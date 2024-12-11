@@ -1,0 +1,235 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5bb2dbce231f94bbaeedd582baab8c, type: 3}
+  m_Name: MainPlayerStats
+  m_EditorClassIdentifier: 
+  BaseSpeed: 12
+  SoftSpeedCap: 75
+  SpeedCapStrength: 1
+  HardSpeedCap: 400
+  AccelerationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 4
+      inSlope: -0.32213515
+      outSlope: -0.25
+      tangentMode: 65
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.24583332
+    - serializedVersion: 3
+      time: 12
+      value: 1
+      inSlope: -0.25
+      outSlope: 0
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  DecelerationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 5
+      inSlope: 1.2705209
+      outSlope: 1.2705209
+      tangentMode: 0
+      weightedMode: 2
+      inWeight: 0
+      outWeight: 0.17391461
+    - serializedVersion: 3
+      time: 12
+      value: 26.041662
+      inSlope: 0.02651712
+      outSlope: 0.02651712
+      tangentMode: 0
+      weightedMode: 1
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  TurnDeceleration:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -1
+      value: 20
+      inSlope: 0
+      outSlope: -9.5
+      tangentMode: 65
+      weightedMode: 2
+      inWeight: 0
+      outWeight: 0.8125
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -9.5
+      outSlope: -0.23060799
+      tangentMode: 5
+      weightedMode: 1
+      inWeight: 0.9
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  TurnStrengthCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 2
+      inSlope: -0.00016107793
+      outSlope: -0.0095
+      tangentMode: 65
+      weightedMode: 2
+      inWeight: 0
+      outWeight: 0.3780184
+    - serializedVersion: 3
+      time: 200
+      value: 0.1
+      inSlope: -0.0095
+      outSlope: 0.000603775
+      tangentMode: 5
+      weightedMode: 1
+      inWeight: 0.38210768
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  BaseSpeedAir: 6
+  AccelerationCurveAir:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 8
+      inSlope: -0.32213515
+      outSlope: -0.41666666
+      tangentMode: 65
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.24583332
+    - serializedVersion: 3
+      time: 12
+      value: 3
+      inSlope: -0.41666666
+      outSlope: 0
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  DecelerationCurveAir:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  TurnDecelerationAir:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -1
+      value: 20
+      inSlope: 0
+      outSlope: -9.5
+      tangentMode: 65
+      weightedMode: 2
+      inWeight: 0
+      outWeight: 0.8125
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -9.5
+      outSlope: -0.23060799
+      tangentMode: 5
+      weightedMode: 1
+      inWeight: 0.9
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  TurnStrengthCurveAir:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 4
+      inSlope: -0.00016107793
+      outSlope: -0.015
+      tangentMode: 65
+      weightedMode: 2
+      inWeight: 0
+      outWeight: 0.3780184
+    - serializedVersion: 3
+      time: 200
+      value: 1
+      inSlope: -0.015
+      outSlope: 0.000603775
+      tangentMode: 5
+      weightedMode: 1
+      inWeight: 0.38210768
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  TurnDeviationCap: -0.85
+  MinBreakSpeed: 5
+  BreakStrength: 12
+  BreakStrengthAir: 5
+  JumpForce: 11
+  JumpCancelStrength: 4
+  SlipTime: 0.3333333
+  GravityForce: 30
+  FallSpeedCap: 66.66667
+  MinGroundStickSpeed: 6.25
+  MaxGroundDeviation: 45
+  SlopeFactor: 0.2
+  SlopeFactorRoll: 0
+  RollDeceleration: 0
+  SpinDashDeceleration: 0
+  MinRollSpeed: 0
+  SpinDashHoldTime: 0.375
+  SpinDashInitSpeed: 1
+  SpinDashOutput:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
