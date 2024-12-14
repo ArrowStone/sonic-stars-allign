@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 
-public class Sonic_GroundState : IState
+public class Sonic_RollState : IState
 {
     private readonly Sonic_PlayerStateMachine _ctx;
     private bool _groundDetected;
-    private float _slipState;
 
-    public Sonic_GroundState(Sonic_PlayerStateMachine _machine)
+    public Sonic_RollState(Sonic_PlayerStateMachine _machine)
     {
         _ctx = _machine;
     }
 
     public void EnterState()
     {
+        Debug.Log("curl");
         #region Misc
 
         _groundDetected = true;
@@ -46,14 +46,8 @@ public class Sonic_GroundState : IState
         }
 
         GroundApplication(_delta);
-        if (SlipCheck())
-        {
-            Slipment(_delta);
-        }
-        else
-        {
-            Movement(_delta);
-        }
+        SlopePhysics(_delta);
+        Movement(_delta);
 
         GroundSwitchConditions(_delta);
         _ctx.Physics_ApplyVelocity();
@@ -74,25 +68,6 @@ public class Sonic_GroundState : IState
     {
         _groundDetected = _ctx.GroundCast.Execute(_ctx.Rb.position, -_ctx.GroundNormal);
         return _groundDetected && Vector3.Angle(_ctx.GroundCast.HitInfo.normal, _ctx.GroundNormal) <= _ctx.Chm.MaxGroundDeviation;
-    }
-
-    private bool SlipCheck()
-    {
-        if (_ctx.HorizontalVelocity.magnitude < _ctx.Chm.MinGroundStickSpeed && Vector3.Angle(-_ctx.Gravity, _ctx.GroundNormal) > FrameworkUtility.ESlipAngle)
-        {
-            _slipState = _ctx.Chm.SlipTime;
-            if (Vector3.Angle(-_ctx.Gravity, _ctx.GroundNormal) > FrameworkUtility.SlopeAngle)
-            {
-                _slipState = _ctx.Chm.SlipTime;
-                _groundDetected = false;
-                AirSwitchConditions();
-            }
-        }
-        if (Vector3.Angle(-_ctx.Gravity, _ctx.GroundNormal) <= FrameworkUtility.FloorAngle)
-        {
-            _slipState = 0;
-        }
-        return _slipState > 0;
     }
 
     private void GroundApplication(float _delta)
@@ -139,12 +114,6 @@ public class Sonic_GroundState : IState
                 }
             }
 
-            if (_ctx.HorizontalVelocity.magnitude < _ctx.Chm.BaseSpeed)
-            {
-                float _acceleration = _ctx.Chm.AccelerationCurve.Evaluate(_ctx.HorizontalVelocity.magnitude) * _delta;
-                _ctx.HorizontalVelocity = Vector3.ClampMagnitude(_ctx.HorizontalVelocity + (_acceleration * _ctx.InputVector), _ctx.Chm.BaseSpeed);
-            }
-
             if (!FrameworkUtility.IsApproximate(_ctx.HorizontalVelocity.normalized, _ctx.InputVector, Mathf.Deg2Rad * Mathf.PI))
             {
                 float _turnDeceleration = _ctx.Chm.TurnDeceleration.Evaluate(Vector3.Dot(_ctx.HorizontalVelocity.normalized, _ctx.InputVector)) * _delta;
@@ -154,21 +123,21 @@ public class Sonic_GroundState : IState
             float _turnStrength = _ctx.Chm.TurnStrengthCurve.Evaluate(_ctx.HorizontalVelocity.magnitude) * Mathf.PI * _delta;
             _ctx.HorizontalVelocity = Vector3.RotateTowards(_ctx.HorizontalVelocity, _ctx.InputVector * _ctx.HorizontalVelocity.magnitude, _turnStrength, 0);
         }
-        else
-        {
-            float _deceleration = _ctx.Chm.DecelerationCurve.Evaluate(_ctx.HorizontalVelocity.magnitude) * _delta;
-            _ctx.HorizontalVelocity = Vector3.MoveTowards(_ctx.HorizontalVelocity, Vector3.zero, _deceleration);
-        }
+
+        float _deceleration = _ctx.Chm.RollDeceleration * _delta;
+        _ctx.HorizontalVelocity = Vector3.MoveTowards(_ctx.HorizontalVelocity, Vector3.zero, _deceleration);
         _ctx.HorizontalVelocity = Vector3.ClampMagnitude(_ctx.HorizontalVelocity, _ctx.Chm.HardSpeedCap);
     }
 
-    private void Slipment(float _delta)
+    private void SlopePhysics(float _delta)
     {
-        _ctx.Skid = false;
-
-        _slipState -= _delta;
-        _ctx.HorizontalVelocity += _ctx.Chm.SlopeFactor * _delta * Vector3.ProjectOnPlane(_ctx.Gravity, _ctx.GroundNormal);
-        _ctx.HorizontalVelocity = Vector3.ClampMagnitude(_ctx.HorizontalVelocity, _ctx.Chm.HardSpeedCap);
+        float _slopeFactor = _ctx.Chm.SlopeFactorRoll * _delta;
+        if (Vector3.Dot(_ctx.HorizontalVelocity, _ctx.Gravity) >= 0)
+        {
+            _slopeFactor = _ctx.Chm.SlopeFactorRollDown * _delta;
+        }
+      
+        _ctx.HorizontalVelocity += Vector3.ProjectOnPlane(_ctx.Gravity, _ctx.GroundNormal) * _slopeFactor;
     }
 
     private void InputRotations()
@@ -183,14 +152,9 @@ public class Sonic_GroundState : IState
 
     private void GroundSwitchConditions(float _delta)
     {
-        if (_ctx.HorizontalVelocity.magnitude < _ctx.Chm.MinGroundStickSpeed && Vector3.Angle(-_ctx.Gravity, _ctx.GroundNormal) > FrameworkUtility.SlopeAngle)
+        if (_ctx.HorizontalVelocity.magnitude < _ctx.Chm.MinRollSpeed || _ctx.Input.CrouchInput.WasPressedThisFrame())
         {
-            AirSwitchConditions();
-        }
-
-        if (_ctx.Input.CrouchInput.WasPressedThisFrame() && _ctx.HorizontalVelocity.magnitude > _ctx.Chm.MinRollSpeed)
-        {
-            _ctx.MachineTransition(PlayerStates.Roll);
+            _ctx.MachineTransition(PlayerStates.Ground);
         }
 
         if (_ctx.Input.CrouchInput.IsPressed() && _ctx.Input.JumpInput.WasPressedThisFrame())

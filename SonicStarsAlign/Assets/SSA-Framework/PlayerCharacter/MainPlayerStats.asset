@@ -220,16 +220,41 @@ MonoBehaviour:
   FallSpeedCap: 66.66667
   MinGroundStickSpeed: 6.25
   MaxGroundDeviation: 45
-  SlopeFactor: 0.2
-  SlopeFactorRoll: 0
-  RollDeceleration: 0
+  SlopeFactor: 10
+  SlopeFactorRoll: 15
+  SlopeFactorRollDown: 20
+  RollDeceleration: 5
   SpinDashDeceleration: 0
-  MinRollSpeed: 0
+  MinRollSpeed: 5
   SpinDashHoldTime: 0.375
   SpinDashInitSpeed: 1
   SpinDashOutput:
     serializedVersion: 2
     m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  DropDashOutput:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 11
+      inSlope: -6
+      outSlope: -6
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 5
+      inSlope: -6
+      outSlope: -6
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

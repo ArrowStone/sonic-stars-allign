@@ -7,7 +7,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public Transform InputRef;
     public Rigidbody Rb;
     public CapsuleCollider Cl;
-    public PlayerCharacterStats Chs;
+    public PlayerCharacterParameters Chm;
     public float InvinciblitiyState;
     public bool TrickState;
 
@@ -66,14 +66,14 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public Cast_Ray WallCast { get; private set; }
     public Cast_Ray CeilCast { get; private set; }
 
-    public event Action JumpAction;
+    public event Action JumpAction;    
+    public event Action DropAction;
 
     #endregion Util
 
     #region Moves
 
     private bool _jumping;
-
     public bool Jumping
     {
         get => _jumping;
@@ -83,6 +83,20 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
             if (value)
             {
                 JumpAction?.Invoke();
+            }
+        }
+    }
+
+    private bool _dropDashing;
+    public bool DropDashing
+    {
+        get => _dropDashing; 
+        set
+        {
+            _dropDashing = value;
+            if (value)
+            {
+                DropAction?.Invoke();
             }
         }
     }
@@ -106,7 +120,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         States.Add(PlayerStates.Ground, new Sonic_GroundState(this));
         States.Add(PlayerStates.Air, new Sonic_AirState(this));
         States.Add(PlayerStates.Spindash, cashedAirState);
-        States.Add(PlayerStates.Roll, cashedAirState);
+        States.Add(PlayerStates.Roll, new Sonic_RollState(this));
+        States.Add(PlayerStates.Bounce, new Sonic_BounceState(this));
 
         CurrentEstate = PlayerStates.Air;
         CurrentState = States[CurrentEstate];
@@ -186,7 +201,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
             return;
         }
 
-        if (CurrentEstate is PlayerStates.Ground)
+        if (CurrentEstate is PlayerStates.Ground or PlayerStates.Roll)
         {
             Debug.DrawLine(Rb.worldCenterOfMass, GroundCast.HitInfo.point, Color.green);
         }
@@ -212,7 +227,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public void Jump(float _delta)
     {
         Jumping = true;
-        VerticalVelocity += (GroundNormal * Chs.JumpForce) - (Gravity * (Chs.GravityForce * _delta));
+        VerticalVelocity += (GroundNormal * Chm.JumpForce) - (Gravity * (Chm.GravityForce * _delta));
 
         Physics_ApplyVelocity();
         MachineTransition(PlayerStates.Air);
@@ -227,7 +242,7 @@ public enum PlayerStates
 {
     Ground,
     Air,
-    Stomp,
+    Bounce,
     HopJump,
     HummingTop,
     HommingAttack,

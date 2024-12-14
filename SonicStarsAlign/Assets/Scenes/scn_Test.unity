@@ -869,7 +869,7 @@ MonoBehaviour:
   InputRef: {fileID: 330585546}
   Rb: {fileID: 1538215776}
   Cl: {fileID: 1538215777}
-  Chs: {fileID: 11400000, guid: 5976ffd069f1d92438628fdafda3acd7, type: 2}
+  Chm: {fileID: 11400000, guid: 5976ffd069f1d92438628fdafda3acd7, type: 2}
   InvinciblitiyState: 0
   TrickState: 0
   ChrTurn:

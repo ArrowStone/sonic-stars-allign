@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-public class Sonic_AirState : IState
+public class Sonic_BounceState : IState
 {
     private readonly Sonic_PlayerStateMachine _ctx;
     private bool _groundDetected;
     private float _ddchargeTime;
-    public Sonic_AirState(Sonic_PlayerStateMachine _machine)
+    public Sonic_BounceState(Sonic_PlayerStateMachine _machine)
     {
         _ctx = _machine;
     }
@@ -28,9 +28,8 @@ public class Sonic_AirState : IState
 
         #region Velocity
 
-        FrameworkUtility.SplitPlanarVector(_ctx.Velocity, -_ctx.Gravity.normalized, out var _v, out var _h);
-        _ctx.VerticalVelocity = _v;
-        _ctx.HorizontalVelocity = _h;
+        _ctx.VerticalVelocity = _ctx.Gravity * _ctx.Chm.BounceSpeed;
+        _ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_ctx.Velocity, _ctx.Gravity.normalized);
         _ctx.Physics_ApplyVelocity();
 
         InputRotations();
@@ -81,21 +80,11 @@ public class Sonic_AirState : IState
 
     private void Gravity(float _delta)
     {
-        if (Vector3.Dot(_ctx.Velocity, _ctx.Gravity.normalized) >= _ctx.Chm.FallSpeedCap)
+        if (Vector3.Dot(_ctx.Velocity, _ctx.Gravity.normalized) >= _ctx.Chm.MaxBounceSpeed)
         {
             return;
         }
-
-        if (_ctx.Jumping && _ctx.Input.JumpInput.WasReleasedThisFrame())
-        {
-            _ctx.Jumping = false;
-            if (Vector3.Dot(_ctx.Velocity, -_ctx.Gravity) > _ctx.Chm.JumpCancelStrength)
-            {
-                _ctx.VerticalVelocity = _ctx.Chm.JumpCancelStrength * -_ctx.Gravity;
-            }
-            return;
-        }
-        _ctx.VerticalVelocity = Vector3.ClampMagnitude(_ctx.VerticalVelocity + _ctx.Chm.GravityForce * _delta * _ctx.Gravity, _ctx.Chm.FallSpeedCap);
+        _ctx.VerticalVelocity = Vector3.ClampMagnitude(_ctx.VerticalVelocity + _ctx.Chm.BounceGravity * _delta * _ctx.Gravity, _ctx.Chm.MaxBounceSpeed);
     }
 
     private void InputRotations()
@@ -191,21 +180,27 @@ public class Sonic_AirState : IState
             return;
         }
 
-        if (_ctx.Input.CrouchInput.IsPressed() && _ctx.HorizontalVelocity.magnitude > _ctx.Chm.SpinDashInitSpeed)
-        {
-            _ctx.MachineTransition(PlayerStates.Roll);
-            return;
-        }
-        _ctx.MachineTransition(PlayerStates.Ground);
+        Bounce();
     }
 
     private void AirSwitchConditions()
     {
-        if (_ctx.Input.CrouchInput.IsPressed() && _ctx.Input.AttackInput.WasPressedThisFrame())
-        {
-            _ctx.MachineTransition(PlayerStates.Bounce);
-        }
+
     }
+
+    private void Bounce()
+    {
+        if(Vector3.Dot(_ctx.Velocity, _ctx.GroundCast.HitInfo.normal) * _ctx.Chm.BounceFactor > _ctx.Chm.MaxBounceHieght)
+        {
+            _ctx.Velocity = Vector3.ProjectOnPlane(_ctx.Velocity, _ctx.GroundCast.HitInfo.normal) + _ctx.GroundCast.HitInfo.normal * _ctx.Chm.MaxBounceHieght;
+        }
+        else
+        {
+            _ctx.Velocity = Vector3.Reflect(_ctx.Velocity, _ctx.GroundCast.HitInfo.normal) * _ctx.Chm.BounceFactor;
+        }
+        _ctx.MachineTransition(PlayerStates.Air);
+    }
+
     private void DropDashCalculations(float _delta)
     {
         if (_ctx.Input.CrouchInput.IsPressed() && _ctx.Input.JumpInput.IsPressed())

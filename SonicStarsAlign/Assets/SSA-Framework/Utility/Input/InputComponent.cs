@@ -8,14 +8,16 @@ public class InputComponent : MonoBehaviour
     public Vector2 MoveInputValues => MovementInput.ReadValue<Vector2>();
     public Vector3 VectorMoveInput => new(MoveInputValues.x, 0, MoveInputValues.y);
     public InputAction JumpInput { get; private set; }
-    public InputAction RollInput { get; private set; }
+    public InputAction CrouchInput { get; private set; }
+    public InputAction AttackInput { get; private set; }
 
     private void Awake()
     {
         I = new GameInput();
         MovementInput = I.Player.Move;
         JumpInput = I.Player.Jump;
-        RollInput = I.Player.Crouch;
+        CrouchInput = I.Player.Crouch;
+        AttackInput = I.Player.Attack;
     }
 
     private void OnEnable()

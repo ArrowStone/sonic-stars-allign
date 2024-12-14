@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [CreateAssetMenu]
-public class PlayerCharacterStats : ScriptableObject
+public class PlayerCharacterParameters : ScriptableObject
 {
     [Header("Handling")]
     public float BaseSpeed;
@@ -67,6 +67,8 @@ public class PlayerCharacterStats : ScriptableObject
 
     public float SlopeFactorRoll;
 
+    public float SlopeFactorRollDown;
+
     [Space]
     [Header("Roll")]
     public float RollDeceleration;
@@ -81,4 +83,13 @@ public class PlayerCharacterStats : ScriptableObject
     public float SpinDashInitSpeed;
 
     public AnimationCurve SpinDashOutput;
+    public AnimationCurve DropDashOutput;
+
+    [Space]
+    [Header("Bounce")]
+    public float BounceSpeed;    
+    public float MaxBounceSpeed;    
+    public float BounceGravity;    
+    public float BounceFactor;
+    public float MaxBounceHieght;
 }
