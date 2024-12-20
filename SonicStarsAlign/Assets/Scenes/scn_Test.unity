@@ -488,7 +488,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f6caeff4bbf3d15469e50693f0493666, type: 3}
       propertyPath: m_Layer
-      value: 22
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -541,7 +541,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 621561934}
-  m_Layer: 22
+  m_Layer: 14
   m_Name: Geometry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -829,7 +829,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!136 &1538215777
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -869,7 +869,7 @@ MonoBehaviour:
   InputRef: {fileID: 330585546}
   Rb: {fileID: 1538215776}
   Cl: {fileID: 1538215777}
-  Chm: {fileID: 11400000, guid: 5976ffd069f1d92438628fdafda3acd7, type: 2}
+  Chp: {fileID: 11400000, guid: 5976ffd069f1d92438628fdafda3acd7, type: 2}
   InvinciblitiyState: 0
   TrickState: 0
   ChrTurn:
@@ -899,7 +899,7 @@ MonoBehaviour:
   SnapForce: 5
   groundLayer:
     serializedVersion: 2
-    m_Bits: 4194304
+    m_Bits: 16384
   wallLayer:
     serializedVersion: 2
     m_Bits: 1
@@ -995,7 +995,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -344004081357383697, guid: 1e9c1c96e7314af4683d8df0526ac45f, type: 3}
       propertyPath: m_Layer
-      value: 22
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e9c1c96e7314af4683d8df0526ac45f, type: 3}
       propertyPath: m_Name
@@ -1003,7 +1003,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e9c1c96e7314af4683d8df0526ac45f, type: 3}
       propertyPath: m_Layer
-      value: 22
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1120705170318893804, guid: 1e9c1c96e7314af4683d8df0526ac45f, type: 3}
       propertyPath: m_Layer
@@ -1111,7 +1111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3ae53a9ba521b4a45922ee19ab80eab8, type: 3}
       propertyPath: m_Layer
-      value: 22
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

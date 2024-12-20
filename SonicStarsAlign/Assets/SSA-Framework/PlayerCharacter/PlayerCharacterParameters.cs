@@ -88,8 +88,17 @@ public class PlayerCharacterParameters : ScriptableObject
     [Space]
     [Header("Bounce")]
     public float BounceSpeed;    
-    public float MaxBounceSpeed;    
-    public float BounceGravity;    
-    public float BounceFactor;
+
+    public float MaxBounceSpeed;      
+    
+    public AnimationCurve BounceFactor;
+
     public float MaxBounceHieght;
+
+    [Space]
+    [Header("Attack")]
+    public float DashSpeed;
+
+    public float DashBoost;
+
 }

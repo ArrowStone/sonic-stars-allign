@@ -7,7 +7,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public Transform InputRef;
     public Rigidbody Rb;
     public CapsuleCollider Cl;
-    public PlayerCharacterParameters Chm;
+    public PlayerCharacterParameters Chp;
     public float InvinciblitiyState;
     public bool TrickState;
 
@@ -66,8 +66,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public Cast_Ray WallCast { get; private set; }
     public Cast_Ray CeilCast { get; private set; }
 
-    public event Action JumpAction;    
-    public event Action DropAction;
+
 
     #endregion Util
 
@@ -90,7 +89,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     private bool _dropDashing;
     public bool DropDashing
     {
-        get => _dropDashing; 
+        get => _dropDashing;
         set
         {
             _dropDashing = value;
@@ -101,6 +100,14 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         }
     }
 
+    public event Action JumpAction;
+
+    public int AirDashes = 1;
+    public event Action DashAction;
+
+    public event Action DropAction;
+
+    public int BounceCount { get; set; }
     public int AirBoosts { get; set; }
     public bool Death { get; set; }
     public bool Skid { get; set; }
@@ -116,10 +123,9 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     public void StateSetup()
     {
-        Sonic_AirState cashedAirState = new(this);
         States.Add(PlayerStates.Ground, new Sonic_GroundState(this));
         States.Add(PlayerStates.Air, new Sonic_AirState(this));
-        States.Add(PlayerStates.Spindash, cashedAirState);
+        States.Add(PlayerStates.Spindash, new Sonic_SpinDashState(this));
         States.Add(PlayerStates.Roll, new Sonic_RollState(this));
         States.Add(PlayerStates.Bounce, new Sonic_BounceState(this));
 
@@ -153,7 +159,6 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     }
 
     private Quaternion cashedRotation = Quaternion.identity;
-
     public Quaternion Physics_Rotate(Vector3 _forward, Vector3 _up)
     {
         Quaternion _diff = Quaternion.LookRotation(_forward, cashedRotation * Vector3.up);
@@ -222,18 +227,34 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     #endregion Debug
 
-    #region Jump
+    #region Moves
 
-    public void Jump(float _delta)
+    public void Jump()
     {
         Jumping = true;
-        VerticalVelocity += (GroundNormal * Chm.JumpForce) - (Gravity * (Chm.GravityForce * _delta));
+        VerticalVelocity += GroundNormal * Chp.JumpForce;
+
+        Physics_ApplyVelocity();
+        MachineTransition(PlayerStates.Air);
+    }
+    public void Dash()
+    {
+        DashAction?.Invoke();
+
+        if (Vector3.Dot(HorizontalVelocity, PlayerDirection) < Chp.DashSpeed)
+        {
+            HorizontalVelocity = PlayerDirection * Chp.DashSpeed;
+        }
+        else
+        {
+            HorizontalVelocity += PlayerDirection * Chp.DashBoost;
+        }
 
         Physics_ApplyVelocity();
         MachineTransition(PlayerStates.Air);
     }
 
-    #endregion Jump
+    #endregion Moves
 
     #endregion AdditionalFunctions
 }
