@@ -17,7 +17,7 @@ namespace Assets.SEM_Framework.PlayerCharacter
         {
         }
 
-        public void OnDisablw()
+        public void OnDisable()
         {
         }
 
