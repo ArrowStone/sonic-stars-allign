@@ -14,8 +14,8 @@ TagManager:
   - SSA/Misc
   - SSA/Target
   - SSA/Entity
-  - 
-  - 
+  - SSA/Interactable
+  - SSA/Collectible
   - SSA/Player
   - 
   - 

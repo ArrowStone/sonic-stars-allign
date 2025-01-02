@@ -21,6 +21,6 @@ public class Cast_Sphere
     public bool Execute(Vector3 _position, Vector3 _direction)
     {
         _direction.Normalize();
-        return Physics.SphereCast(_position, DetectionRadius, _direction, out HitInfo, DetectionDistance, targetMask);
+        return Physics.SphereCast(_position, DetectionRadius, _direction, out HitInfo, DetectionDistance, targetMask, triggerInteraction);
     }
 }

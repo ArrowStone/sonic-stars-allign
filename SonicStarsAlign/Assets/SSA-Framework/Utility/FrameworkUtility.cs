@@ -39,5 +39,5 @@ public static class FrameworkUtility
     public static double QuaternionMagnitude(Quaternion q)
     {
         return Mathf.Sqrt((q.w * q.w) + (q.x * q.x) + (q.y * q.y) + (q.z * q.z));
-    } 
+    }
 }

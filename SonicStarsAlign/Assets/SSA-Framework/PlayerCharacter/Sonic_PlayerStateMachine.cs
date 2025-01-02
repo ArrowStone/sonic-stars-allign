@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
@@ -7,6 +8,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public Transform InputRef;
     public Rigidbody Rb;
     public CapsuleCollider Cl;
+    public Panel_Collider TriggerCl;
     public PlayerCharacterParameters Chp;
     public float InvinciblitiyState;
     public bool TrickState;
@@ -20,6 +22,19 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     [SerializeField] private LayerMask groundLayer;
 
     [SerializeField] private LayerMask wallLayer;
+
+    [SerializeField] private LayerMask homingTargetLayer;
+
+    [SerializeField] private LayerMask ringLayer;
+
+    [Space]
+    [SerializeField] private float homingDetectionDistance;
+
+    [SerializeField] private float homingDetectionRadius;
+
+    [SerializeField] private float lightDetectionDistance;
+
+    [SerializeField] private float lightDetectionRadius;
 
     [Space]
     [SerializeField] private float groundRayDig;
@@ -62,17 +77,19 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         }
     }
 
+    public SplineHandler SplnHandler { get; set; }
     public Cast_Ray GroundCast { get; private set; }
     public Cast_Ray WallCast { get; private set; }
     public Cast_Ray CeilCast { get; private set; }
-
-
+    public Overlap_Sphere RingDetector { get; private set; }
+    public Overlap_Sphere HomingTargetDetector { get; private set; }
 
     #endregion Util
 
     #region Moves
 
     private bool _jumping;
+
     public bool Jumping
     {
         get => _jumping;
@@ -87,6 +104,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     }
 
     private bool _dropDashing;
+
     public bool DropDashing
     {
         get => _dropDashing;
@@ -103,6 +121,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public event Action JumpAction;
 
     public int AirDashes = 1;
+
     public event Action DashAction;
 
     public event Action DropAction;
@@ -119,6 +138,9 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         GroundCast = new Cast_Ray(groundRayLength, groundLayer);
         WallCast = new Cast_Ray(groundRayLength, wallLayer);
         CeilCast = new Cast_Ray(groundRayLength, wallLayer);
+        HomingTargetDetector = new Overlap_Sphere(gameObject, 5, homingTargetLayer, homingDetectionDistance, homingDetectionRadius, wallLayer, DetectionBias.Direction);
+        RingDetector = new Overlap_Sphere(gameObject, 5, ringLayer, lightDetectionDistance, lightDetectionRadius, wallLayer, DetectionBias.Direction);
+        SplnHandler = new SplineHandler();
     }
 
     public void StateSetup()
@@ -128,6 +150,11 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         States.Add(PlayerStates.Spindash, new Sonic_SpinDashState(this));
         States.Add(PlayerStates.Roll, new Sonic_RollState(this));
         States.Add(PlayerStates.Bounce, new Sonic_BounceState(this));
+        States.Add(PlayerStates.HomingAttack, new Sonic_HomingAttackState(this));
+        States.Add(PlayerStates.LightSpeedDash, new Sonic_LightDashState(this));
+        States.Add(PlayerStates.Damage, new Sonic_HurtState(this));
+        States.Add(PlayerStates.RailGrinding, new Sonic_GrindState(this));
+        States.Add(PlayerStates.LinearAutomation, new Sonic_LinearAutomationState(this));
 
         CurrentEstate = PlayerStates.Air;
         CurrentState = States[CurrentEstate];
@@ -159,6 +186,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     }
 
     private Quaternion cashedRotation = Quaternion.identity;
+
     public Quaternion Physics_Rotate(Vector3 _forward, Vector3 _up)
     {
         Quaternion _diff = Quaternion.LookRotation(_forward, cashedRotation * Vector3.up);
@@ -173,7 +201,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public bool Physics_Sweep(Vector3 _point, out RaycastHit Info)
     {
         Vector3 _dif = _point - Rb.position;
-        return Rb.SweepTest(_dif, out Info, _dif.magnitude, QueryTriggerInteraction.Ignore);
+        return Rb.SweepTest(_dif, out Info, _dif.magnitude, QueryTriggerInteraction.Ignore) && Info.transform.gameObject.layer == wallLayer;
     }
 
     public void Physics_Snap(Vector3 _point)
@@ -191,6 +219,15 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         {
             Rb.position = _v;
         }
+    }
+
+    public void ChangeKinematic(bool _t)
+    {
+        Cl.enabled = false;
+        TriggerCl.RefCollider.enabled = false;
+        Rb.isKinematic = _t;
+        Cl.enabled = true;
+        TriggerCl.RefCollider.enabled = true;
     }
 
     #region Debug
@@ -229,6 +266,21 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     #region Moves
 
+    public void HomingCheck()
+    {
+        HomingTargetDetector.Execute(transform.position, PlayerDirection);
+    }
+
+    public void RingCheck()
+    {
+        if (Velocity.magnitude < 1)
+        {
+            RingDetector.Execute(transform.position, PlayerDirection);
+            return;
+        }
+        RingDetector.Execute(transform.position, Velocity.normalized);
+    }
+
     public void Jump()
     {
         Jumping = true;
@@ -237,6 +289,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         Physics_ApplyVelocity();
         MachineTransition(PlayerStates.Air);
     }
+
     public void Dash()
     {
         DashAction?.Invoke();
@@ -264,9 +317,7 @@ public enum PlayerStates
     Ground,
     Air,
     Bounce,
-    HopJump,
-    HummingTop,
-    HommingAttack,
+    HomingAttack,
     LightSpeedDash,
     Roll,
     Spindash,

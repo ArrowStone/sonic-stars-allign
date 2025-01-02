@@ -18,11 +18,13 @@ public class Sonic_GroundState : IState
         _groundDetected = true;
 
         #endregion Misc
-            
+
         #region Collision
 
         _ctx.GroundNormal = _ctx.GroundCast.HitInfo.normal;
         _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundCast.HitInfo.normal);
+        _ctx.Physics_Snap(_ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover, _ctx.SnapForce);
+
         #endregion Collision
 
         #region Velocity
@@ -50,6 +52,11 @@ public class Sonic_GroundState : IState
         if (SlipCheck())
         {
             Slipment(_delta);
+            if (Vector3.Angle(-_ctx.Gravity, _ctx.GroundNormal) > FrameworkUtility.SlopeAngle)
+            {
+                _groundDetected = false;
+                AirSwitchConditions();
+            }
         }
         else
         {
@@ -63,6 +70,7 @@ public class Sonic_GroundState : IState
     public void FixedUpdateState()
     {
         float _delta = Time.fixedDeltaTime;
+        _ctx.RingCheck();
     }
 
     public void ExitState()
@@ -82,12 +90,6 @@ public class Sonic_GroundState : IState
         if (_ctx.HorizontalVelocity.magnitude < _ctx.Chp.MinGroundStickSpeed && Vector3.Angle(-_ctx.Gravity, _ctx.GroundNormal) > FrameworkUtility.ESlipAngle)
         {
             _slipState = _ctx.Chp.SlipTime;
-            if (Vector3.Angle(-_ctx.Gravity, _ctx.GroundNormal) > FrameworkUtility.SlopeAngle)
-            {
-                _slipState = _ctx.Chp.SlipTime;
-                _groundDetected = false;
-                AirSwitchConditions();
-            }
         }
         if (Vector3.Angle(-_ctx.Gravity, _ctx.GroundNormal) <= FrameworkUtility.FloorAngle)
         {
@@ -128,13 +130,14 @@ public class Sonic_GroundState : IState
         {
             if (Vector3.Dot(_ctx.HorizontalVelocity.normalized, _ctx.InputVector) < _ctx.Chp.TurnDeviationCap)
             {
+                float _break = _ctx.Chp.BreakStrength * _delta;
+                _ctx.HorizontalVelocity = Vector3.MoveTowards(_ctx.HorizontalVelocity, Vector3.zero, _break);
                 if (_ctx.HorizontalVelocity.magnitude > _ctx.Chp.MinBreakSpeed)
                 {
-                    _ctx.HorizontalVelocity = Vector3.MoveTowards(_ctx.HorizontalVelocity, Vector3.zero, _ctx.Chp.BreakStrength * _delta);
                     _ctx.Skid = true;
                     return;
                 }
-                else
+                else if (_ctx.HorizontalVelocity.magnitude < _break)
                 {
                     _ctx.HorizontalVelocity = _ctx.InputVector * Vector3.Dot(_ctx.InputVector, _ctx.HorizontalVelocity);
                 }
@@ -142,7 +145,7 @@ public class Sonic_GroundState : IState
 
             if (_ctx.HorizontalVelocity.magnitude < _ctx.Chp.BaseSpeed)
             {
-                float _acceleration = _ctx.Chp.AccelerationCurve.Evaluate(_ctx.HorizontalVelocity.magnitude) * _delta;
+                float _acceleration = _ctx.Chp.Acceleration * _delta;
                 _ctx.HorizontalVelocity = Vector3.ClampMagnitude(_ctx.HorizontalVelocity + (_acceleration * _ctx.InputVector), _ctx.Chp.BaseSpeed);
             }
 
@@ -157,7 +160,7 @@ public class Sonic_GroundState : IState
         }
         else
         {
-            float _deceleration = _ctx.Chp.DecelerationCurve.Evaluate(_ctx.HorizontalVelocity.magnitude) * _delta;
+            float _deceleration = _ctx.Chp.Deceleration * _delta;
             _ctx.HorizontalVelocity = Vector3.MoveTowards(_ctx.HorizontalVelocity, Vector3.zero, _deceleration);
         }
         _ctx.HorizontalVelocity = Vector3.ClampMagnitude(_ctx.HorizontalVelocity, _ctx.Chp.HardSpeedCap);
@@ -172,13 +175,14 @@ public class Sonic_GroundState : IState
         // _ctx.HorizontalVelocity = Vector3.ClampMagnitude(_ctx.HorizontalVelocity, _ctx.Chp.HardSpeedCap);
     }
 
- private void SlopePhysics(float _delta)
+    private void SlopePhysics(float _delta)
     {
-        if(Vector3.Angle(-_ctx.Gravity, _ctx.GroundNormal) <= FrameworkUtility.FloorAngle) return;
-        
+        if (Vector3.Angle(-_ctx.Gravity, _ctx.GroundNormal) <= FrameworkUtility.FloorAngle) return;
+
         float _slopeFactor = _ctx.Chp.SlopeFactor * _delta;
         _ctx.HorizontalVelocity += Vector3.ProjectOnPlane(_ctx.Gravity, _ctx.GroundNormal) * _slopeFactor;
     }
+
     private void InputRotations()
     {
         _ctx.InputRotation = Mathf.Approximately(Vector3.Angle(_ctx.GroundNormal, _ctx.InputRef.up), 180)
@@ -190,7 +194,12 @@ public class Sonic_GroundState : IState
     }
 
     private void GroundSwitchConditions()
-    { 
+    {
+        if (_ctx.RingDetector.TargetDetected && _ctx.Input.ReactionInput.WasPressedThisFrame())
+        {
+            _ctx.MachineTransition(PlayerStates.LightSpeedDash);
+        }
+
         if (_ctx.Input.CrouchInput.IsPressed() && _ctx.Input.JumpInput.WasPressedThisFrame())
         {
             _ctx.MachineTransition(PlayerStates.Spindash);
@@ -201,7 +210,7 @@ public class Sonic_GroundState : IState
         {
             _ctx.MachineTransition(PlayerStates.Roll);
         }
-       
+
         if (_ctx.Input.JumpInput.WasPressedThisFrame())
         {
             _ctx.Jump();

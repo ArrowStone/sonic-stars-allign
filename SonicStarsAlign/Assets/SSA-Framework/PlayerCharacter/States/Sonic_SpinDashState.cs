@@ -5,6 +5,7 @@ public class Sonic_SpinDashState : IState
     private readonly Sonic_PlayerStateMachine _ctx;
     private bool _groundDetected;
     private int _spincharge;
+
     public Sonic_SpinDashState(Sonic_PlayerStateMachine _machine)
     {
         _ctx = _machine;
@@ -13,6 +14,7 @@ public class Sonic_SpinDashState : IState
     public void EnterState()
     {
         Debug.Log("rev");
+
         #region Misc
 
         _groundDetected = true;
@@ -90,7 +92,7 @@ public class Sonic_SpinDashState : IState
             _ctx.PlayerDirection = _ctx.InputVector;
         }
         _ctx.PlayerDirection = Vector3.ProjectOnPlane(_ctx.PlayerDirection, _ctx.GroundNormal).normalized;
-       
+
         _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundNormal);
     }
 

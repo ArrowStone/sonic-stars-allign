@@ -13,6 +13,7 @@ public class Sonic_RollState : IState
     public void EnterState()
     {
         Debug.Log("curl");
+
         #region Misc
 
         _groundDetected = true;
@@ -23,6 +24,7 @@ public class Sonic_RollState : IState
 
         _ctx.GroundNormal = _ctx.GroundCast.HitInfo.normal;
         _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundCast.HitInfo.normal);
+
         #endregion Collision
 
         #region Velocity
@@ -124,21 +126,21 @@ public class Sonic_RollState : IState
             _ctx.HorizontalVelocity = Vector3.RotateTowards(_ctx.HorizontalVelocity, _ctx.InputVector * _ctx.HorizontalVelocity.magnitude, _turnStrength, 0);
         }
 
-        float _deceleration = _ctx.Chp.RollDeceleration * _delta;
+        float _deceleration = _ctx.Chp.SpinDashDeceleration * _delta;
         _ctx.HorizontalVelocity = Vector3.MoveTowards(_ctx.HorizontalVelocity, Vector3.zero, _deceleration);
         _ctx.HorizontalVelocity = Vector3.ClampMagnitude(_ctx.HorizontalVelocity, _ctx.Chp.HardSpeedCap);
     }
 
     private void SlopePhysics(float _delta)
     {
-        if(Vector3.Angle(-_ctx.Gravity, _ctx.GroundNormal) <= FrameworkUtility.FloorAngle) return;
-        
+        if (Vector3.Angle(-_ctx.Gravity, _ctx.GroundNormal) <= FrameworkUtility.FloorAngle) return;
+
         float _slopeFactor = _ctx.Chp.SlopeFactorRoll * _delta;
         if (Vector3.Dot(_ctx.HorizontalVelocity, _ctx.Gravity) >= 0)
         {
             _slopeFactor = _ctx.Chp.SlopeFactorRollDown * _delta;
         }
-      
+
         _ctx.HorizontalVelocity += Vector3.ProjectOnPlane(_ctx.Gravity, _ctx.GroundNormal) * _slopeFactor;
     }
 

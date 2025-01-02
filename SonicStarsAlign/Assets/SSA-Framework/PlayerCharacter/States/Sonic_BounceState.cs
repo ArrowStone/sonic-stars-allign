@@ -5,6 +5,7 @@ public class Sonic_BounceState : IState
     private readonly Sonic_PlayerStateMachine _ctx;
     private bool _groundDetected;
     private float _ddchargeTime;
+
     public Sonic_BounceState(Sonic_PlayerStateMachine _machine)
     {
         _ctx = _machine;
@@ -23,6 +24,7 @@ public class Sonic_BounceState : IState
 
         _ctx.GroundNormal = -_ctx.Gravity.normalized;
         _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity.normalized);
+        _ctx.TriggerCl.TriggerEnter += TriggerCheck;
 
         #endregion Collision
 
@@ -61,6 +63,7 @@ public class Sonic_BounceState : IState
 
     public void ExitState()
     {
+        _ctx.TriggerCl.TriggerEnter -= TriggerCheck;
     }
 
     #region Util
@@ -106,7 +109,7 @@ public class Sonic_BounceState : IState
                 {
                     //_ctx.HorizontalVelocity = Vector3.MoveTowards(_ctx.HorizontalVelocity, Vector3.zero, _ctx.Chs.BreakStrengthAir * _delta);
 
-                    float _acceleration = _ctx.Chp.AccelerationCurveAir.Evaluate(Vector3.Dot(_ctx.HorizontalVelocity, _ctx.InputVector)) * _delta;
+                    float _acceleration = _ctx.Chp.AccelerationAir * _delta;
                     _ctx.HorizontalVelocity += (_acceleration * _ctx.InputVector);
                     _ctx.Skid = true;
                     return;
@@ -119,7 +122,7 @@ public class Sonic_BounceState : IState
 
             if (_ctx.HorizontalVelocity.magnitude < _ctx.Chp.BaseSpeedAir)
             {
-                float _acceleration = _ctx.Chp.AccelerationCurveAir.Evaluate(_ctx.HorizontalVelocity.magnitude) * _delta;
+                float _acceleration = _ctx.Chp.AccelerationAir * _delta;
                 _ctx.HorizontalVelocity = Vector3.ClampMagnitude(_ctx.HorizontalVelocity + (_acceleration * _ctx.InputVector), _ctx.Chp.BaseSpeedAir);
             }
 
@@ -131,11 +134,6 @@ public class Sonic_BounceState : IState
 
             float _turnStrength = _ctx.Chp.TurnStrengthCurveAir.Evaluate(_ctx.HorizontalVelocity.magnitude) * Mathf.PI * _delta;
             _ctx.HorizontalVelocity = Vector3.RotateTowards(_ctx.HorizontalVelocity, _ctx.InputVector * _ctx.HorizontalVelocity.magnitude, _turnStrength, 0);
-        }
-        else
-        {
-            float _deceleration = _ctx.Chp.DecelerationCurveAir.Evaluate(_ctx.HorizontalVelocity.magnitude) * _delta;
-            _ctx.HorizontalVelocity = Vector3.MoveTowards(_ctx.HorizontalVelocity, Vector3.zero, _deceleration);
         }
 
         _ctx.HorizontalVelocity = Vector3.ClampMagnitude(_ctx.HorizontalVelocity, _ctx.Chp.HardSpeedCap);
@@ -166,20 +164,45 @@ public class Sonic_BounceState : IState
         _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity.normalized);
     }
 
+    private void TriggerCheck(Collider _cl)
+    {
+        if (_cl == _ctx.TriggerBuffer) return;
+
+        Debug.Log("l");
+        if (_cl.TryGetComponent(out Automation_ForceSpline _s))
+        {
+            _s.Execute(_ctx);
+            _ctx.TriggerBuffer = _cl;
+            return;
+        }
+
+        if (_cl.TryGetComponent(out Automation_GrindRail _gr))
+        {
+            _gr.Execute(_ctx, _ctx.Rb.position);
+            _ctx.TriggerBuffer = _cl;
+            return;
+        }
+    }
+
     private void GroundSwitchConditions()
-    {   
+    {
         if (_ctx.DropDashing)
-        { 
+        {
             float _ddForce = _ctx.Chp.DropDashOutput.Evaluate(_ddchargeTime);
+
+            if (_ctx.InputVector.magnitude > 0)
+            {
+                _ctx.PlayerDirection = _ctx.InputVector;
+            }
             if (Vector3.ProjectOnPlane(_ctx.Velocity, _ctx.GroundNormal).magnitude < _ddForce)
-            {               
+            {
                 _ctx.Velocity = Vector3.ProjectOnPlane(_ctx.PlayerDirection, _ctx.GroundNormal) * _ddForce;
             }
+
             _ctx.BounceCount = 0;
             _ctx.MachineTransition(PlayerStates.Roll);
             return;
         }
-
         Bounce();
     }
 
@@ -195,6 +218,7 @@ public class Sonic_BounceState : IState
 
     private void Bounce()
     {
+        _ctx.Physics_Snap(_ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover, _ctx.SnapForce);
         float _bounceForce = Vector3.Dot(_ctx.Velocity, -_ctx.GroundCast.HitInfo.normal) * _ctx.Chp.BounceFactor.Evaluate(_ctx.BounceCount);
         if (_bounceForce > _ctx.Chp.MaxBounceHieght)
         {
@@ -205,7 +229,7 @@ public class Sonic_BounceState : IState
             _ctx.Velocity = Vector3.ProjectOnPlane(_ctx.Velocity, _ctx.GroundCast.HitInfo.normal) + _ctx.GroundCast.HitInfo.normal * _bounceForce;
         }
 
-        _ctx.BounceCount++;       
+        _ctx.BounceCount++;
         _ctx.MachineTransition(PlayerStates.Air);
     }
 
@@ -222,5 +246,6 @@ public class Sonic_BounceState : IState
             _ctx.DropDashing = false;
         }
     }
+
     #endregion Util
 }

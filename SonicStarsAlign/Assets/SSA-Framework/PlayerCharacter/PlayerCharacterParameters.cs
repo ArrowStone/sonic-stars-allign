@@ -13,9 +13,11 @@ public class PlayerCharacterParameters : ScriptableObject
 
     public float HardSpeedCap;
 
-    public AnimationCurve AccelerationCurve;
+    public float RailSpeedCap;
 
-    public AnimationCurve DecelerationCurve;
+    public float Acceleration;
+
+    public float Deceleration;
 
     public AnimationCurve TurnDeceleration;
 
@@ -24,9 +26,9 @@ public class PlayerCharacterParameters : ScriptableObject
     [Space]
     public float BaseSpeedAir;
 
-    public AnimationCurve AccelerationCurveAir;
+    public float AirDrag;
 
-    public AnimationCurve DecelerationCurveAir;
+    public float AccelerationAir;
 
     public AnimationCurve TurnDecelerationAir;
 
@@ -45,7 +47,7 @@ public class PlayerCharacterParameters : ScriptableObject
     [Space]
     public float JumpForce;
 
-    public float JumpCancelStrength;
+    public float JumpCancel;
 
     [Space]
     public float SlipTime;
@@ -54,7 +56,7 @@ public class PlayerCharacterParameters : ScriptableObject
     [Header("Gravity")]
     public float GravityForce;
 
-    public float FallSpeedCap;
+    public float FallVelCap;
 
     [Space]
     [Header("SlopePhysics")]
@@ -68,6 +70,12 @@ public class PlayerCharacterParameters : ScriptableObject
     public float SlopeFactorRoll;
 
     public float SlopeFactorRollDown;
+
+    [Space]
+
+    public float RailSlopeInfluence;
+
+    public float RailCrouchInfluence;
 
     [Space]
     [Header("Roll")]
@@ -87,10 +95,10 @@ public class PlayerCharacterParameters : ScriptableObject
 
     [Space]
     [Header("Bounce")]
-    public float BounceSpeed;    
+    public float BounceSpeed;
 
-    public float MaxBounceSpeed;      
-    
+    public float MaxBounceSpeed;
+
     public AnimationCurve BounceFactor;
 
     public float MaxBounceHieght;
@@ -101,4 +109,14 @@ public class PlayerCharacterParameters : ScriptableObject
 
     public float DashBoost;
 
+    public float HomingAttackSpeed;
+
+    [Space]
+    [Header("LightDashSpeed")]
+
+    public float LightDashSpeed;
+
+    [Space]
+    [Header("Rail")]
+    public float RailCollisionBounce;
 }
