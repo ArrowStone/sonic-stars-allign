@@ -182,7 +182,7 @@ public class Sonic_AirState : IState
 
     private void AirDrag(float _delta)
     {
-        if (Vector3.Dot(_ctx.VerticalVelocity, -_ctx.Gravity) >= _ctx.Chp.JumpCancel) return;
+        if (Vector3.Dot(_ctx.VerticalVelocity, -_ctx.Gravity.normalized) <= _ctx.Chp.JumpCancel) return;
         if (_ctx.HorizontalVelocity.magnitude > _ctx.Chp.BaseSpeedAir)
         {
             float _airDrag = _ctx.Chp.AirDrag * _delta;

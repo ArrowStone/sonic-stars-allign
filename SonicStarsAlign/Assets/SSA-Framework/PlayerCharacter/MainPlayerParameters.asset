@@ -153,7 +153,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 12
+      value: 16
       inSlope: Infinity
       outSlope: Infinity
       tangentMode: 103
@@ -162,7 +162,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 2
-      value: 16
+      value: 24
       inSlope: Infinity
       outSlope: Infinity
       tangentMode: 103
@@ -171,7 +171,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 3
-      value: 20
+      value: 28
       inSlope: Infinity
       outSlope: Infinity
       tangentMode: 103
@@ -180,7 +180,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 4
-      value: 24
+      value: 32
       inSlope: Infinity
       outSlope: Infinity
       tangentMode: 103
@@ -189,7 +189,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 5
-      value: 28
+      value: 34
       inSlope: Infinity
       outSlope: Infinity
       tangentMode: 103
@@ -271,5 +271,5 @@ MonoBehaviour:
   DashSpeed: 25
   DashBoost: 15
   HomingAttackSpeed: 75
-  LightDashSpeed: 150
+  LightDashSpeed: 35
   RailCollisionBounce: 5

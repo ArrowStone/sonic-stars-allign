@@ -48,8 +48,8 @@ public class Sonic_HomingAttackState : IState
 
     private void HomingAttackMovement(float _delta)
     {
-        _vel = _ctx.Chp.HomingAttackSpeed * _delta * (_targetPos - _ctx.transform.position).normalized;
-        _ctx.Rb.MovePosition(_ctx.Rb.position + _vel);
+        _vel = _ctx.Chp.HomingAttackSpeed * (_targetPos - _ctx.transform.position).normalized;
+        _ctx.Rb.MovePosition(_ctx.Rb.position + _vel * _delta);
     }
 
     private void HomingAttackRotation()

@@ -25,18 +25,16 @@ public class Sonic_LightDashState : IState
     public void UpdateState()
     {
         float _delta = Time.deltaTime;
-        if (ContinueLightDashing())
+        if (!ContinueLightDashing())
         {
-            _targetPos = _ctx.RingDetector.TargetOutput.transform.position;
-            LightDashMovement(_delta);
-            LightDashRotation();
-        }
-        else
-        {
-            _ctx.MachineTransition(PlayerStates.Air);
+            AirSwitchConditions();
             return;
         }
-        AirSwitchConditions();
+
+        _targetPos = _ctx.RingDetector.TargetOutput.transform.position;
+        LightDashMovement(_delta);
+        LightDashRotation();
+        LightSwitchConditions();
     }
 
     public void FixedUpdateState()
@@ -51,14 +49,14 @@ public class Sonic_LightDashState : IState
     }
 
     private void LightDashMovement(float _delta)
-    {    
+    {
         _vel = _ctx.Chp.LightDashSpeed * (_targetPos - _ctx.Rb.position).normalized;
         _ctx.Physics_Snap(_ctx.Rb.position + _vel * _delta);
     }
 
     private void LightDashRotation()
     {
-        _ctx.PlayerDirection = (_targetPos - _ctx.Rb.position).normalized;
+        _ctx.PlayerDirection = _vel.normalized;
         _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity);
     }
 
@@ -67,7 +65,7 @@ public class Sonic_LightDashState : IState
         if (_ctx.RingDetector.TargetOutput == null || Vector3.Dot(_targetPos - _ctx.Rb.position, _vel.normalized) < 0)
         {
             _ctx.RingCheck();
-            if (_ctx.RingDetector.TargetOutput == null || Vector3.Dot(_targetPos - _ctx.Rb.position, _vel.normalized) < 0)
+            if (_ctx.RingDetector.TargetOutput == null || Vector3.Dot(_ctx.RingDetector.TargetOutput.transform.position - _ctx.Rb.position, _vel.normalized) < 0)
             {
                 return false;
             }
@@ -75,11 +73,16 @@ public class Sonic_LightDashState : IState
         return true;
     }
 
-    void AirSwitchConditions()
+    private void LightSwitchConditions()
     {
         if (_ctx.Input.BounceInput.WasPressedThisFrame())
         {
             _ctx.MachineTransition(PlayerStates.Bounce);
         }
+    }
+
+    private void AirSwitchConditions()
+    {
+        _ctx.MachineTransition(PlayerStates.Air);
     }
 }

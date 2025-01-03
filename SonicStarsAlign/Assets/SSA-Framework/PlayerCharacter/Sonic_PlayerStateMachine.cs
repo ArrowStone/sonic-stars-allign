@@ -243,7 +243,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
             return;
         }
 
-        if (CurrentEstate is PlayerStates.Ground or PlayerStates.Roll)
+        if (CurrentEstate is PlayerStates.Ground or PlayerStates.Roll or PlayerStates.Spindash)
         {
             Debug.DrawLine(Rb.worldCenterOfMass, GroundCast.HitInfo.point, Color.green);
         }
@@ -258,6 +258,12 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                 Debug.DrawLine(Rb.worldCenterOfMass, Rb.worldCenterOfMass + (-Gravity * groundRayLength), Color.red);
             }
         }
+
+        Gizmos.DrawWireSphere(transform.position + (PlayerDirection * homingDetectionDistance),
+          homingDetectionRadius);
+
+        Gizmos.DrawWireSphere(transform.position + (PlayerDirection * lightDetectionDistance),
+            lightDetectionRadius);
     }
 
 #endif
@@ -273,12 +279,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     public void RingCheck()
     {
-        if (Velocity.magnitude < 1)
-        {
-            RingDetector.Execute(transform.position, PlayerDirection);
-            return;
-        }
-        RingDetector.Execute(transform.position, Velocity.normalized);
+        RingDetector.Execute(transform.position, PlayerDirection);
     }
 
     public void Jump()
