@@ -1,8 +1,7 @@
-﻿using System;
-using Unity.Mathematics;
+﻿using Unity.Mathematics;
 using UnityEngine;
 
-public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
+public class CamPoint_Pan : MonoBehaviour, ICamPoint
 {
     public CamBrain Brain;
 
@@ -10,38 +9,35 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
     [Header("Parameters")]
     public Transform Target;
 
-    public float TargetDistance;
-
-    public Vector3 Offset;
+    public Vector3 PointPosition;
 
     [Space]
     public float DeadZone;
 
     public float2 YLimits;
+    public float2 XLimits;
 
     public Vector2 Sensitivity;
 
     [Space]
-    public float SmoothRotaionSpeed = 0.2f;
-
-    public float MovementSmoothing;
+    public float RotationSmoothTime = 0.2f;
 
     [Space]
-    public float YAxisRecenteringWait;
+    public float RecenteringWait;
 
-    public float YAxisRecenteringSpeed;
+    public float RecenteringSpeed;
 
     #region Util
 
     private float _recenteringState;
-
-    private Vector3 _moveVelocity = Vector3.zero;
 
     private Vector3 _cashedTargetPosition;
 
     private Vector2 _inputValues;
 
     private Vector2 _rot;
+
+    private Quaternion addRot;
 
     #endregion Util
 
@@ -50,7 +46,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
         Brain = _brain;
         _position = _brain.CashedPosition;
 
-        _cashedTargetPosition = Target.position;   
+        _cashedTargetPosition = Target.position;
     }
 
     public void Execute(float _delta)
@@ -63,8 +59,8 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
         {
             InputHandling(_delta);
         }
-       
-        _position = SmoothMove(Brain, UpdatePosition(_delta), _delta); 
+
+        _position = UpdatePosition(_delta);
         _rotation = UpdateRotation(_delta);
     }
 
@@ -82,39 +78,33 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
             _recenteringState -= _delta;
             if (_recenteringState <= 0)
             {
-                _rot.x = Mathf.LerpAngle(_rot.x, 0, YAxisRecenteringSpeed * _delta);
+                _rot.x = Mathf.LerpAngle(_rot.x, 0, RecenteringSpeed * _delta);
+                _rot.y = Mathf.LerpAngle(_rot.y, 0, RecenteringSpeed * _delta);
             }
         }
         else
         {
-            _recenteringState = YAxisRecenteringWait;
+            _recenteringState = RecenteringWait;
         }
 
         _inputValues = Vector2.ClampMagnitude(Brain.Input.CameraInput.ReadValue<Vector2>(), 1);
 
         _rot.y += _inputValues.x * Sensitivity.x * _delta;
+        _rot.y = Mathf.Clamp(_rot.x, XLimits.x, XLimits.y);
+
         _rot.x += _inputValues.y * Sensitivity.y * _delta;
-
         _rot.x = Mathf.Clamp(_rot.x, YLimits.x, YLimits.y);
-    }
-
-    public Quaternion UpdateRotation(float _delta)
-    {
-       return Quaternion.RotateTowards(_rotation, Quaternion.LookRotation(Target.position - _position), SmoothRotaionSpeed * _delta);
     }
 
     public Vector3 UpdatePosition(float _delta)
     {
-        Quaternion _posRot = new()
-        {
-            eulerAngles = new Vector3(_rot.x, _rot.y)
-        };
-        return _cashedTargetPosition + Offset + (_posRot * (Vector3.forward * TargetDistance));
+        Vector3 _pos = PointPosition;
+        return _pos;
     }
 
-    public Vector3 SmoothMove(CamBrain camBrain, Vector3 Position, float _delta)
+    public Quaternion UpdateRotation(float _delta)
     {
-        return Vector3.SmoothDamp(camBrain.CashedPosition, Position, ref _moveVelocity, MovementSmoothing, Mathf.Infinity, _delta);
+        return Quaternion.RotateTowards(_rotation, Quaternion.LookRotation(_cashedTargetPosition - _position), RotationSmoothTime * _delta);
     }
 
     #endregion AdditionalFunctions
@@ -130,6 +120,10 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
 
     public Quaternion Rotation()
     {
-        return _rotation;
+        Quaternion _rotRot = new()
+        {
+            eulerAngles = new Vector3(_rot.x, _rot.y)
+        };
+        return  _rotRot * _rotation ;
     }
 }

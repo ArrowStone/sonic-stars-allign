@@ -11,6 +11,7 @@ public class DebugCameraStart : MonoBehaviour
     public void Start()
     {
         _brain.Point = _player;
+        _player.OnEnter(_brain);
         _brain.MachineTransition(CameraStates.Alive);
     }
 }

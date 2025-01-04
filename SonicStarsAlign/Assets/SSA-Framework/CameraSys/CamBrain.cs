@@ -6,6 +6,7 @@ public class CamBrain : StateMachine_MonoBase<CameraStates>
     public InputComponent Input;
 
     public ICamPoint Point;
+    public AnimationCurve WieghtCurve;
 
     #region Util
 
@@ -26,7 +27,7 @@ public class CamBrain : StateMachine_MonoBase<CameraStates>
     {
         States.Add(CameraStates.Alive, new Camera_AliveState(this));
         States.Add(CameraStates.Dead, new Camera_DeadState(this));
-        States.Add(CameraStates.Transitioning, new Camera_AliveState(this));
+        States.Add(CameraStates.Transitioning, new Camera_TransitionState(this));
 
         CurrentEstate = CameraStates.Dead;
         CurrentState = States[CurrentEstate];

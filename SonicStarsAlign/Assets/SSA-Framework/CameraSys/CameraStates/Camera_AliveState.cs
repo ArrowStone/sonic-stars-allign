@@ -11,14 +11,13 @@ public class Camera_AliveState : IState
 
     public void EnterState()
     {
-        _ctx.Point.OnEnter(_ctx);
+
     }
 
     public void UpdateState()
     {
         float _delta = Time.deltaTime;
-        _ctx.Point.Execute(_delta);
-        _ctx.ApplyPoint();
+        AliveMovement(_delta);
     }
 
     public void FixedUpdateState()
@@ -27,5 +26,12 @@ public class Camera_AliveState : IState
 
     public void ExitState()
     {
+        _ctx.Point.OnExit();
+    }
+
+    public void AliveMovement(float _delta)
+    {
+        _ctx.Point.Execute(_delta);
+        _ctx.ApplyPoint();
     }
 }
