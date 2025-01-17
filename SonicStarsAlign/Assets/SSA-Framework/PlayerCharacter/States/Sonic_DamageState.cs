@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class Sonic_HurtState : IState
+public class Sonic_DamageState : IState
 {
     private readonly Sonic_PlayerStateMachine _ctx;
     private bool _groundDetected;
-    public Sonic_HurtState(Sonic_PlayerStateMachine _coreMachine)
+    public Sonic_DamageState(Sonic_PlayerStateMachine _coreMachine)
     {
         _ctx = _coreMachine;
     }

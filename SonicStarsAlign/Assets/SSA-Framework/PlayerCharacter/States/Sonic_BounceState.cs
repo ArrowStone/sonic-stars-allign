@@ -24,7 +24,6 @@ public class Sonic_BounceState : IState
 
         _ctx.GroundNormal = -_ctx.Gravity.normalized;
         _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity.normalized);
-        _ctx.TriggerCl.TriggerEnter += TriggerCheck;
 
         #endregion Collision
 
@@ -63,7 +62,7 @@ public class Sonic_BounceState : IState
 
     public void ExitState()
     {
-        _ctx.TriggerCl.TriggerEnter -= TriggerCheck;
+       
     }
 
     #region Util
@@ -162,26 +161,6 @@ public class Sonic_BounceState : IState
         }
 
         _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity.normalized);
-    }
-
-    private void TriggerCheck(Collider _cl)
-    {
-        if (_cl == _ctx.TriggerBuffer) return;
-
-        Debug.Log("l");
-        if (_cl.TryGetComponent(out Automation_ForceSpline _s))
-        {
-            _s.Execute(_ctx);
-            _ctx.TriggerBuffer = _cl;
-            return;
-        }
-
-        if (_cl.TryGetComponent(out Automation_GrindRail _gr))
-        {
-            _gr.Execute(_ctx, _ctx.Rb.position);
-            _ctx.TriggerBuffer = _cl;
-            return;
-        }
     }
 
     private void GroundSwitchConditions()

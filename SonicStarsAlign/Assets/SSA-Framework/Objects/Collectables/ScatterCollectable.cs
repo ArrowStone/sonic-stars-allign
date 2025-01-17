@@ -70,4 +70,9 @@ public class ScatterCollectable : MonoBehaviour
                           Vector3.Dot(Rb.linearVelocity, -groundDetector.HitInfo.normal) * bounce *
                           groundDetector.HitInfo.normal;
     }
+
+    public void End()
+    {
+        Destroy(gameObject);
+    }
 }

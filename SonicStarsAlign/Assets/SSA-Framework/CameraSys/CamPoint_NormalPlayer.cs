@@ -1,5 +1,4 @@
-﻿using System;
-using Unity.Mathematics;
+﻿using Unity.Mathematics;
 using UnityEngine;
 
 public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
@@ -48,9 +47,9 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
     public void OnEnter(CamBrain _brain)
     {
         Brain = _brain;
-        _position = _brain.CashedPosition;
-
-        _cashedTargetPosition = Target.position;   
+        _position = _brain.CashedTransform.Position;
+        _rotation = _brain.CashedTransform.Rotation;
+        _cashedTargetPosition = Target.position;
     }
 
     public void Execute(float _delta)
@@ -63,8 +62,8 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
         {
             InputHandling(_delta);
         }
-       
-        _position = SmoothMove(Brain, UpdatePosition(_delta), _delta); 
+
+        _position = SmoothMove(Brain, UpdatePosition(_delta), _delta);
         _rotation = UpdateRotation(_delta);
     }
 
@@ -100,7 +99,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
 
     public Quaternion UpdateRotation(float _delta)
     {
-       return Quaternion.RotateTowards(_rotation, Quaternion.LookRotation(Target.position - _position), SmoothRotaionSpeed * _delta);
+        return Quaternion.RotateTowards(_rotation, Quaternion.LookRotation(Target.position - _position), SmoothRotaionSpeed * _delta);
     }
 
     public Vector3 UpdatePosition(float _delta)
@@ -114,22 +113,23 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
 
     public Vector3 SmoothMove(CamBrain camBrain, Vector3 Position, float _delta)
     {
-        return Vector3.SmoothDamp(camBrain.CashedPosition, Position, ref _moveVelocity, MovementSmoothing, Mathf.Infinity, _delta);
+        return Vector3.SmoothDamp(camBrain.CashedTransform.Position, Position, ref _moveVelocity, MovementSmoothing, Mathf.Infinity, _delta);
     }
 
     #endregion AdditionalFunctions
 
     private Vector3 _position;
-
-    public Vector3 Position()
-    {
-        return _position;
-    }
-
     private Quaternion _rotation = Quaternion.identity;
-
-    public Quaternion Rotation()
+    public PosRot Transform()
     {
-        return _rotation;
+        PosRot _transfrm = new PosRot()
+        {
+            Position = _position,
+            Rotation = _rotation
+        };
+        return _transfrm;
     }
+
+
+
 }

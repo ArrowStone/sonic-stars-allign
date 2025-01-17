@@ -2,9 +2,7 @@ using UnityEngine;
 
 public interface ICamPoint
 {
-    public Vector3 Position();
-
-    public Quaternion Rotation();
+    public PosRot Transform();
 
     public void OnEnter(CamBrain _cam);
 

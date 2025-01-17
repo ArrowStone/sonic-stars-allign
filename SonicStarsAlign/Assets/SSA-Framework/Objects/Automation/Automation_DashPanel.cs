@@ -1,56 +1,24 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Automation_DashPanel : MonoBehaviour
+public class Automation_DashPanel : MonoBehaviour, IAutomation
 {
-    [SerializeField] Vector3 normal;
-    [SerializeField] private Vector3 offset;
-    [SerializeField] private AutomationForce force;
+    public Vector3 Normal;
+    public Vector3 Force;
+    public Vector3 Offset;
+
+    [Space]
+    public bool Set;
 
     public UnityEvent InteractionEvent;
 
-    #region Util
-    private Sonic_PlayerStateMachine _ctx;
-    private Vector3 _norm;
-    private Vector3 _pos;
-    private Vector3 _vel;
-    #endregion Util
-
-    public void OnTriggerEnter(Collider _cl)
+    public PosRot Execute(Sonic_PlayerStateMachine _ctx)
     {
-        if (_cl == _ctx.TriggerCl)
-        {
-            return;
-        }
-
-        if (_cl.transform.TryGetComponent(out _ctx))
-        {
-            InteractionEvent.Invoke();
-            Initiate();
-        }
-    }
-
-    public void OnTriggerExit(Collider collision)
-    {
-        _ctx = null;
-    }
-
-    private void Initiate()
-    {
-        _norm = normal.magnitude < 0.1f ? transform.up.normalized : normal.normalized;
-        _vel = Vector3.ProjectOnPlane(_ctx.Rb.linearVelocity, _norm);
-        _pos = transform.position + (transform.rotation * offset);
-
-        _ctx.ChangeKinematic(true);
-        _ctx.Rb.position = _pos;
-        Execute(force);
-    }
-
-    private void Execute(AutomationForce currentForce)
-    {
-        _vel = currentForce.Set || Vector3.Dot(_vel, (transform.rotation * currentForce.Force).normalized) < currentForce.Force.magnitude
-            ? transform.rotation * currentForce.Force
-            : Vector3.Project(_vel, (transform.rotation * currentForce.Force).normalized);
+        Vector3 _norm = Normal.magnitude < 0.1f ? transform.up.normalized : Normal.normalized;
+        Vector3 _fr = transform.rotation * Force;
+        Vector3 _vel = Set || Vector3.Dot(_ctx.Velocity, _fr.normalized) < _fr.magnitude ? _fr : Vector3.Project(_ctx.Velocity, _fr.normalized);
+        Vector3 _pos = transform.position + (transform.rotation * Offset);
+        
 
         if (_ctx.GroundCast.Execute(_pos, -_norm))
         {
@@ -62,7 +30,14 @@ public class Automation_DashPanel : MonoBehaviour
             _ctx.MachineTransition(PlayerStates.Air);
         }
 
-        _ctx.ChangeKinematic(false);
         _ctx.Velocity = _vel;
+        _ctx.PlayerDirection = Vector3.ProjectOnPlane(_ctx.Velocity, _ctx.GroundNormal).normalized;
+
+        PosRot _transfrm = new()
+        {
+            Position = _ctx.Rb.position,
+            Rotation = Quaternion.LookRotation(_ctx.PlayerDirection, _ctx.GroundNormal)
+        };
+        return _transfrm;
     }
 }

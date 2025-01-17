@@ -16,7 +16,7 @@ public class Sonic_HomingAttackState : IState
         _ctx.ChangeKinematic(true);
 
         _targetPos = _ctx.HomingTargetDetector.TargetOutput.transform.position;
-        _vel = _ctx.Chp.HomingAttackSpeed * Time.deltaTime * (_targetPos - _ctx.transform.position).normalized;
+        _vel = _ctx.Chp.HomingAttackSpeed * (_targetPos - _ctx.transform.position).normalized;
         _ctx.PlayerDirection = _vel.normalized;
         _ctx.GroundNormal = -_ctx.Gravity;
     }
@@ -49,7 +49,7 @@ public class Sonic_HomingAttackState : IState
     private void HomingAttackMovement(float _delta)
     {
         _vel = _ctx.Chp.HomingAttackSpeed * (_targetPos - _ctx.transform.position).normalized;
-        _ctx.Rb.MovePosition(_ctx.Rb.position + _vel * _delta);
+        _ctx.Physics_Snap(_ctx.Rb.position + _vel * _delta);
     }
 
     private void HomingAttackRotation()

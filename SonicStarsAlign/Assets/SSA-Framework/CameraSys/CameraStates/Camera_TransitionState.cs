@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Drawing;
+using UnityEngine;
 
 public class Camera_TransitionState : IState
 {
@@ -19,11 +20,6 @@ public class Camera_TransitionState : IState
         _duration = _ctx.WieghtCurve.keys[_ctx.WieghtCurve.length - 1].time;
         #endregion Misc
 
-        #region Collision
-        _ctx.CashedPosition = _ctx.transform.position;
-        _ctx.CashedRotation = _ctx.transform.rotation;
-        #endregion Collision
-
         _ctx.Point.OnEnter(_ctx);
     }
 
@@ -42,12 +38,18 @@ public class Camera_TransitionState : IState
 
     public void ExitState()
     {
+        _ctx.CashedTransform = new()
+        {
+            Position = _ctx.Cam.transform.position,
+            Rotation = _ctx.Cam.transform.rotation,
+        };
     }
 
     public void TransitionMovement(float _delta)
     {
         _ctx.Point.Execute(_delta);
-        _ctx.transform.SetPositionAndRotation(Vector3.Lerp(_ctx.CashedPosition, _ctx.Point.Position(), _ctx.WieghtCurve.Evaluate(_time)), Quaternion.Slerp(_ctx.CashedRotation, _ctx.Point.Rotation(), _ctx.WieghtCurve.Evaluate(_time)));
+        var _transfrm = _ctx.Point.Transform();
+        _ctx.transform.SetPositionAndRotation(Vector3.Lerp(_ctx.CashedTransform.Position, _transfrm.Position, _ctx.WieghtCurve.Evaluate(_time)), Quaternion.Slerp(_ctx.CashedTransform.Rotation, _transfrm.Rotation, _ctx.WieghtCurve.Evaluate(_time)));
     }
 
     public void TransitionSwitchConditions()

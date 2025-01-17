@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class DebugCameraTransitioner : MonoBehaviour
 {
@@ -6,7 +7,10 @@ public class DebugCameraTransitioner : MonoBehaviour
 
     [Space]
     public CameraTransition Enter;
+    public UnityEvent EnterEvent;
+
     public CameraTransition Exit;
+    public UnityEvent ExitEvent;
 
     private Panel_Collider _triggercl;
 
@@ -28,9 +32,11 @@ public class DebugCameraTransitioner : MonoBehaviour
         if (Enter.Point == null) return;
 
         var _camPoint = Enter.Point.GetComponent<ICamPoint>();
-        MainCam.WieghtCurve = Enter.WeightCurve;
-        MainCam.MachineTransition(CameraStates.Transitioning);
+        MainCam.WieghtCurve = Enter.WeightCurve;        
         MainCam.Point = _camPoint;
+        MainCam.MachineTransition(CameraStates.Transitioning);
+        
+        EnterEvent.Invoke();
     }
 
     private void TExit(Collider _other)
@@ -38,9 +44,11 @@ public class DebugCameraTransitioner : MonoBehaviour
         if (Exit.Point == null) return;
 
         var _camPoint = Exit.Point.GetComponent<ICamPoint>();
-        MainCam.WieghtCurve = Exit.WeightCurve;
-        MainCam.MachineTransition(CameraStates.Transitioning);
+        MainCam.WieghtCurve = Exit.WeightCurve;        
         MainCam.Point = _camPoint;
+        MainCam.MachineTransition(CameraStates.Transitioning);
+
+        ExitEvent.Invoke();
     }
 }
 

@@ -44,8 +44,8 @@ public class CamPoint_Pan : MonoBehaviour, ICamPoint
     public void OnEnter(CamBrain _brain)
     {
         Brain = _brain;
-        _position = _brain.CashedPosition;
-
+        _position = _brain.CashedTransform.Position;
+        _rotation = _brain.CashedTransform.Rotation;
         _cashedTargetPosition = Target.position;
     }
 
@@ -90,7 +90,7 @@ public class CamPoint_Pan : MonoBehaviour, ICamPoint
         _inputValues = Vector2.ClampMagnitude(Brain.Input.CameraInput.ReadValue<Vector2>(), 1);
 
         _rot.y += _inputValues.x * Sensitivity.x * _delta;
-        _rot.y = Mathf.Clamp(_rot.x, XLimits.x, XLimits.y);
+        _rot.y = Mathf.Clamp(_rot.y, XLimits.x, XLimits.y);
 
         _rot.x += _inputValues.y * Sensitivity.y * _delta;
         _rot.x = Mathf.Clamp(_rot.x, YLimits.x, YLimits.y);
@@ -111,19 +111,19 @@ public class CamPoint_Pan : MonoBehaviour, ICamPoint
 
     private Vector3 _position;
 
-    public Vector3 Position()
-    {
-        return _position;
-    }
-
     private Quaternion _rotation = Quaternion.identity;
 
-    public Quaternion Rotation()
+    public PosRot Transform()
     {
         Quaternion _rotRot = new()
         {
             eulerAngles = new Vector3(_rot.x, _rot.y)
         };
-        return  _rotRot * _rotation ;
+        PosRot _transfrm = new PosRot()
+        {
+            Position = _position,
+            Rotation = _rotation * _rotRot,
+        };
+        return _transfrm;
     }
 }

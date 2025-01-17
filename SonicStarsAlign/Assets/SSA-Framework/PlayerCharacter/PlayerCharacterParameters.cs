@@ -7,10 +7,6 @@ public class PlayerCharacterParameters : ScriptableObject
     [Header("Handling")]
     public float BaseSpeed;
 
-    public float SoftSpeedCap;
-
-    public float SpeedCapStrength;
-
     public float HardSpeedCap;
 
     public float RailSpeedCap;
@@ -26,7 +22,7 @@ public class PlayerCharacterParameters : ScriptableObject
     [Space]
     public float BaseSpeedAir;
 
-    public float AirDrag;
+    public AnimationCurve AirDrag;
 
     public float AccelerationAir;
 

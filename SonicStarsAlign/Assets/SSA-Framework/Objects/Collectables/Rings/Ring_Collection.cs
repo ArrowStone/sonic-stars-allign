@@ -1,17 +1,16 @@
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Ring_Collection : CollectableBase
 {
-    public float EnergyValue;
-    public int RingValue;
+    public int Value;
 
     public override void Collection(Collider _triggerer)
     {
-        if (_triggerer.transform.TryGetComponent(out Sonic_PlayerStateMachine Collector))
+        if (_triggerer.transform.TryGetComponent(out Sonic_PlayerStateMachine _ctx))
         {
             CollectionEvent.Invoke();
-          //  Collector.Stats.ChangeRings(RingValue);
-           // Collector.Stats.ChangeBoost(EnergyValue);
+            _ctx.Chs.SetRings(_ctx.Chs.Rings + Value);
         }
     }
 }

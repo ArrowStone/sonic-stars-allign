@@ -5,7 +5,7 @@ public class Sonic_AirState : IState
     private readonly Sonic_PlayerStateMachine _ctx;
     private bool _groundDetected;
     private float _ddchargeTime;
-
+    private float _airDragTime;
     public Sonic_AirState(Sonic_PlayerStateMachine _machine)
     {
         _ctx = _machine;
@@ -17,6 +17,7 @@ public class Sonic_AirState : IState
 
         _groundDetected = false;
         _ddchargeTime = 0;
+        _airDragTime = 0;
 
         #endregion Misc
 
@@ -24,9 +25,7 @@ public class Sonic_AirState : IState
 
         _ctx.GroundNormal = -_ctx.Gravity.normalized;
         _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity.normalized);
-        _ctx.PlayerDirection = _ctx.Rb.transform.forward;
-        _ctx.TriggerCl.TriggerEnter += TriggerCheck;
-        _ctx.TriggerCl.TriggerExit += TriggerDCheck;
+        _ctx.PlayerDirection = _ctx.transform.forward;
         #endregion Collision
 
         #region Velocity
@@ -68,8 +67,6 @@ public class Sonic_AirState : IState
 
     public void ExitState()
     {
-        _ctx.TriggerCl.TriggerEnter -= TriggerCheck;
-        _ctx.TriggerCl.TriggerExit -= TriggerDCheck;
 
     }
 
@@ -147,7 +144,7 @@ public class Sonic_AirState : IState
         {
             if (Vector3.Dot(_ctx.HorizontalVelocity.normalized, _ctx.InputVector) < _ctx.Chp.TurnDeviationCap)
             {
-                float _acceleration = _ctx.Chp.AccelerationAir * _delta;
+                float _acceleration = _ctx.Chp.BreakStrengthAir * _delta;
                 _ctx.HorizontalVelocity += _acceleration * _ctx.InputVector;
 
                 if (_ctx.HorizontalVelocity.magnitude > _ctx.Chp.MinBreakSpeed)
@@ -176,43 +173,24 @@ public class Sonic_AirState : IState
             float _turnStrength = _ctx.Chp.TurnStrengthCurveAir.Evaluate(_ctx.HorizontalVelocity.magnitude) * Mathf.PI * _delta;
             _ctx.HorizontalVelocity = Vector3.RotateTowards(_ctx.HorizontalVelocity, _ctx.InputVector * _ctx.HorizontalVelocity.magnitude, _turnStrength, 0);
         }
+        
         AirDrag(_delta);
         _ctx.HorizontalVelocity = Vector3.ClampMagnitude(_ctx.HorizontalVelocity, _ctx.Chp.HardSpeedCap);
     }
 
     private void AirDrag(float _delta)
     {
-        if (Vector3.Dot(_ctx.VerticalVelocity, -_ctx.Gravity.normalized) <= _ctx.Chp.JumpCancel) return;
-        if (_ctx.HorizontalVelocity.magnitude > _ctx.Chp.BaseSpeedAir)
+        if (Vector3.Dot(_ctx.VerticalVelocity, -_ctx.Gravity.normalized) <= _ctx.Chp.JumpCancel)
         {
-            float _airDrag = _ctx.Chp.AirDrag * _delta;
-            _ctx.HorizontalVelocity = _ctx.HorizontalVelocity.normalized * Mathf.Lerp(_ctx.HorizontalVelocity.magnitude, _ctx.Chp.BaseSpeedAir, _airDrag);
-        }
-    }
-    
-    private void TriggerCheck(Collider _cl)
-    {
-        if (_cl == _ctx.TriggerBuffer) return;
-
-        Debug.Log("l");
-        if (_cl.TryGetComponent(out Automation_ForceSpline _s))
-        {
-            _s.Execute(_ctx);
-            _ctx.TriggerBuffer = _cl;
+            _airDragTime = 0;
             return;
-        }
+        } 
 
-        if (_cl.TryGetComponent(out Automation_GrindRail _gr))
+        if (_ctx.HorizontalVelocity.magnitude > _ctx.Chp.BaseSpeed)
         {
-            _gr.Execute(_ctx, _ctx.Rb.position);
-            _ctx.TriggerBuffer = _cl;
-            return;
+            _airDragTime += _delta;
+            _ctx.HorizontalVelocity = _ctx.HorizontalVelocity.normalized * Mathf.Lerp(_ctx.HorizontalVelocity.magnitude, _ctx.Chp.BaseSpeed, _ctx.Chp.AirDrag.Evaluate(_airDragTime));
         }
-    }
-
-    private void TriggerDCheck(Collider _)
-    {
-        _ctx.TriggerBuffer = null;
     }
 
     private void GroundSwitchConditions()

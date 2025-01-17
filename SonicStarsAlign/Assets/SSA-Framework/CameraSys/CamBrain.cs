@@ -9,16 +9,17 @@ public class CamBrain : StateMachine_MonoBase<CameraStates>
     public AnimationCurve WieghtCurve;
 
     #region Util
-
-    public Vector3 CashedPosition { get; set; }
-    public Quaternion CashedRotation { get; set; }
+    public PosRot CashedTransform { get; set; }
 
     #endregion Util
 
     private void Awake()
     {
-        CashedPosition = Cam.transform.position;
-        CashedRotation = Cam.transform.rotation;
+        CashedTransform = new()
+        {
+            Position = Cam.transform.position,
+            Rotation = Cam.transform.rotation,
+        };
         StateSetup();
         Initialize();
     }
@@ -43,9 +44,8 @@ public class CamBrain : StateMachine_MonoBase<CameraStates>
 
     public void ApplyPoint()
     {
-        Cam.transform.SetPositionAndRotation(Point.Position(), Point.Rotation());
-        CashedPosition = Cam.transform.position;
-        CashedRotation = Cam.transform.rotation;
+        CashedTransform = Point.Transform();
+        Cam.transform.SetPositionAndRotation(CashedTransform.Position, CashedTransform.Rotation);
     }
 
     #endregion Functions

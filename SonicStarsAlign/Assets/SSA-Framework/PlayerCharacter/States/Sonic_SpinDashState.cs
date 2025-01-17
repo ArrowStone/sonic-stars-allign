@@ -98,7 +98,7 @@ public class Sonic_SpinDashState : IState
 
     private void Movement(float _delta)
     {
-        float _deceleration = _ctx.Chp.RollDeceleration * _delta;
+        float _deceleration = _ctx.Chp.SpinDashDeceleration * _delta;
         _ctx.HorizontalVelocity = Vector3.MoveTowards(_ctx.HorizontalVelocity, Vector3.zero, _deceleration);
         _ctx.HorizontalVelocity = Vector3.ClampMagnitude(_ctx.HorizontalVelocity, _ctx.Chp.HardSpeedCap);
     }

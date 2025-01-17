@@ -12,29 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5bb2dbce231f94bbaeedd582baab8c, type: 3}
   m_Name: MainPlayerParameters
   m_EditorClassIdentifier: 
-  BaseSpeed: 12
-  SoftSpeedCap: 75
-  SpeedCapStrength: 1
+  BaseSpeed: 18
   HardSpeedCap: 400
   RailSpeedCap: 300
   Acceleration: 5.625
-  Deceleration: 5.625
+  Deceleration: 17
   TurnDeceleration:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: -1
-      value: 20
+      value: 30
       inSlope: 0
-      outSlope: -9.5
+      outSlope: -15
       tangentMode: 65
       weightedMode: 2
       inWeight: 0
       outWeight: 0.8125
     - serializedVersion: 3
       time: 1
-      value: 1
-      inSlope: -9.5
+      value: 0
+      inSlope: -15
       outSlope: -0.23060799
       tangentMode: 5
       weightedMode: 1
@@ -48,17 +46,17 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 2
+      value: 3
       inSlope: -0.00016107793
-      outSlope: -0.0095
+      outSlope: -0.01125
       tangentMode: 65
       weightedMode: 2
       inWeight: 0
       outWeight: 0.3780184
     - serializedVersion: 3
       time: 200
-      value: 0.1
-      inSlope: -0.0095
+      value: 0.75
+      inSlope: -0.01125
       outSlope: 0.000603775
       tangentMode: 5
       weightedMode: 1
@@ -68,24 +66,47 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   BaseSpeedAir: 6
-  AirDrag: 1
+  AirDrag:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.10931362
+      outSlope: 0.10931362
+      tangentMode: 0
+      weightedMode: 2
+      inWeight: 0
+      outWeight: 0.9291667
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 3.8847067
+      outSlope: 3.8847067
+      tangentMode: 0
+      weightedMode: 1
+      inWeight: 0.16250002
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   AccelerationAir: 11.25
   TurnDecelerationAir:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: -1
-      value: 20
+      value: 60
       inSlope: 0
-      outSlope: -9.5
+      outSlope: -30
       tangentMode: 65
       weightedMode: 2
       inWeight: 0
       outWeight: 0.8125
     - serializedVersion: 3
       time: 1
-      value: 1
-      inSlope: -9.5
+      value: 0
+      inSlope: -30
       outSlope: -0.23060799
       tangentMode: 5
       weightedMode: 1
@@ -101,15 +122,15 @@ MonoBehaviour:
       time: 0
       value: 4
       inSlope: -0.00016107793
-      outSlope: -0.015
+      outSlope: -0.01625
       tangentMode: 65
       weightedMode: 2
       inWeight: 0
       outWeight: 0.3780184
     - serializedVersion: 3
       time: 200
-      value: 1
-      inSlope: -0.015
+      value: 0.75
+      inSlope: -0.01625
       outSlope: 0.000603775
       tangentMode: 5
       weightedMode: 1
@@ -120,8 +141,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   TurnDeviationCap: -0.75
   MinBreakSpeed: 5
-  BreakStrength: 30
-  BreakStrengthAir: 11.25
+  BreakStrength: 35
+  BreakStrengthAir: 35
   JumpForce: 20
   JumpCancel: 4
   SlipTime: 0.3333333
@@ -134,8 +155,8 @@ MonoBehaviour:
   SlopeFactorRollDown: 37.5
   RailSlopeInfluence: 15
   RailCrouchInfluence: 37.5
-  RollDeceleration: 2.8125
-  SpinDashDeceleration: 5
+  RollDeceleration: 7.5
+  SpinDashDeceleration: 15
   MinRollSpeed: 1
   SpinDashHoldTime: 0.375
   SpinDashInitSpeed: 1
@@ -162,7 +183,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 2
-      value: 24
+      value: 25
       inSlope: Infinity
       outSlope: Infinity
       tangentMode: 103
@@ -171,7 +192,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 3
-      value: 28
+      value: 33
       inSlope: Infinity
       outSlope: Infinity
       tangentMode: 103
@@ -180,7 +201,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 4
-      value: 32
+      value: 40
       inSlope: Infinity
       outSlope: Infinity
       tangentMode: 103
@@ -189,7 +210,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 5
-      value: 34
+      value: 45
       inSlope: Infinity
       outSlope: Infinity
       tangentMode: 103
@@ -204,7 +225,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 16
+      value: 35
       inSlope: 0
       outSlope: 0
       tangentMode: 34
@@ -213,7 +234,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.1
-      value: 16
+      value: 35
       inSlope: Infinity
       outSlope: -0.06078856
       tangentMode: 7
@@ -270,6 +291,6 @@ MonoBehaviour:
   MaxBounceHieght: 65
   DashSpeed: 25
   DashBoost: 15
-  HomingAttackSpeed: 75
-  LightDashSpeed: 35
+  HomingAttackSpeed: 150
+  LightDashSpeed: 150
   RailCollisionBounce: 5

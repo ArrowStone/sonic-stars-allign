@@ -31,8 +31,7 @@ namespace Assets.SEM_Framework.PlayerCharacter
 
         private void GraphicUpdate(float _delta)
         {
-            Graphic.position = _ctx.Rb.position;
-            Graphic.rotation = _ctx.Rb.rotation;
+            Graphic.SetPositionAndRotation(_ctx.Rb.position, _ctx.Rb.rotation);
         }
 
         private void ParameterUpdate(float _delta)

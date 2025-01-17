@@ -6,6 +6,7 @@ public class SplineHandler
     public bool Active;
     public SplineContainer ActiveSpline;
     public SplineType ActiveSplineType;
+    public Automation_Pully _pully;
     public bool Forward;
     public float SpeedFactor;
     public bool Loose;
@@ -14,7 +15,7 @@ public class SplineHandler
     private Vector3 offset;
     public float SpeedMultiplier;
     public AnimationCurve SpeedOverTime;
-    private float time;
+    public float time;
 
     public void SplineSetup(SplineContainer _spline, SplineType _type, AnimationCurve _speedCurve,
         float _speedMultiplier, Vector3 _offset, float _startTime = 0, bool _looping = false, bool _loose = false)
@@ -109,5 +110,6 @@ public enum SplineType
     Spring,
     DashRamp,
     DashRing,
-    GrindRail
+    GrindRail,
+    Pully,
 }

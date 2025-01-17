@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
@@ -10,6 +9,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public CapsuleCollider Cl;
     public Panel_Collider TriggerCl;
     public PlayerCharacterParameters Chp;
+    public PlayerCharacterStats Chs;
     public float InvinciblitiyState;
     public bool TrickState;
 
@@ -53,7 +53,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     #region Util
 
-    public float PlayerHover { get => groundRayLength - groundRayDig; }
+    public float PlayerHover => groundRayLength - groundRayDig;
     public Vector3 PlayerDirection { get; set; } = Vector3.forward;
     public Vector3 InputVector { get; set; }
     public Quaternion InputRotation { get; set; }
@@ -72,7 +72,6 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
             {
                 return;
             }
-
             Rb.linearVelocity = value;
         }
     }
@@ -152,9 +151,10 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         States.Add(PlayerStates.Bounce, new Sonic_BounceState(this));
         States.Add(PlayerStates.HomingAttack, new Sonic_HomingAttackState(this));
         States.Add(PlayerStates.LightSpeedDash, new Sonic_LightDashState(this));
-        States.Add(PlayerStates.Damage, new Sonic_HurtState(this));
+        States.Add(PlayerStates.Damage, new Sonic_DamageState(this));
         States.Add(PlayerStates.RailGrinding, new Sonic_GrindState(this));
         States.Add(PlayerStates.LinearAutomation, new Sonic_LinearAutomationState(this));
+        States.Add(PlayerStates.Pully, new Sonic_PullyState(this));
 
         CurrentEstate = PlayerStates.Air;
         CurrentState = States[CurrentEstate];
@@ -166,6 +166,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         ComponentSetup();
         StateSetup();
         Initialize();
+
     }
 
     public void Update()
@@ -176,7 +177,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public void FixedUpdate()
     {
         base.MachineFixedUpdate();
-    }
+    } 
 
     #region AdditionalFunctions
 
@@ -208,7 +209,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     {
         if (!Physics_Sweep(_point, out _))
         {
-            Rb.position = _point;
+            Rb.MovePosition(_point);
         }
     }
 
@@ -228,6 +229,47 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         Rb.isKinematic = _t;
         Cl.enabled = true;
         TriggerCl.RefCollider.enabled = true;
+    }
+
+    private void TriggerCheck(Collider _cl)
+    {
+        if (_cl == TriggerBuffer)
+        {
+            return;
+        }
+
+        if (_cl.TryGetComponent(out IAutomation _i))
+        {
+            PosRot _t = _i.Execute(this);
+            Physics_Snap(_t.Position);
+            Rb.MoveRotation(_t.Rotation);
+            cashedRotation = Rb.rotation;
+            TriggerBuffer = _cl;
+            return;
+        }
+        if (_cl.TryGetComponent(out Automation_ForceSpline _s))
+        {
+            _s.Execute(this);
+            TriggerBuffer = _cl;
+            return;
+        }
+        if (_cl.TryGetComponent(out Automation_Pully _p))
+        {
+            _p.Execute(this);
+            TriggerBuffer = _cl;
+            return;
+        }
+        if (_cl.TryGetComponent(out Automation_GrindRail _gr))
+        {
+            _gr.Execute(this, Rb.position);
+            TriggerBuffer = _cl;
+            return;
+        }
+    }
+
+    private void TriggerDCheck(Collider _)
+    {
+        TriggerBuffer = null;
     }
 
     #region Debug
@@ -284,10 +326,10 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     public void Jump()
     {
-        Jumping = true;
         VerticalVelocity += GroundNormal * Chp.JumpForce;
-
         Physics_ApplyVelocity();
+
+        Jumping = true;
         MachineTransition(PlayerStates.Air);
     }
 
@@ -310,7 +352,19 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     #endregion Moves
 
-    #endregion AdditionalFunctions
+    #endregion AdditionalFunctions  
+    
+    public void OnEnable()
+    {
+        TriggerCl.TriggerEnter += TriggerCheck;
+        TriggerCl.TriggerExit += TriggerDCheck;
+    }
+
+    public void OnDisable()
+    {
+        TriggerCl.TriggerEnter -= TriggerCheck;
+        TriggerCl.TriggerExit -= TriggerDCheck;
+    }
 }
 
 public enum PlayerStates
@@ -325,4 +379,5 @@ public enum PlayerStates
     Damage,
     RailGrinding,
     LinearAutomation,
+    Pully,
 }
