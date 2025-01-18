@@ -2,7 +2,6 @@
 
 public class Sonic_LinearAutomationState : IState
 {
-
     public Sonic_PlayerStateMachine _ctx;
     private Vector3 _vel;
     private Vector3 _pos;
@@ -35,7 +34,6 @@ public class Sonic_LinearAutomationState : IState
 
     public void FixedUpdateState()
     {
-
     }
 
     public void ExitState()
@@ -68,6 +66,7 @@ public class Sonic_LinearAutomationState : IState
             _ctx.PlayerDirection = _vel.normalized;
         }
     }
+
     private void AutomationSwitchConditions()
     {
         if (_ctx.SplnHandler.Loose)

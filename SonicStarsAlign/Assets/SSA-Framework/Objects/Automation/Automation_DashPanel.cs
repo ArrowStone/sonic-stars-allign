@@ -18,7 +18,6 @@ public class Automation_DashPanel : MonoBehaviour, IAutomation
         Vector3 _fr = transform.rotation * Force;
         Vector3 _vel = Set || Vector3.Dot(_ctx.Velocity, _fr.normalized) < _fr.magnitude ? _fr : Vector3.Project(_ctx.Velocity, _fr.normalized);
         Vector3 _pos = transform.position + (transform.rotation * Offset);
-        
 
         if (_ctx.GroundCast.Execute(_pos, -_norm))
         {

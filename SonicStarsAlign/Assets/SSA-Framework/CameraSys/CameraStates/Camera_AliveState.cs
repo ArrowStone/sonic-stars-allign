@@ -11,7 +11,6 @@ public class Camera_AliveState : IState
 
     public void EnterState()
     {
-
     }
 
     public void UpdateState()

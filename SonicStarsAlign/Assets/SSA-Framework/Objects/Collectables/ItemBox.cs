@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 
-class ItemBox : GenericDamage
+internal class ItemBox : GenericDamage
 {
     public Sonic_PlayerStateMachine Ctx { get; set; }
     public GameItems Item;
     [SerializeField] private float value;
+
     public override void DealDamage(float _damage, Vector3 _knockback, int _strength)
     {
         base.DealDamage(_damage, _knockback, _strength);
@@ -44,6 +45,7 @@ class ItemBox : GenericDamage
         }
     }
 }
+
 public enum GameItems
 {
     Ring,

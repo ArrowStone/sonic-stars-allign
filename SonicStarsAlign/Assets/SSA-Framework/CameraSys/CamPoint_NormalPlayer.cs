@@ -120,6 +120,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
 
     private Vector3 _position;
     private Quaternion _rotation = Quaternion.identity;
+
     public PosRot Transform()
     {
         PosRot _transfrm = new PosRot()
@@ -129,7 +130,4 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
         };
         return _transfrm;
     }
-
-
-
 }

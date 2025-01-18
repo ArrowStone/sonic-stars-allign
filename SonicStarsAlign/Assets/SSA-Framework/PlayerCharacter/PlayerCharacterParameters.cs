@@ -68,7 +68,6 @@ public class PlayerCharacterParameters : ScriptableObject
     public float SlopeFactorRollDown;
 
     [Space]
-
     public float RailSlopeInfluence;
 
     public float RailCrouchInfluence;
@@ -109,7 +108,6 @@ public class PlayerCharacterParameters : ScriptableObject
 
     [Space]
     [Header("LightDashSpeed")]
-
     public float LightDashSpeed;
 
     [Space]

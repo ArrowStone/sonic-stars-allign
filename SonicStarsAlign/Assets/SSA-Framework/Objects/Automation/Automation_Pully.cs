@@ -13,26 +13,20 @@ public class Automation_Pully : MonoBehaviour
 
     [Space]
     [SerializeField] private float resetTime;
-    [SerializeField] private float resetWait;    
+
+    [SerializeField] private float resetWait;
     private float _rset;
     [SerializeField] private float resetSpeed;
 
     [Space]
-
     public UnityEvent InteractionEvent;
 
     #region Util
+
     private float _time;
     public bool _active;
-    #endregion Util
 
-    public void OnTriggerEnter(Collider collision)
-    {
-        if (collision.TryGetComponent(out Sonic_PlayerStateMachine _target))
-        {
-            Execute(_target);
-        }
-    }
+    #endregion Util
 
     public void Execute(Sonic_PlayerStateMachine _ctx)
     {
@@ -47,7 +41,7 @@ public class Automation_Pully : MonoBehaviour
         InteractionEvent.Invoke();
         Vector3 tangent = RefSpline.EvaluateTangent(_time).xyz;
 
-        _ctx.SplnHandler._pully = this;
+        _ctx.SplnHandler._ctxPully = this;
         _ctx.SplnHandler.SplineSetup(RefSpline, SplineType.Pully, AnimationCurve.Constant(0, 1, 1), Vector3.Dot(_ctx.Rb.linearVelocity, tangent.normalized), offset, _time, RefSpline.Spline.Closed);
         _ctx.SplnHandler.SetTangent(tangent);
         _ctx.MachineTransition(PlayerStates.Pully);
@@ -58,7 +52,7 @@ public class Automation_Pully : MonoBehaviour
         if (_active) return;
 
         _rset += Time.deltaTime;
-        if(_rset >= resetWait)
+        if (_rset >= resetWait)
         {
             _time = Mathf.MoveTowards(_time, resetTime, resetSpeed * Time.deltaTime);
         }

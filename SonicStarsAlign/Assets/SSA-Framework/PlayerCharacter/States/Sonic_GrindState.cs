@@ -35,17 +35,16 @@ public class Sonic_GrindState : IState
                 SlopePhysics(_delta);
             }
         }
-        RailSwitchConditions(); 
+        RailSwitchConditions();
     }
 
     public void FixedUpdateState()
     {
-        
     }
 
     public void ExitState()
     {
-        _ctx.ChangeKinematic(false);        
+        _ctx.ChangeKinematic(false);
         _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity);
         _ctx.Physics_ApplyVelocity();
         _ctx.SplnHandler.Clear();

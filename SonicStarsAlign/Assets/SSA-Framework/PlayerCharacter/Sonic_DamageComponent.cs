@@ -15,11 +15,14 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
 
     [Space]
     public GameObject Scatter;
+
     public float MaxRingsScattered;
     public Vector3 RingScatterVelocity;
 
     public UnityEvent DeathEvent;
+
     public event Action DealtDamage;
+
     public event Action PlayerDeath;
 
     public void DealDamage(float _damage, Vector3 _knockback, int _strength)
@@ -79,7 +82,7 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
 
     public void RingLoss()
     {
-        if(CTX.Chs.Shield != null)
+        if (CTX.Chs.Shield != null)
         {
             CTX.Chs.Shield = null;
             return;

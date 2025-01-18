@@ -4,6 +4,7 @@ public class Sonic_DamageState : IState
 {
     private readonly Sonic_PlayerStateMachine _ctx;
     private bool _groundDetected;
+
     public Sonic_DamageState(Sonic_PlayerStateMachine _coreMachine)
     {
         _ctx = _coreMachine;
@@ -21,7 +22,6 @@ public class Sonic_DamageState : IState
 
         if (GroundCheck())
         {
-
         }
         else
         {
@@ -35,12 +35,10 @@ public class Sonic_DamageState : IState
 
     public void FixedUpdateState()
     {
-
     }
 
     public void ExitState()
     {
-
     }
 
     private void HurtMovement(float _delta)

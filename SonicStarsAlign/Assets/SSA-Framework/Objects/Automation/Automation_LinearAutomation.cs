@@ -1,8 +1,8 @@
 using UnityEngine;
-using UnityEngine.Splines;
 using UnityEngine.Events;
+using UnityEngine.Splines;
 
-public class Automation_ForceSpline : MonoBehaviour
+public class Automation_LinearAutomation : MonoBehaviour
 {
     public SplineContainer spline;
     public SplineType splineType;
@@ -15,15 +15,7 @@ public class Automation_ForceSpline : MonoBehaviour
     [SerializeField] private Vector3 _offset;
 
     public UnityEvent InteractionEvent;
-
-    public void OnTriggerEnter(Collider collision)
-    {
-        if (collision.transform.TryGetComponent(out Sonic_PlayerStateMachine _ctx))
-        {
-            Execute(_ctx);
-        }
-    }
-
+    
     public void Execute(Sonic_PlayerStateMachine _ctx)
     {
         if (_ctx.SplnHandler.ActiveSpline != spline)

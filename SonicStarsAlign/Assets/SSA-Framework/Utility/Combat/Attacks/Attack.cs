@@ -94,7 +94,7 @@ public class Attack
 
     public string Name;
     [SerializeField] private int maxHitsCount;
-    [Space]public float radius;
+    [Space] public float radius;
     public Vector3 Offset;
     [Space][SerializeField] private Vector3 knockback;
     [SerializeField] private Hazards_HitStyle knockbackApplication;

@@ -2,7 +2,6 @@
 
 public class Sonic_PullyState : IState
 {
-
     public Sonic_PlayerStateMachine _ctx;
     private Vector3 _vel;
     private Vector3 _pos;
@@ -28,7 +27,7 @@ public class Sonic_PullyState : IState
         {
             SplineApplication();
             Movement(_delta);
-            _ctx.SplnHandler._pully.VisualUpdate(_ctx.SplnHandler.time);
+            _ctx.SplnHandler._ctxPully.VisualUpdate(_ctx.SplnHandler.Time);
         }
 
         AutomationSwitchConditions();
@@ -36,14 +35,13 @@ public class Sonic_PullyState : IState
 
     public void FixedUpdateState()
     {
-
     }
 
     public void ExitState()
     {
         _ctx.ChangeKinematic(false);
         _ctx.Physics_ApplyVelocity();
-        _ctx.SplnHandler._pully._active = false;
+        _ctx.SplnHandler._ctxPully._active = false;
         _vel = Vector3.zero;
 
         if (_triggerDetected) return;

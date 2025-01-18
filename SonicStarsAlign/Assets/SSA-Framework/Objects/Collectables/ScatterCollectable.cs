@@ -13,15 +13,18 @@ public class ScatterCollectable : MonoBehaviour
 
     [Space]
     [SerializeField] private bool despawn;
+
     [SerializeField] private float despawnTime;
 
     public UnityEvent DespawnEvent;
 
-    #region  Util
+    #region Util
+
     private Cast_Ray groundDetector;
     private float time;
     private Rigidbody Rb;
     public Vector3 GravityDirection { get; set; }
+
     #endregion Util
 
     private void Start()

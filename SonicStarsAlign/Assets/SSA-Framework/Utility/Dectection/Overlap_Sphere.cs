@@ -4,15 +4,15 @@ public class Overlap_Sphere
 {
     public float DetectionDistance;
     public float DetectionRadius;
-    
+
     public LayerMask blockageMask;
     public bool blockageCheck;
 
     public GameObject TargetOutput;
     public Collider[] TargetColliders;
 
-    public bool TargetDetected;    
-    
+    public bool TargetDetected;
+
     private int _count;
     private readonly int _maxCount;
     private readonly LayerMask _mask;
@@ -24,7 +24,7 @@ public class Overlap_Sphere
     private float _currReading;
 
     public Overlap_Sphere(GameObject _source, int _maxTargetCount, LayerMask _layerMask, float _distance, float _radius, LayerMask _blockMask = new(), DetectionBias _detectionBias = DetectionBias.Proximity)
-    {   
+    {
         DetectionDistance = _distance;
         DetectionRadius = _radius;
         _maxCount = _maxTargetCount;

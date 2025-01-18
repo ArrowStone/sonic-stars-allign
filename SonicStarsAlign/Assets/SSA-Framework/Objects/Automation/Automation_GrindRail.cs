@@ -1,7 +1,7 @@
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Splines;
 using UnityEngine.Events;
+using UnityEngine.Splines;
 
 public class Automation_GrindRail : MonoBehaviour
 {
@@ -11,13 +11,14 @@ public class Automation_GrindRail : MonoBehaviour
     private Vector3 offset;
 
     [Space]
-
     public UnityEvent InteractionEvent;
 
     #region Util
+
     private const int _res = 10;
     private const int _iterations = 4;
     private float _time;
+
     #endregion Util
 
     public void OnTriggerEnter(Collider collision)

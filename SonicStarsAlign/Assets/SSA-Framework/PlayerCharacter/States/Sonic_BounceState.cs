@@ -62,7 +62,6 @@ public class Sonic_BounceState : IState
 
     public void ExitState()
     {
-       
     }
 
     #region Util

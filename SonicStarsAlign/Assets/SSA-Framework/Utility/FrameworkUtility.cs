@@ -23,6 +23,7 @@ public static class FrameworkUtility
         return Difference.magnitude <= _deadZone;
     }
 }
+
 public struct PosRot
 {
     public Vector3 Position;

@@ -39,7 +39,6 @@ public class Sonic_LightDashState : IState
 
     public void FixedUpdateState()
     {
-
     }
 
     public void ExitState()

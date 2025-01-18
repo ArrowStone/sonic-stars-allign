@@ -7,6 +7,7 @@ public class DebugCameraTransitioner : MonoBehaviour
 
     [Space]
     public CameraTransition Enter;
+
     public UnityEvent EnterEvent;
 
     public CameraTransition Exit;
@@ -32,10 +33,10 @@ public class DebugCameraTransitioner : MonoBehaviour
         if (Enter.Point == null) return;
 
         var _camPoint = Enter.Point.GetComponent<ICamPoint>();
-        MainCam.WieghtCurve = Enter.WeightCurve;        
+        MainCam.WieghtCurve = Enter.WeightCurve;
         MainCam.Point = _camPoint;
         MainCam.MachineTransition(CameraStates.Transitioning);
-        
+
         EnterEvent.Invoke();
     }
 
@@ -44,7 +45,7 @@ public class DebugCameraTransitioner : MonoBehaviour
         if (Exit.Point == null) return;
 
         var _camPoint = Exit.Point.GetComponent<ICamPoint>();
-        MainCam.WieghtCurve = Exit.WeightCurve;        
+        MainCam.WieghtCurve = Exit.WeightCurve;
         MainCam.Point = _camPoint;
         MainCam.MachineTransition(CameraStates.Transitioning);
 

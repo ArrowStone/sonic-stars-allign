@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Automation_DashPanel_Rail : MonoBehaviour
+public class Automation_DashPanel_Rail : MonoBehaviour, IAutomation
 {
     public Automation_GrindRail SplineRef;
     public float Force;
@@ -13,7 +13,7 @@ public class Automation_DashPanel_Rail : MonoBehaviour
 
     public PosRot Execute(Sonic_PlayerStateMachine _ctx)
     {
-       float _vel = Set || _ctx.SplnHandler.SpeedMultiplier < Force ? Force : _ctx.SplnHandler.SpeedMultiplier;
+        float _vel = Set || _ctx.SplnHandler.SpeedMultiplier < Force ? Force : _ctx.SplnHandler.SpeedMultiplier;
 
         if (_ctx.CurrentEstate is not PlayerStates.RailGrinding)
         {
@@ -25,7 +25,7 @@ public class Automation_DashPanel_Rail : MonoBehaviour
 
         PosRot _transfrm = new()
         {
-            Position = _ctx.Rb.position,
+            Position = transform.position,
             Rotation = Quaternion.LookRotation(_ctx.PlayerDirection, _ctx.GroundNormal)
         };
         return _transfrm;

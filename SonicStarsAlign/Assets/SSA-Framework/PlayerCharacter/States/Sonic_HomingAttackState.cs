@@ -37,7 +37,6 @@ public class Sonic_HomingAttackState : IState
 
     public void FixedUpdateState()
     {
-
     }
 
     public void ExitState()

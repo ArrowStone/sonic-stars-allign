@@ -8,7 +8,7 @@ public class Automation_TrickRamp : MonoBehaviour, IAutomation
     public Vector3 Force;
     public Vector3 ForceMax;
 
-    Sonic_PlayerStateMachine cashedPlayer;
+    private Sonic_PlayerStateMachine cashedPlayer;
 
     [Space]
     public bool Set;

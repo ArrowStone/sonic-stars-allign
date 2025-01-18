@@ -9,6 +9,7 @@ public class CamBrain : StateMachine_MonoBase<CameraStates>
     public AnimationCurve WieghtCurve;
 
     #region Util
+
     public PosRot CashedTransform { get; set; }
 
     #endregion Util

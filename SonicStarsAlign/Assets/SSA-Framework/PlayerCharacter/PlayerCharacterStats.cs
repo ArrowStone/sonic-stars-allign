@@ -6,6 +6,7 @@ public class PlayerCharacterStats : ScriptableObject
 {
     [SerializeField]
     public float Rings;
+
     public float SetRings(float value)
     {
         Rings = value;

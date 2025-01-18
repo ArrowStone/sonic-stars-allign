@@ -1,12 +1,11 @@
-﻿using System.Drawing;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Camera_TransitionState : IState
 {
     private readonly CamBrain _ctx;
 
-    float _time;
-    float _duration;
+    private float _time;
+    private float _duration;
 
     public Camera_TransitionState(CamBrain _machine)
     {
@@ -16,8 +15,10 @@ public class Camera_TransitionState : IState
     public void EnterState()
     {
         #region Misc
+
         _time = 0;
         _duration = _ctx.WieghtCurve.keys[_ctx.WieghtCurve.length - 1].time;
+
         #endregion Misc
 
         _ctx.Point.OnEnter(_ctx);

@@ -155,6 +155,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         States.Add(PlayerStates.RailGrinding, new Sonic_GrindState(this));
         States.Add(PlayerStates.LinearAutomation, new Sonic_LinearAutomationState(this));
         States.Add(PlayerStates.Pully, new Sonic_PullyState(this));
+        States.Add(PlayerStates.Pole, new Sonic_PoleState(this));
 
         CurrentEstate = PlayerStates.Air;
         CurrentState = States[CurrentEstate];
@@ -166,7 +167,6 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         ComponentSetup();
         StateSetup();
         Initialize();
-
     }
 
     public void Update()
@@ -177,7 +177,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public void FixedUpdate()
     {
         base.MachineFixedUpdate();
-    } 
+    }
 
     #region AdditionalFunctions
 
@@ -240,29 +240,30 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
         if (_cl.TryGetComponent(out IAutomation _i))
         {
-            PosRot _t = _i.Execute(this);
-            Physics_Snap(_t.Position);
-            Rb.MoveRotation(_t.Rotation);
-            cashedRotation = Rb.rotation;
             TriggerBuffer = _cl;
+            PosRot _t = _i.Execute(this);
+
+            Physics_Snap(_t.Position);
+            Physics_Rotate(_t.Rotation * Vector3.forward, _t.Rotation * Vector3.up);
+
             return;
         }
-        if (_cl.TryGetComponent(out Automation_ForceSpline _s))
+        if (_cl.TryGetComponent(out Automation_LinearAutomation _s))
         {
-            _s.Execute(this);
             TriggerBuffer = _cl;
+            _s.Execute(this);
             return;
         }
         if (_cl.TryGetComponent(out Automation_Pully _p))
         {
-            _p.Execute(this);
             TriggerBuffer = _cl;
+            _p.Execute(this);
             return;
         }
         if (_cl.TryGetComponent(out Automation_GrindRail _gr))
         {
-            _gr.Execute(this, Rb.position);
             TriggerBuffer = _cl;
+            _gr.Execute(this, Rb.position);
             return;
         }
     }
@@ -352,8 +353,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     #endregion Moves
 
-    #endregion AdditionalFunctions  
-    
+    #endregion AdditionalFunctions
+
     public void OnEnable()
     {
         TriggerCl.TriggerEnter += TriggerCheck;
@@ -380,4 +381,5 @@ public enum PlayerStates
     RailGrinding,
     LinearAutomation,
     Pully,
+    Pole,
 }

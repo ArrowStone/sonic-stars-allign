@@ -1,6 +1,6 @@
-public interface IShield 
+public interface IShield
 {
-    public void Start(Sonic_PlayerStateMachine _ctx);  
+    public void Start(Sonic_PlayerStateMachine _ctx);
 
-    public void Execute(float _dt);  
+    public void Execute(float _dt);
 }

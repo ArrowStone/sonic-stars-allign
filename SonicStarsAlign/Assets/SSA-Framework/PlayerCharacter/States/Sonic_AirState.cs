@@ -6,6 +6,7 @@ public class Sonic_AirState : IState
     private bool _groundDetected;
     private float _ddchargeTime;
     private float _airDragTime;
+
     public Sonic_AirState(Sonic_PlayerStateMachine _machine)
     {
         _ctx = _machine;
@@ -26,6 +27,7 @@ public class Sonic_AirState : IState
         _ctx.GroundNormal = -_ctx.Gravity.normalized;
         _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity.normalized);
         _ctx.PlayerDirection = _ctx.transform.forward;
+
         #endregion Collision
 
         #region Velocity
@@ -67,7 +69,6 @@ public class Sonic_AirState : IState
 
     public void ExitState()
     {
-
     }
 
     #region Util
@@ -173,7 +174,7 @@ public class Sonic_AirState : IState
             float _turnStrength = _ctx.Chp.TurnStrengthCurveAir.Evaluate(_ctx.HorizontalVelocity.magnitude) * Mathf.PI * _delta;
             _ctx.HorizontalVelocity = Vector3.RotateTowards(_ctx.HorizontalVelocity, _ctx.InputVector * _ctx.HorizontalVelocity.magnitude, _turnStrength, 0);
         }
-        
+
         AirDrag(_delta);
         _ctx.HorizontalVelocity = Vector3.ClampMagnitude(_ctx.HorizontalVelocity, _ctx.Chp.HardSpeedCap);
     }
@@ -184,7 +185,7 @@ public class Sonic_AirState : IState
         {
             _airDragTime = 0;
             return;
-        } 
+        }
 
         if (_ctx.HorizontalVelocity.magnitude > _ctx.Chp.BaseSpeed)
         {
@@ -225,7 +226,7 @@ public class Sonic_AirState : IState
 
     private void AirSwitchConditions()
     {
-        if(_ctx.HomingTargetDetector.TargetDetected && _ctx.Input.AttackInput.WasPressedThisFrame())
+        if (_ctx.HomingTargetDetector.TargetDetected && _ctx.Input.AttackInput.WasPressedThisFrame())
         {
             _ctx.MachineTransition(PlayerStates.HomingAttack);
         }
