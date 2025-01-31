@@ -6,8 +6,7 @@ public class SplineHandler
     public bool Active;
     public SplineContainer ActiveSpline;
     public SplineType ActiveSplineType;
-    public Automation_Pully _ctxPully;
-    public Automation_PoleSwing _ctxPole;
+
     public bool Forward;
     public float SpeedFactor;
     public bool Loose;
@@ -19,6 +18,11 @@ public class SplineHandler
     public AnimationCurve SpeedOverTime;
     public float Time;
 
+    #region Misc
+    public bool SwitchDir;    
+    public Automation_Pully _ctxPully;
+    public Automation_PoleSwing _ctxPole;
+    #endregion Misc
     public void SplineSetup(SplineContainer _spline, SplineType _type, AnimationCurve _speedCurve, float _speedMultiplier, Vector3 _offset, float _startTime = 0, bool _looping = false, bool _loose = false, int _spln = 0)
     {
         Active = true;

@@ -156,6 +156,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         States.Add(PlayerStates.LinearAutomation, new Sonic_LinearAutomationState(this));
         States.Add(PlayerStates.Pully, new Sonic_PullyState(this));
         States.Add(PlayerStates.Pole, new Sonic_PoleState(this));
+        States.Add(PlayerStates.RailSwitch, new Sonic_RailSwitchState(this));
+        States.Add(PlayerStates.Win, new Sonic_WinState(this));
 
         CurrentEstate = PlayerStates.Air;
         CurrentState = States[CurrentEstate];
@@ -172,6 +174,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public void Update()
     {
         base.MachineUpdate();
+        Chs.Shield?.Execute(Time.deltaTime);
     }
 
     public void FixedUpdate()
@@ -180,10 +183,15 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     }
 
     #region AdditionalFunctions
-
     public void Physics_ApplyVelocity()
     {
         Velocity = HorizontalVelocity + VerticalVelocity;
+    }
+
+    public void Respawn()
+    {
+        transform.SetPositionAndRotation(Chs.SpawnData.Position, Chs.SpawnData.Rotation);
+        MachineTransition(PlayerStates.Ground);
     }
 
     private Quaternion cashedRotation = Quaternion.identity;
@@ -372,6 +380,7 @@ public enum PlayerStates
 {
     Ground,
     Air,
+    Win,
     Bounce,
     HomingAttack,
     LightSpeedDash,
@@ -379,6 +388,7 @@ public enum PlayerStates
     Spindash,
     Damage,
     RailGrinding,
+    RailSwitch,
     LinearAutomation,
     Pully,
     Pole,

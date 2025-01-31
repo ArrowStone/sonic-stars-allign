@@ -105,7 +105,7 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
                 r.GetComponent<Rigidbody>().linearVelocity = Quaternion.Euler(0, irt, 0) * transform.rotation * RingScatterVelocity;
             }
 
-            CTX.Chs.SetRings(0);
+            CTX.Chs.Rings = 0;
         }
 
         DealtDamage?.Invoke();
@@ -117,7 +117,7 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
 
         CTX.Death = true;
         CTX.MachineTransition(PlayerStates.Damage);
-
+        CTX.Invoke(nameof(CTX.Respawn), 1);
         PlayerDeath?.Invoke();
         DeathEvent.Invoke();
     }

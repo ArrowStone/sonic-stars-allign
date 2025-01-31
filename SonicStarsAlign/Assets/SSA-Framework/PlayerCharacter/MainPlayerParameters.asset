@@ -16,7 +16,7 @@ MonoBehaviour:
   HardSpeedCap: 400
   RailSpeedCap: 300
   Acceleration: 5.625
-  Deceleration: 17
+  Deceleration: 29.75
   TurnDeceleration:
     serializedVersion: 2
     m_Curve:
@@ -141,12 +141,12 @@ MonoBehaviour:
     m_RotationOrder: 4
   TurnDeviationCap: -0.75
   MinBreakSpeed: 5
-  BreakStrength: 35
-  BreakStrengthAir: 35
+  BreakStrength: 70
+  BreakStrengthAir: 70
   JumpForce: 20
   JumpCancel: 4
   SlipTime: 0.3333333
-  GravityForce: 26.25
+  GravityForce: 45.9375
   FallVelCap: 30
   MinGroundStickSpeed: 6.25
   MaxGroundDeviation: 45
@@ -294,3 +294,6 @@ MonoBehaviour:
   HomingAttackSpeed: 150
   LightDashSpeed: 150
   RailCollisionBounce: 5
+  RailSwitchSpeed: 50
+  RailSwitchDuration: 0.5
+  RailSwitchDeadZone: 45

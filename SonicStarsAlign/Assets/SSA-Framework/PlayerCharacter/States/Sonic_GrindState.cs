@@ -28,6 +28,7 @@ public class Sonic_GrindState : IState
         if (_ctx.SplnHandler.Active)
         {
             RailApplication();
+            InputRotations();
             if (!CollisionD(_delta))
             {
                 Movement(_delta);
@@ -90,6 +91,15 @@ public class Sonic_GrindState : IState
         _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundNormal);
     }
 
+    private void InputRotations()
+    {
+        _ctx.InputRotation = Mathf.Approximately(Vector3.Angle(_ctx.GroundNormal, _ctx.InputRef.up), 180)
+            ? Quaternion.FromToRotation(_ctx.InputRotation * Vector3.up, _ctx.GroundNormal) * _ctx.InputRotation
+            : Quaternion.FromToRotation(_ctx.InputRef.up, _ctx.GroundNormal);
+
+        //  Quaternion cameraRotation = Quaternion.Euler(0, StateMachine.Camera.eulerAngles.y, 0);
+        _ctx.InputVector = _ctx.InputRotation * _ctx.InputRef.rotation * _ctx.Input.VectorMoveInput.normalized;
+    }
     private void SlopePhysics(float _delta)
     {
         if (_collided)
@@ -116,8 +126,22 @@ public class Sonic_GrindState : IState
 
     public void RailSwitchConditions()
     {
+
         if (_ctx.Input.JumpInput.WasPressedThisFrame())
         {
+            float _tilt = Vector3.SignedAngle(_ctx.PlayerDirection, _ctx.InputVector, _ctx.GroundNormal);
+            if (_tilt < -_ctx.Chp.RailSwitchDeadZone)
+            {
+                _ctx.SplnHandler.SwitchDir = false;
+                _ctx.MachineTransition(PlayerStates.RailSwitch);
+                return;
+            }
+            if (_tilt > _ctx.Chp.RailSwitchDeadZone)
+            {
+                _ctx.SplnHandler.SwitchDir = true;
+                _ctx.MachineTransition(PlayerStates.RailSwitch);
+                return;
+            }
             _ctx.Jump();
         }
         if (!_ctx.SplnHandler.Active)

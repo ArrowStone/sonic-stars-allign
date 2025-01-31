@@ -113,4 +113,7 @@ public class PlayerCharacterParameters : ScriptableObject
     [Space]
     [Header("Rail")]
     public float RailCollisionBounce;
+    public float RailSwitchSpeed;
+    public float RailSwitchDuration;
+    public float RailSwitchDeadZone;
 }

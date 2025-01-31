@@ -15,7 +15,7 @@ internal class ItemBox : GenericDamage
             {
                 case GameItems.Ring:
                     {
-                        Ctx.Chs.SetRings(Ctx.Chs.Rings + value);
+                        Ctx.Chs.Rings += value;
                         break;
                     }
 
