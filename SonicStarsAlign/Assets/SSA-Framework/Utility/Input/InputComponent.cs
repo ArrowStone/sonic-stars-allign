@@ -14,6 +14,7 @@ public class InputComponent : MonoBehaviour
     public InputAction BounceInput { get; private set; }
     public InputAction ReactionInput { get; private set; }
     public InputAction AttackInput { get; private set; }
+    public InputAction BackCameraInput { get; private set; }
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class InputComponent : MonoBehaviour
         BounceInput = I.Player.Bounce;
         ReactionInput = I.Player.ReactionCommand;
         AttackInput = I.Player.Attack;
+        BackCameraInput = I.Player.BackCamera;
     }
 
     private void OnEnable()

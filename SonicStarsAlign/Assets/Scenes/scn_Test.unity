@@ -3000,7 +3000,8 @@ MonoBehaviour:
   SmoothRotaionSpeed: 500
   MovementSmoothing: 0
   YAxisRecenteringWait: 1
-  YAxisRecenteringSpeed: 0.5
+  YAxisRecenteringSpeed: 1.5
+  BackCameraSpeed: 3
 --- !u!1 &322724828
 GameObject:
   m_ObjectHideFlags: 0

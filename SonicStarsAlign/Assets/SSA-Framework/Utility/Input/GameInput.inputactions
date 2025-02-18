@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "BackCamera",
+                    "type": "Button",
+                    "id": "e8d234ef-f920-40c3-b75a-7f8d4bc5031f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -320,6 +329,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Bounce",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3fbc9bdd-b9bb-409d-b101-3621ac5aa832",
+                    "path": "<Gamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "BackCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
