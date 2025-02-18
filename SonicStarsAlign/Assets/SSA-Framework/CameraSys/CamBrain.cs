@@ -7,7 +7,7 @@ public class CamBrain : StateMachine_MonoBase<CameraStates>
     public InputComponent Input;
 
     public ICamPoint Point;
-    public AnimationCurve WieghtCurve;
+    public AnimationCurve WeightCurve;
 
     #region Util
 

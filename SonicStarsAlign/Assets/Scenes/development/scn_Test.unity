@@ -3000,8 +3000,8 @@ MonoBehaviour:
   SmoothRotaionSpeed: 500
   MovementSmoothing: 0
   YAxisRecenteringWait: 1
-  YAxisRecenteringSpeed: 1.5
-  BackCameraSpeed: 3
+  YAxisRecenteringSpeed: 2
+  BackCameraSpeed: 6
 --- !u!1 &322724828
 GameObject:
   m_ObjectHideFlags: 0
@@ -22674,15 +22674,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1864639724311225380, guid: ac618e7758f400149912444418544d6c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 297.66
+      value: 257.12
       objectReference: {fileID: 0}
     - target: {fileID: 1864639724311225380, guid: ac618e7758f400149912444418544d6c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.57
+      value: 17.56
       objectReference: {fileID: 0}
     - target: {fileID: 1864639724311225380, guid: ac618e7758f400149912444418544d6c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 30.681274
+      value: 39.4
       objectReference: {fileID: 0}
     - target: {fileID: 1864639724311225380, guid: ac618e7758f400149912444418544d6c, type: 3}
       propertyPath: m_LocalRotation.w
