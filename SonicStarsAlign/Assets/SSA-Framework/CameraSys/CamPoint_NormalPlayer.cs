@@ -82,6 +82,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
             if (_recenteringState <= 0)
             {
                 _rot.x = Mathf.LerpAngle(_rot.x, 0, YAxisRecenteringSpeed * _delta);
+                _rot.y = Mathf.LerpAngle(_rot.y, Target.eulerAngles.y, YAxisRecenteringSpeed * _delta);
             }
         }
         else
