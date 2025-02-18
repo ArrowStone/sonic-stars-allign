@@ -182,6 +182,11 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         base.MachineFixedUpdate();
     }
 
+    public void LateUpdate()
+    {
+        base.MachineLateUpdate();
+    }
+
     #region AdditionalFunctions
     public void Physics_ApplyVelocity()
     {

@@ -67,6 +67,11 @@ public class Sonic_SpinDashState : IState
     {
     }
 
+    public void LateUpdateState()
+    {
+
+    }
+
     #region Util
 
     private bool GroundCheck()

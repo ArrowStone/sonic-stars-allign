@@ -22,6 +22,11 @@
         throw new System.NotImplementedException();
     }
 
+    public void LateUpdateState()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void ExitState()
     {
         throw new System.NotImplementedException();

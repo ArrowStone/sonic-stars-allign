@@ -45,6 +45,14 @@ public class StateMachine_Base<EState> : object where EState : Enum
         CurrentState.FixedUpdateState();
     }
 
+    public virtual void MachineLateUpdate()
+    {
+        if (!Running)
+            return;
+
+        CurrentState.LateUpdateState();
+    }
+
     public void MachineTransition(EState _nextState)
     {
         StateChanged?.Invoke(_nextState);

@@ -73,6 +73,11 @@ public class Sonic_GroundState : IState
         _ctx.RingCheck();
     }
 
+    public void LateUpdateState()
+    {
+
+    }
+
     public void ExitState()
     {
     }

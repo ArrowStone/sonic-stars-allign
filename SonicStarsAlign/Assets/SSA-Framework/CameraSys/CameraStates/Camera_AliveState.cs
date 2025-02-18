@@ -3,6 +3,7 @@
 public class Camera_AliveState : IState
 {
     private readonly CamBrain _ctx;
+    private float _delta = 0f;
 
     public Camera_AliveState(CamBrain _machine)
     {
@@ -15,12 +16,17 @@ public class Camera_AliveState : IState
 
     public void UpdateState()
     {
-        float _delta = Time.deltaTime;
-        AliveMovement(_delta);
+        _delta = Time.deltaTime;
     }
 
     public void FixedUpdateState()
     {
+
+    }
+
+    public void LateUpdateState()
+    {
+        AliveMovement(_delta);
     }
 
     public void ExitState()
@@ -33,4 +39,5 @@ public class Camera_AliveState : IState
         _ctx.Point.Execute(_delta);
         _ctx.ApplyPoint();
     }
+
 }

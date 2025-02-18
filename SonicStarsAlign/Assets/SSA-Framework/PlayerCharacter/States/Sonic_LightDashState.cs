@@ -41,6 +41,11 @@ public class Sonic_LightDashState : IState
     {
     }
 
+    public void LateUpdateState()
+    {
+
+    }
+
     public void ExitState()
     {
         _ctx.ChangeKinematic(false);

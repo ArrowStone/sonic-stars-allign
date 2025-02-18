@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CamBrain : StateMachine_MonoBase<CameraStates>
@@ -39,6 +40,11 @@ public class CamBrain : StateMachine_MonoBase<CameraStates>
     private void Update()
     {
         MachineUpdate();
+    }
+
+    private void LateUpdate()
+    {
+        MachineLateUpdate();
     }
 
     #region Functions

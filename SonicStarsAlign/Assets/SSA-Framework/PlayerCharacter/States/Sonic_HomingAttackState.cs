@@ -39,6 +39,11 @@ public class Sonic_HomingAttackState : IState
     {
     }
 
+    public void LateUpdateState()
+    {
+
+    }
+
     public void ExitState()
     {
         _ctx.ChangeKinematic(false);

@@ -60,6 +60,11 @@ public class Sonic_RollState : IState
         float _delta = Time.fixedDeltaTime;
     }
 
+    public void LateUpdateState()
+    {
+
+    }
+
     public void ExitState()
     {
     }

@@ -43,6 +43,11 @@ public class Sonic_GrindState : IState
     {
     }
 
+    public void LateUpdateState()
+    {
+
+    }
+
     public void ExitState()
     {
         _ctx.ChangeKinematic(false);
