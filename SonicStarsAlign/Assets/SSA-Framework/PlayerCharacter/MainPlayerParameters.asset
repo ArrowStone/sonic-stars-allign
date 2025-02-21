@@ -146,6 +146,7 @@ MonoBehaviour:
   JumpForce: 20
   JumpCancel: 4
   SlipTime: 0.3333333
+  LookBackTransitionSpeed: 5
   GravityForce: 45.9375
   FallVelCap: 30
   MinGroundStickSpeed: 6.25

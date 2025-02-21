@@ -62,6 +62,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public Vector3 HorizontalVelocity { get; set; } = Vector3.zero;
     public Vector3 VerticalVelocity { get; set; } = Vector3.zero;
     public Collider TriggerBuffer { get; set; }
+    public Vector3 CurrentMoveDirection { get; set; }
 
     public Vector3 Velocity
     {

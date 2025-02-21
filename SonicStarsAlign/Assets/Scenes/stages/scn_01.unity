@@ -558,7 +558,7 @@ MonoBehaviour:
   MovementSmoothing: 0
   YAxisRecenteringWait: 1
   YAxisRecenteringSpeed: 2
-  BackCameraSpeed: 6
+  BackCameraSpeed: 10
 --- !u!1001 &997596287
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -925,7 +925,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cam: {fileID: 1379003333}
   Input: {fileID: 299919631}
-  WieghtCurve:
+  WeightCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
