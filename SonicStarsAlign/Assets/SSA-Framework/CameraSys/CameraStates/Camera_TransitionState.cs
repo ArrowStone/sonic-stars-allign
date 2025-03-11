@@ -17,7 +17,7 @@ public class Camera_TransitionState : IState
         #region Misc
 
         _time = 0;
-        _duration = _ctx.WieghtCurve.keys[_ctx.WieghtCurve.length - 1].time;
+        _duration = _ctx.WeightCurve.keys[_ctx.WeightCurve.length - 1].time;
 
         #endregion Misc
 
@@ -37,6 +37,11 @@ public class Camera_TransitionState : IState
     {
     }
 
+    public void LateUpdateState()
+    {
+
+    }
+
     public void ExitState()
     {
         _ctx.CashedTransform = new()
@@ -50,7 +55,7 @@ public class Camera_TransitionState : IState
     {
         _ctx.Point.Execute(_delta);
         var _transfrm = _ctx.Point.Transform();
-        _ctx.transform.SetPositionAndRotation(Vector3.Lerp(_ctx.CashedTransform.Position, _transfrm.Position, _ctx.WieghtCurve.Evaluate(_time)), Quaternion.Slerp(_ctx.CashedTransform.Rotation, _transfrm.Rotation, _ctx.WieghtCurve.Evaluate(_time)));
+        _ctx.transform.SetPositionAndRotation(Vector3.Lerp(_ctx.CashedTransform.Position, _transfrm.Position, _ctx.WeightCurve.Evaluate(_time)), Quaternion.Slerp(_ctx.CashedTransform.Rotation, _transfrm.Rotation, _ctx.WeightCurve.Evaluate(_time)));
     }
 
     public void TransitionSwitchConditions()

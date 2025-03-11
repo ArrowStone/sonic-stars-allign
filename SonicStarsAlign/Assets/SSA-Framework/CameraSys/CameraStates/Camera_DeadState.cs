@@ -19,6 +19,11 @@
     {
     }
 
+    public void LateUpdateState()
+    {
+
+    }
+
     public void ExitState()
     {
     }

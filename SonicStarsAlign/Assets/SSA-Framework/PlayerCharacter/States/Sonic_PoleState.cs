@@ -18,15 +18,20 @@ public class Sonic_PoleState : IState
     public void UpdateState()
     {
         _ctx.SplnHandler.Time += Time.deltaTime * _ctx.SplnHandler._ctxPole.TimeSpeed;
-        if(_ctx.SplnHandler.Time > 1)
+        if (_ctx.SplnHandler.Time > 1)
         {
             _ctx.SplnHandler.Time = 0;
         }
-        
+
         PoleSwitchConditions();
     }
 
     public void FixedUpdateState()
+    {
+
+    }
+
+    public void LateUpdateState()
     {
 
     }

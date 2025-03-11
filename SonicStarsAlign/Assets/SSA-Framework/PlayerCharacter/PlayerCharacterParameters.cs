@@ -48,6 +48,8 @@ public class PlayerCharacterParameters : ScriptableObject
     [Space]
     public float SlipTime;
 
+    public float LookBackTransitionSpeed;
+
     [Space]
     [Header("Gravity")]
     public float GravityForce;

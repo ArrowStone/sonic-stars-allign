@@ -6,5 +6,7 @@ public interface IState
 
     public void FixedUpdateState();
 
+    public void LateUpdateState();
+
     public void ExitState();
 }

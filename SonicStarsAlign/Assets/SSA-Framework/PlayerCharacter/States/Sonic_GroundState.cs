@@ -73,6 +73,11 @@ public class Sonic_GroundState : IState
         _ctx.RingCheck();
     }
 
+    public void LateUpdateState()
+    {
+
+    }
+
     public void ExitState()
     {
     }
@@ -189,8 +194,16 @@ public class Sonic_GroundState : IState
             ? Quaternion.FromToRotation(_ctx.InputRotation * Vector3.up, _ctx.GroundNormal) * _ctx.InputRotation
             : Quaternion.FromToRotation(_ctx.InputRef.up, _ctx.GroundNormal);
 
-        //  Quaternion cameraRotation = Quaternion.Euler(0, StateMachine.Camera.eulerAngles.y, 0);
-        _ctx.InputVector = _ctx.InputRotation * _ctx.InputRef.rotation * _ctx.Input.VectorMoveInput.normalized;
+        Vector3 cameraForward = _ctx.InputRef.forward;
+
+        float lookBackFactor = _ctx.Input.BackCameraInput.IsPressed() ? -1f : 1f;
+        Vector3 targetForward = cameraForward * lookBackFactor;
+
+        _ctx.CurrentMoveDirection = Vector3.Lerp(_ctx.CurrentMoveDirection, targetForward, Time.deltaTime * _ctx.Chp.LookBackTransitionSpeed);
+        _ctx.CurrentMoveDirection = Vector3.ProjectOnPlane(_ctx.CurrentMoveDirection, _ctx.GroundNormal).normalized;
+
+        Quaternion adjustedRotation = Quaternion.LookRotation(_ctx.CurrentMoveDirection, _ctx.GroundNormal);
+        _ctx.InputVector = adjustedRotation * _ctx.Input.VectorMoveInput.normalized;
     }
 
     private void GroundSwitchConditions()

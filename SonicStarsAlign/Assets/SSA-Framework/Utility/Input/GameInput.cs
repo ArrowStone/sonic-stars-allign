@@ -89,6 +89,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BackCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""e8d234ef-f920-40c3-b75a-7f8d4bc5031f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -342,6 +351,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Bounce"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3fbc9bdd-b9bb-409d-b101-3621ac5aa832"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""BackCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -936,6 +956,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Bounce = m_Player.FindAction("Bounce", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_BackCamera = m_Player.FindAction("BackCamera", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1022,6 +1043,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Bounce;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_BackCamera;
     public struct PlayerActions
     {
         private @GameInput m_Wrapper;
@@ -1033,6 +1055,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @Bounce => m_Wrapper.m_Player_Bounce;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @BackCamera => m_Wrapper.m_Player_BackCamera;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1063,6 +1086,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @BackCamera.started += instance.OnBackCamera;
+            @BackCamera.performed += instance.OnBackCamera;
+            @BackCamera.canceled += instance.OnBackCamera;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1088,6 +1114,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @BackCamera.started -= instance.OnBackCamera;
+            @BackCamera.performed -= instance.OnBackCamera;
+            @BackCamera.canceled -= instance.OnBackCamera;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1277,6 +1306,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnBounce(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnBackCamera(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

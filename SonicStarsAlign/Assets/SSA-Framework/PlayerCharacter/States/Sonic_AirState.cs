@@ -67,6 +67,11 @@ public class Sonic_AirState : IState
         _ctx.HomingCheck();
     }
 
+    public void LateUpdateState()
+    {
+
+    }
+
     public void ExitState()
     {
     }

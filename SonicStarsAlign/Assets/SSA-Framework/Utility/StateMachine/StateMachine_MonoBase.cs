@@ -46,6 +46,14 @@ public class StateMachine_MonoBase<EState> : MonoBehaviour where EState : Enum
         CurrentState.FixedUpdateState();
     }
 
+    public virtual void MachineLateUpdate()
+    {
+        if (!Running)
+            return;
+
+        CurrentState.LateUpdateState();
+    }
+
     public void MachineTransition(EState _nextState)
     {
         StateChanged?.Invoke(_nextState);

@@ -30,6 +30,8 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
 
     public float YAxisRecenteringSpeed;
 
+    public float BackCameraSpeed;
+
     #region Util
 
     private float _recenteringState;
@@ -76,26 +78,36 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
 
     private void InputHandling(float _delta)
     {
-        if (_inputValues.magnitude < 0.1)
+        // looking behind where the player is facing
+        if (Brain.Input.BackCameraInput.IsPressed())
         {
-            _recenteringState -= _delta;
-            if (_recenteringState <= 0)
-            {
-                _rot.x = Mathf.LerpAngle(_rot.x, 0, YAxisRecenteringSpeed * _delta);
-            }
+            _rot.y = Mathf.LerpAngle(_rot.y, Target.eulerAngles.y + 180f, BackCameraSpeed * _delta);
         }
         else
         {
-            _recenteringState = YAxisRecenteringWait;
+            if (_inputValues.magnitude < 0.1)
+            {
+                _recenteringState -= _delta;
+                if (_recenteringState <= 0)
+                {
+                    _rot.x = Mathf.LerpAngle(_rot.x, 0, YAxisRecenteringSpeed * _delta);
+                    _rot.y = Mathf.LerpAngle(_rot.y, Target.eulerAngles.y, YAxisRecenteringSpeed * _delta);
+                }
+            }
+            else
+            {
+                _recenteringState = YAxisRecenteringWait;
+            }
+
+            _inputValues = Vector2.ClampMagnitude(Brain.Input.CameraInput.ReadValue<Vector2>(), 1);
+
+            _rot.y += _inputValues.x * Sensitivity.x * _delta;
+            _rot.x += _inputValues.y * Sensitivity.y * _delta;
+
+            _rot.x = Mathf.Clamp(_rot.x, YLimits.x, YLimits.y);
         }
-
-        _inputValues = Vector2.ClampMagnitude(Brain.Input.CameraInput.ReadValue<Vector2>(), 1);
-
-        _rot.y += _inputValues.x * Sensitivity.x * _delta;
-        _rot.x += _inputValues.y * Sensitivity.y * _delta;
-
-        _rot.x = Mathf.Clamp(_rot.x, YLimits.x, YLimits.y);
     }
+
 
     public Quaternion UpdateRotation(float _delta)
     {
