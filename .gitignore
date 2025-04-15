@@ -58,8 +58,11 @@ sysinfo.txt
 # Builds
 *.apk
 *.aab
-*.unitypackage
 *.app
+
+
+# EXCEPTION: allow this one to be tracked
+!.unitypackage
 
 # Crashlytics generated file
 crashlytics-build.properties
