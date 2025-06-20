@@ -21,7 +21,6 @@ public class Camera_AliveState : IState
 
     public void FixedUpdateState()
     {
-
     }
 
     public void LateUpdateState()
@@ -39,5 +38,4 @@ public class Camera_AliveState : IState
         _ctx.Point.Execute(_delta);
         _ctx.ApplyPoint();
     }
-
 }

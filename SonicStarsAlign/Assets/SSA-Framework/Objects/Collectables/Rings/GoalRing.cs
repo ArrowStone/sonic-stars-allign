@@ -3,6 +3,7 @@ using UnityEngine;
 public class GoalRing : CollectableBase
 {
     public StageData Data;
+
     public override void Collection(Collider _triggerer)
     {
         if (_triggerer.transform.TryGetComponent(out Sonic_PlayerStateMachine _ctx))
@@ -17,8 +18,8 @@ public class GoalRing : CollectableBase
     public int RankCalc(Sonic_PlayerStateMachine _ctx)
     {
         for (int i = 0; i < Data.RankScores.Count; i++)
-        {   
-            if(_ctx.Chs.Rings >= Data.StageRingCount)
+        {
+            if (_ctx.Chs.Rings >= Data.StageRingCount)
             {
                 i = Data.RankScores.Count - 1;
                 Debug.Log(i);

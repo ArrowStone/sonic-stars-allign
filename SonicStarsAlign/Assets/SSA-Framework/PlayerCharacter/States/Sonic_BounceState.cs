@@ -62,7 +62,6 @@ public class Sonic_BounceState : IState
 
     public void LateUpdateState()
     {
-
     }
 
     public void ExitState()
@@ -201,7 +200,7 @@ public class Sonic_BounceState : IState
 
     private void Bounce()
     {
-        _ctx.Physics_Snap(_ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover, _ctx.SnapForce);
+        _ctx.Physics_Snap(_ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover);
         float _bounceForce = Vector3.Dot(_ctx.Velocity, -_ctx.GroundCast.HitInfo.normal) * _ctx.Chp.BounceFactor.Evaluate(_ctx.BounceCount);
         if (_bounceForce > _ctx.Chp.MaxBounceHieght)
         {

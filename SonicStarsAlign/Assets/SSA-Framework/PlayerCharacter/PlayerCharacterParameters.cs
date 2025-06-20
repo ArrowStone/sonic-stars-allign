@@ -15,6 +15,8 @@ public class PlayerCharacterParameters : ScriptableObject
 
     public float Deceleration;
 
+    public float GroundDrag;
+
     public AnimationCurve TurnDeceleration;
 
     public AnimationCurve TurnStrengthCurve;
@@ -115,6 +117,7 @@ public class PlayerCharacterParameters : ScriptableObject
     [Space]
     [Header("Rail")]
     public float RailCollisionBounce;
+
     public float RailSwitchSpeed;
     public float RailSwitchDuration;
     public float RailSwitchDeadZone;

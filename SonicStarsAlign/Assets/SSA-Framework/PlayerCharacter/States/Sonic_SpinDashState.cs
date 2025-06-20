@@ -69,7 +69,6 @@ public class Sonic_SpinDashState : IState
 
     public void LateUpdateState()
     {
-
     }
 
     #region Util
@@ -84,7 +83,7 @@ public class Sonic_SpinDashState : IState
     {
         _ctx.GroundNormal = _ctx.GroundCast.HitInfo.normal;
         _ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_ctx.Velocity, _ctx.GroundNormal).normalized * _ctx.Velocity.magnitude;
-        _ctx.Physics_Snap(_ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover, _ctx.SnapForce * _delta);
+        _ctx.Physics_Snap(_ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover);
 
         InputRotations();
         GroundRotation(_delta);

@@ -6,29 +6,25 @@
     {
         _ctx = _machine;
     }
+
     //Left blank for future changes
     public void EnterState()
     {
-
     }
 
     public void UpdateState()
     {
-
     }
 
     public void FixedUpdateState()
     {
-
     }
 
     public void LateUpdateState()
     {
-
     }
 
     public void ExitState()
     {
-
     }
 }

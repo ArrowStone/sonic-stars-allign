@@ -1,7 +1,7 @@
-using UnityEngine;
 using Unity.Mathematics;
-using UnityEngine.Splines;
+using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Splines;
 
 public class Automation_PoleSwing : MonoBehaviour, IAutomation
 {
@@ -13,6 +13,7 @@ public class Automation_PoleSwing : MonoBehaviour, IAutomation
     [Space]
     [Header("Forces")]
     [SerializeField] private AnimationCurve speedCurve;
+
     [SerializeField] private float speedMultiplier;
     [SerializeField] private Vector3 offset;
     public UnityEvent InteractionEvent;
@@ -36,7 +37,7 @@ public class Automation_PoleSwing : MonoBehaviour, IAutomation
     public void PoleLaunch(Sonic_PlayerStateMachine _ctx, float _time)
     {
         int _state = 1;
-        if(_time >= Range.x && _time <= Range.y)
+        if (_time >= Range.x && _time <= Range.y)
         {
             _state = 0;
         }

@@ -1,12 +1,13 @@
-﻿using JetBrains.Annotations;
-using System.Runtime.CompilerServices;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
+
 public class CheckPoint : MonoBehaviour
 {
     [SerializeField]
     private Vector3 offset;
+
     public UnityEvent HitEvent;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Sonic_PlayerStateMachine _ctx))
@@ -16,4 +17,3 @@ public class CheckPoint : MonoBehaviour
         }
     }
 }
-

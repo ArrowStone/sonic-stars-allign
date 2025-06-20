@@ -28,12 +28,10 @@ public class Sonic_PoleState : IState
 
     public void FixedUpdateState()
     {
-
     }
 
     public void LateUpdateState()
     {
-
     }
 
     public void ExitState()

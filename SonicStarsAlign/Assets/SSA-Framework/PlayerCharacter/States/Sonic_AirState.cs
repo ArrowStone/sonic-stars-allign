@@ -69,7 +69,6 @@ public class Sonic_AirState : IState
 
     public void LateUpdateState()
     {
-
     }
 
     public void ExitState()

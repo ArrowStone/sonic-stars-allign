@@ -16,8 +16,6 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     [Header("Handling")]
     public AnimationCurve ChrTurn;
 
-    public float SnapForce;
-
     [Header("Collision")]
     [SerializeField] private LayerMask groundLayer;
 
@@ -27,6 +25,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     [SerializeField] private LayerMask ringLayer;
 
+    [SerializeField] private LayerMask railLayer;
+
     [Space]
     [SerializeField] private float homingDetectionDistance;
 
@@ -35,6 +35,10 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     [SerializeField] private float lightDetectionDistance;
 
     [SerializeField] private float lightDetectionRadius;
+
+    [SerializeField] private float railDetectionDistance;
+
+    [SerializeField] private float railDetectionRadius;
 
     [Space]
     [SerializeField] private float groundRayDig;
@@ -83,6 +87,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public Cast_Ray CeilCast { get; private set; }
     public Overlap_Sphere RingDetector { get; private set; }
     public Overlap_Sphere HomingTargetDetector { get; private set; }
+    public Overlap_Sphere RailDetectorL { get; private set; }
+    public Overlap_Sphere RailDetectorR { get; private set; }
 
     #endregion Util
 
@@ -140,6 +146,10 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         CeilCast = new Cast_Ray(groundRayLength, wallLayer);
         HomingTargetDetector = new Overlap_Sphere(gameObject, 5, homingTargetLayer, homingDetectionDistance, homingDetectionRadius, wallLayer, DetectionBias.Direction);
         RingDetector = new Overlap_Sphere(gameObject, 5, ringLayer, lightDetectionDistance, lightDetectionRadius, wallLayer, DetectionBias.Direction);
+
+        RailDetectorL = new Overlap_Sphere(gameObject, 5, railLayer, railDetectionDistance, railDetectionRadius, wallLayer, DetectionBias.Proximity);
+        RailDetectorR = new Overlap_Sphere(gameObject, 5, railLayer, railDetectionDistance, railDetectionRadius, wallLayer, DetectionBias.Proximity);
+
         SplnHandler = new SplineHandler();
     }
 
@@ -189,6 +199,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     }
 
     #region AdditionalFunctions
+
     public void Physics_ApplyVelocity()
     {
         Velocity = HorizontalVelocity + VerticalVelocity;
@@ -252,14 +263,20 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
             return;
         }
 
+        if (_cl.TryGetComponent(out Automation_DashPanel_Rail _j))
+        {
+            PosRot _t = _j.Execute(this);
+            Physics_Snap(_t.Position);
+            Physics_Rotate(_t.Rotation * Vector3.forward, _t.Rotation * Vector3.up);
+            return;
+        }
         if (_cl.TryGetComponent(out IAutomation _i))
         {
             TriggerBuffer = _cl;
-            PosRot _t = _i.Execute(this);
 
+            PosRot _t = _i.Execute(this);
             Physics_Snap(_t.Position);
             Physics_Rotate(_t.Rotation * Vector3.forward, _t.Rotation * Vector3.up);
-
             return;
         }
         if (_cl.TryGetComponent(out Automation_LinearAutomation _s))
@@ -321,6 +338,12 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
         Gizmos.DrawWireSphere(transform.position + (PlayerDirection * lightDetectionDistance),
             lightDetectionRadius);
+
+        Gizmos.DrawWireSphere(transform.position + (-transform.right * railDetectionDistance),
+            railDetectionRadius);
+
+        Gizmos.DrawWireSphere(transform.position + (transform.right * railDetectionDistance),
+            railDetectionRadius);
     }
 
 #endif
@@ -337,6 +360,12 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public void RingCheck()
     {
         RingDetector.Execute(transform.position, PlayerDirection);
+    }
+
+    public void RailCheck()
+    {
+        RailDetectorL.Execute(transform.position, -transform.right);
+        RailDetectorR.Execute(transform.position, transform.right);
     }
 
     public void Jump()

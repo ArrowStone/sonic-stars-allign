@@ -19,10 +19,13 @@ public class SplineHandler
     public float Time;
 
     #region Misc
-    public bool SwitchDir;    
+
+    public Automation_GrindRail SwitchDir;
     public Automation_Pully _ctxPully;
     public Automation_PoleSwing _ctxPole;
+
     #endregion Misc
+
     public void SplineSetup(SplineContainer _spline, SplineType _type, AnimationCurve _speedCurve, float _speedMultiplier, Vector3 _offset, float _startTime = 0, bool _looping = false, bool _loose = false, int _spln = 0)
     {
         Active = true;
@@ -69,6 +72,11 @@ public class SplineHandler
     public Vector3 NewPosition()
     {
         return ActiveSpline.transform.TransformPoint((Vector3)ActiveSpline[spln].EvaluatePosition(Mathf.Clamp01(Time)) + offset.y * SplineNormal());
+    }
+
+    public Vector3 GetPosition(SplineContainer _s, float _t)
+    {
+        return _s.transform.TransformPoint((Vector3)_s[0].EvaluatePosition(Mathf.Clamp01(_t)) + offset.y * SplineNormal());
     }
 
     private Vector3 PreviousNormal = Vector3.up;

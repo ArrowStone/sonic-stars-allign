@@ -5,6 +5,7 @@ public class Sonic_LightDashState : IState
     public Sonic_PlayerStateMachine _ctx;
 
     private Vector3 _targetPos;
+    private Vector3 _difference;
     private Vector3 _vel;
 
     public Sonic_LightDashState(Sonic_PlayerStateMachine _coreMachine)
@@ -15,35 +16,29 @@ public class Sonic_LightDashState : IState
     public void EnterState()
     {
         _ctx.ChangeKinematic(true);
-
-        _targetPos = _ctx.RingDetector.TargetOutput.transform.position;
         _ctx.GroundNormal = -_ctx.Gravity.normalized;
-        _vel = _ctx.Chp.LightDashSpeed * (_targetPos - _ctx.transform.position).normalized;
-        _ctx.PlayerDirection = _vel.normalized;
     }
 
     public void UpdateState()
     {
-        float _delta = Time.deltaTime;
+    }
+
+    public void FixedUpdateState()
+    {
+        float _delta = Time.fixedDeltaTime;
         if (!ContinueLightDashing())
         {
             AirSwitchConditions();
             return;
         }
 
-        _targetPos = _ctx.RingDetector.TargetOutput.transform.position;
         LightDashMovement(_delta);
         LightDashRotation();
         LightSwitchConditions();
     }
 
-    public void FixedUpdateState()
-    {
-    }
-
     public void LateUpdateState()
     {
-
     }
 
     public void ExitState()
@@ -54,26 +49,29 @@ public class Sonic_LightDashState : IState
 
     private void LightDashMovement(float _delta)
     {
-        _vel = _ctx.Chp.LightDashSpeed * (_targetPos - _ctx.Rb.position).normalized;
-        _ctx.Physics_Snap(_ctx.Rb.position + _vel * _delta);
+        _vel = _difference.normalized * _ctx.Chp.LightDashSpeed;
+        _ctx.Physics_Snap(_ctx.Rb.position + Vector3.ClampMagnitude(_vel * _delta, _difference.magnitude));
     }
 
     private void LightDashRotation()
     {
-        _ctx.PlayerDirection = _vel.normalized;
+        _ctx.PlayerDirection = _difference.normalized;
         _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity);
     }
 
     private bool ContinueLightDashing()
     {
-        if (_ctx.RingDetector.TargetOutput == null || Vector3.Dot(_targetPos - _ctx.Rb.position, _vel.normalized) < 0)
+        _difference = _targetPos - _ctx.Rb.position;
+        if (_ctx.RingDetector.TargetOutput == null || _difference.magnitude <= _ctx.Rb.sleepThreshold)
         {
             _ctx.RingCheck();
-            if (_ctx.RingDetector.TargetOutput == null || Vector3.Dot(_ctx.RingDetector.TargetOutput.transform.position - _ctx.Rb.position, _vel.normalized) < 0)
+            if (_ctx.RingDetector.TargetOutput == null || Vector3.Dot(_ctx.RingDetector.TargetOutput.transform.position - _ctx.Rb.position, _vel.normalized) <= 0)
             {
                 return false;
             }
         }
+        _targetPos = _ctx.RingDetector.TargetOutput.transform.position;
+        _difference = _targetPos - _ctx.Rb.position;
         return true;
     }
 

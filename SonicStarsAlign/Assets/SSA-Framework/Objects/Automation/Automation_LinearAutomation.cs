@@ -15,7 +15,7 @@ public class Automation_LinearAutomation : MonoBehaviour
     [SerializeField] private Vector3 _offset;
 
     public UnityEvent InteractionEvent;
-    
+
     public void Execute(Sonic_PlayerStateMachine _ctx)
     {
         if (_ctx.SplnHandler.ActiveSpline != spline)

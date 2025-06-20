@@ -1,86 +1,116 @@
 ﻿using UnityEngine;
+using UnityEngine.Splines;
 
 public class Sonic_RailSwitchState : IState
 {
     public Sonic_PlayerStateMachine _ctx;
     private Vector3 _vel;
-    private float _t;
+    private Vector3 _difference;
 
-    public Sonic_RailSwitchState(Sonic_PlayerStateMachine _machine)
+    private Vector3 _targetPos;
+    private Vector3 _currPos;
+    private Vector3 _startPos;
+    private Vector3 _norm;
+
+    private float _trgtlength;
+    private float _speed;
+    private float _duration;
+    private float _time;
+    private float _nearestTime;
+
+    public Sonic_RailSwitchState(Sonic_PlayerStateMachine _coreMachine)
     {
-        _ctx = _machine;
+        _ctx = _coreMachine;
     }
 
     public void EnterState()
     {
-        if (_ctx.SplnHandler.SwitchDir)
-        {
-            _vel = _ctx.Velocity + _ctx.Chp.RailSwitchSpeed * _ctx.transform.right;
-        }
-        else
-        {
-            _vel = _ctx.Velocity + _ctx.Chp.RailSwitchSpeed * -_ctx.transform.right;
-        }
+        _time = 0;
+        _duration = _ctx.Chp.RailSwitchDuration;
 
+        Setup();
         _ctx.ChangeKinematic(true);
-
-        _ctx.PlayerDirection = _vel.normalized;
-        _ctx.GroundNormal = -_ctx.Gravity;
     }
 
     public void UpdateState()
     {
-        float _delta = Time.deltaTime;
-        if (ContinueRailSwitch(_delta))
+
+    }
+
+    public void FixedUpdateState()
+    {
+        float _delta = Time.fixedDeltaTime;
+        _time += _delta;
+        if (ContinueRailSwitch())
         {
             RailSwitchMovement(_delta);
+            RailSwitchRotation();
         }
         else
         {
             ExitConditions();
         }
-    }
-
-    public void FixedUpdateState()
-    {
-    }
-
-    public void LateUpdateState()
-    {
-
+        _ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_vel, _ctx.Gravity);
     }
 
     public void ExitState()
     {
+        _ctx.GroundNormal = _norm;
         _ctx.ChangeKinematic(false);
-        _ctx.Velocity = _vel;
+        _ctx.Physics_ApplyVelocity();
     }
 
     private void RailSwitchMovement(float _delta)
     {
-        _ctx.Physics_Snap(_ctx.Rb.position + _vel * _delta);
+        _currPos = Vector3.Lerp(_startPos, _targetPos, _time / _duration);
+        _vel = (_currPos - _ctx.Rb.position) / Time.fixedDeltaTime;
+        _ctx.Physics_Snap(_currPos);
     }
 
-    private bool ContinueRailSwitch(float _delta)
+    private void RailSwitchRotation()
     {
-        if (_t < _ctx.Chp.RailSwitchDuration)
+        Vector3 _n = Vector3.Slerp(_ctx.GroundNormal, _norm, _time / _duration);
+        _ctx.Physics_Rotate(_ctx.PlayerDirection, _n);
+    }
+
+    private bool ContinueRailSwitch()
+    {
+        _difference = _targetPos - _ctx.Rb.position;
+        if (_difference.magnitude <= _ctx.Rb.sleepThreshold)
         {
-            _t += _delta;
             return false;
         }
         return true;
     }
 
-    public void RailSwitchConditions()
-    {
-        if (_ctx.Input.BounceInput.WasPressedThisFrame())
-        {
-            _ctx.MachineTransition(PlayerStates.Bounce);
-        }
-    }
-
     private void ExitConditions()
     {
-        _ctx.MachineTransition(PlayerStates.Air);
+        _ctx.ChangeKinematic(false);
+        _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity);
+        _ctx.Physics_ApplyVelocity();
+        _ctx.SplnHandler.SwitchDir.Execute(_ctx, _ctx.transform.position);
+    }
+
+    private void Setup()
+    {
+        SplineContainer spl = _ctx.SplnHandler.SwitchDir.RefSpline;
+        _trgtlength = spl.CalculateLength();
+        _startPos = _ctx.Rb.position;
+
+        _ = SplineUtility.GetNearestPoint(spl.Spline, spl.transform.InverseTransformPoint(_startPos), out _, out _nearestTime, 10, 4);
+        if (_nearestTime < 0)
+        {
+            _nearestTime = 0.01f / _trgtlength;
+        }
+
+        Vector3 tangent = spl.EvaluateTangent(_nearestTime).xyz;
+        _speed = Vector3.Dot(_ctx.Rb.linearVelocity, tangent.normalized) / _trgtlength;
+        _norm = spl.EvaluateUpVector(_nearestTime);
+        _targetPos = _ctx.SplnHandler.GetPosition(spl, _nearestTime + (_duration * _speed));
+    }
+
+    public void LateUpdateState()
+    {
+
     }
 }

@@ -4,6 +4,7 @@ public class Sonic_HomingAttackState : IState
 {
     public Sonic_PlayerStateMachine _ctx;
     private Vector3 _targetPos;
+    private Vector3 _difference;
     private Vector3 _vel;
 
     public Sonic_HomingAttackState(Sonic_PlayerStateMachine _machine)
@@ -16,14 +17,16 @@ public class Sonic_HomingAttackState : IState
         _ctx.ChangeKinematic(true);
 
         _targetPos = _ctx.HomingTargetDetector.TargetOutput.transform.position;
-        _vel = _ctx.Chp.HomingAttackSpeed * (_targetPos - _ctx.transform.position).normalized;
-        _ctx.PlayerDirection = _vel.normalized;
-        _ctx.GroundNormal = -_ctx.Gravity;
+        _difference = _targetPos - _ctx.Rb.position;
     }
 
     public void UpdateState()
     {
-        float _delta = Time.deltaTime;
+    }
+
+    public void FixedUpdateState()
+    {
+        float _delta = Time.fixedDeltaTime;
         if (ContinueHomingAttacking())
         {
             HomingAttackMovement(_delta);
@@ -35,13 +38,8 @@ public class Sonic_HomingAttackState : IState
         }
     }
 
-    public void FixedUpdateState()
-    {
-    }
-
     public void LateUpdateState()
     {
-
     }
 
     public void ExitState()
@@ -52,19 +50,20 @@ public class Sonic_HomingAttackState : IState
 
     private void HomingAttackMovement(float _delta)
     {
-        _vel = _ctx.Chp.HomingAttackSpeed * (_targetPos - _ctx.transform.position).normalized;
-        _ctx.Physics_Snap(_ctx.Rb.position + _vel * _delta);
+        _vel = _ctx.Chp.HomingAttackSpeed * _difference.normalized;
+        _ctx.Physics_Snap(_ctx.Rb.position + Vector3.ClampMagnitude(_vel * _delta, _difference.magnitude));
     }
 
     private void HomingAttackRotation()
     {
-        _ctx.PlayerDirection = (_targetPos - _ctx.transform.position).normalized;
-        _ctx.Physics_Rotate((_targetPos - _ctx.transform.position).normalized, _ctx.GroundNormal);
+        _ctx.PlayerDirection = _difference.normalized;
+        _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundNormal);
     }
 
     private bool ContinueHomingAttacking()
     {
-        if (Vector3.Dot(_targetPos - _ctx.transform.position, _vel.normalized) < 0)
+        _difference = _targetPos - _ctx.Rb.position;
+        if (_difference.magnitude <= _ctx.Rb.sleepThreshold)
         {
             return false;
         }

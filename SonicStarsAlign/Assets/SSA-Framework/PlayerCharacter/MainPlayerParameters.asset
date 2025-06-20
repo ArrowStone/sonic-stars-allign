@@ -17,14 +17,15 @@ MonoBehaviour:
   RailSpeedCap: 300
   Acceleration: 5.625
   Deceleration: 29.75
+  GroundDrag: 5
   TurnDeceleration:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: -1
-      value: 30
+      value: 90
       inSlope: 0
-      outSlope: -15
+      outSlope: -45
       tangentMode: 65
       weightedMode: 2
       inWeight: 0
@@ -32,7 +33,7 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -15
+      inSlope: -45
       outSlope: -0.23060799
       tangentMode: 5
       weightedMode: 1
@@ -292,9 +293,9 @@ MonoBehaviour:
   MaxBounceHieght: 65
   DashSpeed: 25
   DashBoost: 15
-  HomingAttackSpeed: 150
-  LightDashSpeed: 150
+  HomingAttackSpeed: 75
+  LightDashSpeed: 100
   RailCollisionBounce: 5
   RailSwitchSpeed: 50
-  RailSwitchDuration: 0.5
+  RailSwitchDuration: 0.125
   RailSwitchDeadZone: 45

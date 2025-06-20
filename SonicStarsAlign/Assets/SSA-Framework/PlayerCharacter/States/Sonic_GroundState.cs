@@ -23,7 +23,7 @@ public class Sonic_GroundState : IState
 
         _ctx.GroundNormal = _ctx.GroundCast.HitInfo.normal;
         _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundCast.HitInfo.normal);
-        _ctx.Physics_Snap(_ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover, _ctx.SnapForce);
+        _ctx.Physics_Snap(_ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover);
 
         #endregion Collision
 
@@ -75,7 +75,6 @@ public class Sonic_GroundState : IState
 
     public void LateUpdateState()
     {
-
     }
 
     public void ExitState()
@@ -107,7 +106,7 @@ public class Sonic_GroundState : IState
     {
         _ctx.GroundNormal = _ctx.GroundCast.HitInfo.normal;
         _ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_ctx.Velocity, _ctx.GroundNormal).normalized * _ctx.Velocity.magnitude;
-        _ctx.Physics_Snap(_ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover, _ctx.SnapForce * _delta);
+        _ctx.Physics_Snap(_ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover);
 
         InputRotations();
         GroundRotation(_delta);
@@ -152,6 +151,11 @@ public class Sonic_GroundState : IState
             {
                 float _acceleration = _ctx.Chp.Acceleration * _delta;
                 _ctx.HorizontalVelocity = Vector3.ClampMagnitude(_ctx.HorizontalVelocity + (_acceleration * _ctx.InputVector), _ctx.Chp.BaseSpeed);
+            }
+            else
+            {
+                float _Drag = _ctx.Chp.GroundDrag * _delta;
+                _ctx.HorizontalVelocity = Vector3.MoveTowards(_ctx.HorizontalVelocity, _ctx.HorizontalVelocity.normalized * _ctx.Chp.BaseSpeed, _Drag);
             }
 
             if (!FrameworkUtility.IsApproximate(_ctx.HorizontalVelocity.normalized, _ctx.InputVector, Mathf.Deg2Rad * Mathf.PI))

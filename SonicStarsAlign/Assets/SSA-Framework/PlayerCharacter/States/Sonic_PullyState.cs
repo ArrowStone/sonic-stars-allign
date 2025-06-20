@@ -39,7 +39,6 @@ public class Sonic_PullyState : IState
 
     public void LateUpdateState()
     {
-
     }
 
     public void ExitState()

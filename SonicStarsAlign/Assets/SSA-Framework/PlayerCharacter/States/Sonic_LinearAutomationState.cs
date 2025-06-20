@@ -38,7 +38,6 @@ public class Sonic_LinearAutomationState : IState
 
     public void LateUpdateState()
     {
-
     }
 
     public void ExitState()

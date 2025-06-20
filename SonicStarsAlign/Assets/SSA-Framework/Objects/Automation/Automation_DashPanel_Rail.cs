@@ -14,14 +14,8 @@ public class Automation_DashPanel_Rail : MonoBehaviour, IAutomation
     public PosRot Execute(Sonic_PlayerStateMachine _ctx)
     {
         float _vel = Set || _ctx.SplnHandler.SpeedMultiplier < Force ? Force : _ctx.SplnHandler.SpeedMultiplier;
-
-        if (_ctx.CurrentEstate is not PlayerStates.RailGrinding)
-        {
-            SplineRef.Execute(_ctx, _ctx.Rb.position);
-        }
-
+        SplineRef.Execute(_ctx, _ctx.Rb.position);
         _ctx.SplnHandler.SpeedMultiplier = _vel;
-        _ctx.TriggerBuffer = SplineRef.GetComponent<Collider>();
 
         PosRot _transfrm = new()
         {

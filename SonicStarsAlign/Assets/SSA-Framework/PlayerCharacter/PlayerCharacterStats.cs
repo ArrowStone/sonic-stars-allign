@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerCharacterStats : ScriptableObject
 {
     private float _rings;
+
     public float Rings
     {
         get { return _rings; }
@@ -12,6 +13,7 @@ public class PlayerCharacterStats : ScriptableObject
     }
 
     private float _score;
+
     public float Score
     {
         get { return _score; }
@@ -19,6 +21,7 @@ public class PlayerCharacterStats : ScriptableObject
     }
 
     public event Action<float> RingSet;
+
     public event Action<float> ScoreSet;
 
     public IShield Shield = null;

@@ -42,7 +42,8 @@ public class Automation_Pully : MonoBehaviour
         Vector3 tangent = RefSpline.EvaluateTangent(_time).xyz;
 
         _ctx.SplnHandler._ctxPully = this;
-        _ctx.SplnHandler.SplineSetup(RefSpline, SplineType.Pully, AnimationCurve.Constant(0, 1, 1), Vector3.Dot(_ctx.Rb.linearVelocity, tangent.normalized), offset, _time, RefSpline.Spline.Closed);
+        _ctx.CurrentState.ExitState();
+        _ctx.SplnHandler.SplineSetup(RefSpline, SplineType.Pully, AnimationCurve.Constant(0, 1, 1), Vector3.Dot(_ctx.Velocity, tangent.normalized), offset, _time, RefSpline.Spline.Closed);
         _ctx.SplnHandler.SetTangent(tangent);
         _ctx.MachineTransition(PlayerStates.Pully);
     }

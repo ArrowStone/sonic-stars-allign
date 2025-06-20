@@ -39,7 +39,6 @@ public class Camera_TransitionState : IState
 
     public void LateUpdateState()
     {
-
     }
 
     public void ExitState()

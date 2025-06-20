@@ -37,7 +37,6 @@ public class Sonic_DamageState : IState
     {
     }
 
-
     public void LateUpdateState()
     {
     }
