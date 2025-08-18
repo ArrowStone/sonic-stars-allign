@@ -1,6 +1,7 @@
 ﻿using Unity.Mathematics;
 using UnityEngine;
 
+// Camera movement
 public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
 {
     public CamBrain Brain;

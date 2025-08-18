@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InputComponent : MonoBehaviour
@@ -15,6 +15,7 @@ public class InputComponent : MonoBehaviour
     public InputAction ReactionInput { get; private set; }
     public InputAction AttackInput { get; private set; }
     public InputAction BackCameraInput { get; private set; }
+    public InputAction MenuInput { get; private set; }
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class InputComponent : MonoBehaviour
         ReactionInput = I.Player.ReactionCommand;
         AttackInput = I.Player.Attack;
         BackCameraInput = I.Player.BackCamera;
+        MenuInput = I.Player.Menu;
     }
 
     private void OnEnable()

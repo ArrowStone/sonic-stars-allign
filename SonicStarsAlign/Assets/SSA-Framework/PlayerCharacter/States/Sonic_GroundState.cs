@@ -40,7 +40,13 @@ public class Sonic_GroundState : IState
 
     public void UpdateState()
     {
-        float _delta = Time.deltaTime;
+        // float _delta = Time.deltaTime;
+    }
+
+    public void FixedUpdateState()
+    {
+        float _delta = Time.fixedDeltaTime;
+
         if (!GroundCheck())
         {
             AirSwitchConditions();
@@ -65,11 +71,7 @@ public class Sonic_GroundState : IState
 
         GroundSwitchConditions();
         _ctx.Physics_ApplyVelocity();
-    }
 
-    public void FixedUpdateState()
-    {
-        float _delta = Time.fixedDeltaTime;
         _ctx.RingCheck();
     }
 
