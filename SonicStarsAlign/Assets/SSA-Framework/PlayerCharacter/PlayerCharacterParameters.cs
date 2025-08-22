@@ -121,4 +121,10 @@ public class PlayerCharacterParameters : ScriptableObject
     public float RailSwitchSpeed;
     public float RailSwitchDuration;
     public float RailSwitchDeadZone;
+
+    [Space]
+    [Header("Drop Dash")]
+    public float DropDashBaseSpeed = 8f; // minimum speed when landing
+    public float DropDashChargeMultiplier = 4f; // how much extra speed is added per second charged
+    public float DropDashMaxCharge = 1.0f; // max seconds chargeable
 }

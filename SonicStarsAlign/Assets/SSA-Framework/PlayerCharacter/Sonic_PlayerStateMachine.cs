@@ -169,6 +169,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         States.Add(PlayerStates.Pole, new Sonic_PoleState(this));
         States.Add(PlayerStates.RailSwitch, new Sonic_RailSwitchState(this));
         States.Add(PlayerStates.Win, new Sonic_WinState(this));
+        States.Add(PlayerStates.DropDash, new Sonic_DropDashState(this));
 
         CurrentEstate = PlayerStates.Air;
         CurrentState = States[CurrentEstate];
@@ -427,4 +428,5 @@ public enum PlayerStates
     LinearAutomation,
     Pully,
     Pole,
+    DropDash,
 }
