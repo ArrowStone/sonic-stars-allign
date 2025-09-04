@@ -429,4 +429,5 @@ public enum PlayerStates
     Pully,
     Pole,
     DropDash,
+    Water,
 }

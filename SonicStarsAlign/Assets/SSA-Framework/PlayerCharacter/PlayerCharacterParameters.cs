@@ -127,4 +127,14 @@ public class PlayerCharacterParameters : ScriptableObject
     public float DropDashBaseSpeed = 8f; // minimum speed when landing
     public float DropDashChargeMultiplier = 4f; // how much extra speed is added per second charged
     public float DropDashMaxCharge = 1.0f; // max seconds chargeable
+
+    [Space]
+    [Header("Water")]
+    public float WaterSpeedCap = 8f;           // max horizontal speed in water
+    public float WaterDeceleration = 4f;       // how quickly you slow down
+    public float WaterJumpStrength = 6f;       // jump force when in water
+    public float WaterGravityScale = 0.4f;     // scale gravity while submerged
+    public float WaterMaxFallSpeed = 12f;      // cap fall speed
+    public float WaterRunThreshold = 14f;      // min speed needed to run across water
+    public Vector3 Gravity = new Vector3(0, -9.81f, 0);
 }
