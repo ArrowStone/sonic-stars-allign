@@ -3,8 +3,7 @@
 public class Sonic_WaterState : IState
 {
     private readonly Sonic_PlayerStateMachine _ctx;
-    private bool _inWater;
-    private bool _onSurface;
+    private Vector3 _vel;
 
     public Sonic_WaterState(Sonic_PlayerStateMachine _machine)
     {
@@ -13,91 +12,101 @@ public class Sonic_WaterState : IState
 
     public void EnterState()
     {
-        _inWater = true;
-        _onSurface = false;
-
-        // Scale gravity for floaty effect in water
-        _ctx.Gravity = _ctx.Chp.Gravity * _ctx.Chp.WaterGravityScale;
-
-        // Check if player is moving fast enough to "run" on top of water
-        if (_ctx.HorizontalVelocity.magnitude >= _ctx.Chp.WaterRunThreshold)
-        {
-            _onSurface = true;
-            _ctx.Physics_Snap(_ctx.Rb.position + Vector3.up * 0.1f);
-        }
+        _ctx.ChangeKinematic(false);
+        _ctx.GroundNormal = -_ctx.Gravity;
+        _ctx.VerticalVelocity = Vector3.zero;
     }
 
     public void UpdateState()
     {
-        float _delta = Time.deltaTime;
+        float delta = Time.deltaTime;
 
-        WaterMovement(_delta);
-        WaterRotation();
+        // Apply floaty water physics
+        WaterMovement(delta);
+        WaterGravity(delta);
+
+        // Exit conditions
         WaterSwitchConditions();
 
         _ctx.Physics_ApplyVelocity();
     }
 
-    public void FixedUpdateState()
+    public void FixedUpdateState() { }
+    public void LateUpdateState() { }
+    public void ExitState() { }
+
+    #region Water Physics
+
+    private void WaterMovement(float delta)
     {
+        // Basic deceleration
+        _ctx.HorizontalVelocity = Vector3.MoveTowards(
+            _ctx.HorizontalVelocity,
+            Vector3.zero,
+            _ctx.Chp.WaterDeceleration * delta
+        );
+
+        // Clamp speed underwater
+        _ctx.HorizontalVelocity = Vector3.ClampMagnitude(
+            _ctx.HorizontalVelocity,
+            _ctx.Chp.WaterSpeedCap
+        );
     }
 
-    public void LateUpdateState()
+    private void WaterGravity(float delta)
     {
-    }
+        // Apply reduced gravity while submerged
+        _ctx.VerticalVelocity += _ctx.Gravity * _ctx.Chp.WaterGravityScale * delta;
 
-    public void ExitState()
-    {
-        // Restore normal gravity
-        _ctx.Gravity = _ctx.Chp.Gravity;
-    }
-
-    #region Util
-
-    private void WaterMovement(float _delta)
-    {
-        // Target horizontal velocity based on input
-        Vector3 targetVel = _ctx.InputVector * _ctx.Chp.WaterSpeedCap;
-
-        // Apply acceleration/deceleration
-        _ctx.HorizontalVelocity = Vector3.MoveTowards(_ctx.HorizontalVelocity, targetVel, _ctx.Chp.WaterDeceleration * _delta);
-        _ctx.HorizontalVelocity = Vector3.ClampMagnitude(_ctx.HorizontalVelocity, _ctx.Chp.WaterSpeedCap);
-
-        // Vertical movement: floating effect or jump
-        if (!_onSurface)
+        // Clamp fall speed
+        if (_ctx.VerticalVelocity.magnitude > _ctx.Chp.WaterMaxFallSpeed)
         {
-            _ctx.VerticalVelocity += _ctx.Gravity * _delta;
-            _ctx.VerticalVelocity = Vector3.ClampMagnitude(_ctx.VerticalVelocity, _ctx.Chp.WaterMaxFallSpeed);
-        }
-        else
-        {
-            _ctx.VerticalVelocity = Vector3.zero; // stay on surface
-        }
-
-        // Combine horizontal and vertical
-        _ctx.Velocity = _ctx.HorizontalVelocity + _ctx.VerticalVelocity;
-
-        _ctx.Physics_Snap(_ctx.Rb.position + _ctx.Velocity * _delta);
-    }
-
-    private void WaterRotation()
-    {
-        if (_ctx.InputVector.magnitude > 0.1f)
-        {
-            _ctx.PlayerDirection = _ctx.InputVector;
-            _ctx.Physics_Rotate(_ctx.PlayerDirection, Vector3.up);
+            _ctx.VerticalVelocity = Vector3.ClampMagnitude(
+                _ctx.VerticalVelocity,
+                _ctx.Chp.WaterMaxFallSpeed
+            );
         }
     }
+
+    #endregion
+
+    #region Exit Conditions
 
     private void WaterSwitchConditions()
     {
-        // Jumping or leaving water transitions to Air
-        if (!_inWater || _ctx.Input.JumpInput.WasPressedThisFrame())
+        // Exit if no longer submerged
+        if (!_ctx.IsInWater())
+        {
+            if (_ctx.GroundCast.Execute(_ctx.Rb.position, -_ctx.GroundNormal))
+            {
+                _ctx.MachineTransition(PlayerStates.Ground);
+            }
+            else
+            {
+                _ctx.MachineTransition(PlayerStates.Air);
+            }
+            return;
+        }
+
+        // Exit if moving fast enough to "run on water"
+        if (_ctx.HorizontalVelocity.magnitude >= _ctx.Chp.WaterRunThreshold)
+        {
+            if (_ctx.GroundCast.Execute(_ctx.Rb.position, -_ctx.GroundNormal))
+            {
+                _ctx.MachineTransition(PlayerStates.Ground);
+            }
+            else
+            {
+                _ctx.MachineTransition(PlayerStates.Air);
+            }
+        }
+
+        // Jump inside water
+        if (_ctx.Input.JumpInput.WasPressedThisFrame())
         {
             _ctx.VerticalVelocity = Vector3.up * _ctx.Chp.WaterJumpStrength;
-            _ctx.MachineTransition(PlayerStates.Air);
         }
     }
 
-    #endregion Util
+    #endregion
 }

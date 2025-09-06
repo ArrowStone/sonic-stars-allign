@@ -55,6 +55,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     [SerializeField] private float crouchCollHeight;
 
+    [SerializeField] private bool _inWater;
+
     #region Util
 
     public float PlayerHover => groundRayLength - groundRayDig;
@@ -170,6 +172,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         States.Add(PlayerStates.RailSwitch, new Sonic_RailSwitchState(this));
         States.Add(PlayerStates.Win, new Sonic_WinState(this));
         States.Add(PlayerStates.DropDash, new Sonic_DropDashState(this));
+        States.Add(PlayerStates.Water, new Sonic_WaterState(this));
 
         CurrentEstate = PlayerStates.Air;
         CurrentState = States[CurrentEstate];
@@ -409,6 +412,43 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     {
         TriggerCl.TriggerEnter -= TriggerCheck;
         TriggerCl.TriggerExit -= TriggerDCheck;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Water"))
+        {
+            // If not fast enough, fall in
+            if (HorizontalVelocity.magnitude < Chp.WaterRunThreshold)
+            {
+                _inWater = true;
+                MachineTransition(PlayerStates.Water);
+            }
+            // Otherwise: stay in Air/Ground and run across water
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Water"))
+        {
+            _inWater = false;
+
+            // Safely return to Air if moving, Ground if landed
+            if (GroundCast.Execute(Rb.position, -GroundNormal))
+            {
+                MachineTransition(PlayerStates.Ground);
+            }
+            else
+            {
+                MachineTransition(PlayerStates.Air);
+            }
+        }
+    }
+
+    public bool IsInWater()
+    {
+        return _inWater;
     }
 }
 
