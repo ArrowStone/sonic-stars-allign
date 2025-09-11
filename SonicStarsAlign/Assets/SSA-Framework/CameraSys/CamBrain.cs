@@ -16,6 +16,8 @@ public class CamBrain : StateMachine_MonoBase<CameraStates>
 
     private void Awake()
     {
+        Input = GameObject.Find("Player_Rigidbody").GetComponent<Sonic_PlayerStateMachine>().Input;
+
         CashedTransform = new()
         {
             Position = Cam.transform.position,

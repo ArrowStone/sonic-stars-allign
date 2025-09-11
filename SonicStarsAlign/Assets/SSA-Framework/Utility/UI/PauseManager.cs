@@ -6,10 +6,12 @@ public class PauseManager : MonoBehaviour
     public GameObject pauseMenu;
     public MonoBehaviour[] gameComponents;
     public bool paused = false;
-
+    InputComponent input;
     void OnEnable()
     {
         SetPauseState(paused);
+
+        input = GameObject.Find("Player_Rigidbody").GetComponent<Sonic_PlayerStateMachine>().Input;
     }
 
     public void SetPauseState(bool state)
@@ -34,7 +36,7 @@ public class PauseManager : MonoBehaviour
     // TODO: Figure out how to use the proper input system and stuff
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (input.MenuInput.WasPressedThisFrame())
         {
             SwitchPauseState();
         }

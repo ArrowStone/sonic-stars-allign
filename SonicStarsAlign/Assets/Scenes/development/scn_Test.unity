@@ -1114,7 +1114,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 0999ed11289860f40917c43610685a43, type: 2}
+  m_Mesh: {fileID: 0}
 --- !u!23 &138571371
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1162,12 +1162,12 @@ MeshRenderer:
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &138571372
 MeshFilter:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 138571367}
-  m_Mesh: {fileID: 4300000, guid: 0999ed11289860f40917c43610685a43, type: 2}
+  m_Mesh: {fileID: 0}
 --- !u!114 &138571373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1181,6 +1181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Container: {fileID: 138571374}
+  m_TargetMesh: {fileID: 0}
   m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 30
   m_UpdateColliders: 1
@@ -1189,6 +1190,16 @@ MonoBehaviour:
   m_Capped: 1
   m_Radius: 0.25
   m_Range: {x: 0, y: 1}
+  m_FlipNormals: 0
+  m_Shape:
+    rid: 6528150620764372998
+  references:
+    version: 2
+    RefIds:
+    - rid: 6528150620764372998
+      type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
+      data:
+        m_Sides: 8
 --- !u!114 &138571374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6156,12 +6167,12 @@ MeshRenderer:
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &611860974
 MeshFilter:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 611860971}
-  m_Mesh: {fileID: 4300000, guid: 37843f08d4bb90a42b2517a994bd2853, type: 2}
+  m_Mesh: {fileID: 0}
 --- !u!114 &611860975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6175,6 +6186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Container: {fileID: 611860976}
+  m_TargetMesh: {fileID: 0}
   m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 30
   m_UpdateColliders: 1
@@ -6183,6 +6195,16 @@ MonoBehaviour:
   m_Capped: 1
   m_Radius: 0.25
   m_Range: {x: 0, y: 1}
+  m_FlipNormals: 0
+  m_Shape:
+    rid: 6528150620764372995
+  references:
+    version: 2
+    RefIds:
+    - rid: 6528150620764372995
+      type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
+      data:
+        m_Sides: 8
 --- !u!114 &611860976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6324,7 +6346,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 37843f08d4bb90a42b2517a994bd2853, type: 2}
+  m_Mesh: {fileID: 0}
 --- !u!114 &611860979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11167,6 +11189,7 @@ MonoBehaviour:
   normCollHeight: 0
   crouchCollCenter: {x: 0, y: 0, z: 0}
   crouchCollHeight: 0
+  _inWater: 0
   AirDashes: 1
 --- !u!54 &948741070
 Rigidbody:
@@ -12074,12 +12097,12 @@ MeshRenderer:
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &964135665
 MeshFilter:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964135662}
-  m_Mesh: {fileID: 4300000, guid: 051b3699344339747aa75bf228530543, type: 2}
+  m_Mesh: {fileID: 0}
 --- !u!114 &964135666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12093,6 +12116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Container: {fileID: 964135667}
+  m_TargetMesh: {fileID: 0}
   m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 30
   m_UpdateColliders: 1
@@ -12101,6 +12125,16 @@ MonoBehaviour:
   m_Capped: 1
   m_Radius: 0.25
   m_Range: {x: 0, y: 1}
+  m_FlipNormals: 0
+  m_Shape:
+    rid: 6528150620764372996
+  references:
+    version: 2
+    RefIds:
+    - rid: 6528150620764372996
+      type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
+      data:
+        m_Sides: 8
 --- !u!114 &964135667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12242,7 +12276,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 051b3699344339747aa75bf228530543, type: 2}
+  m_Mesh: {fileID: 0}
 --- !u!114 &964135670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12850,7 +12884,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: fef976c54e69a2848af15c1603f3a860, type: 2}
+  m_Mesh: {fileID: 0}
 --- !u!23 &1025277260
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12898,12 +12932,12 @@ MeshRenderer:
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1025277261
 MeshFilter:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1025277256}
-  m_Mesh: {fileID: 4300000, guid: fef976c54e69a2848af15c1603f3a860, type: 2}
+  m_Mesh: {fileID: 0}
 --- !u!114 &1025277262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12917,6 +12951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Container: {fileID: 1025277263}
+  m_TargetMesh: {fileID: 0}
   m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 30
   m_UpdateColliders: 1
@@ -12925,6 +12960,16 @@ MonoBehaviour:
   m_Capped: 1
   m_Radius: 0.25
   m_Range: {x: 0, y: 1}
+  m_FlipNormals: 0
+  m_Shape:
+    rid: 6528150620764372997
+  references:
+    version: 2
+    RefIds:
+    - rid: 6528150620764372997
+      type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
+      data:
+        m_Sides: 8
 --- !u!114 &1025277263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18778,7 +18823,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1214425177}
   gameComponents:
-  - {fileID: 1263480790}
   - {fileID: 948741069}
   paused: 0
 --- !u!114 &1494757881
@@ -18893,7 +18937,7 @@ GameObject:
   - component: {fileID: 1506604444}
   m_Layer: 0
   m_Name: MainCamera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18937,7 +18981,7 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 3
+  m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -20524,12 +20568,12 @@ MeshRenderer:
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1683344718
 MeshFilter:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1683344715}
-  m_Mesh: {fileID: 4300000, guid: 792502fa47fd79f4c86c1f1704563d51, type: 2}
+  m_Mesh: {fileID: 0}
 --- !u!114 &1683344719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20543,6 +20587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Container: {fileID: 1683344720}
+  m_TargetMesh: {fileID: 0}
   m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 30
   m_UpdateColliders: 1
@@ -20551,6 +20596,16 @@ MonoBehaviour:
   m_Capped: 1
   m_Radius: 0.25
   m_Range: {x: 0, y: 1}
+  m_FlipNormals: 0
+  m_Shape:
+    rid: 6528150620764372994
+  references:
+    version: 2
+    RefIds:
+    - rid: 6528150620764372994
+      type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
+      data:
+        m_Sides: 8
 --- !u!114 &1683344720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20692,7 +20747,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 792502fa47fd79f4c86c1f1704563d51, type: 2}
+  m_Mesh: {fileID: 0}
 --- !u!114 &1683344723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21147,6 +21202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1713302569}
+  - component: {fileID: 1713302570}
   m_Layer: 0
   m_Name: CameraSys
   m_TagString: Untagged
@@ -21171,6 +21227,23 @@ Transform:
   - {fileID: 318483107}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1713302570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713302568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb22008c929122fb5b2360098cfdce71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: ab09877e2e707104187f6f83e2f62510, type: 2}
+  pipelineAsset: {fileID: 11400000, guid: 4b83569d67af61e458304325a23e5dfd, type: 2}
+  AAModes: 00000000010000000200000003000000
+  SMAAQualities: 000000000100000002000000
+  TAAQualities: 000000000200000004000000
 --- !u!1 &1714779985
 GameObject:
   m_ObjectHideFlags: 0
@@ -22036,7 +22109,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: d922485c565ae744c8ccef5cf18da0b6, type: 2}
+  m_Mesh: {fileID: 0}
 --- !u!23 &1850769835
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -22084,12 +22157,12 @@ MeshRenderer:
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1850769836
 MeshFilter:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850769831}
-  m_Mesh: {fileID: 4300000, guid: d922485c565ae744c8ccef5cf18da0b6, type: 2}
+  m_Mesh: {fileID: 0}
 --- !u!114 &1850769837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22103,6 +22176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Container: {fileID: 1850769838}
+  m_TargetMesh: {fileID: 0}
   m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 30
   m_UpdateColliders: 1
@@ -22111,6 +22185,16 @@ MonoBehaviour:
   m_Capped: 1
   m_Radius: 0.25
   m_Range: {x: 0, y: 1}
+  m_FlipNormals: 0
+  m_Shape:
+    rid: 6528150620764372992
+  references:
+    version: 2
+    RefIds:
+    - rid: 6528150620764372992
+      type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
+      data:
+        m_Sides: 8
 --- !u!114 &1850769838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24719,7 +24803,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 4e43587f77eafe94f8dd4c11955232d7, type: 2}
+  m_Mesh: {fileID: 0}
 --- !u!23 &2075840141
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -24767,12 +24851,12 @@ MeshRenderer:
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &2075840142
 MeshFilter:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2075840138}
-  m_Mesh: {fileID: 4300000, guid: 4e43587f77eafe94f8dd4c11955232d7, type: 2}
+  m_Mesh: {fileID: 0}
 --- !u!114 &2075840143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24786,6 +24870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Container: {fileID: 2075840139}
+  m_TargetMesh: {fileID: 0}
   m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 30
   m_UpdateColliders: 1
@@ -24794,6 +24879,16 @@ MonoBehaviour:
   m_Capped: 1
   m_Radius: 0.25
   m_Range: {x: 0, y: 1}
+  m_FlipNormals: 0
+  m_Shape:
+    rid: 6528150620764372993
+  references:
+    version: 2
+    RefIds:
+    - rid: 6528150620764372993
+      type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
+      data:
+        m_Sides: 8
 --- !u!4 &2075840144
 Transform:
   m_ObjectHideFlags: 0
@@ -26326,6 +26421,14 @@ PrefabInstance:
     - target: {fileID: 2686722092515048947, guid: b515e3221c84d9345a20d67d0cdfa2c2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7373016842168981472, guid: b515e3221c84d9345a20d67d0cdfa2c2, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042040613249126416, guid: b515e3221c84d9345a20d67d0cdfa2c2, type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

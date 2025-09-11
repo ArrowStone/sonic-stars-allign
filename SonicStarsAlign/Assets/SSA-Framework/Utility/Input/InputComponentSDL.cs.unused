@@ -1,0 +1,100 @@
+// doesnt work but i spent time on it so it stays
+using UnityEngine;
+using System;
+using SDL2;
+using UnityEngine.InputSystem;
+
+// Have to use SDL2 for gamepad input on Linux because Unity devs barely give an f abt Linux
+// Could just use SDL on all platforms but the wrappers seems to not work on every platform and I don't trust this hacky method
+// of trying to replicate methods from the official unity api
+public class InputComponentSDL : InputComponent
+{
+    IntPtr controller;
+
+    ControllerAxisSDL MovementInputX;
+    ControllerAxisSDL MovementInputY;
+    //public ControllerButtonSDL CameraInput { get; private set; }
+    new public Vector2 MoveInputValues => new(MovementInputX.ReadValue(), MovementInputY.ReadValue());
+    new public Vector3 VectorMoveInput => new(MoveInputValues.x, 0, MoveInputValues.y);
+    ControllerAxisSDL CameraInputX;
+    ControllerAxisSDL CameraInputY;
+    new public Vector2 CameraInputValues => new(CameraInputX.ReadValue(), CameraInputY.ReadValue());
+    new public ControllerButtonSDL JumpInput { get; private set; }
+    new public ControllerButtonSDL CrouchInput { get; private set; }
+    new public ControllerButtonSDL BounceInput { get; private set; }
+    new public ControllerButtonSDL ReactionInput { get; private set; }
+    new public ControllerButtonSDL AttackInput { get; private set; }
+    new public ControllerButtonSDL BackCameraInput { get; private set; }
+    new public ControllerButtonSDL MenuInput { get; private set; }
+
+    void Awake()
+    {
+        SDL.SDL_Init(SDL.SDL_INIT_JOYSTICK);
+        SDL.SDL_InitSubSystem(SDL.SDL_INIT_JOYSTICK);
+        controller = SDL.SDL_GameControllerOpen(0);
+
+        MovementInputX = new ControllerAxisSDL(SDL.SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_LEFTX, controller);
+        MovementInputY = new ControllerAxisSDL(SDL.SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_LEFTY, controller);
+        CameraInputX = new ControllerAxisSDL(SDL.SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_RIGHTX, controller);
+        CameraInputY = new ControllerAxisSDL(SDL.SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_RIGHTY, controller);
+        JumpInput = new ControllerButtonSDL(SDL.SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_A, controller);
+        CrouchInput = new ControllerButtonSDL(SDL.SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_LEFTSHOULDER, controller);
+        BounceInput = new ControllerButtonSDL(SDL.SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_B, controller);
+        ReactionInput = new ControllerButtonSDL(SDL.SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_Y, controller);
+        AttackInput = new ControllerButtonSDL(SDL.SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_X, controller);
+        BackCameraInput = new ControllerButtonSDL(SDL.SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_RIGHTSTICK, controller);
+        MenuInput = new ControllerButtonSDL(SDL.SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_START, controller);
+    }
+
+    private void OnEnable()
+    {
+        // do nothing
+    }
+
+    private void OnDisable()
+    {
+        //SDL.SDL_JoystickClose(controller);
+        //SDL.SDL_Quit();
+    }
+}
+
+// Have to divide axis and buttons because that's how SDL works
+public class ControllerButtonSDL
+{
+    SDL.SDL_GameControllerButton inputId;
+    IntPtr controller;
+
+    public ControllerButtonSDL(SDL.SDL_GameControllerButton _inputId, IntPtr _controller)
+    {
+        inputId = _inputId;
+        controller = _controller;
+    }
+
+    bool WasPressedThisFrame()
+    {
+        return SDL.SDL_GameControllerGetButton(controller, inputId) == 1;
+    }
+
+    bool IsPressed()
+    {
+        return SDL.SDL_GameControllerGetButton(controller, inputId) == 1;
+    }
+}
+
+// SDL can't give x and y joystick values together, you have to read them separately
+public class ControllerAxisSDL
+{
+    SDL.SDL_GameControllerAxis inputId;
+    IntPtr controller;
+
+    public ControllerAxisSDL(SDL.SDL_GameControllerAxis _inputId, IntPtr _controller)
+    {
+        inputId = _inputId;
+        controller = _controller;
+    }
+
+    public float ReadValue()
+    {
+        return SDL.SDL_GameControllerGetAxis(controller, inputId) / 32767.0f; // SDL axis values use the "short" type, so we have to convert that to float with values between -1 and 1.
+    }
+}
