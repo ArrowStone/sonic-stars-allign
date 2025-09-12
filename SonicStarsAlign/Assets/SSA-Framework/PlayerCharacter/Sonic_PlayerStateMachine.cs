@@ -450,6 +450,18 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     {
         return _inWater;
     }
+
+    public bool CanRunOnWater()
+    {
+        // Must be touching water surface
+        if (!_inWater) return false;
+
+        // Needs enough horizontal speed
+        if (HorizontalVelocity.magnitude < Chp.WaterRunThreshold) return false;
+
+        // Standing "on" water surface, not submerged
+        return true;
+    }
 }
 
 public enum PlayerStates

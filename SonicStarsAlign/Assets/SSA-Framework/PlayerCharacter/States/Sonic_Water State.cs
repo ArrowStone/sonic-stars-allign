@@ -88,6 +88,12 @@ public class Sonic_WaterState : IState
             return;
         }
 
+        if (_ctx.CanRunOnWater())
+        {
+            _ctx.MachineTransition(PlayerStates.Ground); // Skimming on surface
+            return;
+        }
+
         // Exit if moving fast enough to "run on water"
         if (_ctx.HorizontalVelocity.magnitude >= _ctx.Chp.WaterRunThreshold)
         {

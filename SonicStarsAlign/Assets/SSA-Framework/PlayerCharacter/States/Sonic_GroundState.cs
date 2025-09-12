@@ -73,6 +73,21 @@ public class Sonic_GroundState : IState
         _ctx.Physics_ApplyVelocity();
 
         _ctx.RingCheck();
+
+        if (_ctx.IsInWater())
+        {
+            if (_ctx.CanRunOnWater())
+            {
+                // Player stays in ground state → running across water
+                return;
+            }
+            else
+            {
+                // Not fast enough → sink into water
+                _ctx.MachineTransition(PlayerStates.Water);
+                return;
+            }
+        }
     }
 
     public void LateUpdateState()
