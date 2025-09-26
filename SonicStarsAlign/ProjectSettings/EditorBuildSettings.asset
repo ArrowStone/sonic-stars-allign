@@ -20,5 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/development/scn_Test.unity
     guid: dee0401f82bea4c47a882ba6dd017e90
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: e6916219fffbbda4cad5a0223d4c4dd3, type: 3}
   m_UseUCBPForAssetBundles: 0

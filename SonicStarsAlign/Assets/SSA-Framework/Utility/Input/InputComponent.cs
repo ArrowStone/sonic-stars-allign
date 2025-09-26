@@ -10,6 +10,8 @@ public class InputComponent : MonoBehaviour
     public GameInput I;
     public InputAction MovementInput { get; private set; }
     public InputAction CameraInput { get; private set; }
+    public InputAction MouseInput { get; private set; }
+
     public Vector2 MoveInputValues => MovementInput.ReadValue<Vector2>();
     public Vector3 VectorMoveInput => new(MoveInputValues.x, 0, MoveInputValues.y);
     public Vector2 CameraInputValues => CameraInput.ReadValue<Vector2>();
@@ -19,20 +21,21 @@ public class InputComponent : MonoBehaviour
     public InputAction ReactionInput { get; private set; }
     public InputAction AttackInput { get; private set; }
     public InputAction BackCameraInput { get; private set; }
-    public InputAction MenuInput { get; private set; }
+    public InputAction StartInput { get; private set; }
 
     private void Awake()
     {
         I = new GameInput();
         MovementInput = I.Player.Move;
         CameraInput = I.Player.Look;
+        MouseInput = I.Player.Mouse;
         JumpInput = I.Player.Jump;
         CrouchInput = I.Player.Crouch;
         BounceInput = I.Player.Bounce;
         ReactionInput = I.Player.ReactionCommand;
         AttackInput = I.Player.Attack;
         BackCameraInput = I.Player.BackCamera;
-        MenuInput = I.Player.Menu;
+        StartInput = I.Player.Start;
     }
 
     private void OnEnable()

@@ -8,6 +8,7 @@ public class SettingsElement : MonoBehaviour
 {
     public Component component;
     public string saveParamName;
+    public float defaultValue = 0;
 
     public void SaveValue()
     {
@@ -23,6 +24,11 @@ public class SettingsElement : MonoBehaviour
                 TMP_Dropdown dropdown = (TMP_Dropdown)component;
                 PlayerPrefs.SetInt(saveParamName, dropdown.value);
                 break;
+            case "Toggle":
+                Debug.Log("Toggle");
+                Toggle toggle = (Toggle)component;
+                PlayerPrefs.SetInt(saveParamName, toggle.isOn ? 1 : 0);
+                break;
         }
     }
 
@@ -33,13 +39,40 @@ public class SettingsElement : MonoBehaviour
             case "Scrollbar":
                 Debug.Log("Scrollbar");
                 Scrollbar scrollbar = (Scrollbar)component;
-                scrollbar.value = PlayerPrefs.GetFloat(saveParamName);
+                scrollbar.value = PlayerPrefs.HasKey(saveParamName) ? PlayerPrefs.GetFloat(saveParamName) : defaultValue;
                 break;
             case "TMP_Dropdown":
                 Debug.Log("Dropdown");
                 TMP_Dropdown dropdown = (TMP_Dropdown)component;
-                dropdown.value = PlayerPrefs.GetInt(saveParamName);
+                dropdown.value = PlayerPrefs.HasKey(saveParamName) ? PlayerPrefs.GetInt(saveParamName) : (int)defaultValue;
+                break;
+            case "Toggle":
+                Debug.Log("Toggle");
+                Toggle toggle = (Toggle)component;
+                toggle.isOn = (PlayerPrefs.HasKey(saveParamName) ? PlayerPrefs.GetInt(saveParamName) : defaultValue) > 0;
                 break;
         }
+    }
+
+    public void SetDefaultValue()
+    {
+        switch (component.GetType().Name)
+        {
+            case "Scrollbar":
+                Debug.Log("Scrollbar");
+                Scrollbar scrollbar = (Scrollbar)component;
+                scrollbar.value = defaultValue;
+                break;
+            case "TMP_Dropdown":
+                Debug.Log("Dropdown");
+                TMP_Dropdown dropdown = (TMP_Dropdown)component;
+                dropdown.value = (int)defaultValue;
+                break;
+            case "Toggle":
+                Debug.Log("Toggle");
+                Toggle toggle = (Toggle)component;
+                toggle.isOn = defaultValue > 0;
+                break;
+        } 
     }
 }

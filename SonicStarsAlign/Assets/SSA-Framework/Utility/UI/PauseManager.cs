@@ -36,7 +36,7 @@ public class PauseManager : MonoBehaviour
     // TODO: Figure out how to use the proper input system and stuff
     void Update()
     {
-        if (input.MenuInput.WasPressedThisFrame())
+        if (input.StartInput.WasPressedThisFrame())
         {
             SwitchPauseState();
         }

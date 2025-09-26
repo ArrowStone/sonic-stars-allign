@@ -17,6 +17,7 @@ public class Camera_AliveState : IState
     public void UpdateState()
     {
         _delta = Time.deltaTime;
+        AliveMovement(_delta);
     }
 
     public void FixedUpdateState()
@@ -25,7 +26,7 @@ public class Camera_AliveState : IState
 
     public void LateUpdateState()
     {
-        AliveMovement(_delta);
+        
     }
 
     public void ExitState()

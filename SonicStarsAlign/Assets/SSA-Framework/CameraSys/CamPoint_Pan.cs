@@ -16,8 +16,8 @@ public class CamPoint_Pan : MonoBehaviour, ICamPoint
 
     public float2 YLimits;
     public float2 XLimits;
-
-    public Vector2 Sensitivity;
+    public Vector2 MouseSensitivity;
+    public Vector2 JoystickSensitivity;
 
     [Space]
     public float RotationSmoothTime = 0.2f;
@@ -89,10 +89,10 @@ public class CamPoint_Pan : MonoBehaviour, ICamPoint
 
         _inputValues = Vector2.ClampMagnitude(Brain.Input.CameraInput.ReadValue<Vector2>(), 1);
 
-        _rot.y += _inputValues.x * Sensitivity.x * _delta;
+        _rot.y += _inputValues.x * JoystickSensitivity.x * _delta;
         _rot.y = Mathf.Clamp(_rot.y, XLimits.x, XLimits.y);
 
-        _rot.x += _inputValues.y * Sensitivity.y * _delta;
+        _rot.x += _inputValues.y * JoystickSensitivity.y * _delta;
         _rot.x = Mathf.Clamp(_rot.x, YLimits.x, YLimits.y);
     }
 
@@ -104,7 +104,9 @@ public class CamPoint_Pan : MonoBehaviour, ICamPoint
 
     public Quaternion UpdateRotation(float _delta)
     {
-        return Quaternion.RotateTowards(_rotation, Quaternion.LookRotation(_cashedTargetPosition - _position), RotationSmoothTime * _delta);
+        // The code below messes with mouse camera movement and doesnt seem to do anything meaningful so its going away
+        //return Quaternion.RotateTowards(_rotation, Quaternion.LookRotation(_cashedTargetPosition - _position), RotationSmoothTime * _delta);
+        return _rotation;
     }
 
     #endregion AdditionalFunctions
