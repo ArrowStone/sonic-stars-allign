@@ -22,6 +22,7 @@ public class InputComponent : MonoBehaviour
     public InputAction AttackInput { get; private set; }
     public InputAction BackCameraInput { get; private set; }
     public InputAction StartInput { get; private set; }
+    public InputAction SweepInput { get; private set; }
 
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class InputComponent : MonoBehaviour
         AttackInput = I.Player.Attack;
         BackCameraInput = I.Player.BackCamera;
         StartInput = I.Player.Start;
+        SweepInput = I.Player.SweepKick;
     }
 
     private void OnEnable()
