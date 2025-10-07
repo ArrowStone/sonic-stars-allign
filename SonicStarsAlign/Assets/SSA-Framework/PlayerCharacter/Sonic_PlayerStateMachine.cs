@@ -173,6 +173,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         States.Add(PlayerStates.Win, new Sonic_WinState(this));
         States.Add(PlayerStates.DropDash, new Sonic_DropDashState(this));
         States.Add(PlayerStates.Water, new Sonic_WaterState(this));
+        States.Add(PlayerStates.SweepKick, new Sonic_SweepKickState(this));
 
         CurrentEstate = PlayerStates.Air;
         CurrentState = States[CurrentEstate];
@@ -482,4 +483,5 @@ public enum PlayerStates
     Pole,
     DropDash,
     Water,
+    SweepKick,
 }

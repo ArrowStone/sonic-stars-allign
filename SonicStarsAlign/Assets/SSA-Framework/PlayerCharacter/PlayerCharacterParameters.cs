@@ -17,6 +17,8 @@ public class PlayerCharacterParameters : ScriptableObject
 
     public float GroundDrag;
 
+    public float RunSpeedThreshold = 12f; // Minimum speed needed to trigger SweepKick
+
     public AnimationCurve TurnDeceleration;
 
     public AnimationCurve TurnStrengthCurve;

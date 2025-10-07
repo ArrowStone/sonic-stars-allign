@@ -249,6 +249,11 @@ public class Sonic_GroundState : IState
         {
             _ctx.Jump();
         }
+        if (_ctx.Input.SweepInput.WasPressedThisFrame() && _ctx.HorizontalVelocity.magnitude > _ctx.Chp.RunSpeedThreshold)
+        {
+            _ctx.MachineTransition(PlayerStates.SweepKick);
+            return;
+        }
     }
 
     private void AirSwitchConditions()
