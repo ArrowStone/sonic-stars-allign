@@ -7,6 +7,7 @@ public class PressStart : MonoBehaviour
     public InputComponent input;
     public Animator animator;
 
+    // Activated by the animation
     public void WaitForStart()
     {
         Debug.Log("Awake!");

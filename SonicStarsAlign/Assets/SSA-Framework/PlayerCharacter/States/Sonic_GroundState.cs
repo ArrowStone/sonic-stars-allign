@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Sonic_GroundState : IState
 {
@@ -40,12 +41,7 @@ public class Sonic_GroundState : IState
 
     public void UpdateState()
     {
-        // float _delta = Time.deltaTime;
-    }
-
-    public void FixedUpdateState()
-    {
-        float _delta = Time.fixedDeltaTime;
+        float _delta = Time.deltaTime;
 
         if (!GroundCheck())
         {
@@ -90,6 +86,11 @@ public class Sonic_GroundState : IState
         }
     }
 
+    public void FixedUpdateState()
+    {
+        //float _delta = Time.fixedDeltaTime;
+    }
+
     public void LateUpdateState()
     {
     }
@@ -131,7 +132,7 @@ public class Sonic_GroundState : IState
 
     private void GroundRotation(float _delta)
     {
-        float _turnStrength = _ctx.ChrTurn.Evaluate(_ctx.HorizontalVelocity.magnitude) * Mathf.PI * _delta;
+        /*float _turnStrength = _ctx.ChrTurn.Evaluate(_ctx.HorizontalVelocity.magnitude) * Mathf.PI * _delta;
         if (_ctx.InputVector.magnitude >= 0.1 && !_ctx.Skid)
         {
             _ctx.PlayerDirection = Vector3.RotateTowards(_ctx.PlayerDirection, _ctx.InputVector, _turnStrength, 0);
@@ -139,7 +140,8 @@ public class Sonic_GroundState : IState
         else if (_ctx.HorizontalVelocity.magnitude >= 0.1 && Vector3.Dot(_ctx.HorizontalVelocity.normalized, _ctx.PlayerDirection) > _ctx.Chp.TurnDeviationCap)
         {
             _ctx.PlayerDirection = Vector3.RotateTowards(_ctx.PlayerDirection, _ctx.HorizontalVelocity.normalized, _turnStrength, 0);
-        }
+        }*/
+        _ctx.PlayerDirection = _ctx.InputVector.magnitude > 0 ? _ctx.InputVector : _ctx.PlayerDirection;
         _ctx.PlayerDirection = Vector3.ProjectOnPlane(_ctx.PlayerDirection, _ctx.GroundCast.HitInfo.normal);
         _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundCast.HitInfo.normal);
     }
@@ -220,7 +222,8 @@ public class Sonic_GroundState : IState
         float lookBackFactor = _ctx.Input.BackCameraInput.IsPressed() ? -1f : 1f;
         Vector3 targetForward = cameraForward * lookBackFactor;
 
-        _ctx.CurrentMoveDirection = Vector3.Lerp(_ctx.CurrentMoveDirection, targetForward, Time.deltaTime * _ctx.Chp.LookBackTransitionSpeed);
+        //_ctx.CurrentMoveDirection = Vector3.Lerp(_ctx.CurrentMoveDirection, targetForward, Time.deltaTime * _ctx.Chp.LookBackTransitionSpeed);
+        _ctx.CurrentMoveDirection = targetForward;
         _ctx.CurrentMoveDirection = Vector3.ProjectOnPlane(_ctx.CurrentMoveDirection, _ctx.GroundNormal).normalized;
 
         Quaternion adjustedRotation = Quaternion.LookRotation(_ctx.CurrentMoveDirection, _ctx.GroundNormal);

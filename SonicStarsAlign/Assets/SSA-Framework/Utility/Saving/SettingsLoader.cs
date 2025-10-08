@@ -75,8 +75,8 @@ public class SettingsLoader : MonoBehaviour
 
         if (pointPlayer)
         {
-            pointPlayer.JoystickSensitivity *= joySensitivity;
-            pointPlayer.MouseSensitivity *= mouseSensitivity;
+            pointPlayer.JoystickSensitivity *= 0.5f + joySensitivity;
+            pointPlayer.MouseSensitivity *= 0.5f + mouseSensitivity;
         }
     }
 }

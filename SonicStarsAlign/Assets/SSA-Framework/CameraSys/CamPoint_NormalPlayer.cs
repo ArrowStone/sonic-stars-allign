@@ -90,7 +90,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
         }
         else
         {
-            /*if ((_joystickInputValues + _mouseInputValues).magnitude < 0.1)
+            if ((_joystickInputValues + _mouseInputValues).magnitude < 0.1)
             {
                 _recenteringState -= _delta;
                 if (_recenteringState <= 0)
@@ -102,20 +102,18 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
             else
             {
                 _recenteringState = YAxisRecenteringWait;
-            }*/
+            }
 
             // Screw joystick simulation we're going full SRB2
             //_inputValues = Vector2.ClampMagnitude(Brain.Input.CameraInput.ReadValue<Vector2>(), 1);
             _joystickInputValues = Brain.Input.CameraInputValues;
             _mouseInputValues = Brain.Input.MouseInput.ReadValue<Vector2>();
             
-
-            _rot.x -= _joystickInputValues.y * JoystickSensitivity.y * _delta;
+            // Idk why x and y values are swapped but i dont wanna fix it
             _rot.y += _joystickInputValues.x * JoystickSensitivity.x * _delta;
-            _rot.x -= _mouseInputValues.y * MouseSensitivity.y * _delta;
+            _rot.x -= _joystickInputValues.y * JoystickSensitivity.y * _delta;
             _rot.y += _mouseInputValues.x * MouseSensitivity.x * _delta;
-
-            Debug.Log(_rot);
+            _rot.x -= _mouseInputValues.y * MouseSensitivity.y * _delta;
 
             _rot.x = Mathf.Clamp(_rot.x, YLimits.x, YLimits.y);
         }
