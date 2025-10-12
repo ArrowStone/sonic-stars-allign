@@ -41,7 +41,12 @@ public class Sonic_GroundState : IState
 
     public void UpdateState()
     {
-        float _delta = Time.deltaTime;
+        //float _delta = Time.deltaTime;
+    }
+
+    public void FixedUpdateState()
+    {
+        float _delta = Time.fixedDeltaTime;
 
         if (!GroundCheck())
         {
@@ -84,11 +89,6 @@ public class Sonic_GroundState : IState
                 return;
             }
         }
-    }
-
-    public void FixedUpdateState()
-    {
-        //float _delta = Time.fixedDeltaTime;
     }
 
     public void LateUpdateState()

@@ -40,6 +40,7 @@ public class StateMachine_MonoBase<EState> : MonoBehaviour where EState : Enum
 
     public virtual void MachineFixedUpdate()
     {
+        Debug.Log(CurrentState.GetType());
         if (!Running)
             return;
 

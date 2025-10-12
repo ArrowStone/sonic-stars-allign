@@ -33,8 +33,7 @@ public class PauseManager : MonoBehaviour
         SetPauseState(!paused);
     }
 
-    // TODO: Figure out how to use the proper input system and stuff
-    void Update()
+    void FixedUpdate()
     {
         if (input.StartInput.WasPressedThisFrame())
         {

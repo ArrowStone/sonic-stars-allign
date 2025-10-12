@@ -44,7 +44,16 @@ public class Sonic_AirState : IState
 
     public void UpdateState()
     {
-        float _delta = Time.deltaTime;
+        //float _delta = Time.deltaTime;
+    }
+
+    public void FixedUpdateState()
+    {
+        float _delta = Time.fixedDeltaTime;
+
+        _ctx.RingCheck();
+        _ctx.HomingCheck();
+
         if (GroundCheck())
         {
             GroundSwitchConditions();
@@ -58,13 +67,6 @@ public class Sonic_AirState : IState
 
         AirSwitchConditions();
         _ctx.Physics_ApplyVelocity();
-    }
-
-    public void FixedUpdateState()
-    {
-        float _delta = Time.fixedDeltaTime;
-        _ctx.RingCheck();
-        _ctx.HomingCheck();
     }
 
     public void LateUpdateState()
