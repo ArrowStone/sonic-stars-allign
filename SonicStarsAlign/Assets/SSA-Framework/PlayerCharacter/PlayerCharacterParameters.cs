@@ -139,4 +139,11 @@ public class PlayerCharacterParameters : ScriptableObject
     public float WaterMaxFallSpeed = 12f;      // cap fall speed
     public float WaterRunThreshold = 14f;      // min speed needed to run across water
     public Vector3 Gravity = new Vector3(0, -9.81f, 0);
+
+    [Space]
+    [Header("Wall Run/Jump")]
+    public float MaxWallJumpChargeTime = 1.5f;  // time to fully charge wall jump
+    public float WallJumpForce = 20f;           // jump power
+    public LayerMask WallLayer;                 // define wall layer
+    public float WallAttachCheckDistance = 0.6f;
 }

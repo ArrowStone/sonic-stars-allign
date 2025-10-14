@@ -57,6 +57,9 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     [SerializeField] private bool _inWater;
 
+    [SerializeField] public bool OnWall;
+    [SerializeField] public Vector3 WallNormal;
+
     #region Util
 
     public float PlayerHover => groundRayLength - groundRayDig;
@@ -174,6 +177,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         States.Add(PlayerStates.DropDash, new Sonic_DropDashState(this));
         States.Add(PlayerStates.Water, new Sonic_WaterState(this));
         States.Add(PlayerStates.SweepKick, new Sonic_SweepKickState(this));
+        States.Add(PlayerStates.WallRun, new Sonic_WallRunState(this));
 
         CurrentEstate = PlayerStates.Air;
         CurrentState = States[CurrentEstate];
@@ -463,6 +467,24 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         // Standing "on" water surface, not submerged
         return true;
     }
+
+    private void CheckForWall()
+    {
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, Chp.WallAttachCheckDistance, Chp.WallLayer))
+        {
+            OnWall = true;
+            WallNormal = hit.normal;
+
+            if (CurrentEstate != PlayerStates.WallRun)
+            {
+                MachineTransition(PlayerStates.WallRun);
+            }
+        }
+        else
+        {
+            OnWall = false;
+        }
+    }
 }
 
 public enum PlayerStates
@@ -484,4 +506,5 @@ public enum PlayerStates
     DropDash,
     Water,
     SweepKick,
+    WallRun,
 }
