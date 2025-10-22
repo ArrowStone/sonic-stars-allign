@@ -43,6 +43,11 @@ public class CamBrain : StateMachine_MonoBase<CameraStates>
         MachineUpdate();
     }
 
+    private void FixedUpdate()
+    {
+        MachineFixedUpdate();
+    }
+
     private void LateUpdate()
     {
         MachineLateUpdate();
