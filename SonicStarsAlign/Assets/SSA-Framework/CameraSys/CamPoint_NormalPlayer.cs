@@ -8,7 +8,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
 
     [Space]
     [Header("Parameters")]
-    public Transform Target;
+    public Rigidbody Target;
 
     public float TargetDistance;
 
@@ -54,7 +54,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
         Brain = _brain;
         _position = _brain.CashedTransform.Position;
         _rotation = _brain.CashedTransform.Rotation;
-        _cashedTargetPosition = Target.position;
+        _cashedTargetPosition = Target.GetComponentInChildren<Rigidbody>().position;
     }
 
     public void Execute(float _delta)
@@ -85,8 +85,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
         // looking behind where the player is facing
         if (Brain.Input.BackCameraInput.IsPressed())
         {
-            _rot.y = Mathf.LerpAngle(_rot.y, Target.eulerAngles.y + 180f, BackCameraSpeed * _delta);
-            Debug.Log("Uh oh");
+            _rot.y = Mathf.LerpAngle(_rot.y, Target.transform.eulerAngles.y + 180f, BackCameraSpeed * _delta);
         }
         else
         {
