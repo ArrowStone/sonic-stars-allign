@@ -57,8 +57,9 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     [SerializeField] private bool _inWater;
 
+    [SerializeField] public Vector3 WallRunNormal;
     [SerializeField] public bool OnWall;
-    [SerializeField] public Vector3 WallNormal;
+
 
     #region Util
 
@@ -468,23 +469,6 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         return true;
     }
 
-    private void CheckForWall()
-    {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, Chp.WallAttachCheckDistance, Chp.WallLayer))
-        {
-            OnWall = true;
-            WallNormal = hit.normal;
-
-            if (CurrentEstate != PlayerStates.WallRun)
-            {
-                MachineTransition(PlayerStates.WallRun);
-            }
-        }
-        else
-        {
-            OnWall = false;
-        }
-    }
 }
 
 public enum PlayerStates

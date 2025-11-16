@@ -3,8 +3,7 @@ using UnityEngine;
 public class Sonic_WallRunState : IState
 {
     private readonly Sonic_PlayerStateMachine _ctx;
-    private bool isChargingJump;
-    private float chargeTime;
+    private float _timer;
 
     public Sonic_WallRunState(Sonic_PlayerStateMachine machine)
     {
@@ -13,68 +12,96 @@ public class Sonic_WallRunState : IState
 
     public void EnterState()
     {
-        _ctx.Rb.useGravity = false;
+        _timer = 0f;
+
+        // Lock vertical velocity
         _ctx.VerticalVelocity = Vector3.zero;
-        chargeTime = 0f;
-        isChargingJump = false;
+
+        // Determine slide direction along the wall
+        Vector3 slideDir = Vector3.Cross(_ctx.WallRunNormal, -_ctx.Gravity.normalized).normalized;
+        _ctx.HorizontalVelocity = slideDir * _ctx.Chp.WallRunSpeed;
+
+        _ctx.ChangeKinematic(false);
+        _ctx.OnWall = true;
     }
 
     public void UpdateState()
     {
-        // Check for continued wall contact
-        if (!IsTouchingWall())
+        float dt = Time.deltaTime;
+        _timer += dt;
+
+        // Max time safety
+        if (_timer > _ctx.Chp.MaxWallRunTime)
         {
-            ExitToAir();
+            LeaveWall();
             return;
         }
 
-        // Begin charging wall jump
-        if (_ctx.Input.JumpInput.IsPressed())
+        // Player jumps → wall jump
+        if (_ctx.Input.JumpInput.WasPressedThisFrame())
         {
-            isChargingJump = true;
-            chargeTime = Mathf.Min(chargeTime + Time.deltaTime, _ctx.Chp.MaxWallJumpChargeTime);
-        }
-
-        // Release jump to perform jump off wall
-        if (_ctx.Input.JumpInput.WasReleasedThisFrame() && isChargingJump)
-        {
-            PerformWallJump();
+            DoWallJump();
             return;
         }
 
-        // Small "cling" effect � slows descent if not jumping
-        _ctx.Rb.linearVelocity = Vector3.Lerp(_ctx.Rb.linearVelocity, Vector3.zero, Time.deltaTime * 4f);
+        // Check if we're still touching a valid wall
+        if (!StillOnWall())
+        {
+            LeaveWall();
+            return;
+        }
+
+        ApplyPhysics(dt);
+        _ctx.Physics_ApplyVelocity();
     }
 
     public void FixedUpdateState() { }
-
     public void LateUpdateState() { }
 
     public void ExitState()
     {
-        _ctx.Rb.useGravity = true;
+        _ctx.OnWall = false;
     }
 
-    private bool IsTouchingWall()
+    private bool StillOnWall()
     {
-        return Physics.Raycast(_ctx.transform.position, _ctx.transform.forward,
-            out RaycastHit hit, _ctx.Chp.WallAttachCheckDistance, _ctx.Chp.WallLayer);
+        RaycastHit hit;
+        Vector3 origin = _ctx.Rb.position;
+
+        // Check still facing the original wall
+        if (Physics.Raycast(origin, -_ctx.WallRunNormal, out hit, _ctx.Chp.WallAttachCheckDistance))
+        {
+            float verticalDot = Mathf.Abs(hit.normal.y);
+
+            // still wall-like
+            return verticalDot < _ctx.Chp.MinWallDot;
+        }
+
+        return false;
     }
 
-    private void PerformWallJump()
+    private void ApplyPhysics(float dt)
     {
-        Vector3 jumpDir = (_ctx.transform.forward + _ctx.WallNormal).normalized;
-        float chargeRatio = chargeTime / _ctx.Chp.MaxWallJumpChargeTime;
+        // Reduced gravity
+        _ctx.VerticalVelocity += _ctx.Gravity * _ctx.Chp.WallRunGravityScale * dt;
 
-        _ctx.Rb.useGravity = true;
-        _ctx.Rb.linearVelocity = jumpDir * (_ctx.Chp.WallJumpForce * chargeRatio);
+        // Maintain wall slide direction
+        Vector3 slideDir = Vector3.Cross(_ctx.WallRunNormal, -_ctx.Gravity.normalized).normalized;
+        _ctx.HorizontalVelocity = slideDir * _ctx.Chp.WallRunSpeed;
+    }
+
+    private void DoWallJump()
+    {
+        Vector3 jumpDir = (_ctx.WallRunNormal + -_ctx.Gravity.normalized).normalized;
+
+        _ctx.VerticalVelocity = jumpDir * _ctx.Chp.WallJumpStrength;
+        _ctx.HorizontalVelocity = jumpDir * _ctx.Chp.WallJumpStrength;
 
         _ctx.MachineTransition(PlayerStates.Air);
     }
 
-    private void ExitToAir()
+    private void LeaveWall()
     {
-        _ctx.Rb.useGravity = true;
         _ctx.MachineTransition(PlayerStates.Air);
     }
 }

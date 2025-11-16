@@ -141,9 +141,12 @@ public class PlayerCharacterParameters : ScriptableObject
     public Vector3 Gravity = new Vector3(0, -9.81f, 0);
 
     [Space]
-    [Header("Wall Run/Jump")]
-    public float MaxWallJumpChargeTime = 1.5f;  // time to fully charge wall jump
-    public float WallJumpForce = 20f;           // jump power
-    public LayerMask WallLayer;                 // define wall layer
-    public float WallAttachCheckDistance = 0.6f;
+    [Header("Wall Run")]
+    public float WallAttachCheckDistance = 1.0f;
+    public float WallRunGravityScale = 0.35f;
+    public float WallRunSpeed = 12f;
+    public float WallJumpStrength = 18f;
+    public float MaxWallRunTime = 2.0f;
+    public float MinWallDot = 0.5f; // 0 = flat ground, 1 = vertical
+
 }

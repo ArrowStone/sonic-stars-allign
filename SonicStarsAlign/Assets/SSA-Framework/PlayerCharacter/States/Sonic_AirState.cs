@@ -67,6 +67,7 @@ public class Sonic_AirState : IState
 
         AirSwitchConditions();
         _ctx.Physics_ApplyVelocity();
+        CheckForWallRun();
     }
 
     public void LateUpdateState()
@@ -264,6 +265,40 @@ public class Sonic_AirState : IState
             _ctx.DropDashing = false;
         }
     }
+
+    private void CheckForWallRun()
+    {
+        RaycastHit hit;
+
+        // Raycast forward from Sonic
+        Vector3 origin = _ctx.Rb.position;
+        Vector3 dir = _ctx.PlayerDirection.normalized;
+
+        if (Physics.Raycast(origin, dir, out hit, _ctx.Chp.WallAttachCheckDistance))
+        {
+            // Check that it's actually wall-like (not ground)
+            // Using the surface normal angle
+            float verticalDot = Mathf.Abs(hit.normal.y);
+
+            if (verticalDot < _ctx.Chp.MinWallDot) // surface is steep enough to be a wall
+            {
+                // Check that Sonic is moving INTO the wall
+                float intoWall = Vector3.Dot(_ctx.HorizontalVelocity.normalized, -hit.normal);
+
+                if (intoWall > 0.2f)
+                {
+                    _ctx.WallRunNormal = hit.normal;
+                    _ctx.OnWall = true;
+
+                    _ctx.MachineTransition(PlayerStates.WallRun);
+                    return;
+                }
+            }
+        }
+
+        _ctx.OnWall = false;
+    }
+
 
     #endregion Util
 }
