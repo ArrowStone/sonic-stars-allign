@@ -1,4 +1,6 @@
+using UnityEditor.SettingsManagement;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // da thing that does pause
 public class PauseManager : MonoBehaviour
@@ -16,16 +18,19 @@ public class PauseManager : MonoBehaviour
 
     public void SetPauseState(bool state)
     {
+        Debug.Log("Pause state: " + state.ToString());
         paused = state;
         pauseMenu.SetActive(state);
-        Cursor.lockState = (state) ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.lockState = state ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = state;
-        Time.timeScale = (state) ? 0 : 1;
+        Time.timeScale = state ? 0 : 1;
 
         foreach (MonoBehaviour comp in gameComponents)
         {
             comp.enabled = !state;
         }
+
+        InputSystem.settings.updateMode = state ? InputSettings.UpdateMode.ProcessEventsInDynamicUpdate : InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
     }
 
     public void SwitchPauseState()
@@ -33,11 +38,12 @@ public class PauseManager : MonoBehaviour
         SetPauseState(!paused);
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (input.StartInput.WasPressedThisFrame())
         {
             SwitchPauseState();
+            //SetPauseState(true);
         }
     }
 
