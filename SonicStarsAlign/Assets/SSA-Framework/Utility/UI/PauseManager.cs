@@ -43,7 +43,6 @@ public class PauseManager : MonoBehaviour
         if (input.StartInput.WasPressedThisFrame())
         {
             SwitchPauseState();
-            //SetPauseState(true);
         }
     }
 

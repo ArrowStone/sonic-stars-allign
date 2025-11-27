@@ -26,7 +26,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     [SerializeField] private LayerMask ringLayer;
 
     [SerializeField] private LayerMask railLayer;
-
+    [SerializeField] public LayerMask ledgeLayer;
     [Space]
     [SerializeField] private float homingDetectionDistance;
 
@@ -39,13 +39,17 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     [SerializeField] private float railDetectionDistance;
 
     [SerializeField] private float railDetectionRadius;
+    [SerializeField] public float ledgeGrabDisplacement;
 
     [Space]
     [SerializeField] private float groundRayDig;
 
     [SerializeField] private float groundRayLength;
-
+    [SerializeField] public float ledgeVerticalRayLength;
+    [SerializeField] public float ledgeHorizontalRayLength;
     [Space]
+    [SerializeField] public Transform ledgeVericalRayPoint;
+    [SerializeField] public Transform ledgeHorizontalRayPoint;
     [SerializeField] private Vector3 normCollCenter;
 
     [SerializeField] private float normCollHeight;
@@ -321,6 +325,9 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public void OnDrawGizmos()
     {
         Debug.DrawLine(Rb.worldCenterOfMass, Rb.worldCenterOfMass + (InputRotation * Vector3.up * 1), Color.yellow);
+
+        Debug.DrawRay(ledgeVericalRayPoint.position, -transform.up * ledgeVerticalRayLength, Color.red);
+        Debug.DrawRay(ledgeHorizontalRayPoint.position, transform.forward * ledgeHorizontalRayLength, Color.red);
 
         if (GroundCast == null)
         {

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Sonic_AirState : IState
 {
@@ -67,6 +68,8 @@ public class Sonic_AirState : IState
 
         AirSwitchConditions();
         _ctx.Physics_ApplyVelocity();
+
+        CheckForLedgeGrab();
         CheckForWallRun();
     }
 
@@ -299,6 +302,44 @@ public class Sonic_AirState : IState
         _ctx.OnWall = false;
     }
 
+    private void CheckForLedgeGrab()
+    {
+        Vector3 vertRayStart = _ctx.ledgeVericalRayPoint.position;
+        Vector3 horzRayStart = _ctx.ledgeHorizontalRayPoint.position;
+        float vertLength = _ctx.ledgeVerticalRayLength;
+        float horzLength = _ctx.ledgeHorizontalRayLength;
+        Vector3 endPosition = new Vector3();
+        Ray ray = new Ray(vertRayStart, -_ctx.transform.up);
+        RaycastHit hit;
 
+        bool success = Physics.Raycast(ray, out hit, vertLength, _ctx.ledgeLayer);
+
+        if (!success)
+        {
+            return;
+        }
+
+        //Debug.Log(hit.transform.name + " " + hit.transform.gameObject.layer);
+
+        endPosition.y = hit.point.y;
+
+        ray = new Ray(horzRayStart, _ctx.transform.forward * horzLength);
+        success = Physics.Raycast(ray, out hit, horzLength, _ctx.ledgeLayer);
+
+        if (!success)
+        {
+            Debug.Log("Second ledge grab ray failed! " + ray.direction);
+            return;
+        }
+
+        Debug.Log("Grab!");
+
+        endPosition.x = hit.point.x;
+        endPosition.z = hit.point.z;
+        endPosition += _ctx.transform.forward * _ctx.ledgeGrabDisplacement;
+
+        _ctx.Rb.position = endPosition;
+        _ctx.Rb.linearVelocity = Vector3.zero;
+    }
     #endregion Util
 }
