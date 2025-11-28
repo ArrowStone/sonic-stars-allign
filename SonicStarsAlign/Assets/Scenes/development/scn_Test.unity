@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 525e5916b449b49779c4e884686f041a, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: dbb1db83c65770b46916efc08217d394, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 15717145331302d428bfa03d30175ffb, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -7822,6 +7822,10 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: -8143710011712545758, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8143710011712545758, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
       propertyPath: m_MotionVectors
       value: 0
       objectReference: {fileID: 0}
@@ -7854,6 +7858,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7664728788398519507, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7664728788398519507, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
       propertyPath: m_MotionVectors
       value: 0
       objectReference: {fileID: 0}
@@ -7878,6 +7886,10 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: -7385041301864716751, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7385041301864716751, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
       propertyPath: m_MotionVectors
       value: 0
       objectReference: {fileID: 0}
@@ -7918,6 +7930,10 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: -6199534426325264718, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6199534426325264718, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
       propertyPath: m_MotionVectors
       value: 0
       objectReference: {fileID: 0}
@@ -7926,6 +7942,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -6093592463355912122, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6093592463355912122, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
       propertyPath: m_MotionVectors
       value: 0
       objectReference: {fileID: 0}
@@ -8006,12 +8026,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1881495173642898794, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -1881495173642898794, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
       propertyPath: m_MotionVectors
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1881495173642898794, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
       propertyPath: m_StaticShadowCaster
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1806680513116206669, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -1806680513116206669, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
       propertyPath: m_MotionVectors
@@ -8031,7 +8059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1461304994638716399, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
       propertyPath: m_ReceiveGI
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -1461304994638716399, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
       propertyPath: m_MotionVectors
@@ -8040,6 +8068,10 @@ PrefabInstance:
     - target: {fileID: -1461304994638716399, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
       propertyPath: m_StaticShadowCaster
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1120989108687609925, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -1120989108687609925, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
       propertyPath: m_MotionVectors
@@ -8064,6 +8096,10 @@ PrefabInstance:
     - target: {fileID: -804731622281664130, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
       propertyPath: m_StaticShadowCaster
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -678588488315902003, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -678588488315902003, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
       propertyPath: m_MotionVectors
@@ -8130,6 +8166,10 @@ PrefabInstance:
       value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1124027825992947256, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124027825992947256, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
       propertyPath: m_MotionVectors
       value: 0
       objectReference: {fileID: 0}
@@ -8210,12 +8250,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7202271454713460447, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202271454713460447, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
       propertyPath: m_MotionVectors
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7202271454713460447, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
       propertyPath: m_StaticShadowCaster
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021564431019960529, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8021564431019960529, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
       propertyPath: m_MotionVectors
