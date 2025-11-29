@@ -15,6 +15,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     [Header("Handling")]
     public AnimationCurve ChrTurn;
+    public AnimationCurve LedgeGrabVelocityDecrease;
 
     [Header("Collision")]
     [SerializeField] private LayerMask groundLayer;
@@ -39,7 +40,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     [SerializeField] private float railDetectionDistance;
 
     [SerializeField] private float railDetectionRadius;
-    [SerializeField] public float ledgeGrabDisplacement;
+    [SerializeField] public Vector3 ledgeGrabDisplacement;
+    [SerializeField] public Vector3 ledgeGrabReleaseDisplacement;
 
     [Space]
     [SerializeField] private float groundRayDig;
@@ -63,6 +65,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     [SerializeField] public Vector3 WallRunNormal;
     [SerializeField] public bool OnWall;
+    [SerializeField] public Vector3 ledgeGrabInitialVelocity;
+    [SerializeField] public float ledgeGrabStartTime;
 
 
     #region Util
@@ -183,6 +187,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         States.Add(PlayerStates.Water, new Sonic_WaterState(this));
         States.Add(PlayerStates.SweepKick, new Sonic_SweepKickState(this));
         States.Add(PlayerStates.WallRun, new Sonic_WallRunState(this));
+        States.Add(PlayerStates.LedgeGrab, new Sonic_LedgeGrabState(this));
 
         CurrentEstate = PlayerStates.Air;
         CurrentState = States[CurrentEstate];
@@ -498,4 +503,5 @@ public enum PlayerStates
     Water,
     SweepKick,
     WallRun,
+    LedgeGrab,
 }

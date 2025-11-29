@@ -69,8 +69,8 @@ public class Sonic_AirState : IState
         AirSwitchConditions();
         _ctx.Physics_ApplyVelocity();
 
-        CheckForLedgeGrab();
         CheckForWallRun();
+        CheckForLedgeGrab();
     }
 
     public void LateUpdateState()
@@ -302,8 +302,11 @@ public class Sonic_AirState : IState
         _ctx.OnWall = false;
     }
 
-    private void CheckForLedgeGrab()
+    private void CheckForLedgeGrab() // Also logic for ledge grabbing
     {
+        _ctx.ledgeGrabInitialVelocity = _ctx.Rb.linearVelocity; // Gotta save it while we have it
+        _ctx.ledgeGrabStartTime = Time.time; // This too
+
         Vector3 vertRayStart = _ctx.ledgeVericalRayPoint.position;
         Vector3 horzRayStart = _ctx.ledgeHorizontalRayPoint.position;
         float vertLength = _ctx.ledgeVerticalRayLength;
@@ -312,9 +315,10 @@ public class Sonic_AirState : IState
         Ray ray = new Ray(vertRayStart, -_ctx.transform.up);
         RaycastHit hit;
 
+        // Ray from somewhere in front of the player down, just for checking for ledges and the vertical component of the new position
         bool success = Physics.Raycast(ray, out hit, vertLength, _ctx.ledgeLayer);
 
-        if (!success)
+        if (!success) // If fails, there's no ledge to grab within range
         {
             return;
         }
@@ -322,24 +326,35 @@ public class Sonic_AirState : IState
         //Debug.Log(hit.transform.name + " " + hit.transform.gameObject.layer);
 
         endPosition.y = hit.point.y;
+        // The relative Y value of the horizontal ledge point actually controls the displacement from the y coordinate of the ledge surface
+        horzRayStart.y = hit.point.y + _ctx.ledgeHorizontalRayPoint.localPosition.y; 
 
+        // Horizontal ray a bit down from the y position of the ledge to get the horizontal position values
         ray = new Ray(horzRayStart, _ctx.transform.forward * horzLength);
         success = Physics.Raycast(ray, out hit, horzLength, _ctx.ledgeLayer);
 
-        if (!success)
+        if (!success) // Ideally the second ray should hit the ledge but it's impossible to guarantee, so we check
         {
             Debug.Log("Second ledge grab ray failed! " + ray.direction);
             return;
         }
 
-        Debug.Log("Grab!");
+        _ctx.Physics_Rotate(-hit.normal, Vector3.up); // Face the ledge
+
+        //_ctx.transform.forward = -hit.normal; 
 
         endPosition.x = hit.point.x;
         endPosition.z = hit.point.z;
-        endPosition += _ctx.transform.forward * _ctx.ledgeGrabDisplacement;
 
-        _ctx.Rb.position = endPosition;
-        _ctx.Rb.linearVelocity = Vector3.zero;
+        Vector3 displacement = _ctx.ledgeGrabDisplacement; // Adjustable displacement from the ledge
+        displacement.x *= _ctx.transform.forward.x;
+        displacement.z *= _ctx.transform.forward.z;
+
+        endPosition += displacement;
+
+        _ctx.Physics_Snap(endPosition); // Set the position
+        
+        _ctx.MachineTransition(PlayerStates.LedgeGrab); // Change state
     }
     #endregion Util
 }

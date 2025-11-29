@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
+// Ledge grab, duh
 public class Sonic_LedgeGrabState : IState
 {
     private readonly Sonic_PlayerStateMachine _ctx;
@@ -10,9 +11,11 @@ public class Sonic_LedgeGrabState : IState
         _ctx = _machine;
     }
 
-    public void EnterState()
+    public void EnterState() // Setting the correct position is handled by AirState
     {
-        
+        Debug.Log("Grab!");
+        _ctx.Rb.linearVelocity = Vector3.zero;
+        _ctx.Rb.isKinematic = false;
     }
 
     public void UpdateState()
@@ -23,6 +26,24 @@ public class Sonic_LedgeGrabState : IState
     public void FixedUpdateState()
     {
         //float _delta = Time.fixedDeltaTime;
+        if(_ctx.Input.JumpInput.WasPressedThisFrame())
+        {
+            Debug.Log("Ungrabbing!");
+            if(_ctx.ledgeGrabInitialVelocity.y < 0) // If players was going down, we need for them to go up after releasing the grab
+            {
+                _ctx.ledgeGrabInitialVelocity.y = -_ctx.ledgeGrabInitialVelocity.y;
+            }
+            // Decrease velocity over grab time
+            _ctx.ledgeGrabInitialVelocity = _ctx.ledgeGrabInitialVelocity * _ctx.LedgeGrabVelocityDecrease.Evaluate(Time.time - _ctx.ledgeGrabStartTime);
+            _ctx.Rb.linearVelocity = _ctx.ledgeGrabInitialVelocity; // Restore the velocity from before the grab
+
+            Vector3 displacement = _ctx.ledgeGrabReleaseDisplacement;
+            displacement.x *= _ctx.transform.forward.x;
+            displacement.z *= _ctx.transform.forward.z;
+            _ctx.transform.Translate(displacement);
+            
+            _ctx.MachineTransition(PlayerStates.Air);
+        }
     }
 
     public void LateUpdateState()
@@ -32,6 +53,6 @@ public class Sonic_LedgeGrabState : IState
 
     public void ExitState()
     {
-        
+        _ctx.Rb.isKinematic = false;
     }
 }
