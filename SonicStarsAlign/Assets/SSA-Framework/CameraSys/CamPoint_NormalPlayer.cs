@@ -23,7 +23,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
     public Vector2 JoystickSensitivity;
 
     [Space]
-    public float SmoothRotaionSpeed = 0.2f;
+    public float SmoothRotationSpeed = 0.2f;
 
     public float MovementSmoothing;
 
@@ -68,6 +68,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
             InputHandling(_delta);
         }
 
+        
         //_position = SmoothMove(Brain, UpdatePosition(_delta), _delta);
         _position = UpdatePosition(_delta);
         _rotation = UpdateRotation(_delta);
@@ -111,8 +112,8 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
             // Idk why x and y values are swapped but i dont wanna fix it
             _rot.y += _joystickInputValues.x * JoystickSensitivity.x * _delta;
             _rot.x -= _joystickInputValues.y * JoystickSensitivity.y * _delta;
-            _rot.y += _mouseInputValues.x * MouseSensitivity.x * _delta;
-            _rot.x -= _mouseInputValues.y * MouseSensitivity.y * _delta;
+            _rot.y += _mouseInputValues.x * MouseSensitivity.x * Time.timeScale; // Multiply by timescale so the camera wont rotate while paused
+            _rot.x -= _mouseInputValues.y * MouseSensitivity.y * Time.timeScale;
 
             _rot.x = Mathf.Clamp(_rot.x, YLimits.x, YLimits.y);
         }
@@ -121,7 +122,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
     public Quaternion UpdateRotation(float _delta)
     {
         // Dunno why its here but it messes with using the mouse for rotation so it goes in the trash
-        //return Quaternion.RotateTowards(_rotation, Quaternion.LookRotation(Target.position - _position), SmoothRotaionSpeed * _delta);
+        //return Quaternion.RotateTowards(_rotation, Quaternion.LookRotation(Target.position - _position), SmoothRotationSpeed * _delta);
         return Quaternion.LookRotation(Target.position - _position);
     }
 

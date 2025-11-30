@@ -10,6 +10,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public Panel_Collider TriggerCl;
     public PlayerCharacterParameters Chp;
     public PlayerCharacterStats Chs;
+    public Sonic_SoundComponent Snd;
     public float InvinciblitiyState;
     public bool TrickState;
 
@@ -282,6 +283,10 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
             return;
         }
 
+        if (_cl.TryGetComponent(out Automation_Sound _sd))
+        {
+            _sd.PlaySound(Snd);
+        }
         if (_cl.TryGetComponent(out Automation_DashPanel_Rail _j))
         {
             PosRot _t = _j.Execute(this);
@@ -331,7 +336,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     {
         Debug.DrawLine(Rb.worldCenterOfMass, Rb.worldCenterOfMass + (InputRotation * Vector3.up * 1), Color.yellow);
 
-        Debug.DrawRay(ledgeVericalRayPoint.position, -transform.up * ledgeVerticalRayLength, Color.red);
+        Debug.DrawRay(ledgeVericalRayPoint.position, Gravity * ledgeVerticalRayLength, Color.red);
         Debug.DrawRay(ledgeHorizontalRayPoint.position, transform.forward * ledgeHorizontalRayLength, Color.red);
 
         if (GroundCast == null)
@@ -392,6 +397,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     public void Jump()
     {
+        Snd.PlaySound(Snd.jumpSound);
+
         VerticalVelocity += GroundNormal * Chp.JumpForce;
         Physics_ApplyVelocity();
 

@@ -7,11 +7,14 @@ public class Ring_Collection : CollectableBase
 
     public override void Collection(Collider _triggerer)
     {
-        if (_triggerer.transform.TryGetComponent(out Sonic_PlayerStateMachine _ctx))
+        Debug.Log(_triggerer);
+        if (_triggerer.transform.TryGetComponent(out Sonic_PlayerStateMachine _ctx) || _triggerer.transform.parent.TryGetComponent(out _ctx)) // Rings often detect TrigCL as the triggerer
         {
-            CollectionEvent.Invoke();
+            Debug.Log("Found ctx!");
+            //CollectionEvent.Invoke();
             _ctx.Chs.Rings += Value;
             _ctx.Chs.Score += ScoreValue;
+            _ctx.Snd.PlaySound(_ctx.Snd.ringSound);
         }
     }
 }

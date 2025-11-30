@@ -15,8 +15,9 @@ public abstract class CollectableBase : MonoBehaviour
     {
         if (NoCollectionTime > 0) return;
 
-        CollectionEvent.Invoke();
+        Debug.Log("Trigger!");
         Collection(_trigger);
+        CollectionEvent.Invoke();
     }
 
     public abstract void Collection(Collider _triggerer);

@@ -62,6 +62,7 @@ public class Sonic_LightDashState : IState
     private bool ContinueLightDashing()
     {
         _difference = _targetPos - _ctx.Rb.position;
+
         if (_ctx.RingDetector.TargetOutput == null || _difference.magnitude <= _ctx.Rb.sleepThreshold)
         {
             _ctx.RingCheck();
@@ -69,9 +70,12 @@ public class Sonic_LightDashState : IState
             {
                 return false;
             }
+
         }
+        
         _targetPos = _ctx.RingDetector.TargetOutput.transform.position;
         _difference = _targetPos - _ctx.Rb.position;
+
         return true;
     }
 

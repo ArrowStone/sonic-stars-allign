@@ -238,18 +238,22 @@ public class Sonic_AirState : IState
     {
         if (_ctx.HomingTargetDetector.TargetDetected && _ctx.Input.AttackInput.WasPressedThisFrame())
         {
+            _ctx.Snd.PlaySound(_ctx.Snd.homingSound);
             _ctx.MachineTransition(PlayerStates.HomingAttack);
         }
         if (_ctx.RingDetector.TargetDetected && _ctx.Input.ReactionInput.WasPressedThisFrame())
         {
+            _ctx.Snd.PlaySound(_ctx.Snd.lightDashSound);
             _ctx.MachineTransition(PlayerStates.LightSpeedDash);
         }
         if (_ctx.Input.BounceInput.WasPressedThisFrame())
         {
+            _ctx.Snd.PlaySound(_ctx.Snd.bounceSound);
             _ctx.MachineTransition(PlayerStates.Bounce);
         }
         if (!_ctx.Input.CrouchInput.IsPressed() && _ctx.Input.JumpInput.WasPressedThisFrame() && _ctx.AirDashes > 0)
         {
+            _ctx.Snd.PlaySound(_ctx.Snd.homingSound);
             _ctx.AirDashes--;
             _ctx.Dash();
         }
@@ -312,18 +316,24 @@ public class Sonic_AirState : IState
         float vertLength = _ctx.ledgeVerticalRayLength;
         float horzLength = _ctx.ledgeHorizontalRayLength;
         Vector3 endPosition = new Vector3();
-        Ray ray = new Ray(vertRayStart, -_ctx.transform.up);
+        Ray ray = new Ray(vertRayStart, _ctx.Gravity);
         RaycastHit hit;
 
         // Ray from somewhere in front of the player down, just for checking for ledges and the vertical component of the new position
         bool success = Physics.Raycast(ray, out hit, vertLength, _ctx.ledgeLayer);
 
-        if (!success) // If fails, there's no ledge to grab within range
+        // If fails, there's no ledge to grab within range
+        if (!success)
         {
             return;
         }
-
-        //Debug.Log(hit.transform.name + " " + hit.transform.gameObject.layer);
+        Debug.DrawRay(hit.point, hit.normal, Color.yellow, 1f);
+        Debug.Log(Vector3.Dot(-_ctx.Gravity.normalized, hit.normal));
+        //If the ledge is too steep, we can't grab it
+        if (Vector3.Dot(-_ctx.Gravity.normalized, hit.normal) < 0.9f)
+        {
+            return;
+        }
 
         endPosition.y = hit.point.y;
         // The relative Y value of the horizontal ledge point actually controls the displacement from the y coordinate of the ledge surface
@@ -333,15 +343,17 @@ public class Sonic_AirState : IState
         ray = new Ray(horzRayStart, _ctx.transform.forward * horzLength);
         success = Physics.Raycast(ray, out hit, horzLength, _ctx.ledgeLayer);
 
-        if (!success) // Ideally the second ray should hit the ledge but it's impossible to guarantee, so we check
+         // Ideally the second ray should hit the ledge but it's impossible to guarantee, so we check
+        if (!success)
         {
-            Debug.Log("Second ledge grab ray failed! " + ray.direction);
+            Debug.DrawRay(ray.origin, ray.direction, Color.cyan, 1f);
             return;
         }
 
-        _ctx.Physics_Rotate(-hit.normal, Vector3.up); // Face the ledge
+        _ctx.ChangeKinematic(true); // Have to do this before changing the position and rotation
 
-        //_ctx.transform.forward = -hit.normal; 
+        //_ctx.Physics_Rotate(-hit.normal, -_ctx.Gravity); // Face the ledge
+        _ctx.transform.forward = -hit.normal;
 
         endPosition.x = hit.point.x;
         endPosition.z = hit.point.z;
@@ -349,10 +361,12 @@ public class Sonic_AirState : IState
         Vector3 displacement = _ctx.ledgeGrabDisplacement; // Adjustable displacement from the ledge
         displacement.x *= _ctx.transform.forward.x;
         displacement.z *= _ctx.transform.forward.z;
+        Debug.Log(_ctx.transform.forward);
 
         endPosition += displacement;
 
-        _ctx.Physics_Snap(endPosition); // Set the position
+        //_ctx.Physics_Snap(endPosition); // Set the position
+        _ctx.transform.position = endPosition;
         
         _ctx.MachineTransition(PlayerStates.LedgeGrab); // Change state
     }
