@@ -1,5 +1,6 @@
 ﻿using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // Camera movement
 public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
@@ -107,7 +108,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
             // Screw joystick simulation we're going full SRB2
             //_inputValues = Vector2.ClampMagnitude(Brain.Input.CameraInput.ReadValue<Vector2>(), 1);
             _joystickInputValues = Brain.Input.CameraInputValues;
-            _mouseInputValues = Brain.Input.MouseInput.ReadValue<Vector2>();
+            _mouseInputValues = Mouse.current.delta.ReadValue(); // Have to do this so mouse input gets processed every dynamic update
             
             // Idk why x and y values are swapped but i dont wanna fix it
             _rot.y += _joystickInputValues.x * JoystickSensitivity.x * _delta;

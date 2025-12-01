@@ -2701,7 +2701,7 @@ MonoBehaviour:
   YLimits:
     x: -65
     y: 65
-  MouseSensitivity: {x: 5, y: 5}
+  MouseSensitivity: {x: 0.5, y: 0.5}
   JoystickSensitivity: {x: 200, y: 150}
   SmoothRotationSpeed: 0.2
   MovementSmoothing: 0
@@ -10189,13 +10189,13 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.24166666
     - serializedVersion: 3
-      time: 1
+      time: 5
       value: 0
-      inSlope: -1.0641278
-      outSlope: -1.0641278
+      inSlope: -0.6005509
+      outSlope: -0.6005509
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.08183781
+      inWeight: 0.18894072
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
