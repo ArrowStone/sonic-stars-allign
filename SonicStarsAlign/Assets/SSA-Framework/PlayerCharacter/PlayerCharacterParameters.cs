@@ -149,4 +149,11 @@ public class PlayerCharacterParameters : ScriptableObject
     public float MaxWallRunTime = 2.0f;
     public float MinWallDot = 0.5f; // 0 = flat ground, 1 = vertical
 
+    [Space]
+    [Header("Wall Jump")]
+    public float WallJumpMaxCharge = 1.0f;       // how long you can hold jump to charge
+    public float WallJumpMinStrength = 10f;      // smallest jump strength
+    public float WallJumpMaxStrength = 25f;      // largest jump strength
+
+
 }

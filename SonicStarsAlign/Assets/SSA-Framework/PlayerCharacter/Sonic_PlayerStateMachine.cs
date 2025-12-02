@@ -188,6 +188,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         States.Add(PlayerStates.Water, new Sonic_WaterState(this));
         States.Add(PlayerStates.SweepKick, new Sonic_SweepKickState(this));
         States.Add(PlayerStates.WallRun, new Sonic_WallRunState(this));
+        States.Add(PlayerStates.WallJump, new Sonic_WallJumpState(this));
         States.Add(PlayerStates.LedgeGrab, new Sonic_LedgeGrabState(this));
 
         CurrentEstate = PlayerStates.Air;
@@ -510,5 +511,6 @@ public enum PlayerStates
     Water,
     SweepKick,
     WallRun,
+    WallJump,
     LedgeGrab,
 }

@@ -51,6 +51,13 @@ public class Sonic_WallRunState : IState
             return;
         }
 
+        if (_ctx.Input.JumpInput.IsPressed())
+        {
+            _ctx.MachineTransition(PlayerStates.WallJump);
+            return;
+        }
+
+
         ApplyPhysics(dt);
         _ctx.Physics_ApplyVelocity();
     }
@@ -104,4 +111,5 @@ public class Sonic_WallRunState : IState
     {
         _ctx.MachineTransition(PlayerStates.Air);
     }
+    
 }
