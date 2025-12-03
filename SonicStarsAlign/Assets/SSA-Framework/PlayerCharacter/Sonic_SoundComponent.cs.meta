@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 3a3817449ab79d13c8fa761cfca23be6
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - audioSource: {instanceID: 0}
+  - jumpSound: {fileID: 8300000, guid: 5c366301824130c488a7c4cc12158f69, type: 3}
+  - ringSound: {fileID: 8300000, guid: 96941af979471d8c19b7005e6bf9a611, type: 3}
+  - homingSound: {fileID: 8300000, guid: 7e804f4be6a23ae6b8c8b3bf28a1edc6, type: 3}
+  - rollSound: {fileID: 8300000, guid: 070237532a0d58160ac70bececd459a9, type: 3}
+  - bounceSound: {fileID: 8300000, guid: 5c366301824130c488a7c4cc12158f69, type: 3}
+  - lightDashSound: {fileID: 8300000, guid: ff749f902d716ca538fbd4134a7dd870, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -65,6 +66,11 @@ public class SettingsLoader : MonoBehaviour
         else
         {
             Screen.fullScreen = fullScreen;
+        }
+
+        if (renderScale == 0)
+        {
+            renderScale = 1f;
         }
 
         cam.farClipPlane = 100f + (viewDist * 900f);
