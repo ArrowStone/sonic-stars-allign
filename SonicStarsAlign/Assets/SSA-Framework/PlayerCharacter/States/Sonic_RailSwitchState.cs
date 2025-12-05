@@ -30,6 +30,8 @@ public class Sonic_RailSwitchState : IState
 
         Setup();
         _ctx.ChangeKinematic(true);
+
+        _ctx.Snd.PlaySound(_ctx.Snd.railSwitchSound);
     }
 
     public void UpdateState()

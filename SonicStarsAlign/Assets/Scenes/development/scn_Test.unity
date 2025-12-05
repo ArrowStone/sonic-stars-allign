@@ -11082,7 +11082,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -11182,6 +11182,9 @@ MonoBehaviour:
   rollSound: {fileID: 8300000, guid: 070237532a0d58160ac70bececd459a9, type: 3}
   bounceSound: {fileID: 8300000, guid: 5c366301824130c488a7c4cc12158f69, type: 3}
   lightDashSound: {fileID: 8300000, guid: ff749f902d716ca538fbd4134a7dd870, type: 3}
+  railGrindSound: {fileID: 8300000, guid: a005260a0a61dfcb7b30d8f3b54bd082, type: 3}
+  railSwitchSound: {fileID: 8300000, guid: 77eaa8b92871522bf9e1bc80d1cb59c1, type: 3}
+  railLandSound: {fileID: 8300000, guid: 0535d5a9dae114ec9aa20899eaafa6cd, type: 3}
   ringSound: {fileID: 8300000, guid: 96941af979471d8c19b7005e6bf9a611, type: 3}
   goalRingSound: {fileID: 8300000, guid: 184ab8152890a6ff5a148263be230466, type: 3}
 --- !u!1001 &950592366

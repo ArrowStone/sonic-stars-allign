@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Sonic_GrindState : IState
 {
@@ -21,6 +22,11 @@ public class Sonic_GrindState : IState
         _difference = Vector3.Project(_ctx.Velocity, _ctx.SplnHandler.SplineTangent());
         _ctx.VerticalVelocity = Vector3.zero;
 
+        _ctx.Snd.PlaySound(_ctx.Snd.railLandSound);
+
+        _ctx.Snd.audioSource.clip = _ctx.Snd.railGrindSound;
+        _ctx.Snd.audioSource.Play();
+
         RailApplication();
     }
 
@@ -31,10 +37,14 @@ public class Sonic_GrindState : IState
         _ctx.SplnHandler.Clear();
 
         _vel = Vector3.zero;
+
+        _ctx.Snd.audioSource.Stop();
+        _ctx.Snd.audioSource.pitch = 1f;
     }
 
     public void FixedUpdateState()
     {
+        _ctx.Snd.audioSource.pitch = Math.Clamp(_ctx.Rb.linearVelocity.magnitude * 0.05f, 1f, 1.5f);
     }
 
     public void LateUpdateState()
