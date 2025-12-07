@@ -52,7 +52,7 @@ public class Sonic_RailSwitchState : IState
         {
             ExitConditions();
         }
-        _ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_vel, _ctx.Gravity);
+        //_ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_vel, _ctx.Gravity);
     }
 
     public void ExitState()
@@ -65,7 +65,7 @@ public class Sonic_RailSwitchState : IState
     private void RailSwitchMovement(float _delta)
     {
         _currPos = Vector3.Lerp(_startPos, _targetPos, _time / _duration);
-        _vel = (_currPos - _ctx.Rb.position) / Time.fixedDeltaTime;
+        //_vel = (_currPos - _ctx.Rb.position) / Time.fixedDeltaTime;
         _ctx.Physics_Snap(_currPos);
     }
 
