@@ -44,7 +44,7 @@ public class Sonic_GrindState : IState
 
     public void FixedUpdateState()
     {
-        _ctx.Snd.audioSource.pitch = Math.Clamp(_ctx.Rb.linearVelocity.magnitude * 0.05f, 1f, 1.5f);
+        _ctx.Snd.audioSource.pitch = Mathf.Lerp(_ctx.Snd.audioSource.pitch, Math.Clamp(_ctx.Rb.linearVelocity.magnitude * 0.05f, 0.9f, 1.2f), Time.fixedDeltaTime * 10f);
     }
 
     public void LateUpdateState()

@@ -24,6 +24,7 @@ public class Sonic_SoundComponent : MonoBehaviour
 
     public void PlaySound(AudioClip sound)
     {
+        audioSource.Stop();
         audioSource.PlayOneShot(sound);
     }
 }

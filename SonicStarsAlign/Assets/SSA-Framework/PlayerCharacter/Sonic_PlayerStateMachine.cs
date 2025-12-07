@@ -224,6 +224,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public void Physics_ApplyVelocity()
     {
         Velocity = HorizontalVelocity + VerticalVelocity;
+        Debug.Log(Velocity);
     }
 
     public void Respawn()

@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System;
-using UnityEditor.UI;
 
 // Game input
 public class InputComponent : MonoBehaviour
