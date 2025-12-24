@@ -109,6 +109,10 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     #region Moves
 
+    public float airRotationSpeed; // For rotation toward the vertical position after leaving a ramp
+    public bool doneAirRotation = true;
+    public Vector3 fakeNormal;
+
     private bool _jumping;
 
     public bool Jumping
@@ -224,7 +228,6 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public void Physics_ApplyVelocity()
     {
         Velocity = HorizontalVelocity + VerticalVelocity;
-        Debug.Log(Velocity);
     }
 
     public void Respawn()

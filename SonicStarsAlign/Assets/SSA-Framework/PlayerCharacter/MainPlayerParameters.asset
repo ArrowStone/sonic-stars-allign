@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5bb2dbce231f94bbaeedd582baab8c, type: 3}
   m_Name: MainPlayerParameters
   m_EditorClassIdentifier: 
-  BaseSpeed: 18
+  BaseSpeed: 30
   HardSpeedCap: 400
   RailSpeedCap: 300
-  Acceleration: 5.625
+  Acceleration: 15
   Deceleration: 29.75
   GroundDrag: 5
+  RunSpeedThreshold: 12
   TurnDeceleration:
     serializedVersion: 2
     m_Curve:
@@ -66,7 +67,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  BaseSpeedAir: 6
+  BaseSpeedAir: 2
   AirDrag:
     serializedVersion: 2
     m_Curve:
@@ -299,3 +300,22 @@ MonoBehaviour:
   RailSwitchSpeed: 50
   RailSwitchDuration: 0.125
   RailSwitchDeadZone: 45
+  DropDashBaseSpeed: 8
+  DropDashChargeMultiplier: 4
+  DropDashMaxCharge: 1
+  WaterSpeedCap: 8
+  WaterDeceleration: 4
+  WaterJumpStrength: 6
+  WaterGravityScale: 0.4
+  WaterMaxFallSpeed: 12
+  WaterRunThreshold: 14
+  Gravity: {x: 0, y: -9.81, z: 0}
+  WallAttachCheckDistance: 1
+  WallRunGravityScale: 0.35
+  WallRunSpeed: 12
+  WallJumpStrength: 18
+  MaxWallRunTime: 2
+  MinWallDot: 0.5
+  WallJumpMaxCharge: 1
+  WallJumpMinStrength: 10
+  WallJumpMaxStrength: 25

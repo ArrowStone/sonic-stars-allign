@@ -2706,8 +2706,9 @@ MonoBehaviour:
   JoystickSensitivity: {x: 200, y: 150}
   SmoothRotationSpeed: 0.2
   MovementSmoothing: 0
-  YAxisRecenteringWait: 1
+  CameraRecenteringWait: 0
   YAxisRecenteringSpeed: 2
+  XAxisRecenteringSpeed: 0
   BackCameraSpeed: 10
 --- !u!1 &323259932
 GameObject:
@@ -7490,6 +7491,30 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: -2484921068739079471, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 8.812636
+      objectReference: {fileID: 0}
+    - target: {fileID: -2484921068739079471, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 8.812636
+      objectReference: {fileID: 0}
+    - target: {fileID: -2484921068739079471, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4.2419267
+      objectReference: {fileID: 0}
+    - target: {fileID: -2484921068739079471, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -33.98
+      objectReference: {fileID: 0}
+    - target: {fileID: -2484921068739079471, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.53
+      objectReference: {fileID: 0}
+    - target: {fileID: -2484921068739079471, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 36.07
+      objectReference: {fileID: 0}
     - target: {fileID: -2045257923548263128, guid: 049590deb37b7854e919e6a20cbc2f71, type: 3}
       propertyPath: m_Layer
       value: 14
@@ -11415,6 +11440,9 @@ MonoBehaviour:
   OnWall: 0
   ledgeGrabInitialVelocity: {x: 0, y: 0, z: 0}
   ledgeGrabStartTime: 0
+  airRotationSpeed: 16
+  doneAirRotation: 1
+  fakeNormal: {x: 0, y: 0, z: 0}
   AirDashes: 1
 --- !u!54 &948741070
 Rigidbody:

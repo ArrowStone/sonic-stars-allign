@@ -7,7 +7,8 @@ public class PauseManager : MonoBehaviour
     public GameObject pauseMenu;
     public MonoBehaviour[] gameComponents;
     public bool paused = false;
-    InputComponent input;
+    private InputComponent input;
+    private bool wasPauseButtonReleased = true;
     void OnEnable()
     {
         SetPauseState(paused);
@@ -39,9 +40,14 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
-        if (input.StartInput.WasPressedThisFrame())
+        if (input.StartInput.WasPressedThisFrame() && wasPauseButtonReleased)
         {
+            wasPauseButtonReleased = false;
             SwitchPauseState();
+        }
+        else if (input.StartInput.WasReleasedThisFrame())
+        {
+            wasPauseButtonReleased = true;
         }
     }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 public class Sonic_GroundState : IState
@@ -50,7 +50,7 @@ public class Sonic_GroundState : IState
 
         if (!GroundCheck())
         {
-            AirSwitchConditions();
+            //AirSwitchConditions();
             return;
         }
 
@@ -69,6 +69,7 @@ public class Sonic_GroundState : IState
         {
             Movement(_delta);
         }
+        Movement(_delta);
 
         GroundSwitchConditions();
         _ctx.Physics_ApplyVelocity();
@@ -141,8 +142,10 @@ public class Sonic_GroundState : IState
         {
             _ctx.PlayerDirection = Vector3.RotateTowards(_ctx.PlayerDirection, _ctx.HorizontalVelocity.normalized, _turnStrength, 0);
         }*/
-        _ctx.PlayerDirection = _ctx.InputVector.magnitude > 0 ? _ctx.InputVector : _ctx.PlayerDirection;
-        _ctx.PlayerDirection = Vector3.ProjectOnPlane(_ctx.PlayerDirection, _ctx.GroundCast.HitInfo.normal);
+
+        _ctx.PlayerDirection = _ctx.InputVector.magnitude > 0 ? _ctx.InputVector : _ctx.PlayerDirection;// I tried to rotate the input vector but gave up
+        Vector3 normal = _ctx.GroundCast.HitInfo.normal;
+        _ctx.PlayerDirection = Vector3.ProjectOnPlane(_ctx.PlayerDirection, normal);
         _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundCast.HitInfo.normal);
     }
 
@@ -216,6 +219,7 @@ public class Sonic_GroundState : IState
         _ctx.InputRotation = Mathf.Approximately(Vector3.Angle(_ctx.GroundNormal, _ctx.InputRef.up), 180)
             ? Quaternion.FromToRotation(_ctx.InputRotation * Vector3.up, _ctx.GroundNormal) * _ctx.InputRotation
             : Quaternion.FromToRotation(_ctx.InputRef.up, _ctx.GroundNormal);
+        _ctx.InputRotation = Quaternion.FromToRotation(_ctx.InputRotation * Vector3.up, _ctx.GroundNormal) * _ctx.InputRotation;
 
         Vector3 cameraForward = _ctx.InputRef.forward;
 

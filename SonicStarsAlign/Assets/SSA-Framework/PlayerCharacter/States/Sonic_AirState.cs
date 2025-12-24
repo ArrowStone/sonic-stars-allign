@@ -20,13 +20,15 @@ public class Sonic_AirState : IState
         _groundDetected = false;
         _ddchargeTime = 0;
         _airDragTime = 0;
+        _ctx.doneAirRotation = false;
+        _ctx.fakeNormal = _ctx.GroundNormal;
 
         #endregion Misc
 
         #region Collision
 
         _ctx.GroundNormal = -_ctx.Gravity.normalized;
-        _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity.normalized);
+        _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.fakeNormal);
         _ctx.PlayerDirection = _ctx.transform.forward;
 
         #endregion Collision
@@ -45,7 +47,8 @@ public class Sonic_AirState : IState
 
     public void UpdateState()
     {
-        //float _delta = Time.deltaTime;
+        float _delta = Time.deltaTime;
+        RotateTowardVertical(_delta);
     }
 
     public void FixedUpdateState()
@@ -70,7 +73,10 @@ public class Sonic_AirState : IState
         _ctx.Physics_ApplyVelocity();
 
         CheckForWallRun();
-        CheckForLedgeGrab();
+        if(_ctx.doneAirRotation) // The rotation also acts as a ledge grab timeout timer
+        {
+            CheckForLedgeGrab();
+        }
     }
 
     public void LateUpdateState()
@@ -369,6 +375,23 @@ public class Sonic_AirState : IState
         _ctx.transform.position = endPosition;
         
         _ctx.MachineTransition(PlayerStates.LedgeGrab); // Change state
+    }
+
+    void RotateTowardVertical(float delta)
+    {
+        if (!_ctx.doneAirRotation && Vector3.Dot(_ctx.Gravity.normalized, _ctx.fakeNormal) < -0.995f)
+        {
+            Debug.Log("Done!");
+            _ctx.doneAirRotation = true;
+            _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity.normalized);
+        }
+        if(!_ctx.doneAirRotation)
+        {
+            //Debug.Log("Moving!");
+            _ctx.fakeNormal = Vector3.Slerp(_ctx.fakeNormal, -_ctx.Gravity.normalized, delta * _ctx.airRotationSpeed);
+            _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.fakeNormal);
+            Debug.Log(Vector3.Dot(_ctx.Gravity.normalized, _ctx.fakeNormal));
+        }
     }
     #endregion Util
 }

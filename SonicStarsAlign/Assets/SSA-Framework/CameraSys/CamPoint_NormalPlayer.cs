@@ -29,9 +29,10 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
     public float MovementSmoothing;
 
     [Space]
-    public float YAxisRecenteringWait;
+    public float CameraRecenteringWait;
 
     public float YAxisRecenteringSpeed;
+    public float XAxisRecenteringSpeed;
 
     public float BackCameraSpeed;
 
@@ -97,13 +98,13 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                 if (_recenteringState <= 0)
                 {
                     _rot.x = Mathf.LerpAngle(_rot.x, 0, YAxisRecenteringSpeed * _delta);
-                    _rot.y = Mathf.LerpAngle(_rot.y, Target.transform.eulerAngles.y, 2 * _delta);
+                    _rot.y = Mathf.LerpAngle(_rot.y, Target.transform.eulerAngles.y, XAxisRecenteringSpeed * _delta);
                 }
 
             }
             else
             {
-                _recenteringState = YAxisRecenteringWait;
+                _recenteringState = CameraRecenteringWait;
             }
 
             // Screw joystick simulation we're going full SRB2
