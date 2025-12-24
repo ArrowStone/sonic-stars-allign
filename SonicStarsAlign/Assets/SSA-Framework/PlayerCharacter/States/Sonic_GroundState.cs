@@ -50,7 +50,7 @@ public class Sonic_GroundState : IState
 
         if (!GroundCheck())
         {
-            //AirSwitchConditions();
+            AirSwitchConditions();
             return;
         }
 

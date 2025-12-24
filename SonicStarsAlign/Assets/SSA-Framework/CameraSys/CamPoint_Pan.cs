@@ -9,7 +9,7 @@ public class CamPoint_Pan : MonoBehaviour, ICamPoint
     [Header("Parameters")]
     public Transform Target;
 
-    public Vector3 PointPosition;
+    public Transform PointTransform;
 
     [Space]
     public float DeadZone;
@@ -98,14 +98,14 @@ public class CamPoint_Pan : MonoBehaviour, ICamPoint
 
     public Vector3 UpdatePosition(float _delta)
     {
-        Vector3 _pos = PointPosition;
+        Vector3 _pos = PointTransform.position;
         return _pos;
     }
 
     public Quaternion UpdateRotation(float _delta)
     {
         // The code below messes with mouse camera movement and doesnt seem to do anything meaningful so its going away
-        //return Quaternion.RotateTowards(_rotation, Quaternion.LookRotation(_cashedTargetPosition - _position), RotationSmoothTime * _delta);
+        return Quaternion.RotateTowards(_rotation, Quaternion.LookRotation(_cashedTargetPosition - _position), RotationSmoothTime * _delta);
         return _rotation;
     }
 
