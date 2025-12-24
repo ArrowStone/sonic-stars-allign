@@ -1,7 +1,9 @@
-﻿using Unity.Mathematics;
+﻿using System;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Splines;
 
-public class CamPoint_Pan : MonoBehaviour, ICamPoint
+public class CamPoint_FollowSpline : MonoBehaviour, ICamPoint
 {
     public CamBrain Brain;
 
@@ -9,7 +11,9 @@ public class CamPoint_Pan : MonoBehaviour, ICamPoint
     [Header("Parameters")]
     public Transform Target;
 
-    public Transform PointTransform;
+    public SplineContainer TargetSpline;
+    public float followOffset;
+    public float3 RotationOffset;
 
     [Space]
     public float DeadZone;
@@ -38,6 +42,9 @@ public class CamPoint_Pan : MonoBehaviour, ICamPoint
     private Vector2 _rot;
 
     private Quaternion addRot;
+
+    private float3 nearest;
+    private float t;
 
     #endregion Util
 
@@ -98,13 +105,17 @@ public class CamPoint_Pan : MonoBehaviour, ICamPoint
 
     public Vector3 UpdatePosition(float _delta)
     {
-        Vector3 _pos = PointTransform.position;
-        return _pos;
+        SplineUtility.GetNearestPoint(TargetSpline.Spline, TargetSpline.transform.worldToLocalMatrix.MultiplyPoint(Target.position), out nearest, out t);
+        t += followOffset;
+        Vector3 output = TargetSpline.Spline.EvaluatePosition(t);
+        output = TargetSpline.transform.localToWorldMatrix.MultiplyPoint(output);
+        return output;
     }
 
     public Quaternion UpdateRotation(float _delta)
     {
-        return Quaternion.RotateTowards(_rotation, Quaternion.LookRotation(_cashedTargetPosition - _position), RotationSmoothTime * _delta);
+        Debug.Log(TargetSpline.Spline.EvaluateTangent(t) + RotationOffset + " " + _rotation);
+        return Quaternion.RotateTowards(_rotation, Quaternion.LookRotation(TargetSpline.Spline.EvaluateTangent(t) + RotationOffset), RotationSmoothTime * _delta);
     }
 
     #endregion AdditionalFunctions

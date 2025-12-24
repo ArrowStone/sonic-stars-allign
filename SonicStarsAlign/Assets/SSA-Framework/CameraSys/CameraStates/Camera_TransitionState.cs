@@ -54,7 +54,6 @@ public class Camera_TransitionState : IState
     {
         _ctx.Point.Execute(_delta);
         var _transfrm = _ctx.Point.Transform();
-        Debug.Log(_transfrm.Position);
         _ctx.transform.SetPositionAndRotation(Vector3.Lerp(_ctx.CashedTransform.Position, _transfrm.Position, _ctx.WeightCurve.Evaluate(_time)), Quaternion.Slerp(_ctx.CashedTransform.Rotation, _transfrm.Rotation, _ctx.WeightCurve.Evaluate(_time)));
     }
 
