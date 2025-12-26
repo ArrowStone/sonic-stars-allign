@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-public class DebugCameraTransitioner : MonoBehaviour
+public class CameraTransitioner : MonoBehaviour
 {
     public CamBrain MainCam;
 

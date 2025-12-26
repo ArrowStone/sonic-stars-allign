@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class DebugCameraStart : MonoBehaviour
+public class CameraTransitionStart : MonoBehaviour
 {
     [SerializeField]
     private CamBrain _brain;
