@@ -6213,7 +6213,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 52c153266653937428a31167b2803120, type: 2}
+  - {fileID: 2100000, guid: 5a743d9165f0b8d2285ee6e518ecdaa4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -29317,7 +29317,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 52c153266653937428a31167b2803120, type: 2}
+  - {fileID: 2100000, guid: 5a743d9165f0b8d2285ee6e518ecdaa4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -32580,6 +32580,38 @@ PrefabInstance:
       propertyPath: spline
       value: 
       objectReference: {fileID: 1328142710}
+    - target: {fileID: 837480583931593770, guid: fb78e1b74e31c2647b5afb9173de422e, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[1].Position.x
+      value: -0.2929077
+      objectReference: {fileID: 0}
+    - target: {fileID: 837480583931593770, guid: fb78e1b74e31c2647b5afb9173de422e, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[1].Position.y
+      value: -5.2251205
+      objectReference: {fileID: 0}
+    - target: {fileID: 837480583931593770, guid: fb78e1b74e31c2647b5afb9173de422e, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[1].Position.z
+      value: 8.994278
+      objectReference: {fileID: 0}
+    - target: {fileID: 837480583931593770, guid: fb78e1b74e31c2647b5afb9173de422e, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[0].Rotation.value.w
+      value: 0.9953536
+      objectReference: {fileID: 0}
+    - target: {fileID: 837480583931593770, guid: fb78e1b74e31c2647b5afb9173de422e, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[0].Rotation.value.x
+      value: -0.09628665
+      objectReference: {fileID: 0}
+    - target: {fileID: 837480583931593770, guid: fb78e1b74e31c2647b5afb9173de422e, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[0].Rotation.value.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 837480583931593770, guid: fb78e1b74e31c2647b5afb9173de422e, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[1].Rotation.value.w
+      value: 0.8030481
+      objectReference: {fileID: 0}
+    - target: {fileID: 837480583931593770, guid: fb78e1b74e31c2647b5afb9173de422e, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[1].Rotation.value.x
+      value: 0.59591436
+      objectReference: {fileID: 0}
     - target: {fileID: 3405196016933804028, guid: fb78e1b74e31c2647b5afb9173de422e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 308
