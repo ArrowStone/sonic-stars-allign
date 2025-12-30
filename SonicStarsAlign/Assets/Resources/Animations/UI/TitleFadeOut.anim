@@ -1682,6 +1682,13 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 0
+    functionName: Spawn
+    data: 
+    objectReferenceParameter: {fileID: 1220318308549522199, guid: b0fe147f6e0231ee7a59c68696e445fe, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.3333334
     functionName: SwitchScene
     data: 
