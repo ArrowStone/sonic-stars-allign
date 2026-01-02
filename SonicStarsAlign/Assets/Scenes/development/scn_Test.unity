@@ -11826,6 +11826,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5e3866537b535748da2e8d67fb9f7fb7, type: 3}
   - {fileID: 8300000, guid: f842f8a74ee7a775ca53006e2921ef22, type: 3}
   - {fileID: 8300000, guid: e11e6512e863f55ac98d7124ec83fa09, type: 3}
+  ringScatterSound: {fileID: 8300000, guid: 3f675148a2fd327cca8e91126145bc46, type: 3}
 --- !u!1001 &950592366
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15733,7 +15734,7 @@ Transform:
   m_GameObject: {fileID: 1263480788}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: -0.00000037252897}
-  m_LocalPosition: {x: 172.04, y: 75.76, z: 234.29}
+  m_LocalPosition: {x: 360.2, y: 53.07, z: 141.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -31992,7 +31993,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3215784629196662793, guid: 98d2ee3af3c964146890e6755ba19475, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 289.21707
+      value: 295.684
       objectReference: {fileID: 0}
     - target: {fileID: 3215784629196662793, guid: 98d2ee3af3c964146890e6755ba19475, type: 3}
       propertyPath: m_LocalPosition.y
@@ -32000,7 +32001,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3215784629196662793, guid: 98d2ee3af3c964146890e6755ba19475, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 23.881287
+      value: 25.564
       objectReference: {fileID: 0}
     - target: {fileID: 3215784629196662793, guid: 98d2ee3af3c964146890e6755ba19475, type: 3}
       propertyPath: m_LocalRotation.w

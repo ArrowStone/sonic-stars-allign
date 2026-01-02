@@ -381,7 +381,6 @@ public class Sonic_AirState : IState
     {
         if (!_ctx.doneAirRotation && Vector3.Dot(_ctx.Gravity.normalized, _ctx.fakeNormal) < -0.995f)
         {
-            Debug.Log("Done!");
             _ctx.doneAirRotation = true;
             _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity.normalized);
         }

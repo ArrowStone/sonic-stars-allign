@@ -6,16 +6,17 @@ public abstract class CollectableBase : MonoBehaviour
     public float NoCollectionTime;
     public UnityEvent CollectionEvent;
 
-    protected void Update()
+    protected void FixedUpdate()
     {
-        if (NoCollectionTime > 0) NoCollectionTime -= Time.deltaTime;
+        if (NoCollectionTime > 0) NoCollectionTime -= Time.fixedDeltaTime;
     }
 
     public virtual void OnTriggerEnter(Collider _trigger)
     {
-        if (NoCollectionTime > 0) return;
+        Debug.Log("Collected by: " + _trigger.gameObject.layer);
+        if (NoCollectionTime > 0 ) return;
+        if (_trigger.gameObject.layer != 11 && _trigger.transform.parent.gameObject.layer != 11) return;
 
-        Debug.Log("Trigger!");
         Collection(_trigger);
         CollectionEvent.Invoke();
     }

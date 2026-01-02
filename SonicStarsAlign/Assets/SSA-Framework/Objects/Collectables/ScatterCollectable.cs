@@ -6,7 +6,9 @@ public class ScatterCollectable : MonoBehaviour
 {
     [SerializeField] private float castDist;
     [SerializeField] private float gravity;
+    [SerializeField] private float frictionCoefficient;
     [SerializeField] private float bounce;
+    [SerializeField] private float minimumBounce;
 
     [Space]
     [SerializeField] private LayerMask layerMask;
@@ -42,18 +44,17 @@ public class ScatterCollectable : MonoBehaviour
 
     private void FixedUpdate()
     {
-        GravityCalculations();
-        GroundCheck();
-    }
+        float _delta = Time.fixedDeltaTime;
 
-    private void Update()
-    {
+        GravityCalculations();
+        GroundCheck(_delta);
+        
         if (!despawn)
             return;
 
         if (time > 0)
         {
-            time -= Time.deltaTime;
+            time -= _delta;
         }
         else
         {
@@ -61,17 +62,29 @@ public class ScatterCollectable : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        
+    }
+
     private void GravityCalculations()
     {
         Rb.linearVelocity += GravityDirection * gravity;
     }
 
-    private void GroundCheck()
+    private void GroundCheck(float _delta)
     {
         if (groundDetector.Execute(transform.position, Rb.linearVelocity.normalized))
-            Rb.linearVelocity = Vector3.ProjectOnPlane(Rb.linearVelocity, groundDetector.HitInfo.normal) +
-                          Vector3.Dot(Rb.linearVelocity, -groundDetector.HitInfo.normal) * bounce *
-                          groundDetector.HitInfo.normal;
+        {
+            Vector3 bounceVelocity = Vector3.Dot(Rb.linearVelocity, -groundDetector.HitInfo.normal) * bounce * groundDetector.HitInfo.normal;
+
+            if (bounceVelocity.magnitude < minimumBounce)
+            {
+                bounceVelocity = Vector3.zero;
+            }
+
+            Rb.linearVelocity = Vector3.ProjectOnPlane(Rb.linearVelocity, groundDetector.HitInfo.normal) * frictionCoefficient + bounceVelocity;
+        }
     }
 
     public void End()

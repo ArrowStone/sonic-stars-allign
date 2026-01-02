@@ -56,7 +56,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f41bdd9ee4214c543b207b570c3f18db, type: 2}
+  - {fileID: 2100000, guid: 758d2dac5c0f610159d54038c2f65f1c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -144,9 +144,9 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!135 &2417903233847346982
@@ -168,7 +168,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.25
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4612260657262127081
 MonoBehaviour:
@@ -198,7 +198,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  Value: 0
+  Value: 1
   ScoreValue: 0
 --- !u!114 &6496415309630597294
 MonoBehaviour:
@@ -214,12 +214,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   castDist: 1
   gravity: 1
-  bounce: 0.75
+  frictionCoefficient: 0.9
+  bounce: 0.5
+  minimumBounce: 1
   layerMask:
     serializedVersion: 2
     m_Bits: 16384
-  despawn: 1
-  despawnTime: 5
+  despawn: 0
+  despawnTime: 15
   DespawnEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6496415309630597294}
+        m_TargetAssemblyTypeName: ScatterCollectable, Assembly-CSharp
+        m_MethodName: End
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

@@ -27,10 +27,11 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
 
     public void DealDamage(float _damage, Vector3 _knockback, int _strength)
     {
+        Debug.Log("Damage");
         if (AttackMachine.Library.Active() && AttackMachine.Library.AttackStrength() > _strength) return;
         ApplyKnockback(_knockback);
 
-        if (CTX.InvinciblitiyState >= 0) return;
+        if (CTX.InvinciblitiyState > 0) return;
         CTX.InvinciblitiyState = InvincibilityDuration;
         RingLoss();
     }
@@ -61,11 +62,12 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
         AttackMachine = GetComponent<Sonic_AttackComponent>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (CTX.InvinciblitiyState > 0)
         {
-            CTX.InvinciblitiyState -= Time.deltaTime;
+            CTX.InvinciblitiyState -= Time.fixedDeltaTime;
+            Debug.Log(CTX.InvinciblitiyState);
         }
     }
 
@@ -82,20 +84,26 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
 
     public void RingLoss()
     {
+        Debug.Log("Ring loss");
         if (CTX.Chs.Shield != null)
         {
+            Debug.Log("Shield down");
             CTX.Chs.Shield = null;
             return;
         }
 
         if (CTX.Chs.Rings <= 0)
         {
+            Debug.Log("Death");
             Death();
             return;
         }
 
         if (CTX.Chs.Rings > 0)
         {
+            Debug.Log("Confirmed ring loss");
+            CTX.Snd.PlaySound(CTX.Snd.ringScatterSound);
+
             for (var i = 1; i <= Mathf.Clamp(CTX.Chs.Rings, 0, MaxRingsScattered); i++)
             {
                 float irt = 360 / Mathf.Clamp(CTX.Chs.Rings, 0, MaxRingsScattered) * i;

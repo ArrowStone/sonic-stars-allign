@@ -26,6 +26,9 @@ public class Sonic_SoundComponent : MonoBehaviour
     [Header ("Footsteps")]
     public AudioClip[] concreteFootsteps;
 
+    [Header ("Damage")]
+    public AudioClip ringScatterSound;
+
     public void Start()
     {
         _ctx = GetComponent<Sonic_PlayerStateMachine>();
