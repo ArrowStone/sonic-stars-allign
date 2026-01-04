@@ -75,17 +75,19 @@ public class Sonic_WallRunState : IState
         RaycastHit hit;
         Vector3 origin = _ctx.Rb.position;
 
-        // Check still facing the original wall
         if (Physics.Raycast(origin, -_ctx.WallRunNormal, out hit, _ctx.Chp.WallAttachCheckDistance))
         {
-            float verticalDot = Mathf.Abs(hit.normal.y);
+            // Dot against gravity
+            float gravityDot = Mathf.Abs(Vector3.Dot(hit.normal.normalized, -_ctx.Gravity.normalized));
 
-            // still wall-like
-            return verticalDot < _ctx.Chp.MinWallDot;
+            // 0 = perfectly vertical wall
+            // 1 = floor or ceiling
+            return gravityDot <= _ctx.Chp.MaxWallGravityDot;
         }
 
         return false;
     }
+
 
     private void ApplyPhysics(float dt)
     {

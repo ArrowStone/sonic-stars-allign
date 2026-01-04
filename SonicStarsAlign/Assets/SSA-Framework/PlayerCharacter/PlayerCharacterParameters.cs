@@ -147,7 +147,7 @@ public class PlayerCharacterParameters : ScriptableObject
     public float WallRunSpeed = 12f;
     public float WallJumpStrength = 18f;
     public float MaxWallRunTime = 2.0f;
-    public float MinWallDot = 0.5f; // 0 = flat ground, 1 = vertical
+    public float MaxWallGravityDot = 0.2f;
 
     [Space]
     [Header("Wall Jump")]
