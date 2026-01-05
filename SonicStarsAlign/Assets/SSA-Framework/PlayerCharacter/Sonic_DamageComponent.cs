@@ -5,7 +5,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Sonic_PlayerStateMachine))]
 public class Sonic_DamageComponent : MonoBehaviour, IDamageable
 {
-    public Sonic_PlayerStateMachine CTX { get; private set; }
+    public Sonic_PlayerStateMachine _ctx { get; private set; }
     public Sonic_AttackComponent AttackMachine { get; private set; }
     [SerializeField] private Vector3 _bounce;
     [SerializeField] private BounceType _bounceType;
@@ -27,18 +27,18 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
 
     public void DealDamage(float _damage, Vector3 _knockback, int _strength)
     {
-        Debug.Log("Damage");
+        if (_ctx.CurrentEstate == PlayerStates.Damage) return;
         if (AttackMachine.Library.Active() && AttackMachine.Library.AttackStrength() > _strength) return;
         ApplyKnockback(_knockback);
 
-        if (CTX.InvinciblitiyState > 0) return;
-        CTX.InvinciblitiyState = InvincibilityDuration;
+        if (_ctx.InvinciblitiyState > 0) return;
+        _ctx.InvinciblitiyState = InvincibilityDuration;
         RingLoss();
     }
 
     public float Health()
     {
-        return CTX.Chs.Rings;
+        return _ctx.Chs.Rings;
     }
 
     public Vector3 Bounce()
@@ -58,16 +58,15 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
 
     private void Awake()
     {
-        CTX = GetComponent<Sonic_PlayerStateMachine>();
+        _ctx = GetComponent<Sonic_PlayerStateMachine>();
         AttackMachine = GetComponent<Sonic_AttackComponent>();
     }
 
     private void FixedUpdate()
     {
-        if (CTX.InvinciblitiyState > 0)
+        if (_ctx.InvinciblitiyState > 0)
         {
-            CTX.InvinciblitiyState -= Time.fixedDeltaTime;
-            Debug.Log(CTX.InvinciblitiyState);
+            _ctx.InvinciblitiyState -= Time.fixedDeltaTime;
         }
     }
 
@@ -75,45 +74,45 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
     {
         if (_knockback.magnitude > 0.1f)
         {
-            CTX.ChangeKinematic(false);
+            _ctx.ChangeKinematic(false);
 
-            CTX.Velocity = _knockback;
-            CTX.MachineTransition(PlayerStates.Damage);
+            _ctx.Velocity = _knockback;
+            _ctx.MachineTransition(PlayerStates.Damage);
         }
     }
 
     public void RingLoss()
     {
         Debug.Log("Ring loss");
-        if (CTX.Chs.Shield != null)
+        if (_ctx.Chs.Shield != null)
         {
             Debug.Log("Shield down");
-            CTX.Chs.Shield = null;
+            _ctx.Chs.Shield = null;
             return;
         }
 
-        if (CTX.Chs.Rings <= 0)
+        if (_ctx.Chs.Rings <= 0)
         {
             Debug.Log("Death");
             Death();
             return;
         }
 
-        if (CTX.Chs.Rings > 0)
+        if (_ctx.Chs.Rings > 0)
         {
             Debug.Log("Confirmed ring loss");
-            CTX.Snd.PlaySound(CTX.Snd.ringScatterSound);
+            _ctx.Snd.PlaySound(_ctx.Snd.ringScatterSound);
 
-            for (var i = 1; i <= Mathf.Clamp(CTX.Chs.Rings, 0, MaxRingsScattered); i++)
+            for (var i = 1; i <= Mathf.Clamp(_ctx.Chs.Rings, 0, MaxRingsScattered); i++)
             {
-                float irt = 360 / Mathf.Clamp(CTX.Chs.Rings, 0, MaxRingsScattered) * i;
+                float irt = 360 / Mathf.Clamp(_ctx.Chs.Rings, 0, MaxRingsScattered) * i;
                 var r = Instantiate(Scatter, transform.position, Quaternion.identity);
 
-                r.GetComponent<ScatterCollectable>().GravityDirection = CTX.Gravity;
+                r.GetComponent<ScatterCollectable>().GravityDirection = _ctx.Gravity;
                 r.GetComponent<Rigidbody>().linearVelocity = Quaternion.Euler(0, irt, 0) * transform.rotation * RingScatterVelocity;
             }
 
-            CTX.Chs.Rings = 0;
+            _ctx.Chs.Rings = 0;
         }
 
         DealtDamage?.Invoke();
@@ -121,11 +120,11 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
 
     public void Death()
     {
-        if (CTX.Death) { return; }
+        if (_ctx.Death) { return; }
 
-        CTX.Death = true;
-        CTX.MachineTransition(PlayerStates.Damage);
-        CTX.Invoke(nameof(CTX.Respawn), 1);
+        _ctx.Death = true;
+        _ctx.MachineTransition(PlayerStates.Damage);
+        _ctx.Invoke(nameof(_ctx.Respawn), 1);
         PlayerDeath?.Invoke();
         DeathEvent.Invoke();
     }

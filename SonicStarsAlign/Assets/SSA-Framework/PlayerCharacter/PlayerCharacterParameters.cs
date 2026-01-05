@@ -111,6 +111,7 @@ public class PlayerCharacterParameters : ScriptableObject
     public float DashBoost;
 
     public float HomingAttackSpeed;
+    public float HomingAttackBounceForce;
 
     [Space]
     [Header("LightDashSpeed")]

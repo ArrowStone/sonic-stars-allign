@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5470945715569637916, guid: 9712ffe11e14e3eae975d20cfdb3f3cf, type: 3}
       propertyPath: m_Name
-      value: OneTimeSFX
+      value: StartSFX
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

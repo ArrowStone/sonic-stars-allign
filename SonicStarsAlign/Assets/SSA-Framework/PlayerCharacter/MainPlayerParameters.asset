@@ -295,6 +295,7 @@ MonoBehaviour:
   DashSpeed: 25
   DashBoost: 15
   HomingAttackSpeed: 75
+  HomingAttackBounceForce: 20
   LightDashSpeed: 100
   RailCollisionBounce: 5
   RailSwitchSpeed: 50

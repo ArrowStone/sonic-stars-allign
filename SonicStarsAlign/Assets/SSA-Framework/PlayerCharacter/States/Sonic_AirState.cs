@@ -72,7 +72,9 @@ public class Sonic_AirState : IState
         AirSwitchConditions();
         _ctx.Physics_ApplyVelocity();
 
-        CheckForWallRun();
+        //CheckForWallRun();
+        // Sorry lajeeth
+
         if(_ctx.doneAirRotation) // The rotation also acts as a ledge grab timeout timer
         {
             CheckForLedgeGrab();

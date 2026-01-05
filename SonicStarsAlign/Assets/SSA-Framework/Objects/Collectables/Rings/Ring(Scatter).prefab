@@ -186,10 +186,10 @@ MonoBehaviour:
   CollectionEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8105107609564456181}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 6496415309630597294}
+        m_TargetAssemblyTypeName: ScatterCollectable, Assembly-CSharp
+        m_MethodName: End
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -220,8 +220,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 16384
-  despawn: 0
-  despawnTime: 15
+  despawn: 1
+  despawnTime: 5
   DespawnEvent:
     m_PersistentCalls:
       m_Calls:

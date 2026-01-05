@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Sonic_HomingAttackState : IState
 {
@@ -46,6 +47,11 @@ public class Sonic_HomingAttackState : IState
     {
         _ctx.ChangeKinematic(false);
         _ctx.Velocity = _vel;
+
+        // Have to wait one frame, enemy hasnt deactivated yet
+        IEnumerator UpthrustDelay() {yield return new WaitForFixedUpdate(); _ctx.Rb.linearVelocity = -_ctx.Gravity * _ctx.Chp.HomingAttackBounceForce;}
+
+        _ctx.StartCoroutine(UpthrustDelay());
     }
 
     private void HomingAttackMovement(float _delta)
