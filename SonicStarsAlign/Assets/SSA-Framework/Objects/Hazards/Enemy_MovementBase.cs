@@ -1,18 +1,6 @@
 using UnityEngine;
 
-public class Enemy_MovementBase : MonoBehaviour
+public interface Enemy_MovementBase
 {
-    public Transform target;
-    private Rigidbody Rb;
-
-    private void Start()
-    {
-        Rb = GetComponent<Rigidbody>();
-    }
-
-    private void FixedUpdate()
-    {
-        transform.LookAt(target);
-        Rb.linearVelocity = transform.forward;
-    }
+    // Uh idk what to put here but I feel obliged to have this interface.
 }
