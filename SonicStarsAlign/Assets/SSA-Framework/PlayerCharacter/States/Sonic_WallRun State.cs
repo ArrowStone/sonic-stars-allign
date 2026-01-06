@@ -44,12 +44,13 @@ public class Sonic_WallRunState : IState
             return;
         }
 
-        // Check if we're still touching a valid wall
-        if (!StillOnWall())
+        // Check if we're still touching a valid wall AND moving at a valid angle
+        if (!StillOnWall() || !HasValidWallRunAngle())
         {
             LeaveWall();
             return;
         }
+
 
         if (_ctx.Input.JumpInput.IsPressed())
         {
@@ -88,15 +89,45 @@ public class Sonic_WallRunState : IState
         return false;
     }
 
+    //Helps fix perpendicular bug
+    private bool HasValidWallRunAngle()
+    {
+        Vector3 velocity = _ctx.Velocity;
 
+        if (velocity.magnitude < _ctx.Chp.WallRunMinSpeed)
+            return false;
+
+        Vector3 velDir = velocity.normalized;
+        float headOnDot = Mathf.Abs(Vector3.Dot(velDir, _ctx.WallRunNormal.normalized));
+
+        // Reject near-perpendicular impacts
+        return headOnDot <= _ctx.Chp.MaxWallHeadOnDot;
+    }
+    private Vector3 GetWallUpDirection()
+    {
+        // Up direction constrained to wall surface
+        return Vector3.ProjectOnPlane(-_ctx.Gravity.normalized, _ctx.WallRunNormal).normalized;
+    }
     private void ApplyPhysics(float dt)
     {
-        // Reduced gravity
-        _ctx.VerticalVelocity += _ctx.Gravity * _ctx.Chp.WallRunGravityScale * dt;
+        // Base slide direction
+        Vector3 wallForward = Vector3.Cross(_ctx.WallRunNormal, -_ctx.Gravity.normalized).normalized;
 
-        // Maintain wall slide direction
-        Vector3 slideDir = Vector3.Cross(_ctx.WallRunNormal, -_ctx.Gravity.normalized).normalized;
-        _ctx.HorizontalVelocity = slideDir * _ctx.Chp.WallRunSpeed;
+        // Wall-aligned up/down direction
+        Vector3 wallUp = GetWallUpDirection();
+
+        // Player vertical input (forward/back stick ignored)
+        float verticalInput = _ctx.Input.VectorMoveInput.z;
+
+        // Add controlled steering
+        Vector3 steerVelocity =
+            wallForward * _ctx.Chp.WallRunSpeed +
+            wallUp * (verticalInput * _ctx.Chp.WallRunVerticalControl);
+
+        _ctx.HorizontalVelocity = steerVelocity;
+
+        // Light gravity so player slowly slides down if idle
+        _ctx.VerticalVelocity += _ctx.Gravity * _ctx.Chp.WallRunGravityScale * dt;
     }
 
     private void DoWallJump()

@@ -150,6 +150,9 @@ public class PlayerCharacterParameters : ScriptableObject
     public float MaxWallRunTime = 2.0f;
     public float MinWallDot = 0.5f; // 0 = flat ground, 1 = vertical
     public float MaxWallGravityDot = 0.2f;
+    public float WallRunMinSpeed = 8f;
+    public float MaxWallHeadOnDot = 0.7f;
+    public float WallRunVerticalControl = 4f; // how much player can steer up/down
 
     [Space]
     [Header("Wall Jump")]
