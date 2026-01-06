@@ -28,7 +28,10 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     [SerializeField] private LayerMask ringLayer;
 
     [SerializeField] private LayerMask railLayer;
+
     [SerializeField] public LayerMask ledgeLayer;
+
+    [SerializeField] public LayerMask wallRunLayer;
     [Space]
     [SerializeField] private float homingDetectionDistance;
 

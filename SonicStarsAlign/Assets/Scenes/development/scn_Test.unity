@@ -11538,6 +11538,9 @@ MonoBehaviour:
   ledgeLayer:
     serializedVersion: 2
     m_Bits: 16384
+  wallRunLayer:
+    serializedVersion: 2
+    m_Bits: 32768
   homingDetectionDistance: 8
   homingDetectionRadius: 15
   lightDetectionDistance: 2

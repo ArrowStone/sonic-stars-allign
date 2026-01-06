@@ -76,18 +76,26 @@ public class Sonic_WallRunState : IState
         RaycastHit hit;
         Vector3 origin = _ctx.Rb.position;
 
-        if (Physics.Raycast(origin, -_ctx.WallRunNormal, out hit, _ctx.Chp.WallAttachCheckDistance))
+        // Use the layer defined in the PlayerStateMachine
+        if (Physics.Raycast(
+            origin,
+            -_ctx.WallRunNormal,
+            out hit,
+            _ctx.Chp.WallAttachCheckDistance,
+            _ctx.wallRunLayer      // <-- reference the layer from the state machine
+        ))
         {
             // Dot against gravity
             float gravityDot = Mathf.Abs(Vector3.Dot(hit.normal.normalized, -_ctx.Gravity.normalized));
 
-            // 0 = perfectly vertical wall
-            // 1 = floor or ceiling
+            // 0 = perfectly vertical wall, 1 = floor/ceiling
             return gravityDot <= _ctx.Chp.MaxWallGravityDot;
         }
 
         return false;
     }
+
+
 
     //Helps fix perpendicular bug
     private bool HasValidWallRunAngle()
