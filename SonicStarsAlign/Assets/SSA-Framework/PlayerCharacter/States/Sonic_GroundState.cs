@@ -125,7 +125,17 @@ public class Sonic_GroundState : IState
     {
         _ctx.GroundNormal = _ctx.GroundCast.HitInfo.normal;
         _ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_ctx.Velocity, _ctx.GroundNormal).normalized * _ctx.Velocity.magnitude;
-        _ctx.Physics_Snap(_ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover);
+
+        Vector3 targetPos = _ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover;
+        Vector3 point0 = targetPos;
+        Vector3 point1 = targetPos;
+        point0 -= _ctx.GroundNormal;
+        point1 += _ctx.GroundNormal;
+        Collider[] colliders = new Collider[5];
+        
+        // Simple point check isn't enough, player can sometimes clip
+        if(Physics.OverlapCapsuleNonAlloc(point0, point1, 0.5f, colliders, _ctx.wallLayer) < 2f) _ctx.Physics_Snap(targetPos);
+        else Debug.Log("Uh oh");
 
         InputRotations();
         GroundRotation(_delta);

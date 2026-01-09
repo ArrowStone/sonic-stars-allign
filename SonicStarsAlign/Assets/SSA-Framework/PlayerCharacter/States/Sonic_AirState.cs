@@ -92,7 +92,7 @@ public class Sonic_AirState : IState
 
     private bool GroundCheck()
     {
-        var _check = _ctx.GroundCast.Execute(_ctx.Rb.worldCenterOfMass, _ctx.Gravity.normalized) || _ctx.GroundCast.Execute(_ctx.Rb.worldCenterOfMass, -_ctx.Gravity.normalized);
+        var _check = _ctx.GroundCast.Execute(_ctx.Rb.worldCenterOfMass, _ctx.Gravity.normalized);
         _groundDetected = _check && Vector3.Dot(_ctx.Velocity, _ctx.GroundCast.HitInfo.normal) <= 0;
 
         if (Vector3.Dot(_ctx.Velocity, -_ctx.Gravity.normalized) > 0)

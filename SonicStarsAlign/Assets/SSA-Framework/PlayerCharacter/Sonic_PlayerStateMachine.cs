@@ -21,7 +21,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     [Header("Collision")]
     [SerializeField] private LayerMask groundLayer;
 
-    [SerializeField] private LayerMask wallLayer;
+    [SerializeField] public LayerMask wallLayer;
 
     [SerializeField] private LayerMask homingTargetLayer;
 
