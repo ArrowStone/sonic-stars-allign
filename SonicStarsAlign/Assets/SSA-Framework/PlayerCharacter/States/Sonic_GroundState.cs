@@ -212,8 +212,8 @@ public class Sonic_GroundState : IState
         _ctx.Skid = false;
 
         _slipState -= _delta;
-        //  _ctx.HorizontalVelocity += _ctx.Chp.SlopeFactor * _delta * Vector3.ProjectOnPlane(_ctx.Gravity, _ctx.GroundNormal);
-        // _ctx.HorizontalVelocity = Vector3.ClampMagnitude(_ctx.HorizontalVelocity, _ctx.Chp.HardSpeedCap);
+        _ctx.HorizontalVelocity += _ctx.Chp.SlopeFactor * _delta * Vector3.ProjectOnPlane(_ctx.Gravity, _ctx.GroundNormal);
+        _ctx.HorizontalVelocity = Vector3.ClampMagnitude(_ctx.HorizontalVelocity, _ctx.Chp.HardSpeedCap);
     }
 
     private void SlopePhysics(float _delta)
@@ -226,9 +226,9 @@ public class Sonic_GroundState : IState
 
     private void InputRotations()
     {
-        _ctx.InputRotation = Mathf.Approximately(Vector3.Angle(_ctx.GroundNormal, _ctx.InputRef.up), 180)
+        /*_ctx.InputRotation = Mathf.Approximately(Vector3.Angle(_ctx.GroundNormal, _ctx.InputRef.up), 180)
             ? Quaternion.FromToRotation(_ctx.InputRotation * Vector3.up, _ctx.GroundNormal) * _ctx.InputRotation
-            : Quaternion.FromToRotation(_ctx.InputRef.up, _ctx.GroundNormal);
+            : Quaternion.FromToRotation(_ctx.InputRef.up, _ctx.GroundNormal);*/
         _ctx.InputRotation = Quaternion.FromToRotation(_ctx.InputRotation * Vector3.up, _ctx.GroundNormal) * _ctx.InputRotation;
 
         Vector3 cameraForward = _ctx.InputRef.forward;
@@ -236,8 +236,7 @@ public class Sonic_GroundState : IState
         float lookBackFactor = _ctx.Input.BackCameraInput.IsPressed() ? -1f : 1f;
         Vector3 targetForward = cameraForward * lookBackFactor;
 
-        //_ctx.CurrentMoveDirection = Vector3.Lerp(_ctx.CurrentMoveDirection, targetForward, Time.deltaTime * _ctx.Chp.LookBackTransitionSpeed);
-        _ctx.CurrentMoveDirection = targetForward;
+        _ctx.CurrentMoveDirection = Vector3.Lerp(_ctx.CurrentMoveDirection, targetForward, Time.deltaTime * _ctx.Chp.LookBackTransitionSpeed);
         _ctx.CurrentMoveDirection = Vector3.ProjectOnPlane(_ctx.CurrentMoveDirection, _ctx.GroundNormal).normalized;
 
         Quaternion adjustedRotation = Quaternion.LookRotation(_ctx.CurrentMoveDirection, _ctx.GroundNormal);

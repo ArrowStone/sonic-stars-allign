@@ -20,6 +20,10 @@ public class SceneSwitcher : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(_scn, LoadSceneMode.Additive);
     }
+    public void DelScene(int _scn)
+    {
+        SceneManager.UnloadSceneAsync(_scn);
+    }
     private void ExitGame()
     {
         // Credit: Unity Docs
@@ -37,5 +41,9 @@ public class SceneSwitcher : MonoBehaviour
     public void LoadCachedScene()
     {
         SwitchScene(cachedScene);
+    }
+    public void AddCachedScene()
+    {
+        AddScene(cachedScene);
     }
 }
