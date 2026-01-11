@@ -70,7 +70,6 @@ public class CamPoint_FollowSpline : MonoBehaviour, ICamPoint
 
     public Quaternion UpdateRotation(float _delta)
     {
-        Debug.Log(TargetSpline.Spline.EvaluateTangent(t) + RotationOffset + " " + _rotation);
         return Quaternion.RotateTowards(_rotation, Quaternion.LookRotation(TargetSpline.Spline.EvaluateTangent(t) + RotationOffset), RotationSmoothTime * _delta);
     }
 

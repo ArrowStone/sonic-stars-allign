@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class Sonic_GroundState : IState
@@ -6,10 +7,11 @@ public class Sonic_GroundState : IState
     private readonly Sonic_PlayerStateMachine _ctx;
     private bool _groundDetected;
     private float _slipState;
-
+    private Cast_Ray SecondaryGroundCast;
     public Sonic_GroundState(Sonic_PlayerStateMachine _machine)
     {
         _ctx = _machine;
+        SecondaryGroundCast = new Cast_Ray(5f, _ctx.groundLayer);
     }
 
     public void EnterState()
@@ -135,7 +137,6 @@ public class Sonic_GroundState : IState
         
         // Simple point check isn't enough, player can sometimes clip
         if(Physics.OverlapCapsuleNonAlloc(point0, point1, 0.5f, colliders, _ctx.wallLayer) < 2f) _ctx.Physics_Snap(targetPos);
-        else Debug.Log("Uh oh");
 
         InputRotations();
         GroundRotation(_delta);
@@ -156,7 +157,38 @@ public class Sonic_GroundState : IState
         _ctx.PlayerDirection = _ctx.InputVector.magnitude > 0 ? _ctx.InputVector : _ctx.PlayerDirection;// I tried to rotate the input vector but gave up
         Vector3 normal = _ctx.GroundCast.HitInfo.normal;
         _ctx.PlayerDirection = Vector3.ProjectOnPlane(_ctx.PlayerDirection, normal);
-        _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundCast.HitInfo.normal);
+
+        float groundDistance = _ctx.GroundCast.HitInfo.distance;
+
+        bool frontRaySuccess = SecondaryGroundCast.Execute(_ctx.transform.position - _ctx.Gravity + _ctx.PlayerDirection * 1f, -normal);
+        Debug.DrawRay(SecondaryGroundCast.HitInfo.point, SecondaryGroundCast.HitInfo.normal, Color.black, _delta);
+        float frontGroundDeviation = groundDistance - SecondaryGroundCast.HitInfo.distance;
+        Vector3 frontGroundNormal = SecondaryGroundCast.HitInfo.normal;
+        if(FrameworkUtility.IsApproximate(frontGroundNormal, normal, 0.001f)) {frontRaySuccess = false;} // Check for ledges or such
+
+        bool backRaySuccess = SecondaryGroundCast.Execute(_ctx.transform.position - _ctx.Gravity - _ctx.PlayerDirection * 1f, -normal);
+        Debug.DrawRay(SecondaryGroundCast.HitInfo.point, SecondaryGroundCast.HitInfo.normal, Color.black, _delta);
+        float backGroundDeviation = groundDistance - SecondaryGroundCast.HitInfo.distance;
+        Vector3 backGroundNormal = SecondaryGroundCast.HitInfo.normal;
+        if(FrameworkUtility.IsApproximate(backGroundNormal, normal, 0.001f)) {backRaySuccess = false;} // Check for ledges or such
+
+        // Turn the player slightly depending if the ground in front is going up or down
+        if (frontRaySuccess) 
+        {
+            frontGroundDeviation = Math.Abs(Math.Clamp(frontGroundDeviation, -1f, 1f));
+            Debug.Log("FGD: " + frontGroundDeviation);
+            normal += frontGroundNormal * frontGroundDeviation;
+        }
+        if(backRaySuccess)
+        {
+            backGroundDeviation = Math.Abs(Math.Clamp(backGroundDeviation, -1f, 1f));
+            Debug.Log("BGD: " + backGroundDeviation);
+            normal += backGroundNormal * backGroundDeviation;
+        }
+        normal.Normalize();
+
+        //Also smoothen rotation
+        _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, Vector3.Lerp(_ctx.transform.up, normal, _delta * 10f));
     }
 
     private void Movement(float _delta)

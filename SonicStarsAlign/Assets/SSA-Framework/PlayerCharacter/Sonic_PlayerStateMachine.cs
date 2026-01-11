@@ -19,7 +19,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public AnimationCurve LedgeGrabVelocityDecrease;
 
     [Header("Collision")]
-    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] public LayerMask groundLayer;
 
     [SerializeField] public LayerMask wallLayer;
 
