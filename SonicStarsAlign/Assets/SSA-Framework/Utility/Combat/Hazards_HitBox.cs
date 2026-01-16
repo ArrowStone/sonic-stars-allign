@@ -15,7 +15,7 @@ public class Hazards_HitBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Damaged))
+        if (isActiveAndEnabled && other.TryGetComponent(out Damaged))
         {
             switch (KnockbackApplication)
             {
