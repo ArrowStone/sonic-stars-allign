@@ -1,0 +1,78 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+public class StageSelector : MonoBehaviour
+{
+    [System.Serializable]
+    public class Stage
+    {
+        public string displayName; // optional for debug/logging
+        public int sceneIndex;     // scene build index
+        public Sprite preview;     // thumbnail image
+        public Sprite nameSprite;  // stage name image
+    }
+
+    [Header("Stages Setup")]
+    public Stage[] stages;
+
+    [Header("UI References")]
+    public Image stagePreview;     // UI Image for stage thumbnail
+    public Image stageNameImage;   // UI Image for stage name graphic
+
+    private int currentIndex = 0;
+
+    void Start()
+    {
+        if (stages.Length == 0)
+        {
+            Debug.LogWarning("No stages set up in StageSelector!");
+            return;
+        }
+        UpdateStageUI();
+    }
+
+    // Cycle to the next stage
+    public void NextStage()
+    {
+        if (stages.Length == 0) return;
+
+        currentIndex = (currentIndex + 1) % stages.Length;
+        UpdateStageUI();
+    }
+
+    // Cycle to the previous stage
+    public void PreviousStage()
+    {
+        if (stages.Length == 0) return;
+
+        currentIndex--;
+        if (currentIndex < 0)
+            currentIndex = stages.Length - 1;
+
+        UpdateStageUI();
+    }
+
+    // Updates the UI with the currently selected stage
+    void UpdateStageUI()
+    {
+        Stage current = stages[currentIndex];
+
+        // Update stage preview
+        if (stagePreview != null && current.preview != null)
+            stagePreview.sprite = current.preview;
+
+        // Update stage name image
+        if (stageNameImage != null && current.nameSprite != null)
+            stageNameImage.sprite = current.nameSprite;
+
+        // Optional: debug log
+        Debug.Log("Selected Stage: " + current.displayName + " (SceneIndex: " + current.sceneIndex + ")");
+    }
+
+    // Returns the currently selected scene index
+    public int GetSelectedSceneIndex()
+    {
+        if (stages.Length == 0) return -1;
+        return stages[currentIndex].sceneIndex;
+    }
+}
