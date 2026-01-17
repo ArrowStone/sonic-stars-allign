@@ -52,6 +52,9 @@ public class Movement_Gunner : MonoBehaviour, Enemy_MovementBase
                 shootTimer = shootInterval;
 
                 Vector3 rotationVector = Vector3.ProjectOnPlane(target.position - BulletSpawn.position, Vector3.Cross(transform.forward, transform.up));
+
+                if(Vector3.Angle(transform.forward, rotationVector) > 45) return;
+                
                 rotationVector += new Vector3(RandomNumberGenerator.GetInt32(-5, 5), RandomNumberGenerator.GetInt32(-5, 5), RandomNumberGenerator.GetInt32(-5, 5)) * 0.1f;
                 Quaternion bulletRotation = Quaternion.LookRotation(rotationVector);
                 bulletRotation.Normalize();

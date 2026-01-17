@@ -236,6 +236,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public void Respawn()
     {
         transform.SetPositionAndRotation(Chs.SpawnData.Position, Chs.SpawnData.Rotation);
+        Death = false;
         MachineTransition(PlayerStates.Ground);
     }
 

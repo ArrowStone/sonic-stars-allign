@@ -300,10 +300,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e83f7b48d7433449b7497f8cb651ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 999
+  Damage: 9
   HitEvent:
     m_PersistentCalls:
-      m_Calls: []
-  Knockback: {x: 0, y: 0, z: 0}
+      m_Calls:
+      - m_Target: {fileID: 1882496191196914429}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  Knockback: {x: 0, y: 10, z: -10}
   KnockbackApplication: 1
-  Strength: 0
+  Strength: 1
