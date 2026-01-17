@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3245003096477270316}
   - component: {fileID: -1791102717251816936}
   - component: {fileID: 7043602656773760620}
+  - component: {fileID: 4884870874636132681}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -177,6 +178,19 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &4884870874636132681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882496191196914429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7fdf7ddbcfe866c5a98f90b2283c36f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 2
 --- !u!1 &4361594239971693630
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,10 +318,10 @@ MonoBehaviour:
   HitEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1882496191196914429}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 4884870874636132681}
+        m_TargetAssemblyTypeName: TimerDespawn, Assembly-CSharp
+        m_MethodName: Despawn
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

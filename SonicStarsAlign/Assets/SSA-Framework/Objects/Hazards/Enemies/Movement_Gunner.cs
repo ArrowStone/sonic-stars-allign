@@ -42,8 +42,8 @@ public class Movement_Gunner : MonoBehaviour, Enemy_MovementBase
 
         detector.Execute(transform.position, Vector3.forward);
         if(detector.TargetDetected) target = detector.TargetOutput.transform;
-        // The spere doesn't detect player if they're too close for some reason
-        else if (target && Vector3.Distance(target.position, transform.position) < detectionDistance) target = null;
+        // The sphere doesn't detect player if they're too close for some reason
+        else if (target && Vector3.Distance(target.position, transform.position) > detectionDistance) target = null;
 
         if (target)
         {
