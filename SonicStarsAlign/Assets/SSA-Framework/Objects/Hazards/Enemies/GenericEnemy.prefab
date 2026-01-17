@@ -70,7 +70,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6886115211697191214}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 2919345b7bc38d92fa34993eb307bb77, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -105,6 +105,7 @@ MonoBehaviour:
     m_Bits: 16384
   detectionDistance: 10
   movementSpeed: 10
+  rotationSpeed: 0
 --- !u!1 &8166191998289444350
 GameObject:
   m_ObjectHideFlags: 0

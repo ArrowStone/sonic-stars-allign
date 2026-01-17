@@ -8,6 +8,7 @@ public class Movement_Gunner : MonoBehaviour, Enemy_MovementBase
     public LayerMask targetLayer;
     public LayerMask detectionBlockingMask;
     public float detectionDistance;
+    public float dashDistance;
     private Overlap_Sphere detector;
     private Quaternion targetRotation;
     public float movementSpeed;
@@ -30,12 +31,19 @@ public class Movement_Gunner : MonoBehaviour, Enemy_MovementBase
         shootCounter = 0;
     }
 
+    void Dash()
+    {
+        Rb.linearVelocity = movementSpeed * transform.forward;
+    }
+
     void FixedUpdate()
     {
         float _delta = Time.fixedDeltaTime;
 
         detector.Execute(transform.position, Vector3.forward);
-        if(detector.TargetDetected) target = detector.TargetOutput.transform; else target = null;
+        if(detector.TargetDetected) target = detector.TargetOutput.transform;
+        // The spere doesn't detect player if they're too close for some reason
+        else if (target && Vector3.Distance(target.position, transform.position) < detectionDistance) target = null;
 
         if (target)
         {
@@ -43,9 +51,6 @@ public class Movement_Gunner : MonoBehaviour, Enemy_MovementBase
             targetLookPos.y = transform.position.y;
             targetRotation = Quaternion.LookRotation((targetLookPos - transform.position).normalized);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, _delta * rotationSpeed);
-            //Debug.Log();
-            //Debug.DrawRay(transform.position, transform.forward * 10f, Color.red, _delta);
-            //Rb.linearVelocity = movementSpeed * Mathf.Max(0f, 1f - Quaternion.Angle(targetRotation, transform.rotation) * 0.02f) * transform.forward;
             shootTimer -= _delta;
             if(shootTimer <= 0)
             {
@@ -54,7 +59,7 @@ public class Movement_Gunner : MonoBehaviour, Enemy_MovementBase
                 Vector3 rotationVector = Vector3.ProjectOnPlane(target.position - BulletSpawn.position, Vector3.Cross(transform.forward, transform.up));
 
                 if(Vector3.Angle(transform.forward, rotationVector) > 45) return;
-                
+
                 rotationVector += new Vector3(RandomNumberGenerator.GetInt32(-5, 5), RandomNumberGenerator.GetInt32(-5, 5), RandomNumberGenerator.GetInt32(-5, 5)) * 0.1f;
                 Quaternion bulletRotation = Quaternion.LookRotation(rotationVector);
                 bulletRotation.Normalize();
@@ -67,6 +72,7 @@ public class Movement_Gunner : MonoBehaviour, Enemy_MovementBase
                 {
                     shootTimer = shootDelay;
                     shootCounter = 0;
+                    if(Vector3.Distance(target.position, transform.position) < dashDistance) Dash();
                 }
 
                 source.Play();

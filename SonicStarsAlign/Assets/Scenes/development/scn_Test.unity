@@ -19415,7 +19415,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   detectionDistance: 50
-  movementSpeed: 0
+  dashDistance: 20
+  movementSpeed: 20
   rotationSpeed: 2
   shootInterval: 0.1
   shootCount: 10
