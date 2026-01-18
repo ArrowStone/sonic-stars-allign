@@ -578,7 +578,7 @@ MonoBehaviour:
   detectionBlockingMask:
     serializedVersion: 2
     m_Bits: 0
-  detectionDistance: 50
+  detectionDistance: 30
   dashDistance: 20
   movementSpeed: 20
   rotationSpeed: 2
