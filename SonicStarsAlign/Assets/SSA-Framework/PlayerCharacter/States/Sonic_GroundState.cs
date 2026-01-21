@@ -176,13 +176,11 @@ public class Sonic_GroundState : IState
         if (frontRaySuccess) 
         {
             frontGroundDeviation = Math.Abs(Math.Clamp(frontGroundDeviation, -1f, 1f));
-            Debug.Log("FGD: " + frontGroundDeviation);
             normal += frontGroundNormal * frontGroundDeviation;
         }
         if(backRaySuccess)
         {
             backGroundDeviation = Math.Abs(Math.Clamp(backGroundDeviation, -1f, 1f));
-            Debug.Log("BGD: " + backGroundDeviation);
             normal += backGroundNormal * backGroundDeviation;
         }
         normal.Normalize();

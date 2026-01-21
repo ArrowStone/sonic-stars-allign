@@ -40,7 +40,13 @@ public class Sonic_RollState : IState
 
     public void UpdateState()
     {
-        float _delta = Time.deltaTime;
+        //float _delta = Time.deltaTime;
+    }
+
+    public void FixedUpdateState()
+    {
+        float _delta = Time.fixedDeltaTime;
+
         if (!GroundCheck())
         {
             AirSwitchConditions();
@@ -53,11 +59,6 @@ public class Sonic_RollState : IState
 
         GroundSwitchConditions();
         _ctx.Physics_ApplyVelocity();
-    }
-
-    public void FixedUpdateState()
-    {
-        float _delta = Time.fixedDeltaTime;
     }
 
     public void LateUpdateState()
@@ -98,7 +99,7 @@ public class Sonic_RollState : IState
             _ctx.PlayerDirection = Vector3.RotateTowards(_ctx.PlayerDirection, _ctx.HorizontalVelocity.normalized, _turnStrength, 0);
         }
 
-        _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundCast.HitInfo.normal);
+        _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, Vector3.Lerp(_ctx.transform.up, _ctx.GroundCast.HitInfo.normal, _delta * 10f));
     }
 
     private void Movement(float _delta)
