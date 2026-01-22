@@ -152,8 +152,8 @@ MonoBehaviour:
   GravityForce: 45.9375
   FallVelCap: 30
   MinGroundStickSpeed: 6.25
-  MaxGroundDeviation: 45
-  SlopeFactor: 15
+  MaxGroundDeviation: 30
+  SlopeFactor: 50
   SlopeFactorRoll: 9.375
   SlopeFactorRollDown: 37.5
   RailSlopeInfluence: 15
@@ -317,6 +317,10 @@ MonoBehaviour:
   WallJumpStrength: 18
   MaxWallRunTime: 2
   MinWallDot: 0.5
+  MaxWallGravityDot: 0.2
+  WallRunMinSpeed: 8
+  MaxWallHeadOnDot: 0.7
+  WallRunVerticalControl: 4
   WallJumpMaxCharge: 1
   WallJumpMinStrength: 10
   WallJumpMaxStrength: 25
