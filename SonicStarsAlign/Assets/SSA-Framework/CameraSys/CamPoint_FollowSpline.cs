@@ -13,7 +13,8 @@ public class CamPoint_FollowSpline : MonoBehaviour, ICamPoint
     private Rigidbody targetRb;
 
     public SplineContainer TargetSpline;
-    public float followOffset;
+    public float FollowDistance; // Offset in units
+    private float followOffset; // Offset in relation to total length
     public float3 RotationOffset;
 
     [Space]
@@ -41,6 +42,8 @@ public class CamPoint_FollowSpline : MonoBehaviour, ICamPoint
         _position = _brain.CashedTransform.Position;
         _rotation = _brain.CashedTransform.Rotation;
         _cashedTargetPosition = Target.position;
+
+        followOffset = -FollowDistance / TargetSpline.Spline.GetLength();
     }
 
     public void Execute(float _delta)

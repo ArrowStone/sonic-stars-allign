@@ -65,7 +65,7 @@ public class CamPoint_Pan : MonoBehaviour, ICamPoint
 
     public Quaternion UpdateRotation(float _delta)
     {
-        return Quaternion.RotateTowards(_rotation, Quaternion.LookRotation(_cashedTargetPosition - _position), RotationSmoothTime * _delta);
+        return Quaternion.Lerp(_rotation, Quaternion.LookRotation(_cashedTargetPosition - _position), RotationSmoothTime * _delta);
     }
 
     #endregion AdditionalFunctions

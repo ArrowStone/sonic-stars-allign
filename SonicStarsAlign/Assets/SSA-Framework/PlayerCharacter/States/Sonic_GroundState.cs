@@ -132,12 +132,13 @@ public class Sonic_GroundState : IState
         Vector3 targetPos = _ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover;
         Vector3 point0 = targetPos;
         Vector3 point1 = targetPos;
-        point0 -= _ctx.GroundNormal;
-        point1 += _ctx.GroundNormal;
+        point0 -= _ctx.GroundNormal * 0.45f;
+        point1 += _ctx.GroundNormal * 0.45f;
         Collider[] colliders = new Collider[5];
         
         // Simple point check isn't enough, player can sometimes clip
-        if(Physics.OverlapCapsuleNonAlloc(point0, point1, 0.5f, colliders, _ctx.wallLayer) < 2f) _ctx.Physics_Snap(targetPos);
+        if(Physics.OverlapCapsuleNonAlloc(point0, point1, 0.25f, colliders, _ctx.wallLayer) < 2f) _ctx.Physics_Snap(targetPos);
+        else Debug.Log("!!!");
         
         //Debug.Log(_ctx.movementLockTimer);
 
@@ -172,6 +173,13 @@ public class Sonic_GroundState : IState
         _ctx.PlayerDirection = _ctx.InputVector.magnitude > 0 ? _ctx.InputVector : _ctx.PlayerDirection;// I tried to rotate the input vector but gave up
         Vector3 normal = _ctx.GroundCast.HitInfo.normal;
         _ctx.PlayerDirection = Vector3.ProjectOnPlane(_ctx.PlayerDirection, normal);
+
+        // Smoothing looks bad in a loop, disabling it there
+        if(_ctx.movementLockTimer > 0f)
+        {
+            _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, normal);
+            return;
+        }
 
         float groundDistance = _ctx.GroundCast.HitInfo.distance;
 
