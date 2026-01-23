@@ -10,6 +10,8 @@ public class Automation_DashPanel : MonoBehaviour, IAutomation
     [Space]
     public bool Set;
 
+    public float movementLockTime;
+
     public UnityEvent InteractionEvent;
 
     public PosRot Execute(Sonic_PlayerStateMachine _ctx)
@@ -23,6 +25,7 @@ public class Automation_DashPanel : MonoBehaviour, IAutomation
         {
             _ctx.GroundNormal = _ctx.GroundCast.HitInfo.normal;
             _ctx.MachineTransition(PlayerStates.Ground);
+            _ctx.movementLockTimer = movementLockTime;
         }
         else
         {

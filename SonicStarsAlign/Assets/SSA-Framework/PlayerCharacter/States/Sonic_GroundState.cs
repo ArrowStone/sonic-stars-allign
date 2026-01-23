@@ -100,6 +100,7 @@ public class Sonic_GroundState : IState
 
     public void ExitState()
     {
+        _ctx.movementLockTimer = 0f;
     }
 
     #region Util
@@ -137,8 +138,22 @@ public class Sonic_GroundState : IState
         
         // Simple point check isn't enough, player can sometimes clip
         if(Physics.OverlapCapsuleNonAlloc(point0, point1, 0.5f, colliders, _ctx.wallLayer) < 2f) _ctx.Physics_Snap(targetPos);
+        
+        //Debug.Log(_ctx.movementLockTimer);
 
-        InputRotations();
+        // Locking movement after a dash panel if needed
+        if(_ctx.movementLockTimer > 0f)
+        {
+            _ctx.movementLockTimer -= _delta;
+            _ctx.PlayerDirection = Vector3.ProjectOnPlane(_ctx.PlayerDirection, _ctx.GroundNormal).normalized;
+            _ctx.InputVector = _ctx.PlayerDirection;
+        }
+        else
+        {
+            InputRotations();
+        }
+
+
         GroundRotation(_delta);
     }
 

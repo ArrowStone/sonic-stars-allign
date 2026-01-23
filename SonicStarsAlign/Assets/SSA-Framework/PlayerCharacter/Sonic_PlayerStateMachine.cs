@@ -107,6 +107,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public Overlap_Sphere HomingTargetDetector { get; private set; }
     public Overlap_Sphere RailDetectorL { get; private set; }
     public Overlap_Sphere RailDetectorR { get; private set; }
+    public float movementLockTimer;
 
     #endregion Util
 

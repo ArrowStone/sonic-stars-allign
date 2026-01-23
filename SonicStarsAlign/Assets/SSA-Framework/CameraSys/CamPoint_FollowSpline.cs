@@ -10,6 +10,7 @@ public class CamPoint_FollowSpline : MonoBehaviour, ICamPoint
     [Space]
     [Header("Parameters")]
     public Transform Target;
+    private Rigidbody targetRb;
 
     public SplineContainer TargetSpline;
     public float followOffset;
@@ -35,6 +36,7 @@ public class CamPoint_FollowSpline : MonoBehaviour, ICamPoint
 
     public void OnEnter(CamBrain _brain)
     {
+        targetRb = Target.GetComponent<Rigidbody>();
         Brain = _brain;
         _position = _brain.CashedTransform.Position;
         _rotation = _brain.CashedTransform.Rotation;
@@ -61,7 +63,7 @@ public class CamPoint_FollowSpline : MonoBehaviour, ICamPoint
 
     public Vector3 UpdatePosition(float _delta)
     {
-        SplineUtility.GetNearestPoint(TargetSpline.Spline, TargetSpline.transform.worldToLocalMatrix.MultiplyPoint(Target.position), out nearest, out t);
+        SplineUtility.GetNearestPoint(TargetSpline.Spline, TargetSpline.transform.worldToLocalMatrix.MultiplyPoint(targetRb.position), out nearest, out t);
         t += followOffset;
         Vector3 output = TargetSpline.Spline.EvaluatePosition(t);
         output = TargetSpline.transform.localToWorldMatrix.MultiplyPoint(output);

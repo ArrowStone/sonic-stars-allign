@@ -10,6 +10,7 @@ public class CamPoint_Pan : MonoBehaviour, ICamPoint
     public Transform Target;
 
     public Transform PointTransform;
+    private Rigidbody targetRb;
 
     [Space]
     public float RotationSmoothTime = 0.2f;
@@ -34,13 +35,15 @@ public class CamPoint_Pan : MonoBehaviour, ICamPoint
         _position = _brain.CashedTransform.Position;
         _rotation = _brain.CashedTransform.Rotation;
         _cashedTargetPosition = Target.position;
+
+        targetRb = Target.GetComponent<Rigidbody>();
     }
 
     public void Execute(float _delta)
     {
         if (Target != null)
         {
-            _cashedTargetPosition = Target.position;
+            _cashedTargetPosition = targetRb.position;
         }
 
         _position = UpdatePosition(_delta);
