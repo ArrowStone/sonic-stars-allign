@@ -4,7 +4,7 @@ Shader "UI/AlphaMask_Strength"
     {
         _MainTex ("Main Texture", 2D) = "white" {}
         _MaskTex ("Mask Texture", 2D) = "white" {}
-        _Strength ("Mask Strength", Range(0,2)) = 1.5
+        _Strength ("Mask Strength", Range(0,2)) = 2
     }
 
     SubShader
