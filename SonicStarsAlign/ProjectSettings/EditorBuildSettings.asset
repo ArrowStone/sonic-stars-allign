@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/development/scn_Test.unity
     guid: dee0401f82bea4c47a882ba6dd017e90
+  - enabled: 1
+    path: Assets/Scenes/development/scn_TitleCard.unity
+    guid: 544074a648980af4c9ee719c12585566
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: fee0eb38ce4dedfe1a80e98a13ec6dd6, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: e6916219fffbbda4cad5a0223d4c4dd3, type: 3}

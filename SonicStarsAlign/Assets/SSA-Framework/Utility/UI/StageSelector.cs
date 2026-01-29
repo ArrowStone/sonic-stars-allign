@@ -10,6 +10,7 @@ public class StageSelector : MonoBehaviour
         public int sceneIndex;     // scene build index
         public Sprite preview;     // thumbnail image
         public Sprite nameSprite;  // stage name image
+        public Sprite loadingName; //loading name image
     }
 
     [Header("Stages Setup")]
@@ -20,6 +21,21 @@ public class StageSelector : MonoBehaviour
     public Image stageNameImage;   // UI Image for stage name graphic
 
     private int currentIndex = 0;
+
+    public static StageSelector Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -68,11 +84,18 @@ public class StageSelector : MonoBehaviour
         // Optional: debug log
         Debug.Log("Selected Stage: " + current.displayName + " (SceneIndex: " + current.sceneIndex + ")");
     }
-
-    // Returns the currently selected scene index
-    public int GetSelectedSceneIndex()
+    public Stage GetSelectedStage()
     {
-        if (stages.Length == 0) return -1;
-        return stages[currentIndex].sceneIndex;
+        if (stages.Length == 0) return null;
+        return stages[currentIndex];
+    }
+    public Stage GetStageByDisplayName(string displayName)
+    {
+        foreach (var stage in stages)
+        {
+            if (stage.displayName == displayName)
+                return stage;
+        }
+        return null;
     }
 }

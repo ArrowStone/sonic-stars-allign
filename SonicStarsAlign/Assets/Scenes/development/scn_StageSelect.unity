@@ -1622,7 +1622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selector: {fileID: 701154771}
-  switcher: {fileID: 2115179567}
+  loadingScreenSceneIndex: 5
 --- !u!1 &505922680
 GameObject:
   m_ObjectHideFlags: 0
@@ -1789,7 +1789,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &649917937
 Transform:
   m_ObjectHideFlags: 0
@@ -1799,11 +1799,11 @@ Transform:
   m_GameObject: {fileID: 649917936}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -155.90173, y: 192.02101, z: -133.49597}
-  m_LocalScale: {x: 2.1476512, y: 2.1476512, z: 2.1476512}
+  m_LocalPosition: {x: 374.40826, y: 314.70978, z: -62.15906}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1930084648}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &649917938
 MonoBehaviour:
@@ -1818,7 +1818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selector: {fileID: 701154771}
-  switcher: {fileID: 2115179567}
+  loadingScreenSceneIndex: 5
 --- !u!1 &697973197
 GameObject:
   m_ObjectHideFlags: 0
@@ -1981,11 +1981,11 @@ Transform:
   m_GameObject: {fileID: 701154769}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -155.90173, y: 192.02101, z: -133.49597}
-  m_LocalScale: {x: 2.1476512, y: 2.1476512, z: 2.1476512}
+  m_LocalPosition: {x: 374.40826, y: 314.70978, z: -62.15906}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1930084648}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &701154771
 MonoBehaviour:
@@ -2000,14 +2000,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stages:
-  - displayName: Test 1
+  - displayName: Test
     sceneIndex: 4
     preview: {fileID: 21300000, guid: 3b6f040763cb85e4b917498567771ab4, type: 3}
     nameSprite: {fileID: 21300000, guid: 77620f086dd78f94eb1f3a5d4483d00d, type: 3}
+    loadingName: {fileID: 21300000, guid: 8d56004b0549a00428ac534f2b7bf0b1, type: 3}
   - displayName: Neo
     sceneIndex: 0
     preview: {fileID: 21300000, guid: 8c2994e0ecf1cc54a8adfd38e5324ff4, type: 3}
     nameSprite: {fileID: 21300000, guid: ca2db0eb84e501547a637c43ac656156, type: 3}
+    loadingName: {fileID: 21300000, guid: 9f0ffec337860fd4bb3f4ff909548265, type: 3}
   stagePreview: {fileID: 46039372}
   stageNameImage: {fileID: 1495192438}
 --- !u!1 &707851222
@@ -4209,9 +4211,6 @@ RectTransform:
   - {fileID: 1425429155}
   - {fileID: 1829868461}
   - {fileID: 186046199}
-  - {fileID: 701154770}
-  - {fileID: 2115179566}
-  - {fileID: 649917937}
   - {fileID: 46039371}
   - {fileID: 953129963}
   - {fileID: 1495192437}
@@ -4628,11 +4627,11 @@ Transform:
   m_GameObject: {fileID: 2115179565}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -155.90173, y: 192.02101, z: -133.49597}
-  m_LocalScale: {x: 2.1476512, y: 2.1476512, z: 2.1476512}
+  m_LocalPosition: {x: 374.40826, y: 314.70978, z: -62.15906}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1930084648}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2115179567
 MonoBehaviour:
@@ -4651,4 +4650,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1518892027}
+  - {fileID: 701154770}
+  - {fileID: 2115179566}
+  - {fileID: 649917937}
   - {fileID: 1930084648}

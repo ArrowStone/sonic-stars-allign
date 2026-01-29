@@ -3,9 +3,26 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    private int cachedScene = 0;
+    //private int cachedScene = 0;
 
-    public void SwitchScene(int _scn)
+    public static SceneSwitcher Instance;
+
+    private string cachedStageDisplayName;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // this keeps it alive across scenes
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    /*public void SwitchScene(int _scn)
     {
         if (_scn < 0)
         {
@@ -45,5 +62,23 @@ public class SceneSwitcher : MonoBehaviour
     public void AddCachedScene()
     {
         AddScene(cachedScene);
+    }
+    public int GetCachedScene()
+    {
+        return cachedScene;
+    }
+    */
+    public void CacheStage(string displayName)
+    {
+        cachedStageDisplayName = displayName;
+    }
+
+    public string GetCachedStage()
+    {
+        return cachedStageDisplayName;
+    }
+    public void SwitchScene(int sceneIndex)
+    {
+        SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Single);
     }
 }
