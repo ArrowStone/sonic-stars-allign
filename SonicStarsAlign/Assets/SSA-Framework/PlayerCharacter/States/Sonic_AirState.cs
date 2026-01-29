@@ -335,9 +335,9 @@ public class Sonic_AirState : IState
             return;
         }
         Debug.DrawRay(hit.point, hit.normal, Color.yellow, 1f);
-        Debug.Log(Vector3.Dot(-_ctx.Gravity.normalized, hit.normal));
+
         //If the ledge is too steep, we can't grab it
-        if (Vector3.Dot(-_ctx.Gravity.normalized, hit.normal) < 0.9f)
+        if (Vector3.Angle(-_ctx.Gravity.normalized, hit.normal) > FrameworkUtility.FloorAngle)
         {
             return;
         }
