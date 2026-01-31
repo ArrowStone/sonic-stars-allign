@@ -110,7 +110,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
             // Screw joystick simulation we're going full SRB2
             //_inputValues = Vector2.ClampMagnitude(Brain.Input.CameraInput.ReadValue<Vector2>(), 1);
             _joystickInputValues = Brain.Input.CameraInputValues;
-            _mouseInputValues = Mouse.current.delta.ReadValue(); // Have to do this so mouse input gets processed every dynamic update
+            _mouseInputValues = Vector2.Lerp(_mouseInputValues, Brain.Input.MouseInput.ReadValue<Vector2>(), SmoothRotationSpeed * _delta);
             
             // Idk why x and y values are swapped but i dont wanna fix it
             _rot.y += _joystickInputValues.x * JoystickSensitivity.x * _delta;
@@ -125,7 +125,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
     public Quaternion UpdateRotation(float _delta)
     {
         // Dunno why its here but it messes with using the mouse for rotation so it goes in the trash
-        //return Quaternion.RotateTowards(_rotation, Quaternion.LookRotation(Target.position - _position), SmoothRotationSpeed * _delta);
+        //return Quaternion.RotateTowards(_rotation, Quaternion.LookRotation(Target.transform.position - _position), SmoothRotationSpeed * _delta);
         return Quaternion.LookRotation(Target.transform.position - _position);
     }
 

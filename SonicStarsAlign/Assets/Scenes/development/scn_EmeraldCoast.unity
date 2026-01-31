@@ -2751,9 +2751,9 @@ MonoBehaviour:
   YLimits:
     x: -65
     y: 65
-  MouseSensitivity: {x: 0.5, y: 0.5}
+  MouseSensitivity: {x: 0.1, y: 0.1}
   JoystickSensitivity: {x: 200, y: 150}
-  SmoothRotationSpeed: 0.2
+  SmoothRotationSpeed: 30
   MovementSmoothing: 0
   CameraRecenteringWait: 0
   YAxisRecenteringSpeed: 2
@@ -14463,10 +14463,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -4.8973753e-23
       objectReference: {fileID: 0}
-    - target: {fileID: -7483265010278249696, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
-      propertyPath: m_SkinnedMotionVectors
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -7420498298150109540, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -10.886258
@@ -14550,10 +14546,6 @@ PrefabInstance:
     - target: {fileID: -7091493363429997264, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 30.588211
-      objectReference: {fileID: 0}
-    - target: {fileID: -7088474374832380201, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
-      propertyPath: m_SkinnedMotionVectors
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7018631307132293359, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -15107,10 +15099,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -17.190882
       objectReference: {fileID: 0}
-    - target: {fileID: -3488063919645288440, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
-      propertyPath: m_SkinnedMotionVectors
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -3444517468239145272, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 4.9658333e-24
@@ -15166,10 +15154,6 @@ PrefabInstance:
     - target: {fileID: -3257397789900227401, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.00000058146725
-      objectReference: {fileID: 0}
-    - target: {fileID: -3113173035779163274, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
-      propertyPath: m_SkinnedMotionVectors
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3056789082122302814, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -15659,10 +15643,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 5.7771797
       objectReference: {fileID: 0}
-    - target: {fileID: -386103457053647884, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
-      propertyPath: m_SkinnedMotionVectors
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -258862850530690652, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -1.7185358
@@ -15946,10 +15926,6 @@ PrefabInstance:
     - target: {fileID: 960969945669747209, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 3.6150665
-      objectReference: {fileID: 0}
-    - target: {fileID: 967350827082908250, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
-      propertyPath: m_SkinnedMotionVectors
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1080835565697941043, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -16267,10 +16243,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.0000026178036
       objectReference: {fileID: 0}
-    - target: {fileID: 2593773767004990388, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
-      propertyPath: m_SkinnedMotionVectors
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2619746057282616114, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -1.0615402
@@ -16546,10 +16518,6 @@ PrefabInstance:
     - target: {fileID: 3362659695061047118, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.000002507375
-      objectReference: {fileID: 0}
-    - target: {fileID: 3371799292369573962, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
-      propertyPath: m_SkinnedMotionVectors
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3418108703013640110, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -17115,10 +17083,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.0004267305
       objectReference: {fileID: 0}
-    - target: {fileID: 5792130531311840555, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
-      propertyPath: m_SkinnedMotionVectors
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5829189392691625795, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
@@ -17130,10 +17094,6 @@ PrefabInstance:
     - target: {fileID: 5829189392691625795, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.3904334e-22
-      objectReference: {fileID: 0}
-    - target: {fileID: 5850920790951036997, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
-      propertyPath: m_SkinnedMotionVectors
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5983291847854073231, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -17351,10 +17311,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -119.26947
       objectReference: {fileID: 0}
-    - target: {fileID: 6935220366169093129, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
-      propertyPath: m_SkinnedMotionVectors
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6950144440331902053, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 13.326861
@@ -17474,10 +17430,6 @@ PrefabInstance:
     - target: {fileID: 7331462130351921526, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -27.966843
-      objectReference: {fileID: 0}
-    - target: {fileID: 7344903683660237254, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
-      propertyPath: m_SkinnedMotionVectors
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7394519055457946475, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -17719,10 +17671,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 2.388746e-12
       objectReference: {fileID: 0}
-    - target: {fileID: 8228634047246195999, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
-      propertyPath: m_SkinnedMotionVectors
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8377340445677033331, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0.0000007214278
@@ -17806,10 +17754,6 @@ PrefabInstance:
     - target: {fileID: 8667248088824404166, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.000013918908
-      objectReference: {fileID: 0}
-    - target: {fileID: 8675546736064911763, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
-      propertyPath: m_SkinnedMotionVectors
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8697472265654595853, guid: 44ff296ed879f24238c276fde5a9020e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

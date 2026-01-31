@@ -66,7 +66,7 @@ public class CamPoint_FollowSpline : MonoBehaviour, ICamPoint
 
     public Vector3 UpdatePosition(float _delta)
     {
-        SplineUtility.GetNearestPoint(TargetSpline.Spline, TargetSpline.transform.worldToLocalMatrix.MultiplyPoint(targetRb.position), out nearest, out t);
+        SplineUtility.GetNearestPoint(TargetSpline.Spline, TargetSpline.transform.worldToLocalMatrix.MultiplyPoint(targetRb.transform.position), out nearest, out t);
         t += followOffset;
         Vector3 output = TargetSpline.Spline.EvaluatePosition(t);
         output = TargetSpline.transform.localToWorldMatrix.MultiplyPoint(output);
