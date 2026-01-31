@@ -88,7 +88,7 @@ public class Sonic_WallJumpState : IState
     private bool StillTouchingWall()
     {
         RaycastHit hit;
-        Vector3 origin = _ctx.Rb.position;
+        Vector3 origin = _ctx.Rb.transform.position;
 
         if (Physics.Raycast(origin, -_ctx.WallRunNormal, out hit, _ctx.Chp.WallAttachCheckDistance))
         {

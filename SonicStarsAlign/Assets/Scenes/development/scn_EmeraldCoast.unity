@@ -363,15 +363,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4095706529206318758, guid: cf0f1f974929b7646b166c407a9566b5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 36.57
+      value: 36.173
       objectReference: {fileID: 0}
     - target: {fileID: 4095706529206318758, guid: cf0f1f974929b7646b166c407a9566b5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.471138
+      value: 8.595
       objectReference: {fileID: 0}
     - target: {fileID: 4095706529206318758, guid: cf0f1f974929b7646b166c407a9566b5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 182.68
+      value: 182.978
       objectReference: {fileID: 0}
     - target: {fileID: 4095706529206318758, guid: cf0f1f974929b7646b166c407a9566b5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4074,7 +4074,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -4554,7 +4554,7 @@ MonoBehaviour:
     x: 0
     y: 0
     z: 0
-  RotationSmoothTime: 1000
+  RotationSmoothTime: 200
   RecenteringWait: 1
   RecenteringSpeed: 500
 --- !u!64 &628446328
@@ -5995,7 +5995,7 @@ MonoBehaviour:
   Brain: {fileID: 0}
   Target: {fileID: 948741068}
   PointTransform: {fileID: 1538083776}
-  RotationSmoothTime: 1000
+  RotationSmoothTime: 10
   RecenteringWait: 1
   RecenteringSpeed: 500
 --- !u!64 &816455884
@@ -6591,7 +6591,7 @@ MonoBehaviour:
   Brain: {fileID: 0}
   Target: {fileID: 948741068}
   PointTransform: {fileID: 904939899}
-  RotationSmoothTime: 1000
+  RotationSmoothTime: 10
   RecenteringWait: 1
   RecenteringSpeed: 500
 --- !u!64 &899891977
@@ -7069,7 +7069,7 @@ MonoBehaviour:
   Brain: {fileID: 0}
   Target: {fileID: 948741068}
   PointTransform: {fileID: 112610358}
-  RotationSmoothTime: 1000
+  RotationSmoothTime: 5
   RecenteringWait: 1
   RecenteringSpeed: 500
 --- !u!1 &948741067
@@ -8640,15 +8640,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4095706529206318758, guid: cf0f1f974929b7646b166c407a9566b5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 36.57
+      value: 36.173
       objectReference: {fileID: 0}
     - target: {fileID: 4095706529206318758, guid: cf0f1f974929b7646b166c407a9566b5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.471138
+      value: 8.595
       objectReference: {fileID: 0}
     - target: {fileID: 4095706529206318758, guid: cf0f1f974929b7646b166c407a9566b5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 179.68
+      value: 179.978
       objectReference: {fileID: 0}
     - target: {fileID: 4095706529206318758, guid: cf0f1f974929b7646b166c407a9566b5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10457,12 +10457,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1342682792}
   m_Layer: 0
-  m_Name: TestCamTRigger
+  m_Name: TestCamTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1342682792
 Transform:
   m_ObjectHideFlags: 0
@@ -25601,7 +25601,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1

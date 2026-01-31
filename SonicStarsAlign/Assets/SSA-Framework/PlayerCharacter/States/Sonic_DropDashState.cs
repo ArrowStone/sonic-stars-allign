@@ -82,7 +82,7 @@ public class Sonic_DropDashState : IState
 
     private bool GroundCheck()
     {
-        _groundDetected = _ctx.GroundCast.Execute(_ctx.Rb.position, -_ctx.Gravity);
+        _groundDetected = _ctx.GroundCast.Execute(_ctx.Rb.transform.position, -_ctx.Gravity);
         return _groundDetected && Vector3.Angle(_ctx.GroundCast.HitInfo.normal, -_ctx.Gravity) <= _ctx.Chp.MaxGroundDeviation;
     }
 

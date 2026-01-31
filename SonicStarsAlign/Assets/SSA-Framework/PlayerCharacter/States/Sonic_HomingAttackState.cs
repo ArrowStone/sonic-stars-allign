@@ -18,7 +18,7 @@ public class Sonic_HomingAttackState : IState
         _ctx.ChangeKinematic(true);
 
         _targetPos = _ctx.HomingTargetDetector.TargetOutput.transform.position;
-        _difference = _targetPos - _ctx.Rb.position;
+        _difference = _targetPos - _ctx.Rb.transform.position;
     }
 
     public void UpdateState()
@@ -57,7 +57,7 @@ public class Sonic_HomingAttackState : IState
     private void HomingAttackMovement(float _delta)
     {
         _vel = _ctx.Chp.HomingAttackSpeed * _difference.normalized;
-        _ctx.Physics_Snap(_ctx.Rb.position + Vector3.ClampMagnitude(_vel * _delta, _difference.magnitude));
+        _ctx.Physics_Snap(_ctx.Rb.transform.position + Vector3.ClampMagnitude(_vel * _delta, _difference.magnitude));
     }
 
     private void HomingAttackRotation()
@@ -68,7 +68,7 @@ public class Sonic_HomingAttackState : IState
 
     private bool ContinueHomingAttacking()
     {
-        _difference = _targetPos - _ctx.Rb.position;
+        _difference = _targetPos - _ctx.Rb.transform.position;
         if (_difference.magnitude <= _ctx.Rb.sleepThreshold)
         {
             return false;

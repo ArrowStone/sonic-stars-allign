@@ -14,7 +14,7 @@ public class Automation_DashPanel_Rail : MonoBehaviour, IAutomation
     public PosRot Execute(Sonic_PlayerStateMachine _ctx)
     {
         float _vel = Set || _ctx.SplnHandler.SpeedMultiplier < Force ? Force : _ctx.SplnHandler.SpeedMultiplier;
-        SplineRef.Execute(_ctx, _ctx.Rb.position);
+        SplineRef.Execute(_ctx, _ctx.Rb.transform.position);
         _ctx.SplnHandler.SpeedMultiplier = _vel;
 
         PosRot _transfrm = new()

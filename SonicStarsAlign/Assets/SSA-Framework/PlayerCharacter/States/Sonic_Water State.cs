@@ -77,7 +77,7 @@ public class Sonic_WaterState : IState
         // Exit if no longer submerged
         if (!_ctx.IsInWater())
         {
-            if (_ctx.GroundCast.Execute(_ctx.Rb.position, -_ctx.GroundNormal))
+            if (_ctx.GroundCast.Execute(_ctx.Rb.transform.position, -_ctx.GroundNormal))
             {
                 _ctx.MachineTransition(PlayerStates.Ground);
             }
@@ -97,7 +97,7 @@ public class Sonic_WaterState : IState
         // Exit if moving fast enough to "run on water"
         if (_ctx.HorizontalVelocity.magnitude >= _ctx.Chp.WaterRunThreshold)
         {
-            if (_ctx.GroundCast.Execute(_ctx.Rb.position, -_ctx.GroundNormal))
+            if (_ctx.GroundCast.Execute(_ctx.Rb.transform.position, -_ctx.GroundNormal))
             {
                 _ctx.MachineTransition(PlayerStates.Ground);
             }

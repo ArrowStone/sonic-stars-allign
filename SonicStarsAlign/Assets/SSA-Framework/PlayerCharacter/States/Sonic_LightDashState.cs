@@ -50,7 +50,7 @@ public class Sonic_LightDashState : IState
     private void LightDashMovement(float _delta)
     {
         _vel = _difference.normalized * _ctx.Chp.LightDashSpeed;
-        _ctx.Physics_Snap(_ctx.Rb.position + Vector3.ClampMagnitude(_vel * _delta, _difference.magnitude));
+        _ctx.Physics_Snap(_ctx.Rb.transform.position + Vector3.ClampMagnitude(_vel * _delta, _difference.magnitude));
     }
 
     private void LightDashRotation()
@@ -61,12 +61,12 @@ public class Sonic_LightDashState : IState
 
     private bool ContinueLightDashing()
     {
-        _difference = _targetPos - _ctx.Rb.position;
+        _difference = _targetPos - _ctx.Rb.transform.position;
 
         if (_ctx.RingDetector.TargetOutput == null || _difference.magnitude <= _ctx.Rb.sleepThreshold)
         {
             _ctx.RingCheck();
-            if (_ctx.RingDetector.TargetOutput == null || Vector3.Dot(_ctx.RingDetector.TargetOutput.transform.position - _ctx.Rb.position, _vel.normalized) <= 0)
+            if (_ctx.RingDetector.TargetOutput == null || Vector3.Dot(_ctx.RingDetector.TargetOutput.transform.position - _ctx.Rb.transform.position, _vel.normalized) <= 0)
             {
                 return false;
             }
@@ -74,7 +74,7 @@ public class Sonic_LightDashState : IState
         }
         
         _targetPos = _ctx.RingDetector.TargetOutput.transform.position;
-        _difference = _targetPos - _ctx.Rb.position;
+        _difference = _targetPos - _ctx.Rb.transform.position;
 
         return true;
     }

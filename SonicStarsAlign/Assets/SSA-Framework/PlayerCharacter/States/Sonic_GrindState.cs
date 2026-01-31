@@ -102,7 +102,7 @@ public class Sonic_GrindState : IState
         }
         if (!_ctx.SplnHandler.Active)
         {
-            if (_ctx.GroundCast.Execute(_ctx.transform.position, -_ctx.GroundNormal))
+            if (_ctx.GroundCast.Execute(_ctx.Rb.transform.position, -_ctx.GroundNormal))
             {
                 _ctx.MachineTransition(PlayerStates.Ground);
                 return;
@@ -145,7 +145,7 @@ public class Sonic_GrindState : IState
 
         //_ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_vel, _ctx.GroundNormal);
         _pos = _ctx.SplnHandler.NewPosition();
-        _difference = _pos - _ctx.Rb.position;
+        _difference = _pos - _ctx.Rb.transform.position;
     }
 
     private void Rotation()

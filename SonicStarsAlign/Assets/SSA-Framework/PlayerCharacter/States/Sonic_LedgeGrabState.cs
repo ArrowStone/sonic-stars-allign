@@ -31,7 +31,7 @@ public class Sonic_LedgeGrabState : IState
             Vector3 displacement = _ctx.ledgeGrabReleaseDisplacement;
             displacement.x *= _ctx.transform.forward.x;
             displacement.z *= _ctx.transform.forward.z;
-            _ctx.transform.position += displacement;
+            _ctx.Rb.transform.position += displacement;
 
             if(_ctx.ledgeGrabInitialVelocity.y < 0) // If players was going down, we need for them to go up after releasing the grab
             {

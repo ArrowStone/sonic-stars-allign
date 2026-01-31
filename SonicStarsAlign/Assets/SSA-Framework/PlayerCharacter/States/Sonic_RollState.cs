@@ -73,7 +73,7 @@ public class Sonic_RollState : IState
 
     private bool GroundCheck()
     {
-        _groundDetected = _ctx.GroundCast.Execute(_ctx.Rb.position, -_ctx.GroundNormal);
+        _groundDetected = _ctx.GroundCast.Execute(_ctx.Rb.transform.position, -_ctx.GroundNormal);
         return _groundDetected && Vector3.Angle(_ctx.GroundCast.HitInfo.normal, _ctx.GroundNormal) <= _ctx.Chp.MaxGroundDeviation;
     }
 
@@ -99,7 +99,7 @@ public class Sonic_RollState : IState
             _ctx.PlayerDirection = Vector3.RotateTowards(_ctx.PlayerDirection, _ctx.HorizontalVelocity.normalized, _turnStrength, 0);
         }
 
-        _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, Vector3.Lerp(_ctx.transform.up, _ctx.GroundCast.HitInfo.normal, _delta * 10f));
+        _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, Vector3.Lerp(_ctx.transform.up, _ctx.GroundCast.HitInfo.normal, 0.1f));
     }
 
     private void Movement(float _delta)

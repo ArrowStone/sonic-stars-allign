@@ -53,7 +53,7 @@ public class Sonic_LinearAutomationState : IState
 
     private void Movement(float _delta)
     {
-        _vel = (_pos - _ctx.Rb.position) / _delta;
+        _vel = (_pos - _ctx.Rb.transform.position) / _delta;
 
         _ctx.Physics_Snap(_pos);
         _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundNormal);

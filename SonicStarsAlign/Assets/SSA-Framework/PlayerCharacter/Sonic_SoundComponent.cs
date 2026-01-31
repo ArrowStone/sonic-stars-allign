@@ -46,7 +46,7 @@ public class Sonic_SoundComponent : MonoBehaviour
     }
     public void PlayFootstep()
     {
-        if(_ctx.GroundCast.Execute(_ctx.Rb.position, -_ctx.GroundNormal))
+        if(_ctx.GroundCast.Execute(_ctx.Rb.transform.position, -_ctx.GroundNormal))
         {
             PlayRandom(concreteFootsteps);
         }

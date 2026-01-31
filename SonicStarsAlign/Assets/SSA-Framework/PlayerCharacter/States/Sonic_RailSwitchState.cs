@@ -65,7 +65,7 @@ public class Sonic_RailSwitchState : IState
     private void RailSwitchMovement(float _delta)
     {
         _currPos = Vector3.Lerp(_startPos, _targetPos, _time / _duration);
-        //_vel = (_currPos - _ctx.Rb.position) / Time.fixedDeltaTime;
+        //_vel = (_currPos - _ctx.Rb.transform.position) / Time.fixedDeltaTime;
         _ctx.Physics_Snap(_currPos);
     }
 
@@ -77,7 +77,7 @@ public class Sonic_RailSwitchState : IState
 
     private bool ContinueRailSwitch()
     {
-        _difference = _targetPos - _ctx.Rb.position;
+        _difference = _targetPos - _ctx.Rb.transform.position;
         if (_difference.magnitude <= _ctx.Rb.sleepThreshold)
         {
             return false;
@@ -90,14 +90,14 @@ public class Sonic_RailSwitchState : IState
         _ctx.ChangeKinematic(false);
         _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity);
         _ctx.Physics_ApplyVelocity();
-        _ctx.SplnHandler.SwitchDir.Execute(_ctx, _ctx.transform.position);
+        _ctx.SplnHandler.SwitchDir.Execute(_ctx, _ctx.Rb.transform.position);
     }
 
     private void Setup()
     {
         SplineContainer spl = _ctx.SplnHandler.SwitchDir.RefSpline;
         _trgtlength = spl.CalculateLength();
-        _startPos = _ctx.Rb.position;
+        _startPos = _ctx.Rb.transform.position;
 
         _ = SplineUtility.GetNearestPoint(spl.Spline, spl.transform.InverseTransformPoint(_startPos), out _, out _nearestTime, 10, 4);
         if (_nearestTime < 0)

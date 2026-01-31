@@ -37,7 +37,7 @@ public class Automation_DashPanel : MonoBehaviour, IAutomation
 
         PosRot _transfrm = new()
         {
-            Position = _ctx.Rb.position,
+            Position = _ctx.Rb.transform.position,
             Rotation = Quaternion.LookRotation(_ctx.PlayerDirection, _ctx.GroundNormal)
         };
         return _transfrm;

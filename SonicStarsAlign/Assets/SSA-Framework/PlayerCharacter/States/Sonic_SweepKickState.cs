@@ -64,8 +64,8 @@ public class Sonic_SweepKickState : IState
     {
         _hasHit = true;
 
-        // Overlap sphere forward from Sonic’s position
-        Vector3 kickOrigin = _ctx.Rb.position + _ctx.PlayerDirection * 1f;
+        // Overlap sphere forward from Sonicï¿½s position
+        Vector3 kickOrigin = _ctx.Rb.transform.position + _ctx.PlayerDirection * 1f;
         Collider[] hits = Physics.OverlapSphere(kickOrigin, _kickDamageRadius);
 
         foreach (var hit in hits)

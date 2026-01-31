@@ -47,8 +47,7 @@ public class Sonic_AirState : IState
 
     public void UpdateState()
     {
-        float _delta = Time.deltaTime;
-        RotateTowardVertical(_delta);
+        //float _delta = Time.deltaTime;
     }
 
     public void FixedUpdateState()
@@ -67,6 +66,7 @@ public class Sonic_AirState : IState
         AirApplication(_delta);
         Gravity(_delta);
         Movement(_delta);
+        RotateTowardVertical(_delta);
         DropDashCalculations(_delta);
 
         AirSwitchConditions();
@@ -285,7 +285,7 @@ public class Sonic_AirState : IState
         RaycastHit hit;
 
         // Raycast forward from Sonic
-        Vector3 origin = _ctx.Rb.position;
+        Vector3 origin = _ctx.Rb.transform.position;
         Vector3 dir = _ctx.PlayerDirection.normalized;
 
         if (Physics.Raycast(origin, dir, out hit, _ctx.Chp.WallAttachCheckDistance))
@@ -373,7 +373,7 @@ public class Sonic_AirState : IState
         endPosition += displacement;
 
         //_ctx.Physics_Snap(endPosition); // Set the position
-        _ctx.transform.position = endPosition;
+        _ctx.Rb.transform.position = endPosition;
         
         _ctx.MachineTransition(PlayerStates.LedgeGrab); // Change state
     }
@@ -387,7 +387,7 @@ public class Sonic_AirState : IState
         }
         if(!_ctx.doneAirRotation)
         {
-            //Debug.Log("Moving!");
+            Debug.Log("Moving!");
             _ctx.fakeNormal = Vector3.Slerp(_ctx.fakeNormal, -_ctx.Gravity.normalized, delta * _ctx.airRotationSpeed);
             _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.fakeNormal);
         }

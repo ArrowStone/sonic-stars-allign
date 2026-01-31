@@ -63,7 +63,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
     {
         if (Target != null)
         {
-            _cashedTargetPosition = Target.position;
+            _cashedTargetPosition = Target.transform.position;
         }
         if (Brain.Input != null)
         {
@@ -126,7 +126,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
     {
         // Dunno why its here but it messes with using the mouse for rotation so it goes in the trash
         //return Quaternion.RotateTowards(_rotation, Quaternion.LookRotation(Target.position - _position), SmoothRotationSpeed * _delta);
-        return Quaternion.LookRotation(Target.position - _position);
+        return Quaternion.LookRotation(Target.transform.position - _position);
     }
 
     public Vector3 UpdatePosition(float _delta)

@@ -74,7 +74,7 @@ public class Sonic_WallRunState : IState
     private bool StillOnWall()
     {
         RaycastHit hit;
-        Vector3 origin = _ctx.Rb.position;
+        Vector3 origin = _ctx.Rb.transform.position;
 
         // Use the layer defined in the PlayerStateMachine
         if (Physics.Raycast(

@@ -107,7 +107,7 @@ public class Sonic_GroundState : IState
 
     private bool GroundCheck()
     {
-        _groundDetected = _ctx.GroundCast.Execute(_ctx.Rb.position, -_ctx.GroundNormal);
+        _groundDetected = _ctx.GroundCast.Execute(_ctx.Rb.transform.position, -_ctx.GroundNormal);
         return _groundDetected && Vector3.Angle(_ctx.GroundCast.HitInfo.normal, _ctx.GroundNormal) <= _ctx.Chp.MaxGroundDeviation;
     }
 
@@ -138,7 +138,6 @@ public class Sonic_GroundState : IState
         
         // Simple point check isn't enough, player can sometimes clip
         if(Physics.OverlapCapsuleNonAlloc(point0, point1, 0.25f, colliders, _ctx.wallLayer) < 2f) _ctx.Physics_Snap(targetPos);
-        else Debug.Log("!!!");
         
         //Debug.Log(_ctx.movementLockTimer);
 
@@ -181,15 +180,15 @@ public class Sonic_GroundState : IState
             return;
         }
 
-        float groundDistance = _ctx.GroundCast.HitInfo.distance;
+        /*float groundDistance = _ctx.GroundCast.HitInfo.distance;
 
-        bool frontRaySuccess = SecondaryGroundCast.Execute(_ctx.transform.position - _ctx.Gravity + _ctx.PlayerDirection * 1f, -normal);
+        bool frontRaySuccess = SecondaryGroundCast.Execute(_ctx.Rb.transform.position - _ctx.Gravity + _ctx.PlayerDirection * 1f, -normal);
         Debug.DrawRay(SecondaryGroundCast.HitInfo.point, SecondaryGroundCast.HitInfo.normal, Color.black, _delta);
         float frontGroundDeviation = groundDistance - SecondaryGroundCast.HitInfo.distance;
         Vector3 frontGroundNormal = SecondaryGroundCast.HitInfo.normal;
         if(FrameworkUtility.IsApproximate(frontGroundNormal, normal, 0.001f)) {frontRaySuccess = false;} // Check for ledges or such
 
-        bool backRaySuccess = SecondaryGroundCast.Execute(_ctx.transform.position - _ctx.Gravity - _ctx.PlayerDirection * 1f, -normal);
+        bool backRaySuccess = SecondaryGroundCast.Execute(_ctx.Rb.transform.position - _ctx.Gravity - _ctx.PlayerDirection * 1f, -normal);
         Debug.DrawRay(SecondaryGroundCast.HitInfo.point, SecondaryGroundCast.HitInfo.normal, Color.black, _delta);
         float backGroundDeviation = groundDistance - SecondaryGroundCast.HitInfo.distance;
         Vector3 backGroundNormal = SecondaryGroundCast.HitInfo.normal;
@@ -206,10 +205,10 @@ public class Sonic_GroundState : IState
             backGroundDeviation = Math.Abs(Math.Clamp(backGroundDeviation, -1f, 1f));
             normal += backGroundNormal * backGroundDeviation;
         }
-        normal.Normalize();
+        normal.Normalize();*/
 
         //Also smoothen rotation
-        _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, Vector3.Lerp(_ctx.transform.up, normal, _delta * 10f));
+        _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, Vector3.Lerp(_ctx.transform.up, normal, 0.1f));
     }
 
     private void Movement(float _delta)

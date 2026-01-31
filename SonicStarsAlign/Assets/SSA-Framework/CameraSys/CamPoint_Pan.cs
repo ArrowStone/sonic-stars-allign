@@ -43,7 +43,7 @@ public class CamPoint_Pan : MonoBehaviour, ICamPoint
     {
         if (Target != null)
         {
-            _cashedTargetPosition = targetRb.position;
+            _cashedTargetPosition = targetRb.transform.position;
         }
 
         _position = UpdatePosition(_delta);

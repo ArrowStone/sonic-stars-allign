@@ -25,7 +25,7 @@ public class Automation_GrindRail : MonoBehaviour
     {
         if (collision.TryGetComponent(out Sonic_PlayerStateMachine _target))
         {
-            Execute(_target, _target.Rb.position);
+            Execute(_target, _target.transform.position);
         }
     }
 

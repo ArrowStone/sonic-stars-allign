@@ -256,7 +256,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     public bool Physics_Sweep(Vector3 _point, out RaycastHit Info)
     {
-        Vector3 _dif = _point - Rb.position;
+        Vector3 _dif = _point - transform.position;
         return Rb.SweepTest(_dif, out Info, _dif.magnitude, QueryTriggerInteraction.Ignore) && Info.transform.gameObject.layer == wallLayer;
     }
 
@@ -270,10 +270,10 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     public void Physics_Snap(Vector3 _point, float _time)
     {
-        Vector3 _v = Vector3.Lerp(Rb.position, _point, _time);
+        Vector3 _v = Vector3.Lerp(transform.position, _point, _time);
         if (!Physics_Sweep(_v, out _))
         {
-            Rb.position = _v;
+            transform.position = _v;
         }
     }
 
@@ -328,7 +328,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         if (_cl.TryGetComponent(out Automation_GrindRail _gr))
         {
             TriggerBuffer = _cl;
-            _gr.Execute(this, Rb.position);
+            _gr.Execute(this, transform.position);
             return;
         }
     }
@@ -470,7 +470,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
             _inWater = false;
 
             // Safely return to Air if moving, Ground if landed
-            if (GroundCast.Execute(Rb.position, -GroundNormal))
+            if (GroundCast.Execute(transform.position, -GroundNormal))
             {
                 MachineTransition(PlayerStates.Ground);
             }
