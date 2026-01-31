@@ -2755,9 +2755,9 @@ MonoBehaviour:
   JoystickSensitivity: {x: 200, y: 150}
   SmoothRotationSpeed: 30
   MovementSmoothing: 0
-  CameraRecenteringWait: 0
-  YAxisRecenteringSpeed: 2
-  XAxisRecenteringSpeed: 0
+  CameraRecenteringWait: 1
+  YAxisRecenteringSpeed: 10
+  XAxisRecenteringSpeed: 1
   BackCameraSpeed: 10
 --- !u!64 &319963746
 MeshCollider:

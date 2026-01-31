@@ -2922,11 +2922,11 @@ MonoBehaviour:
     y: 65
   MouseSensitivity: {x: 0.5, y: 0.5}
   JoystickSensitivity: {x: 200, y: 150}
-  SmoothRotationSpeed: 0.2
+  SmoothRotationSpeed: 30
   MovementSmoothing: 0
-  CameraRecenteringWait: 0
-  YAxisRecenteringSpeed: 2
-  XAxisRecenteringSpeed: 0
+  CameraRecenteringWait: 1
+  YAxisRecenteringSpeed: 10
+  XAxisRecenteringSpeed: 2
   BackCameraSpeed: 10
 --- !u!1 &323259932
 GameObject:

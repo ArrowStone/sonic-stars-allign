@@ -256,7 +256,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  BounceSpeed: 30
+  BounceSpeed: 40
   MaxBounceSpeed: 75
   BounceFactor:
     serializedVersion: 2
