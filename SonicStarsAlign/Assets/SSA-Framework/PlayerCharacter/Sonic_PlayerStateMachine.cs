@@ -4,8 +4,10 @@ using UnityEngine;
 public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 {
     public InputComponent Input;
+	
     public Transform InputRef;
     public Rigidbody Rb;
+	public Animator Anim;
     public CapsuleCollider Cl;
     public Panel_Collider TriggerCl;
     public PlayerCharacterParameters Chp;

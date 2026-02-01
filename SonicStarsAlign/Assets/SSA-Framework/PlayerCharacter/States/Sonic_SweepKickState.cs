@@ -23,6 +23,8 @@ public class Sonic_SweepKickState : IState
         _kickTimer = 0f;
         _hasHit = false;
 
+		_ctx.Anim.SetTrigger("Kick");
+
         // lock input for the move
         _ctx.HorizontalVelocity = _ctx.PlayerDirection * Mathf.Max(_ctx.HorizontalVelocity.magnitude, _ctx.Chp.BaseSpeed);
         _ctx.VerticalVelocity = Vector3.zero;
@@ -43,6 +45,7 @@ public class Sonic_SweepKickState : IState
         // end the move
         if (_kickTimer >= _kickDuration)
         {
+			
             _ctx.MachineTransition(PlayerStates.Ground);
         }
     }

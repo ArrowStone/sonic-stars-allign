@@ -15,31 +15,40 @@ public class Sonic_GroundState : IState
     }
 
     public void EnterState()
-    {
-        #region Misc
+	{
+		#region Misc
 
-        _groundDetected = true;
+		_groundDetected = true;
 
-        #endregion Misc
+		#endregion Misc
 
-        #region Collision
+		#region Collision
 
-        _ctx.GroundNormal = _ctx.GroundCast.HitInfo.normal;
-        _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundCast.HitInfo.normal);
-        _ctx.Physics_Snap(_ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover);
+		if (_ctx.GroundCast.Execute(_ctx.Rb.position, -_ctx.GroundNormal))
+		{
+			_ctx.GroundNormal = _ctx.GroundCast.HitInfo.normal;
 
-        #endregion Collision
+			Vector3 targetPos =_ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover;
 
-        #region Velocity
+			_ctx.Rb.position = Vector3.Lerp(_ctx.Rb.position,targetPos,0.5f);
+		}
 
-        _ctx.VerticalVelocity = Vector3.zero;
-        _ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_ctx.Velocity, _ctx.GroundCast.HitInfo.normal);
-        _ctx.Physics_ApplyVelocity();
+		_ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundNormal);
 
-        InputRotations();
+		#endregion Collision
 
-        #endregion Velocity
-    }
+		#region Velocity
+
+		_ctx.VerticalVelocity = Vector3.zero;
+		_ctx.HorizontalVelocity =
+			Vector3.ProjectOnPlane(_ctx.Velocity, _ctx.GroundNormal);
+
+		_ctx.Physics_ApplyVelocity();
+
+		InputRotations();
+
+		#endregion Velocity
+	}
 
     public void UpdateState()
     {
