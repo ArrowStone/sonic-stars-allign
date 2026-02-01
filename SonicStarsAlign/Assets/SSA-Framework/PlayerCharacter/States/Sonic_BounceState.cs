@@ -18,6 +18,8 @@ public class Sonic_BounceState : IState
         _groundDetected = false;
         _ddchargeTime = 0;
 
+		_ctx.Anim.SetInteger("State", 1);
+
         #endregion Misc
 
         #region Collision

@@ -34,6 +34,7 @@ public class Sonic_GroundState : IState
 		}
 
 		_ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundNormal);
+		_ctx.Anim.SetInteger("State", 0);
 
 		#endregion Collision
 
@@ -320,14 +321,17 @@ public class Sonic_GroundState : IState
         if (_ctx.Input.CrouchInput.WasPressedThisFrame() && _ctx.HorizontalVelocity.magnitude > _ctx.Chp.MinRollSpeed)
         {
             _ctx.MachineTransition(PlayerStates.Roll);
+			_ctx.Snd.PlaySound(_ctx.Snd.rollSound);
         }
 
         if (_ctx.Input.JumpInput.WasPressedThisFrame())
         {
+			_ctx.Anim.SetInteger("State", 1);
             _ctx.Jump();
         }
         if (_ctx.Input.SweepInput.WasPressedThisFrame() && _ctx.HorizontalVelocity.magnitude > _ctx.Chp.RunSpeedThreshold)
         {
+			_ctx.Snd.PlaySound(_ctx.Snd.slideSound);
             _ctx.MachineTransition(PlayerStates.SweepKick);
             return;
         }

@@ -13,6 +13,7 @@ public class Sonic_SoundComponent : MonoBehaviour
     public AudioClip rollSound;
     public AudioClip bounceSound;
     public AudioClip lightDashSound;
+	public AudioClip slideSound;
 
     [Header ("Movement")]
     public AudioClip railGrindSound;
