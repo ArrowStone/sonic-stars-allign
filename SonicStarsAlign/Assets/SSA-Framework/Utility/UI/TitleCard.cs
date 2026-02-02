@@ -1,13 +1,16 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 using System.Collections;
 
 public class TitleCard : MonoBehaviour
 {
     //public Image stagePreview;
     public Image stageNameImage;
-    public float delaySeconds = 3f;
+
+    public TMP_Text loadingText;
+    public float minDisplayTime = 1.5f; // ensures loading screen shows briefly
 
     void Start()
     {
@@ -41,15 +44,36 @@ public class TitleCard : MonoBehaviour
         //if (stagePreview != null && stage.preview != null) stagePreview.sprite = stage.preview;
         if (stageNameImage != null && stage.loadingName != null) stageNameImage.sprite = stage.loadingName;
 
-        // Wait for a few seconds
-        yield return new WaitForSeconds(delaySeconds);
+        AsyncOperation op = SceneManager.LoadSceneAsync(stage.sceneIndex);
+        op.allowSceneActivation = false;
 
-        // Load the stage scene
-        Debug.Log("Loading scene: " + stage.sceneIndex + " (" + stage.displayName + ")");
-        AsyncOperation op = SceneManager.LoadSceneAsync(stage.sceneIndex, LoadSceneMode.Single);
-        op.allowSceneActivation = true;
+        float elapsedTime = 0f;
+        float displayedProgress = 0f;
 
         while (!op.isDone)
+        {
+            elapsedTime += Time.deltaTime;
+
+            float targetProgress = Mathf.Clamp01(op.progress / 0.9f);
+            displayedProgress = Mathf.MoveTowards(
+                displayedProgress,
+                targetProgress,
+                Time.deltaTime * 0.5f // speed of increase
+            );
+
+            int percent = Mathf.RoundToInt(displayedProgress * 100f);
+
+            if (loadingText != null)
+                loadingText.text = $"Loading {percent}%";
+
+            if (displayedProgress >= 1f && elapsedTime >= minDisplayTime)
+            {
+                loadingText.text = "Loading 100%";
+                yield return new WaitForSeconds(0.25f);
+                op.allowSceneActivation = true;
+            }
+
             yield return null;
+        }
     }
 }
