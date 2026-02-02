@@ -409,7 +409,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     public void Jump()
     {
-        Snd.PlaySound(Snd.jumpSound);
+        Snd.PlaySound("Jump");
+		Snd.PlaySound("JumpVoiceLine");
 
         VerticalVelocity += GroundNormal * Chp.JumpForce;
         Physics_ApplyVelocity();

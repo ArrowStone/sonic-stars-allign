@@ -315,13 +315,15 @@ public class Sonic_GroundState : IState
         if (_ctx.Input.CrouchInput.IsPressed() && _ctx.Input.JumpInput.WasPressedThisFrame())
         {
             _ctx.MachineTransition(PlayerStates.Spindash);
+			_ctx.Snd.PlaySound("Jump");
+        
             return;
         }
 
         if (_ctx.Input.CrouchInput.WasPressedThisFrame() && _ctx.HorizontalVelocity.magnitude > _ctx.Chp.MinRollSpeed)
         {
             _ctx.MachineTransition(PlayerStates.Roll);
-			_ctx.Snd.PlaySound(_ctx.Snd.rollSound);
+			_ctx.Snd.PlaySound("Roll");
         }
 
         if (_ctx.Input.JumpInput.WasPressedThisFrame())
@@ -331,7 +333,6 @@ public class Sonic_GroundState : IState
         }
         if (_ctx.Input.SweepInput.WasPressedThisFrame() && _ctx.HorizontalVelocity.magnitude > _ctx.Chp.RunSpeedThreshold)
         {
-			_ctx.Snd.PlaySound(_ctx.Snd.slideSound);
             _ctx.MachineTransition(PlayerStates.SweepKick);
             return;
         }

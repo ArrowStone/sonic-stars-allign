@@ -22,7 +22,7 @@ public class Footsteps : StateMachineBehaviour
         if(stateInfo.normalizedTime > lastStepTime + firstStepTime)
         {
             lastStepTime += 1/stepNumber;
-            _ctx.Snd.PlayFootstep();
+           // _ctx.Snd.PlayFootstep();
             
         }
     }

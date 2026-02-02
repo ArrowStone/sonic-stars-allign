@@ -1,19 +1,30 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
-// Handles the player characters' sounds. Mainly exists because I want to keep all the sound clip references in one place.
+/*Changed this bit to make it easier to add new sounds in the inspector
+ 
+ To add a sound just make an entry in Sounds or CommonSounds, give it a name, 
+ sound clip (can be multiple for variation) and an audiomixer.
+ to call it simply do _ctx.Snd.PlaySound("YourSoundName");
+
+ */ 
+
 public class Sonic_SoundComponent : MonoBehaviour
 {
     private Sonic_PlayerStateMachine _ctx;
-    [SerializeField] public AudioSource audioSource;
 
-    // Automation sounds are stored in the automation objects because I cant be bothered.
-    [Header ("Moves")]
-    public AudioClip jumpSound;
-    public AudioClip homingSound;
-    public AudioClip rollSound;
-    public AudioClip bounceSound;
-    public AudioClip lightDashSound;
-	public AudioClip slideSound;
+    public AudioSource[] AudioSources;
+	public AudioSource VoiceAudioSource;
+	public AudioSource RailSource;
+
+	public Sounds_Database CommonSounds;
+	public SoundType[] Sounds;
+	SoundType[] SoundsCombined;
+
+	AudioMixerGroup Mixer;
+	AudioSource LatestAudioSource;
+	bool playedSound;
+
 
     [Header ("Movement")]
     public AudioClip railGrindSound;
@@ -33,23 +44,89 @@ public class Sonic_SoundComponent : MonoBehaviour
     public void Start()
     {
         _ctx = GetComponent<Sonic_PlayerStateMachine>();
+
+		//You can separate sounds from a specific prefab (like character voicelines) and common sounds (dash, jump, etc), then combine them.
+		SoundsCombined = new SoundType[Sounds.Length + CommonSounds.Sounds.Length];
+		Sounds.CopyTo(SoundsCombined, 0);
+        CommonSounds.Sounds.CopyTo(SoundsCombined, Sounds.Length);
     }
 
-    public void PlaySound(AudioClip sound)
+	public void PlaySound(string ClipName)
+	{
+		foreach (SoundType s in SoundsCombined){
+			if(s.Name == ClipName){
+				if(s.Clip.Length > 1){
+					int rand = Random.Range(0, s.Clip.Length);
+					Mixer = s.Channel;
+					PlayClip(s.Clip[rand]);
+				}else{
+					Mixer = s.Channel;
+					PlayClip(s.Clip[0]);
+				}
+			}
+		}
+	}
+    public void PlaySound(string ClipName, int SoundInt)
     {
-        audioSource.Stop();
-        audioSource.PlayOneShot(sound);
-    }
-    public void PlayRandom(AudioClip[] sounds)
-    {
-        //audioSource.Stop();
-        audioSource.PlayOneShot(sounds[(byte) Random.Range(0f, sounds.Length-1)]);
-    }
-    public void PlayFootstep()
-    {
-        if(_ctx.GroundCast.Execute(_ctx.Rb.transform.position, -_ctx.GroundNormal))
-        {
-            PlayRandom(concreteFootsteps);
+        foreach (SoundType s in SoundsCombined){
+            if(s.Name == ClipName){
+                Mixer = s.Channel;
+                PlayClip(s.Clip[SoundInt]);
+            }
         }
     }
+    public void PlaySoundOneSource(string ClipName, int SourceInt)
+    {
+        foreach (SoundType s in SoundsCombined){
+            if(s.Name == ClipName){
+                if(s.Clip.Length > 1){
+                    int rand = Random.Range(0, s.Clip.Length);
+                    Mixer = s.Channel;
+                    AudioSources[SourceInt].clip = s.Clip[rand];
+                    AudioSources[SourceInt].Play();
+                }else{
+                    Mixer = s.Channel;
+                    AudioSources[SourceInt].clip = s.Clip[0];
+                    AudioSources[SourceInt].Play();
+                }
+            }
+        }
+    }
+
+    public void InterruptSound(){LatestAudioSource.Stop();}
+
+	void PlayClip(AudioClip Clip)
+    {
+        int i = 0;
+        playedSound = false;
+
+        if(Mixer.name == "Voices"){
+            if(!VoiceAudioSource.isPlaying){
+                VoiceAudioSource.clip = Clip;
+				VoiceAudioSource.Play();
+				LatestAudioSource = VoiceAudioSource;
+            }
+            return;
+        }
+        while (i < AudioSources.Length) 
+        {
+            if(!AudioSources[i].isPlaying){
+                AudioSources[i].clip = Clip;
+                AudioSources[i].outputAudioMixerGroup = Mixer;
+                AudioSources[i].Play();
+                LatestAudioSource = AudioSources[i];
+                playedSound = true;
+                break;
+            }
+            i++;
+        }
+		//Makes sure to play even if there isnt an audio source available
+        if(!playedSound){
+            AudioSources[6].clip = Clip;
+            AudioSources[6].outputAudioMixerGroup = Mixer;
+            AudioSources[6].Play();
+            LatestAudioSource = AudioSources[0];
+        }
+    }
+
 }

@@ -245,22 +245,22 @@ public class Sonic_AirState : IState
     {
         if (_ctx.HomingTargetDetector.TargetDetected && _ctx.Input.AttackInput.WasPressedThisFrame())
         {
-            _ctx.Snd.PlaySound(_ctx.Snd.homingSound);
+            _ctx.Snd.PlaySound("Homing");
             _ctx.MachineTransition(PlayerStates.HomingAttack);
         }
         if (_ctx.RingDetector.TargetDetected && _ctx.Input.ReactionInput.WasPressedThisFrame())
         {
-            _ctx.Snd.PlaySound(_ctx.Snd.lightDashSound);
+            _ctx.Snd.PlaySound("LightDash");
             _ctx.MachineTransition(PlayerStates.LightSpeedDash);
         }
         if (_ctx.Input.BounceInput.WasPressedThisFrame())
         {
-            _ctx.Snd.PlaySound(_ctx.Snd.bounceSound);
+            _ctx.Snd.PlaySound("Bounce");
             _ctx.MachineTransition(PlayerStates.Bounce);
         }
         if (!_ctx.Input.CrouchInput.IsPressed() && _ctx.Input.JumpInput.WasPressedThisFrame() && _ctx.AirDashes > 0)
         {
-            _ctx.Snd.PlaySound(_ctx.Snd.homingSound);
+            _ctx.Snd.PlaySound("Homing");
             _ctx.AirDashes--;
             _ctx.Dash();
         }

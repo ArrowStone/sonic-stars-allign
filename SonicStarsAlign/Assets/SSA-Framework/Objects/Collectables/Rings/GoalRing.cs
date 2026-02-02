@@ -8,7 +8,7 @@ public class GoalRing : CollectableBase
     {
         if (_triggerer.transform.TryGetComponent(out Sonic_PlayerStateMachine _ctx))
         {
-            _ctx.Snd.PlaySound(_ctx.Snd.goalRingSound);
+            _ctx.Snd.PlaySound("GoalRing");
             CollectionEvent.Invoke();
             _ctx.MachineTransition(PlayerStates.Win);
             Data.Complete = true;

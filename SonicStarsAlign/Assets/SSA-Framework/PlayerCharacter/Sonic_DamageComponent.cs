@@ -104,7 +104,7 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
         if (_ctx.Chs.Rings > 0)
         {
             Debug.Log("Confirmed ring loss");
-            _ctx.Snd.PlaySound(_ctx.Snd.ringScatterSound);
+            _ctx.Snd.PlaySound("RingScatter");
 
             for (var i = 1; i <= Mathf.Clamp(_ctx.Chs.Rings, 0, MaxRingsScattered); i++)
             {

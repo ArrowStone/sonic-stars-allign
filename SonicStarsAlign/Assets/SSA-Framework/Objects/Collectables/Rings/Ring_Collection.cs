@@ -14,7 +14,7 @@ public class Ring_Collection : CollectableBase
             //CollectionEvent.Invoke();
             _ctx.Chs.Rings += Value;
             _ctx.Chs.Score += ScoreValue;
-            _ctx.Snd.PlaySound(_ctx.Snd.ringSound);
+            _ctx.Snd.PlaySoundOneSource("Ring", 5);
         }
     }
 }

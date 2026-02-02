@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b909ece5064cb9498559195ce743046, type: 3}
+  m_Name: Common Sounds
+  m_EditorClassIdentifier: 
+  Sounds:
+  - Name: Jump
+    Clip:
+    - {fileID: 8300000, guid: 5c366301824130c488a7c4cc12158f69, type: 3}
+    Channel: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+  - Name: Homing
+    Clip:
+    - {fileID: 8300000, guid: 7e804f4be6a23ae6b8c8b3bf28a1edc6, type: 3}
+    Channel: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+  - Name: Bounce
+    Clip:
+    - {fileID: 8300000, guid: 3fd3412e4a4d9114aac5ec7f8ff9d5d6, type: 3}
+    Channel: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+  - Name: LightDash
+    Clip:
+    - {fileID: 8300000, guid: ff749f902d716ca538fbd4134a7dd870, type: 3}
+    Channel: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+  - Name: Roll
+    Clip:
+    - {fileID: 8300000, guid: ec5ba8c19e94c3e4ea0b95176d1f8327, type: 3}
+    Channel: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+  - Name: Slide
+    Clip:
+    - {fileID: 8300000, guid: c15f280f849303842932fa48692f4d08, type: 3}
+    Channel: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+  - Name: Ring
+    Clip:
+    - {fileID: 8300000, guid: 96941af979471d8c19b7005e6bf9a611, type: 3}
+    Channel: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+  - Name: RingScatter
+    Clip:
+    - {fileID: 8300000, guid: 3f675148a2fd327cca8e91126145bc46, type: 3}
+    Channel: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+  - Name: SwitchRail
+    Clip:
+    - {fileID: 8300000, guid: 77eaa8b92871522bf9e1bc80d1cb59c1, type: 3}
+    Channel: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+  - Name: RailLand
+    Clip:
+    - {fileID: 8300000, guid: 0535d5a9dae114ec9aa20899eaafa6cd, type: 3}
+    Channel: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+  - Name: GoalRing
+    Clip:
+    - {fileID: 8300000, guid: 184ab8152890a6ff5a148263be230466, type: 3}
+    Channel: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}

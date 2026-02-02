@@ -24,6 +24,7 @@ public class Sonic_SweepKickState : IState
         _hasHit = false;
 
 		_ctx.Anim.SetTrigger("Kick");
+		_ctx.Snd.PlaySound("Slide");
 
         // lock input for the move
         _ctx.HorizontalVelocity = _ctx.PlayerDirection * Mathf.Max(_ctx.HorizontalVelocity.magnitude, _ctx.Chp.BaseSpeed);
