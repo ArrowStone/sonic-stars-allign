@@ -387,7 +387,6 @@ public class Sonic_AirState : IState
         }
         if(!_ctx.doneAirRotation)
         {
-            Debug.Log("Moving!");
             _ctx.fakeNormal = Vector3.Slerp(_ctx.fakeNormal, -_ctx.Gravity.normalized, delta * _ctx.airRotationSpeed);
             _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.fakeNormal);
         }
