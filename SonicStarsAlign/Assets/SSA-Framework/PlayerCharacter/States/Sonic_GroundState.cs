@@ -77,10 +77,7 @@ public class Sonic_GroundState : IState
                 AirSwitchConditions();
             }
         }
-        else
-        {
-            Movement(_delta);
-        }
+
         Movement(_delta);
 
         GroundSwitchConditions();
@@ -148,8 +145,6 @@ public class Sonic_GroundState : IState
         
         // Simple point check isn't enough, player can sometimes clip
         if(Physics.OverlapCapsuleNonAlloc(point0, point1, 0.25f, colliders, _ctx.wallLayer) < 2f) _ctx.Physics_Snap(targetPos);
-        
-        //Debug.Log(_ctx.movementLockTimer);
 
         // Locking movement after a dash panel if needed
         if(_ctx.movementLockTimer > 0f)
@@ -169,7 +164,14 @@ public class Sonic_GroundState : IState
 
     private void GroundRotation(float _delta)
     {
-        /*float _turnStrength = _ctx.ChrTurn.Evaluate(_ctx.HorizontalVelocity.magnitude) * Mathf.PI * _delta;
+        // Smoothing looks bad in a loop, disabling it there
+        if(_ctx.movementLockTimer > 0f)
+        {
+            _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundCast.HitInfo.normal);
+            return;
+        }
+
+        float _turnStrength = _ctx.ChrTurn.Evaluate(_ctx.HorizontalVelocity.magnitude) * Mathf.PI * _delta;
         if (_ctx.InputVector.magnitude >= 0.1 && !_ctx.Skid)
         {
             _ctx.PlayerDirection = Vector3.RotateTowards(_ctx.PlayerDirection, _ctx.InputVector, _turnStrength, 0);
@@ -177,18 +179,8 @@ public class Sonic_GroundState : IState
         else if (_ctx.HorizontalVelocity.magnitude >= 0.1 && Vector3.Dot(_ctx.HorizontalVelocity.normalized, _ctx.PlayerDirection) > _ctx.Chp.TurnDeviationCap)
         {
             _ctx.PlayerDirection = Vector3.RotateTowards(_ctx.PlayerDirection, _ctx.HorizontalVelocity.normalized, _turnStrength, 0);
-        }*/
-
-        _ctx.PlayerDirection = _ctx.InputVector.magnitude > 0 ? _ctx.InputVector : _ctx.PlayerDirection;// I tried to rotate the input vector but gave up
-        Vector3 normal = _ctx.GroundCast.HitInfo.normal;
-        _ctx.PlayerDirection = Vector3.ProjectOnPlane(_ctx.PlayerDirection, normal);
-
-        // Smoothing looks bad in a loop, disabling it there
-        if(_ctx.movementLockTimer > 0f)
-        {
-            _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, normal);
-            return;
         }
+
 
         /*float groundDistance = _ctx.GroundCast.HitInfo.distance;
 
@@ -218,7 +210,7 @@ public class Sonic_GroundState : IState
         normal.Normalize();*/
 
         //Also smoothen rotation
-        _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, Vector3.Lerp(_ctx.transform.up, normal, 0.1f));
+        _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, Vector3.Lerp(_ctx.transform.up, _ctx.GroundCast.HitInfo.normal, 0.1f));
     }
 
     private void Movement(float _delta)
@@ -288,10 +280,10 @@ public class Sonic_GroundState : IState
 
     private void InputRotations()
     {
-        /*_ctx.InputRotation = Mathf.Approximately(Vector3.Angle(_ctx.GroundNormal, _ctx.InputRef.up), 180)
+        _ctx.InputRotation = Mathf.Approximately(Vector3.Angle(_ctx.GroundNormal, _ctx.InputRef.up), 180)
             ? Quaternion.FromToRotation(_ctx.InputRotation * Vector3.up, _ctx.GroundNormal) * _ctx.InputRotation
-            : Quaternion.FromToRotation(_ctx.InputRef.up, _ctx.GroundNormal);*/
-        _ctx.InputRotation = Quaternion.FromToRotation(_ctx.InputRotation * Vector3.up, _ctx.GroundNormal) * _ctx.InputRotation;
+            : Quaternion.FromToRotation(_ctx.InputRef.up, _ctx.GroundNormal);
+        //_ctx.InputRotation = Quaternion.FromToRotation(_ctx.InputRotation * Vector3.up, _ctx.GroundNormal) * _ctx.InputRotation;
 
         Vector3 cameraForward = _ctx.InputRef.forward;
 
