@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7954481755547924872
 Transform:
   m_ObjectHideFlags: 0
@@ -150,8 +150,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5148051148087387254}
-  - component: {fileID: 3096547251932241877}
   - component: {fileID: 1040720887102627406}
+  - component: {fileID: 863972668230426361}
+  - component: {fileID: 1824001819670015961}
+  - component: {fileID: 4541822905745523767}
   m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
@@ -174,7 +176,65 @@ Transform:
   m_Children: []
   m_Father: {fileID: 788088621223185212}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3096547251932241877
+--- !u!114 &1040720887102627406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5846970026198698832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6e83f7b48d7433449b7497f8cb651ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 999
+  HitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  Knockback: {x: 0, y: 0, z: 0}
+  KnockbackApplication: 1
+  Strength: 0
+--- !u!114 &863972668230426361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5846970026198698832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c14671167cf9642a2c8d492da2ab05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _LinkedComponent: {fileID: 1824001819670015961}
+  _InspectorTheme: {fileID: 11400000, guid: 94aee69ef1f5bbf439ac320683d4c454, type: 2}
+--- !u!114 &1824001819670015961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5846970026198698832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 550d5a82c22e9b346b91968ae3897b5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isSelected: 1
+  _hasVisualisationScripted: 1
+  _viewVisualisationData: 1
+  _viewVisualisationDataHidden: 1
+  _drawAtAllTimes: 1
+  _drawIfParentSelected: 0
+  _normalOutlineColour: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _selectedOutlineColour: {r: 1, g: 1, b: 1, a: 1}
+  _normalFillColour: {r: 0.22352941, g: 0, b: 0, a: 0.2509804}
+  _selectedFillColour: {r: 0.3433962, g: 0, b: 0.03994078, a: 0.43137255}
+  _maxDistanceFromCameraToDraw: 1200
+  _hasDataChanged: 1
+  _whatTriggerShape: 0
+--- !u!65 &4541822905745523767
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -195,22 +255,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1040720887102627406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5846970026198698832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6e83f7b48d7433449b7497f8cb651ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 999
-  HitEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  Knockback: {x: 0, y: 0, z: 0}
-  KnockbackApplication: 1
-  Strength: 0

@@ -1,0 +1,121 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Reflection;
+using UnityEngine;
+
+public class S_S_Objects
+{
+	//Takes a transform and returns a local transform that is equal in world space.
+	//NOTE - This only works if the transform is the same rotation as its parent. If you want to rotate, only rotate children of this, as their scaling will be set back to a factor of Vector3.one
+	public static Vector3 LockScale ( Transform transform, float lockTo = 0 ) {
+		Vector3 parentScale = transform.parent ? transform.parent.lossyScale : Vector3.one;
+
+		Vector3 worldScale = transform.lossyScale;
+		Vector3 localScale = transform.localScale;
+		float averageScale = (Mathf.Abs(worldScale.x) + Mathf.Abs(worldScale.y) + Mathf.Abs(worldScale.z)) / 3;
+		averageScale = lockTo > 0 ? lockTo : averageScale;
+
+		//Applies inverse scale to parents world scale, esentially resetting scale to one for its children. This only works if the object has no local rotation.
+		Vector3 newLocalScale = new Vector3(averageScale  / parentScale.x
+			,averageScale / parentScale.y
+			,averageScale / parentScale.z);
+		return newLocalScale;
+	}
+
+
+	//Takes an animator and the name of a trigger, then after x frames, sends that trigger to that animator.
+	public static IEnumerator TriggerAnimatorAfterDelay ( Animator Animator, string trigger, int frames = 0, float seconds = 0 ) {
+		if (!Animator) { yield break; }
+
+		if (trigger == "") trigger = "Trigger";
+
+		if (seconds != 0 || Time.timeScale < 0.5f)
+		{
+			seconds = seconds == 0 ? frames / 55 : seconds;
+			yield return new WaitForSecondsRealtime(seconds);
+		}
+		else
+		{
+			for (int i = 0 ; i < frames ; i++)
+			{
+				yield return new WaitForFixedUpdate();
+			}
+		}
+
+		if (!Animator) { yield break; }
+		Animator.SetTrigger(trigger);
+	}
+
+	//Sames as above but with a specific animation component rather than an animator.
+	public static IEnumerator TriggerAnimationAfterDelay ( Animation Clip, int frames, float seconds = 0 ) {
+		if (!Clip) { yield break; }
+
+		if (seconds != 0 || Time.timeScale < 0.5f)
+		{
+			seconds = seconds == 0 ? frames / 55 : seconds;
+			yield return new WaitForSecondsRealtime(seconds);
+		}
+		else
+		{
+			for (int i = 0 ; i < frames ; i++)
+			{
+				yield return new WaitForFixedUpdate();
+			}
+		}
+		if (!Clip) { yield break; }
+		Clip.Play();
+	}
+
+
+	//Takes an object and finds the scale needed for its bounds to fit neatly with the camera field of view, so it fills the camera edges
+	public static Vector2 GetScaleToFitCameraBounds ( Camera Cam, float zOffset, Transform transform, bool setTo ) {
+
+		float height = 2f * zOffset * Mathf.Tan(Cam.fieldOfView * 0.5f * Mathf.Deg2Rad);
+		float width = height * Cam.aspect;
+
+		if (setTo)
+		{
+			transform.parent = Cam.transform;
+			transform.localPosition = new Vector3(0, 0, zOffset);
+			transform.localScale = new Vector3(width, height, 1f);
+		}
+
+		return new Vector2(width, height);
+	}
+
+	//Used for fading audio in or out.
+	public static IEnumerator LerpAudioSourceVolume ( AudioSource Source, float seconds, float targetVolume ) {
+		if (!Source) { yield break; }
+		float initialVolume = Source.volume;
+		float time = 0;
+
+		float lerpProgress = 0;
+
+		while (Source.volume != targetVolume)
+		{
+			yield return new WaitForEndOfFrame();
+			time += Time.unscaledDeltaTime;
+			lerpProgress = time / seconds;
+
+			if (!Source) { yield break; }
+
+			Source.volume = Mathf.Lerp(initialVolume, targetVolume, lerpProgress);
+		}
+	}
+	
+}
+
+//Similar to above, but class itself is static as well.
+public static class S_S_ObjectsStatic
+{
+	public static void CopyFrom<T> ( this T target, T source ) where T : Component {
+		FieldInfo[] fields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+		foreach (var field in fields)
+		{
+			field.SetValue(target, field.GetValue(source));
+		}
+	}
+}
+
+
