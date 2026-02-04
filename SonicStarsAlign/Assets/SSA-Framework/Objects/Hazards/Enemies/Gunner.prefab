@@ -524,11 +524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6886115211697191214, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
       propertyPath: m_Name
-      value: Gunner Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 7937139477811425740, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+      value: Gunner
       objectReference: {fileID: 0}
     - target: {fileID: 8166191998289444350, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
       propertyPath: m_IsActive

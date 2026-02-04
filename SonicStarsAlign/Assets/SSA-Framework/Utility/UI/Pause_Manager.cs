@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 // da thing that does pause
-public class PauseManager : MonoBehaviour
+public class Pause_Manager : MonoBehaviour
 {
     public GameObject pauseMenu;
     public MonoBehaviour[] gameComponents;
