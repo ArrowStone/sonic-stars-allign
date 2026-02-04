@@ -202,7 +202,7 @@ MonoBehaviour:
   Force: {x: 0, y: 0, z: 90}
   Offset: {x: 0, y: 0, z: 0}
   Set: 1
-  movementLockTime: 5
+  movementLockTime: 30
   InteractionEvent:
     m_PersistentCalls:
       m_Calls: []
