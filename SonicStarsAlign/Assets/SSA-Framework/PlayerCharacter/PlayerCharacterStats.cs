@@ -9,7 +9,7 @@ public class PlayerCharacterStats : ScriptableObject
     public float Rings
     {
         get { return _rings; }
-        set { RingSet?.Invoke(value, _rings); _rings = value; Debug.Log(_rings);}
+        set { RingSet?.Invoke(value, _rings); _rings = value;}
     }
 
     private float _score;
@@ -17,7 +17,7 @@ public class PlayerCharacterStats : ScriptableObject
     public float Score
     {
         get { return _score; }
-        set { ScoreSet?.Invoke(value, _score); _score = value; Debug.Log(_score); }
+        set { ScoreSet?.Invoke(value, _score); _score = value;}
     }
 
     public event Action<float, float> RingSet;

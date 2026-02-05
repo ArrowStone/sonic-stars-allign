@@ -27597,6 +27597,111 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cdc683a2fd56b047bc0f0b0b7c8afec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1494757882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494757878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb86f7237faa4d8ebe73e4df731bfc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textObjects:
+  - {fileID: 1336131239}
+  - {fileID: 2007086263}
+  scorePopup: {fileID: 7602453445711789638, guid: 146f95662936596fb8a14f1e2ca6c632, type: 3}
+  Canvas: {fileID: 802755553}
+  ScorePopupIgnoreBelow: 200
+  PopupOffset: 100
+  _ctx: {fileID: 948741069}
+--- !u!1 &1501480831
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1501480832}
+  - component: {fileID: 1501480834}
+  - component: {fileID: 1501480833}
+  m_Layer: 10
+  m_Name: Ring(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1501480832
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501480831}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.4264879, z: -0, w: 0.9044933}
+  m_LocalPosition: {x: 17.250854, y: 4.982071, z: 4.240364}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 439633131}
+  m_Father: {fileID: 625700466}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1501480833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501480831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a9b5b9f5b3ab5244b6dd5c6efabea5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NoCollectionTime: 0
+  CollectionEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1501480831}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  Value: 1
+  ScoreValue: 100
+--- !u!135 &1501480834
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501480831}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 2048
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1502999185 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2045257923548263128, guid: d490bfc6a013e870a9cadda29561ddc2, type: 3}
