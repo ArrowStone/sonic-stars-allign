@@ -1,4 +1,5 @@
-﻿using Unity.Mathematics;
+﻿using Unity.Cinemachine;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,8 +12,86 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
 
         public CamBrain Brain;
 
-        [Space]
         [Header("Parameters")]
+
+        #region Cinemachine Data
+
+        [Header("Cinemachine Camera Control")]
+        [TextSpace("The below composers will overwrite the provided Cinemachine Position Composer, depending if the camera is behind or infront of the character.")]
+        public bool DummyText2;
+
+        [ColourIfNull(0.8f, 0.1f, 0.1f, 1f)]
+        public CinemachineRotationComposer ComposerToOverwrite;
+        public CinemachineOrbitalFollow OrbitalToOverwrite;
+        public CineCameraData CineCameraWhenBehind;
+        public CineCameraData CineCameraWhenInFront;
+
+        private float _LerpBehindToInFront;
+
+        [System.Serializable]
+        public class CineCameraData
+        {
+                public float cameraDistance = 3;
+                public float deadZoneDepth = 3;
+                public Vector2 screenPosition;
+
+                [HideInInspector]
+                public bool deadZone = true;
+                [DrawTickBoxBefore("deadZone")]
+                public Vector2 deadZoneSize = new Vector2(0.2f,0.1f);
+
+                [HideInInspector]
+                public bool hardLimits = true;
+                [DrawTickBoxBefore("hardLimits")]
+                public Vector2 hardLimitsSize = new Vector2(0.8f,0.6f);
+                [DrawTickBoxBefore("hardLimits")]
+                public Vector2 hardLimitsOffset = new Vector2(0f,0f);
+
+                public bool centerOnActivate = true;
+
+                [Header("Target Tracking")]
+
+                public Vector3 targetOffset = new Vector3();
+                public Vector3 damping;
+                public bool lookahead = true;
+                [Range(0,1)]
+                public float time;
+                [Range(0,1)]
+                public float smoothing;
+                public bool ignoreY;
+        }
+
+        public void ApplyComposerDataToComposer (float lerpAmount) {
+                // Framing / distance
+                ComposerToOverwrite.Composition.ScreenPosition = Vector2.Lerp(CineCameraWhenBehind.screenPosition, CineCameraWhenInFront.screenPosition, lerpAmount);
+
+                // Dead zone
+                ComposerToOverwrite.Composition.DeadZone.Enabled = lerpAmount < 0.5f ? CineCameraWhenBehind.deadZone : CineCameraWhenInFront.deadZone;
+                ComposerToOverwrite.Composition.DeadZone.Size = Vector2.Lerp(CineCameraWhenBehind.deadZoneSize, CineCameraWhenInFront.deadZoneSize, lerpAmount);
+
+                // Hard limits
+                ComposerToOverwrite.Composition.HardLimits.Enabled = lerpAmount < 0.5f ? CineCameraWhenBehind.hardLimits : CineCameraWhenInFront.hardLimits;
+                ComposerToOverwrite.Composition.HardLimits.Size = Vector2.Lerp(CineCameraWhenBehind.hardLimitsSize, CineCameraWhenInFront.hardLimitsSize, lerpAmount);
+                ComposerToOverwrite.Composition.HardLimits.Offset = Vector2.Lerp(CineCameraWhenBehind.hardLimitsOffset, CineCameraWhenInFront.hardLimitsOffset, lerpAmount);
+
+                // Activation behavior
+                ComposerToOverwrite.CenterOnActivate = lerpAmount < 0.5f ? CineCameraWhenBehind.centerOnActivate : CineCameraWhenInFront.centerOnActivate;
+
+                // Target tracking
+                ComposerToOverwrite.TargetOffset = Vector3.Lerp(CineCameraWhenBehind.targetOffset, CineCameraWhenInFront.targetOffset, lerpAmount);
+                OrbitalToOverwrite.TargetOffset = Vector3.Lerp(CineCameraWhenBehind.targetOffset, CineCameraWhenInFront.targetOffset, lerpAmount);
+                OrbitalToOverwrite.TrackerSettings.PositionDamping = Vector3.Lerp(CineCameraWhenBehind.damping, CineCameraWhenInFront.damping, lerpAmount);
+
+                // Lookahead
+                ComposerToOverwrite.Lookahead.Enabled = lerpAmount < 0.5f ? CineCameraWhenBehind.lookahead : CineCameraWhenInFront.lookahead;
+                ComposerToOverwrite.Lookahead.Time = Mathf.Lerp(CineCameraWhenBehind.time, CineCameraWhenInFront.time, lerpAmount);
+                ComposerToOverwrite.Lookahead.Smoothing = Mathf.Lerp(CineCameraWhenBehind.smoothing, CineCameraWhenInFront.smoothing, lerpAmount);
+                ComposerToOverwrite.Lookahead.IgnoreY = lerpAmount < 0.5f ? CineCameraWhenBehind.ignoreY : CineCameraWhenInFront.ignoreY;
+        }
+
+        #endregion
+
+        [Space]
         public Transform Target;
 
         public float TargetDistance;
@@ -44,6 +123,8 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
 
         private float _recenteringState;
 
+        private bool _isCameraInFrontOfCharacter;
+
         private Vector3 _moveVelocity = Vector3.zero;
 
         private Vector3 _cashedTargetPosition;
@@ -61,9 +142,14 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                 _rotation = _brain.CashedTransform.Rotation;
                // _cashedTargetPosition = Target.GetComponentInChildren<Rigidbody>().position;
                 _cashedTargetPosition = Target.position;
+
+                CompareCameraDirectionToCharacter(true);
         }
 
         public void Execute ( float _delta ) {
+
+                CompareCameraDirectionToCharacter();
+
                 if (Target != null)
                 {
                         _cashedTargetPosition = Target.position;
@@ -77,6 +163,31 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                 //_position = SmoothMove(Brain, UpdatePosition(_delta), _delta);
                 _position = UpdatePosition(_delta);
                 _rotation = UpdateRotation(_delta);
+        }
+
+        //Check if character is facing towards the camera and adjust the composer data accordingly.
+        private void CompareCameraDirectionToCharacter (bool overwrite = false) {
+                if(!ComposerToOverwrite) { return; }
+
+
+                bool cameraCurrentlyInfrontOfCharacter = Vector3.Dot(Target.forward, ComposerToOverwrite.transform.forward) < 0;
+                bool CurrentlyNotSet = _LerpBehindToInFront != 1 && _LerpBehindToInFront != 0;
+
+                Debug.Log("Dot is " + Vector3.Dot(Target.forward, ComposerToOverwrite.transform.forward));
+                Debug.Log("Lerp is " + _LerpBehindToInFront);
+                if (CurrentlyNotSet  || cameraCurrentlyInfrontOfCharacter != _isCameraInFrontOfCharacter || overwrite)
+                {
+                        //if first time, set immediately to behind or in front
+                        if (overwrite) _LerpBehindToInFront = cameraCurrentlyInfrontOfCharacter ? 1 : 0;
+                        //if not, then move the lerp amount towards the goal. The ensures smooth changing between settings, not instant.
+                        else
+                        {
+                                _LerpBehindToInFront = Mathf.MoveTowards(_LerpBehindToInFront, cameraCurrentlyInfrontOfCharacter ? 1 : 0, (1/0.13f) * Time.deltaTime);
+                        }
+
+                        ApplyComposerDataToComposer(_LerpBehindToInFront);
+                        _isCameraInFrontOfCharacter = cameraCurrentlyInfrontOfCharacter;
+                }
         }
 
         public void OnExit () {

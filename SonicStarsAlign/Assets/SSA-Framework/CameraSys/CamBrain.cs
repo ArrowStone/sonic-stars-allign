@@ -6,70 +6,68 @@ public class CamBrain : StateMachine_MonoBase<CameraStates>
         bool DummyText;
 
         public Transform CamTransform;
-    public InputComponent Input;
+        public InputComponent Input;
 
-    public ICamPoint Point;
-    public AnimationCurve WeightCurve;
+        public bool SetPositionAndRotationManually;
 
-    #region Util
+        public ICamPoint Point;
+        public AnimationCurve WeightCurve;
 
-    public PosRot CashedTransform { get; set; }
+        #region Util
 
-    #endregion Util
+        public PosRot CashedTransform { get; set; }
 
-    private void Awake()
-    {
-        Input = GameObject.Find("Player_Rigidbody").GetComponent<Sonic_PlayerStateMachine>().Input;
+        #endregion Util
 
-        CashedTransform = new()
-        {
-            Position = CamTransform.position,
-            Rotation = CamTransform.rotation,
-        };
-        StateSetup();
-        Initialize();
-    }
+        private void Awake () {
+                Input = GameObject.Find("Player_Rigidbody").GetComponent<Sonic_PlayerStateMachine>().Input;
 
-    public void StateSetup()
-    {
-        States.Add(CameraStates.Alive, new Camera_AliveState(this));
-        States.Add(CameraStates.Dead, new Camera_DeadState(this));
-        States.Add(CameraStates.Transitioning, new Camera_TransitionState(this));
+                CashedTransform = new()
+                {
+                        Position = CamTransform.position,
+                        Rotation = CamTransform.rotation,
+                };
+                StateSetup();
+                Initialize();
+        }
 
-        CurrentEstate = CameraStates.Dead;
-        CurrentState = States[CurrentEstate];
-        CurrentState.EnterState();
-    }
+        public void StateSetup () {
+                States.Add(CameraStates.Alive, new Camera_AliveState(this));
+                States.Add(CameraStates.Dead, new Camera_DeadState(this));
+                States.Add(CameraStates.Transitioning, new Camera_TransitionState(this));
 
-    private void Update()
-    {
-        MachineUpdate();
-    }
+                CurrentEstate = CameraStates.Dead;
+                CurrentState = States[CurrentEstate];
+                CurrentState.EnterState();
+        }
 
-    private void FixedUpdate()
-    {
-        MachineFixedUpdate();
-    }
+        private void Update () {
+                MachineUpdate();
+        }
 
-    private void LateUpdate()
-    {
-        MachineLateUpdate();
-    }
+        private void FixedUpdate () {
+                MachineFixedUpdate();
+        }
 
-    #region Functions
+        private void LateUpdate () {
+                MachineLateUpdate();
+        }
 
-    public void ApplyPoint()
-    {
-        CashedTransform = Point.Transform();
-        CamTransform.SetPositionAndRotation(CashedTransform.Position, CashedTransform.Rotation);
-    }
+        #region Functions
 
-    #endregion Functions
+        public void ApplyPoint () {
+                CashedTransform = Point.Transform();
+
+                if(SetPositionAndRotationManually)
+                        CamTransform.SetPositionAndRotation(CashedTransform.Position, CashedTransform.Rotation);
+        }
+
+        #endregion Functions
 }
 
 public enum CameraStates
 {
-    Alive,
-    Dead,
-    Transitioning,
+        Alive,
+        Dead,
+        Transitioning,
 }
