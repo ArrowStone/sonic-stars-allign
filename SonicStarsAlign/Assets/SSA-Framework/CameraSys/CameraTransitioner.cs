@@ -3,59 +3,62 @@ using UnityEngine.Events;
 
 public class CameraTransitioner : MonoBehaviour
 {
-    public CamBrain MainCam;
+        public CamBrain PlayerCameraBrain;
 
-    [Space]
-    public CameraTransition Enter;
+        [Space]
+        public CameraTransition Enter;
 
-    public UnityEvent EnterEvent;
+        public UnityEvent EnterEvent;
 
-    public CameraTransition Exit;
-    public UnityEvent ExitEvent;
+        public CameraTransition Exit;
+        public UnityEvent ExitEvent;
 
-    private Panel_Collider _triggercl;
+        private Panel_Collider _triggercl;
 
-    public void OnEnable()
-    {
-        _triggercl = GetComponent<Panel_Collider>();
-        _triggercl.TriggerEnter += TEnter;
-        _triggercl.TriggerExit += TExit;
-    }
+        public void OnEnable () {
+                _triggercl = GetComponent<Panel_Collider>();
+                _triggercl.TriggerEnter += TEnter;
+                _triggercl.TriggerExit += TExit;
+        }
 
-    public void OnDisable()
-    {
-        _triggercl.TriggerEnter -= TEnter;
-        _triggercl.TriggerExit -= TExit;
-    }
+        public void OnDisable () {
+                _triggercl.TriggerEnter -= TEnter;
+                _triggercl.TriggerExit -= TExit;
+        }
 
-    private void TEnter(Collider _other)
-    {
-        if (Enter.Point == null) return;
+        private void TEnter ( Collider _other ) {
+                Debug.Log(_other);
+                if (Enter.Point == null) return;
 
-        var _camPoint = Enter.Point.GetComponent<ICamPoint>();
-        MainCam.WeightCurve = Enter.WeightCurve;
-        MainCam.Point = _camPoint;
-        MainCam.MachineTransition(CameraStates.Transitioning);
+                if (!PlayerCameraBrain)
+                {
+                        if(_other.gameObject.TryGetComponent(out Sonic_ReferenceObjects References))
+                                PlayerCameraBrain = References.CameraBrain;
+                }
 
-        EnterEvent.Invoke();
-    }
+                var _camPoint = Enter.Point.GetComponent<ICamPoint>();
+                PlayerCameraBrain.WeightCurve = Enter.WeightCurve;
+                PlayerCameraBrain.Point = _camPoint;
+                PlayerCameraBrain.MachineTransition(CameraStates.Transitioning);
 
-    private void TExit(Collider _other)
-    {
-        if (Exit.Point == null) return;
+                EnterEvent.Invoke();
+        }
 
-        var _camPoint = Exit.Point.GetComponent<ICamPoint>();
-        MainCam.WeightCurve = Exit.WeightCurve;
-        MainCam.Point = _camPoint;
-        MainCam.MachineTransition(CameraStates.Transitioning);
+        private void TExit ( Collider _other ) {
+                if (Exit.Point == null) return;
 
-        ExitEvent.Invoke();
-    }
+                var _camPoint = Exit.Point.GetComponent<ICamPoint>();
+                PlayerCameraBrain.WeightCurve = Exit.WeightCurve;
+                PlayerCameraBrain.Point = _camPoint;
+                PlayerCameraBrain.MachineTransition(CameraStates.Transitioning);
+
+                ExitEvent.Invoke();
+        }
 }
 
 [System.Serializable]
 public struct CameraTransition
 {
-    public GameObject Point;
-    public AnimationCurve WeightCurve;
+        public GameObject Point;
+        public AnimationCurve WeightCurve;
 }

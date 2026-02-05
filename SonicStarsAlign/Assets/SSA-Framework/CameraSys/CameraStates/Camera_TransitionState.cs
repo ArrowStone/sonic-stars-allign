@@ -45,8 +45,8 @@ public class Camera_TransitionState : IState
     {
         _ctx.CashedTransform = new()
         {
-            Position = _ctx.Cam.transform.position,
-            Rotation = _ctx.Cam.transform.rotation,
+            Position = _ctx.CamTransform.position,
+            Rotation = _ctx.CamTransform.rotation,
         };
     }
 

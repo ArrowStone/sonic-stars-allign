@@ -129,6 +129,101 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &4057180974824396486
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6491936539475151559}
+  m_Layer: 11
+  m_Name: Camera Targets Offset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6491936539475151559
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4057180974824396486}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.568, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3588364039322496579}
+  m_Father: {fileID: 4762720238778129734}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4305991935861906932
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3588364039322496579}
+  - component: {fileID: 7933950346820097928}
+  m_Layer: 11
+  m_Name: Main CamTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3588364039322496579
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4305991935861906932}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6491936539475151559}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7933950346820097928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4305991935861906932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025dd8a9986532a48a5fea4a4fd2b824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isSelected: 1
+  _hasVisualisationScripted: 1
+  _viewVisualisationData: 0
+  _viewVisualisationDataHidden: 0
+  _drawAtAllTimes: 1
+  _drawIfParentSelected: 0
+  _normalOutlineColour: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _selectedOutlineColour: {r: 1, g: 1, b: 1, a: 1}
+  _normalFillColour: {r: 1, g: 1, b: 1, a: 0}
+  _selectedFillColour: {r: 1, g: 1, b: 1, a: 0.1}
+  _maxDistanceFromCameraToDraw: 1200
+  _thickness: 3.23
+  _scale: 0.3
+  _forwards: 1
+  _backwards: 0
+  _upwards: 1
+  _downwards: 0
+  _right: 0
+  _left: 0
 --- !u!1 &4497414902112148468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1437,6 +1532,7 @@ GameObject:
   - component: {fileID: 4762720238778129734}
   - component: {fileID: 6081405800739371547}
   - component: {fileID: 7937978964724185185}
+  - component: {fileID: 218597422485095100}
   - component: {fileID: 6161017509054430529}
   - component: {fileID: 1640816526557118502}
   - component: {fileID: 2915567401409790432}
@@ -1467,6 +1563,7 @@ Transform:
   - {fileID: 755140025663853551}
   - {fileID: 5270858383537269734}
   - {fileID: 2510587425217299857}
+  - {fileID: 6491936539475151559}
   m_Father: {fileID: 6094424250598897931}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &6081405800739371547
@@ -1519,6 +1616,21 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 3
+--- !u!114 &218597422485095100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8760114905739693595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be769bfb20fc53c4dacffcc7096c1276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DummyText: 0
+  DummyButton: 0
+  CameraBrain: {fileID: 0}
 --- !u!114 &6161017509054430529
 MonoBehaviour:
   m_ObjectHideFlags: 0

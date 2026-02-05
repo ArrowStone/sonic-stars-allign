@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class CamBrain : StateMachine_MonoBase<CameraStates>
 {
-    public Camera Cam;
+        [SerializeField,TextSpace("This component determines and calls the camera's state (between alive, dead and transitioning), and applies transformations.")]
+        bool DummyText;
+
+        public Transform CamTransform;
     public InputComponent Input;
 
     public ICamPoint Point;
@@ -20,8 +23,8 @@ public class CamBrain : StateMachine_MonoBase<CameraStates>
 
         CashedTransform = new()
         {
-            Position = Cam.transform.position,
-            Rotation = Cam.transform.rotation,
+            Position = CamTransform.position,
+            Rotation = CamTransform.rotation,
         };
         StateSetup();
         Initialize();
@@ -58,7 +61,7 @@ public class CamBrain : StateMachine_MonoBase<CameraStates>
     public void ApplyPoint()
     {
         CashedTransform = Point.Transform();
-        Cam.transform.SetPositionAndRotation(CashedTransform.Position, CashedTransform.Rotation);
+        CamTransform.SetPositionAndRotation(CashedTransform.Position, CashedTransform.Rotation);
     }
 
     #endregion Functions

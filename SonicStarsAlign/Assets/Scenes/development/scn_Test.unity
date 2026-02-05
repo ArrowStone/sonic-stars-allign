@@ -2858,6 +2858,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3218774793418519497, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
   m_PrefabInstance: {fileID: 2570230520030055649}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &318483110 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2452809473747569026, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+  m_PrefabInstance: {fileID: 2570230520030055649}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318483106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d00f476b5c36b654ebd3bf585b5b3829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &323259932
 GameObject:
   m_ObjectHideFlags: 0
@@ -6516,7 +6527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9247b8fdbee1f96458149e2269f596cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainCam: {fileID: 1506604444}
+  PlayerCameraBrain: {fileID: 0}
   Enter:
     Point: {fileID: 1921139591}
     WeightCurve:
@@ -6608,10 +6619,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 550d5a82c22e9b346b91968ae3897b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isSelected: 1
+  _isSelected: 0
   _hasVisualisationScripted: 1
-  _viewVisualisationData: 1
-  _viewVisualisationDataHidden: 1
+  _viewVisualisationData: 0
+  _viewVisualisationDataHidden: 0
   _drawAtAllTimes: 1
   _drawIfParentSelected: 0
   _normalOutlineColour: {r: 0.5, g: 0.5, b: 0.5, a: 1}
@@ -10950,11 +10961,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e42fc9a0a9c544d98d97366d752989, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &948741070 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 7937978964724185185, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
-  m_PrefabInstance: {fileID: 7424688648105209037}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &952842995
 GameObject:
   m_ObjectHideFlags: 0
@@ -19482,6 +19488,11 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!4 &1282866121 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3588364039322496579, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
+  m_PrefabInstance: {fileID: 7424688648105209037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1289922431
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27645,17 +27656,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2730942054133459718, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
   m_PrefabInstance: {fileID: 2570230520030055649}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1506604444 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8387522747622004048, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
-  m_PrefabInstance: {fileID: 2570230520030055649}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d00f476b5c36b654ebd3bf585b5b3829, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1506650314
 GameObject:
   m_ObjectHideFlags: 0
@@ -38866,7 +38866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9247b8fdbee1f96458149e2269f596cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainCam: {fileID: 1506604444}
+  PlayerCameraBrain: {fileID: 0}
   Enter:
     Point: {fileID: 487717761}
     WeightCurve:
@@ -41543,10 +41543,34 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: Brain
+      value: 
+      objectReference: {fileID: 318483110}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
       propertyPath: Target
       value: 
-      objectReference: {fileID: 948741070}
-    - target: {fileID: 8387522747622004048, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      objectReference: {fileID: 1282866121}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: DeadZone
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: Offset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: TargetDistance
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1288419031941415505, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: _brain
+      value: 
+      objectReference: {fileID: 318483110}
+    - target: {fileID: 1525934068458892939, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: Input
+      value: 
+      objectReference: {fileID: 1263480790}
+    - target: {fileID: 2452809473747569026, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
       propertyPath: Input
       value: 
       objectReference: {fileID: 1263480790}
@@ -42522,6 +42546,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 218597422485095100, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
+      propertyPath: CameraBrain
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057180974824396486, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6094424250598897931, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 349.46
