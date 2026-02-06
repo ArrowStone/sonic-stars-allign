@@ -22,7 +22,7 @@ public class HUD_Manager : MonoBehaviour
     {
         void SetRings(float rings, float _)
         {
-            SetText(0, $"<mspace=450>{(int)rings:D3}</mspace>");
+            SetText(0, $"<mspace=500>{(int)rings:D3}</mspace>");
         }
         void SetScore(float score, float prevScore)
         {
