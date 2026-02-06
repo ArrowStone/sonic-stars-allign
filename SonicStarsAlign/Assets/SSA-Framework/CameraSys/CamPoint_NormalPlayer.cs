@@ -12,7 +12,14 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
 
         public CamBrain Brain;
 
-        [Header("Parameters")]
+        [Header("Camera Target Levels")]
+        [SerializeField,TextSpace("The target may need to be moved at certain points, such as to avoid being too close to a wall. These different objects are used to calculate the position of the Main Target")]
+        bool DummyText3;
+        [ColourIfNull(0.6f , 0.2f , 0.2f , 2f)][Tooltip("This is the actual target being looked at, but its placement is affected by the others")] public Transform MainTarget;
+        [ColourIfNull(0.6f, 0.2f, 0.2f, 2f)][Tooltip("Must be a parent of the other targets, and a child of the character. When in doubt, use this.")]public Transform BaseTarget;
+        [ColourIfNull(0.6f, 0.2f, 0.2f, 2f)]public Transform TargetCollisionOffset;
+        [ColourIfNull(0.6f , 0.2f , 0.2f , 2f)]public Transform TargetAdditionalVerticalOffset;
+
 
         #region Cinemachine Data
 
@@ -20,9 +27,12 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
         [TextSpace("The below composers will overwrite the provided Cinemachine Position Composer, depending if the camera is behind or infront of the character.")]
         public bool DummyText2;
 
-        [ColourIfNull(0.8f, 0.1f, 0.1f, 1f)]
-        public CinemachineRotationComposer ComposerToOverwrite;
-        public CinemachineOrbitalFollow OrbitalToOverwrite;
+        [ColourIfNull(0.6f , 0.2f , 0.2f , 2f)]       public CinemachineCamera CMCamera;
+        [ColourIfNull(0.6f , 0.2f , 0.2f , 2f)]       public CinemachineRotationComposer ComposerToOverwrite;
+        [ColourIfNull(0.6f , 0.2f , 0.2f , 2f)]       public CinemachineOrbitalFollow OrbitalToOverwrite;
+        [ColourIfNull(0.6f , 0.2f , 0.2f , 2f)]       public CinemachineDeoccluder DeoccluderToOverwrite;
+        [ColourIfNull(0.6f , 0.2f , 0.2f , 2f)]       public CinemachineDecollider DecolliderToOverwrite;
+
         public CineCameraData CineCameraWhenBehind;
         public CineCameraData CineCameraWhenInFront;
 
@@ -31,9 +41,8 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
         [System.Serializable]
         public class CineCameraData
         {
-                public float cameraDistance = 3;
-                public float deadZoneDepth = 3;
                 public Vector2 screenPosition;
+                public Cinemachine3OrbitRig.Settings OrbitNewSettings;
 
                 [HideInInspector]
                 public bool deadZone = true;
@@ -63,6 +72,13 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
 
         public void ApplyComposerDataToComposer (float lerpAmount) {
                 // Framing / distance
+                OrbitalToOverwrite.Orbits.Top.Radius = Mathf.Lerp(CineCameraWhenBehind.OrbitNewSettings.Top.Radius, CineCameraWhenInFront.OrbitNewSettings.Top.Radius, lerpAmount);
+                OrbitalToOverwrite.Orbits.Top.Height = Mathf.Lerp(CineCameraWhenBehind.OrbitNewSettings.Top.Height, CineCameraWhenInFront.OrbitNewSettings.Top.Height, lerpAmount);
+                OrbitalToOverwrite.Orbits.Center.Radius = Mathf.Lerp(CineCameraWhenBehind.OrbitNewSettings.Center.Radius, CineCameraWhenInFront.OrbitNewSettings.Center.Radius, lerpAmount);
+                OrbitalToOverwrite.Orbits.Center.Height = Mathf.Lerp(CineCameraWhenBehind.OrbitNewSettings.Center.Height, CineCameraWhenInFront.OrbitNewSettings.Center.Height, lerpAmount);
+                OrbitalToOverwrite.Orbits.Bottom.Radius = Mathf.Lerp(CineCameraWhenBehind.OrbitNewSettings.Bottom.Radius, CineCameraWhenInFront.OrbitNewSettings.Bottom.Radius, lerpAmount);
+                OrbitalToOverwrite.Orbits.Bottom.Height = Mathf.Lerp(CineCameraWhenBehind.OrbitNewSettings.Bottom.Height, CineCameraWhenInFront.OrbitNewSettings.Bottom.Height, lerpAmount);
+
                 ComposerToOverwrite.Composition.ScreenPosition = Vector2.Lerp(CineCameraWhenBehind.screenPosition, CineCameraWhenInFront.screenPosition, lerpAmount);
 
                 // Dead zone
@@ -91,15 +107,12 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
 
         #endregion
 
-        [Space]
-        public Transform Target;
-
+        [Header("Parameters")]
+        public LayerMask CameraCollidesWith;
         public float TargetDistance;
 
         public Vector3 Offset;
 
-        [Space]
-        public float DeadZone;
 
         public float2 YLimits;
 
@@ -141,7 +154,12 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                 _position = _brain.CashedTransform.Position;
                 _rotation = _brain.CashedTransform.Rotation;
                // _cashedTargetPosition = Target.GetComponentInChildren<Rigidbody>().position;
-                _cashedTargetPosition = Target.position;
+                _cashedTargetPosition = MainTarget.position;
+
+                //Cinemachine setup
+                CMCamera.Target.TrackingTarget = MainTarget;
+                DecolliderToOverwrite.Decollision.ObstacleLayers = CameraCollidesWith;
+                DeoccluderToOverwrite.CollideAgainst = CameraCollidesWith;
 
                 CompareCameraDirectionToCharacter(true);
         }
@@ -149,10 +167,11 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
         public void Execute ( float _delta ) {
 
                 CompareCameraDirectionToCharacter();
+                CalculateTargetPlacement();
 
-                if (Target != null)
+                if (MainTarget != null)
                 {
-                        _cashedTargetPosition = Target.position;
+                        _cashedTargetPosition = MainTarget.position;
                 }
                 if (Brain.Input != null)
                 {
@@ -165,24 +184,28 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                 _rotation = UpdateRotation(_delta);
         }
 
+
+        public void OnExit () {
+                Brain = null;
+        }
+
+        #region camera calculations
+
         //Check if character is facing towards the camera and adjust the composer data accordingly.
-        private void CompareCameraDirectionToCharacter (bool overwrite = false) {
-                if(!ComposerToOverwrite) { return; }
+        private void CompareCameraDirectionToCharacter ( bool overwrite = false ) {
+                if (!ComposerToOverwrite || !OrbitalToOverwrite) { return; }
 
-
-                bool cameraCurrentlyInfrontOfCharacter = Vector3.Dot(Target.forward, ComposerToOverwrite.transform.forward) < 0;
+                bool cameraCurrentlyInfrontOfCharacter = Vector3.Dot(MainTarget.forward, ComposerToOverwrite.transform.forward) < 0;
                 bool CurrentlyNotSet = _LerpBehindToInFront != 1 && _LerpBehindToInFront != 0;
 
-                Debug.Log("Dot is " + Vector3.Dot(Target.forward, ComposerToOverwrite.transform.forward));
-                Debug.Log("Lerp is " + _LerpBehindToInFront);
-                if (CurrentlyNotSet  || cameraCurrentlyInfrontOfCharacter != _isCameraInFrontOfCharacter || overwrite)
+                if (CurrentlyNotSet || cameraCurrentlyInfrontOfCharacter != _isCameraInFrontOfCharacter || overwrite)
                 {
                         //if first time, set immediately to behind or in front
                         if (overwrite) _LerpBehindToInFront = cameraCurrentlyInfrontOfCharacter ? 1 : 0;
                         //if not, then move the lerp amount towards the goal. The ensures smooth changing between settings, not instant.
                         else
                         {
-                                _LerpBehindToInFront = Mathf.MoveTowards(_LerpBehindToInFront, cameraCurrentlyInfrontOfCharacter ? 1 : 0, (1/0.13f) * Time.deltaTime);
+                                _LerpBehindToInFront = Mathf.MoveTowards(_LerpBehindToInFront, cameraCurrentlyInfrontOfCharacter ? 1 : 0, (1 / 0.13f) * Time.deltaTime);
                         }
 
                         ApplyComposerDataToComposer(_LerpBehindToInFront);
@@ -190,9 +213,57 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                 }
         }
 
-        public void OnExit () {
-                Brain = null;
+        //Calculates a number of offsets for the main target, then places it in the middle of them.
+        private void CalculateTargetPlacement () {
+                Vector3 BaseTargetPosition = BaseTarget.position;
+                MainTarget.position = BaseTargetPosition;
+
+                Vector3 TargetOffset = Vector3.zero;
+                float totalOffsets = 0;
+
+                OffsetByCollision();
+                MainTarget.position = BaseTargetPosition + (TargetOffset / Mathf.Max(1, totalOffsets));
+
+                void OffsetByCollision () {
+                        //Searches for any collision nearby to the target, and is it finds it, moves the target slightly away from it to ensure the camera won't be forced into it.
+                        if (TargetCollisionOffset)
+                        {
+                                //For efficiency, first used overlap sphere
+                                float range = 0.5f;
+                                Debug.DrawRay(BaseTargetPosition, Vector3.up * range, Color.magenta);
+                                Collider[] hits = Physics.OverlapSphere(BaseTargetPosition, range,CameraCollidesWith);
+                                if (hits != null && hits.Length != 0)
+                                {
+                                        // Boxcast is slower than overlap sphere, but can provide a contact point. Cast roughly towards collision object.
+                                        Vector3 direction = S_S_MoreMaths.GetDirection(BaseTargetPosition ,hits[0].transform.position);
+                                        Debug.DrawLine(hits[0].transform.position, BaseTargetPosition, Color.cyan, 2f);
+
+                                        if (Physics.BoxCast(BaseTargetPosition, new Vector3(range / 3, range / 3, 0.02f), direction, out RaycastHit hit,
+                                                Quaternion.LookRotation(hits[0].transform.position, BaseTarget.up), range - 0.02f, CameraCollidesWith))
+                                        {
+                                                if (Vector3.Distance(hit.point, BaseTargetPosition) > range) 
+                                                { return; }
+
+                                                Vector3 closestPoint = hit.point;
+                                                Debug.DrawLine(hit.point, BaseTargetPosition, Color.cyan, 2f);
+
+                                                //Offset is inversly proportionate to how close to the collision. If collision point is 25% of range close, offset with be 75% in the opposite direction.
+                                                closestPoint -= BaseTargetPosition;
+                                                Vector3 collisionOffset = Vector3.Lerp(closestPoint, -closestPoint.normalized * range, 0.5f);
+                                                collisionOffset *= 2;
+
+                                                Debug.Log(collisionOffset.magnitude + " + " + closestPoint.magnitude + "  =  " + (collisionOffset.magnitude + closestPoint.magnitude));
+                                                TargetOffset += collisionOffset;
+                                                TargetCollisionOffset.position = (-closestPoint.normalized * range) + BaseTargetPosition;
+                                                totalOffsets++;
+                                        }
+                                }
+                        }
+                }
         }
+
+        #endregion
+
 
         #region AdditionalFunctions
 
@@ -200,7 +271,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                 // looking behind where the player is facing
                 if (Brain.Input.BackCameraInput.IsPressed())
                 {
-                        _rot.y = Mathf.LerpAngle(_rot.y, Target.eulerAngles.y + 180f, BackCameraSpeed * _delta);
+                        _rot.y = Mathf.LerpAngle(_rot.y, MainTarget.eulerAngles.y + 180f, BackCameraSpeed * _delta);
                 }
                 else
                 {
@@ -209,8 +280,8 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                                 _recenteringState -= _delta;
                                 if (_recenteringState <= 0)
                                 {
-                                        _rot.x = Mathf.LerpAngle(_rot.x, Target.eulerAngles.x, YAxisRecenteringSpeed * _delta);
-                                        _rot.y = Mathf.LerpAngle(_rot.y, Target.eulerAngles.y, XAxisRecenteringSpeed * _delta);
+                                        _rot.x = Mathf.LerpAngle(_rot.x, MainTarget.eulerAngles.x, YAxisRecenteringSpeed * _delta);
+                                        _rot.y = Mathf.LerpAngle(_rot.y, MainTarget.eulerAngles.y, XAxisRecenteringSpeed * _delta);
                                 }
 
                         }
@@ -237,7 +308,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
         public Quaternion UpdateRotation ( float _delta ) {
                 // Dunno why its here but it messes with using the mouse for rotation so it goes in the trash
                 //return Quaternion.RotateTowards(_rotation, Quaternion.LookRotation(Target.position - _position), SmoothRotationSpeed * _delta);
-                return Quaternion.LookRotation(Target.position - _position);
+                return Quaternion.LookRotation(MainTarget.position - _position);
         }
 
         public Vector3 UpdatePosition ( float _delta ) {
@@ -246,10 +317,6 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                         eulerAngles = new Vector3(_rot.x, _rot.y)
                 };
                 return _cashedTargetPosition + Offset + (_posRot * (Vector3.forward * TargetDistance));
-        }
-
-        public Vector3 SmoothMove ( CamBrain camBrain, Vector3 Position, float _delta ) {
-                return Vector3.SmoothDamp(camBrain.CashedTransform.Position, Position, ref _moveVelocity, MovementSmoothing, Mathf.Infinity, _delta);
         }
 
         #endregion AdditionalFunctions
