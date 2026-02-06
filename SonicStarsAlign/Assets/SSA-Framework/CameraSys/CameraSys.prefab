@@ -88,13 +88,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DummyText: 0
   Brain: {fileID: 2452809473747569026}
+  DummyText3: 0
+  MainTarget: {fileID: 0}
+  BaseTarget: {fileID: 0}
+  TargetCollisionOffset: {fileID: 0}
+  TargetAdditionalVerticalOffset: {fileID: 0}
   DummyText2: 0
-  ComposerToOverwrite: {fileID: 2276630876082974160}
-  OrbitalToOverwrite: {fileID: 2621452276608245540}
+  CMCamera: {fileID: 1691193734993029450}
+  ComposerToOverwrite: {fileID: 6611107125198237596}
+  OrbitalToOverwrite: {fileID: 5153416008075702613}
+  DeoccluderToOverwrite: {fileID: 2591128158740404477}
+  DecolliderToOverwrite: {fileID: 6688665525823516562}
   CineCameraWhenBehind:
-    cameraDistance: 3
-    deadZoneDepth: 3
     screenPosition: {x: 0, y: 0}
+    OrbitNewSettings:
+      Top:
+        Radius: 1.6
+        Height: 2
+      Center:
+        Radius: 4
+        Height: 0
+      Bottom:
+        Radius: 1.7
+        Height: -1.7
+      SplineCurvature: 0
     deadZone: 1
     deadZoneSize: {x: 0, y: 0}
     hardLimits: 1
@@ -104,13 +121,22 @@ MonoBehaviour:
     targetOffset: {x: 0, y: 0, z: 0}
     damping: {x: 0.2, y: 0.3, z: 0.2}
     lookahead: 1
-    time: 0.02
-    smoothing: 0.1
+    time: 0.01
+    smoothing: 0.2
     ignoreY: 1
   CineCameraWhenInFront:
-    cameraDistance: 3
-    deadZoneDepth: 3
     screenPosition: {x: 0, y: 0}
+    OrbitNewSettings:
+      Top:
+        Radius: 1.6
+        Height: 2
+      Center:
+        Radius: 5
+        Height: 0
+      Bottom:
+        Radius: 2.2
+        Height: -1.5
+      SplineCurvature: 0
     deadZone: 1
     deadZoneSize: {x: 0, y: 0}
     hardLimits: 1
@@ -120,13 +146,14 @@ MonoBehaviour:
     targetOffset: {x: 0, y: 0, z: 0}
     damping: {x: 0.05, y: 0.2, z: 0.05}
     lookahead: 1
-    time: 0.03
-    smoothing: 0.1
+    time: 0.015
+    smoothing: 0.25
     ignoreY: 1
-  Target: {fileID: 0}
+  CameraCollidesWith:
+    serializedVersion: 2
+    m_Bits: 49153
   TargetDistance: -5
   Offset: {x: 0, y: 0, z: 0}
-  DeadZone: 0
   YLimits:
     x: -65
     y: 65
@@ -219,7 +246,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100
   field of view: 70
   orthographic: 0
   orthographic size: 5
@@ -333,18 +360,19 @@ GameObject:
   - component: {fileID: 2620728555040612940}
   - component: {fileID: 1616159411979852575}
   - component: {fileID: 1691193734993029450}
-  - component: {fileID: 2621452276608245540}
   - component: {fileID: 2794846627501740950}
-  - component: {fileID: 2276630876082974160}
-  - component: {fileID: 5902214162300384522}
-  - component: {fileID: 4236316886417056615}
+  - component: {fileID: 5153416008075702613}
+  - component: {fileID: 203515578868880786}
+  - component: {fileID: 6611107125198237596}
+  - component: {fileID: 2591128158740404477}
+  - component: {fileID: 6688665525823516562}
   m_Layer: 0
   m_Name: Cinemachine Camera Transform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2620728555040612940
 Transform:
   m_ObjectHideFlags: 0
@@ -372,8 +400,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9369efc84ed173940ac9804843a05bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: Multiple settings in the orbital follow and rotation composer will be dictated
-    by Cam Point_Normal Player in PlayerCam Control.
+  notes: All of the cinemachine components are referenced by, and have some of their
+    data dictated by, Cam Point_Normal Player in PlayerCam Control.
   NoteStyle:
     m_Name: textfield
     m_Normal:
@@ -450,7 +478,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7680409500595581811}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
   m_Name: 
@@ -470,7 +498,7 @@ MonoBehaviour:
     FieldOfView: 70
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 1000
+    FarClipPlane: 100
     Dutch: 0
     ModeOverride: 0
     PhysicalProperties:
@@ -486,7 +514,65 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
---- !u!114 &2621452276608245540
+--- !u!114 &2794846627501740950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7680409500595581811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89875cdc57c54474a8a74efd9b2a3b5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScanRecursively: 1
+  SuppressInputWhileBlending: 1
+  IgnoreTimeScale: 0
+  m_ControllerManager:
+    Controllers:
+    - Name: Look Orbit X
+      Owner: {fileID: 5153416008075702613}
+      Enabled: 1
+      Input:
+        InputAction: {fileID: -5630151704836100654, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
+        Gain: 1
+        LegacyInput: 
+        LegacyGain: 1
+        CancelDeltaTime: 0
+      InputValue: 0
+      Driver:
+        AccelTime: 0.2
+        DecelTime: 0.2
+    - Name: Look Orbit Y
+      Owner: {fileID: 5153416008075702613}
+      Enabled: 1
+      Input:
+        InputAction: {fileID: -5630151704836100654, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
+        Gain: -1
+        LegacyInput: 
+        LegacyGain: 1
+        CancelDeltaTime: 0
+      InputValue: 0
+      Driver:
+        AccelTime: 0.2
+        DecelTime: 0.2
+    - Name: Orbit Scale
+      Owner: {fileID: 5153416008075702613}
+      Enabled: 1
+      Input:
+        InputAction: {fileID: -423771258819551211, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
+        Gain: -1
+        LegacyInput: 
+        LegacyGain: 1
+        CancelDeltaTime: 0
+      InputValue: 0
+      Driver:
+        AccelTime: 0
+        DecelTime: 0
+  PlayerIndex: -1
+  AutoEnableInputs: 1
+--- !u!114 &5153416008075702613
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -549,7 +635,7 @@ MonoBehaviour:
       Wait: 1
       Time: 2
     Restrictions: 0
---- !u!114 &2794846627501740950
+--- !u!114 &203515578868880786
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -567,7 +653,7 @@ MonoBehaviour:
   m_ControllerManager:
     Controllers:
     - Name: Look Orbit X
-      Owner: {fileID: 2621452276608245540}
+      Owner: {fileID: 5153416008075702613}
       Enabled: 1
       Input:
         InputAction: {fileID: -5630151704836100654, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
@@ -580,7 +666,7 @@ MonoBehaviour:
         AccelTime: 0.2
         DecelTime: 0.2
     - Name: Look Orbit Y
-      Owner: {fileID: 2621452276608245540}
+      Owner: {fileID: 5153416008075702613}
       Enabled: 1
       Input:
         InputAction: {fileID: -5630151704836100654, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
@@ -593,7 +679,7 @@ MonoBehaviour:
         AccelTime: 0.2
         DecelTime: 0.2
     - Name: Orbit Scale
-      Owner: {fileID: 2621452276608245540}
+      Owner: {fileID: 5153416008075702613}
       Enabled: 1
       Input:
         InputAction: {fileID: -423771258819551211, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
@@ -607,7 +693,7 @@ MonoBehaviour:
         DecelTime: 0
   PlayerIndex: -1
   AutoEnableInputs: 1
---- !u!114 &2276630876082974160
+--- !u!114 &6611107125198237596
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -630,13 +716,13 @@ MonoBehaviour:
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 0, z: 0}
-  Damping: {x: 0.5, y: 0.5}
+  Damping: {x: 0, y: 0}
   Lookahead:
     Enabled: 1
     Time: 0.02
     Smoothing: 0.3
     IgnoreY: 1
---- !u!114 &5902214162300384522
+--- !u!114 &2591128158740404477
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -675,7 +761,7 @@ MonoBehaviour:
     NearLimit: 5
     FarLimit: 30
     MaxQualityBoost: 0.2
---- !u!114 &4236316886417056615
+--- !u!114 &6688665525823516562
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
