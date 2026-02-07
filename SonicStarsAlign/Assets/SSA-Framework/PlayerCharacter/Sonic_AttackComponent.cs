@@ -82,6 +82,11 @@ public class Sonic_AttackComponent : MonoBehaviour
                     Library.StartAttack("SDash");
                     break;
                 }
+            case PlayerStates.Bounce:
+                {
+                    Library.StartAttack("Bounce");
+                    break;
+                }
         }
     }
 
