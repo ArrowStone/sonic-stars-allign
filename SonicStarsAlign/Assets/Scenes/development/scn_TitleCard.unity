@@ -1400,6 +1400,7 @@ GameObject:
   - component: {fileID: 1212308521}
   - component: {fileID: 1212308520}
   - component: {fileID: 1212308522}
+  - component: {fileID: 1212308523}
   m_Layer: 5
   m_Name: Stage Text
   m_TagString: Untagged
@@ -1476,9 +1477,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 999ff5d83d64cef4bb5033b4dec27dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startOffset: {x: -1350, y: 0}
-  duration: 0.6
-  delay: 0.9
+  startOffset: {x: 0, y: 0}
+  duration: 1
+  delay: 1
+  fadeIn: 1
+--- !u!225 &1212308523
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212308518}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1367941792
 GameObject:
   m_ObjectHideFlags: 0
@@ -1863,8 +1877,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -540, y: 143}
-  m_SizeDelta: {x: 350, y: 253}
+  m_AnchoredPosition: {x: -514, y: 166}
+  m_SizeDelta: {x: 275, y: 199}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1649701791
 MonoBehaviour:
@@ -1916,9 +1930,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 999ff5d83d64cef4bb5033b4dec27dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startOffset: {x: 0, y: 400}
-  duration: 0.6
+  startOffset: {x: 0, y: 350}
+  duration: 1.5
   delay: 0
+  fadeIn: 0
 --- !u!1 &1727295617
 GameObject:
   m_ObjectHideFlags: 0
