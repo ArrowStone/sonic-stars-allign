@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3897691409524928149}
   - component: {fileID: 383526350250548113}
   - component: {fileID: 15830146094202309}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GenericEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,6 +282,18 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b045491341fabafdfb4868aa1dafc08b, type: 3}
       propertyPath: m_Name
       value: Mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b045491341fabafdfb4868aa1dafc08b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6036577318228579774, guid: b045491341fabafdfb4868aa1dafc08b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7900573212944184903, guid: b045491341fabafdfb4868aa1dafc08b, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

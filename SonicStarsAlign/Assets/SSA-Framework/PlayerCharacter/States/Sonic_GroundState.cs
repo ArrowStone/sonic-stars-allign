@@ -7,11 +7,9 @@ public class Sonic_GroundState : IState
     private readonly Sonic_PlayerStateMachine _ctx;
     private bool _groundDetected;
     private float _slipState;
-    private Cast_Ray SecondaryGroundCast;
     public Sonic_GroundState(Sonic_PlayerStateMachine _machine)
     {
         _ctx = _machine;
-        SecondaryGroundCast = new Cast_Ray(5f, _ctx.groundLayer);
     }
 
     public void EnterState()
@@ -181,36 +179,8 @@ public class Sonic_GroundState : IState
             _ctx.PlayerDirection = Vector3.RotateTowards(_ctx.PlayerDirection, _ctx.HorizontalVelocity.normalized, _turnStrength, 0);
         }
 
-
-        /*float groundDistance = _ctx.GroundCast.HitInfo.distance;
-
-        bool frontRaySuccess = SecondaryGroundCast.Execute(_ctx.Rb.transform.position - _ctx.Gravity + _ctx.PlayerDirection * 1f, -normal);
-        Debug.DrawRay(SecondaryGroundCast.HitInfo.point, SecondaryGroundCast.HitInfo.normal, Color.black, _delta);
-        float frontGroundDeviation = groundDistance - SecondaryGroundCast.HitInfo.distance;
-        Vector3 frontGroundNormal = SecondaryGroundCast.HitInfo.normal;
-        if(FrameworkUtility.IsApproximate(frontGroundNormal, normal, 0.001f)) {frontRaySuccess = false;} // Check for ledges or such
-
-        bool backRaySuccess = SecondaryGroundCast.Execute(_ctx.Rb.transform.position - _ctx.Gravity - _ctx.PlayerDirection * 1f, -normal);
-        Debug.DrawRay(SecondaryGroundCast.HitInfo.point, SecondaryGroundCast.HitInfo.normal, Color.black, _delta);
-        float backGroundDeviation = groundDistance - SecondaryGroundCast.HitInfo.distance;
-        Vector3 backGroundNormal = SecondaryGroundCast.HitInfo.normal;
-        if(FrameworkUtility.IsApproximate(backGroundNormal, normal, 0.001f)) {backRaySuccess = false;} // Check for ledges or such
-
-        // Turn the player slightly depending if the ground in front is going up or down
-        if (frontRaySuccess) 
-        {
-            frontGroundDeviation = Math.Abs(Math.Clamp(frontGroundDeviation, -1f, 1f));
-            normal += frontGroundNormal * frontGroundDeviation;
-        }
-        if(backRaySuccess)
-        {
-            backGroundDeviation = Math.Abs(Math.Clamp(backGroundDeviation, -1f, 1f));
-            normal += backGroundNormal * backGroundDeviation;
-        }
-        normal.Normalize();*/
-
         //Also smoothen rotation
-        _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, Vector3.Lerp(_ctx.transform.up, _ctx.GroundCast.HitInfo.normal, 0.1f));
+        _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, Vector3.Lerp(_ctx.transform.up, _ctx.GroundCast.HitInfo.normal, _delta * _ctx.RotationSmoothingSpeed));
     }
 
     private void Movement(float _delta)

@@ -1830,6 +1830,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  RotationSmoothingSpeed: 7
   groundLayer:
     serializedVersion: 2
     m_Bits: 16384

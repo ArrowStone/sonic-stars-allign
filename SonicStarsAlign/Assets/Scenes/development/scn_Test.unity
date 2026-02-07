@@ -42896,7 +42896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 740205978266202856, guid: 01e205996e4bf35a38fe0c44206e2b45, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 52.8
+      value: 53.216
       objectReference: {fileID: 0}
     - target: {fileID: 740205978266202856, guid: 01e205996e4bf35a38fe0c44206e2b45, type: 3}
       propertyPath: m_LocalPosition.z
@@ -43581,6 +43581,10 @@ PrefabInstance:
       propertyPath: InputRef
       value: 
       objectReference: {fileID: 1506604440}
+    - target: {fileID: 6161017509054430529, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
+      propertyPath: RotationSmoothingSpeed
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6509000225257215466, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
       propertyPath: m_Name
       value: Player
