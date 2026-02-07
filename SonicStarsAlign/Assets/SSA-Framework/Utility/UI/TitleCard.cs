@@ -19,6 +19,7 @@ public class TitleCard : MonoBehaviour
 
     IEnumerator LoadStageCoroutine()
     {
+        yield return null;
         string cachedStage = SceneSwitcher.Instance?.GetCachedStage();
 
         if (string.IsNullOrEmpty(cachedStage))

@@ -271,7 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageNameImage: {fileID: 1212308520}
   loadingText: {fileID: 996480424}
-  minDisplayTime: 1
+  minDisplayTime: 1.5
 --- !u!4 &138160043
 Transform:
   m_ObjectHideFlags: 0
@@ -1399,6 +1399,7 @@ GameObject:
   - component: {fileID: 1212308519}
   - component: {fileID: 1212308521}
   - component: {fileID: 1212308520}
+  - component: {fileID: 1212308522}
   m_Layer: 5
   m_Name: Stage Text
   m_TagString: Untagged
@@ -1463,6 +1464,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1212308518}
   m_CullTransparentMesh: 1
+--- !u!114 &1212308522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212308518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 999ff5d83d64cef4bb5033b4dec27dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startOffset: {x: -1350, y: 0}
+  duration: 0.6
+  delay: 0.9
 --- !u!1 &1367941792
 GameObject:
   m_ObjectHideFlags: 0
@@ -1823,6 +1839,7 @@ GameObject:
   - component: {fileID: 1649701789}
   - component: {fileID: 1649701792}
   - component: {fileID: 1649701791}
+  - component: {fileID: 1649701793}
   m_Layer: 5
   m_Name: Sonic Head
   m_TagString: Untagged
@@ -1846,8 +1863,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -507.4, y: 181}
-  m_SizeDelta: {x: 300, y: 300}
+  m_AnchoredPosition: {x: -540, y: 143}
+  m_SizeDelta: {x: 350, y: 253}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1649701791
 MonoBehaviour:
@@ -1869,7 +1886,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e4ff285f6b9631ca297f56ab4d1d2acc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0b6acee8d2a15034b92fa926618955b5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1887,6 +1904,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649701788}
   m_CullTransparentMesh: 1
+--- !u!114 &1649701793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649701788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 999ff5d83d64cef4bb5033b4dec27dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startOffset: {x: 0, y: 400}
+  duration: 0.6
+  delay: 0
 --- !u!1 &1727295617
 GameObject:
   m_ObjectHideFlags: 0
