@@ -3,13 +3,18 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using Unity.Cinemachine;
 
 // Code for loading and applying settings in the levels. Every parameter has to be hardcoded.
 public class SettingsLoader : MonoBehaviour
 {
+        [Header("References")]
     public CamPoint_NormalPlayer pointPlayer;
+        public CinemachineCamera CMCamera;
     public VolumeProfile profile;
     public UniversalRenderPipelineAsset pipelineAsset;
+
+        [Header("Qualities")]
     public int[,] resolutions =
     {
         {0,0},
@@ -74,7 +79,8 @@ public class SettingsLoader : MonoBehaviour
         }
 
         cam.farClipPlane = 100f + (viewDist * 900f);
-        cameraData.antialiasing = AAModes[AAMode];
+                CMCamera.Lens.FarClipPlane = 100f + (viewDist * 900f); ;
+                cameraData.antialiasing = AAModes[AAMode];
         cameraData.antialiasingQuality = SMAAQualities[AAQuality];
         cameraData.taaSettings.quality = TAAQualities[AAQuality];
         pipelineAsset.renderScale = renderScale;

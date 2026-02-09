@@ -503,6 +503,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""26a75e9c-e74e-421e-85d4-502ea03c10f0"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""BackCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""fa574f32-1587-49ce-aa28-8e9a23ef8a06"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
