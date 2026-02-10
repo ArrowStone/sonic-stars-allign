@@ -68,21 +68,18 @@ public class Sonic_SweepKickState : IState
     {
         _hasHit = true;
 
-        // Overlap sphere forward from Sonic�s position
+        // Overlap sphere forward from Sonic's position
         Vector3 kickOrigin = _ctx.Rb.transform.position + _ctx.PlayerDirection * 1f;
-        Collider[] hits = Physics.OverlapSphere(kickOrigin, _kickDamageRadius);
+        Collider[] hits = Physics.OverlapSphere(kickOrigin, _kickDamageRadius, _ctx.homingTargetLayer);
 
         foreach (var hit in hits)
         {
-            if (hit.CompareTag("Enemy"))
-            {
-                // TODO: replace with your enemy damage pipeline
-                Debug.Log("Sweep Kick hit: " + hit.name);
+            // TODO: replace with your enemy damage pipeline
+            Debug.Log("Sweep Kick hit: " + hit.name);
 
-                // give a little forward boost
-                _ctx.Velocity += _ctx.PlayerDirection * _kickSpeedBoost;
-                break;
-            }
+            // give a little forward boost
+            _ctx.Velocity += _ctx.PlayerDirection * _kickSpeedBoost;
+            break;
         }
     }
 }

@@ -22,19 +22,19 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         public float RotationSmoothingSpeed;
 
         [Header("Collision")]
-        [SerializeField] public LayerMask groundLayer;
+        public LayerMask groundLayer;
 
-        [SerializeField] public LayerMask wallLayer;
+        public LayerMask wallLayer;
 
-        [SerializeField] private LayerMask homingTargetLayer;
+        public LayerMask homingTargetLayer;
 
-        [SerializeField] private LayerMask ringLayer;
+        public LayerMask ringLayer;
 
-        [SerializeField] private LayerMask railLayer;
+        public LayerMask railLayer;
 
-        [SerializeField] public LayerMask ledgeLayer;
+        public LayerMask ledgeLayer;
 
-        [SerializeField] public LayerMask wallRunLayer;
+        public LayerMask wallRunLayer;
         [Space]
         [SerializeField] private float homingDetectionDistance;
 
@@ -169,7 +169,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                 GroundCast = new Cast_Ray(groundRayLength, groundLayer);
                 WallCast = new Cast_Ray(groundRayLength, wallLayer);
                 CeilCast = new Cast_Ray(groundRayLength, wallLayer);
-                HomingTargetDetector = new Overlap_Sphere(gameObject, 5, homingTargetLayer, homingDetectionDistance, homingDetectionRadius, wallLayer, DetectionBias.Direction);
+                // Have to set layer blockmask to empty otherwise you can't home onto grounded enemies for some reason
+                HomingTargetDetector = new Overlap_Sphere(gameObject, 5, homingTargetLayer, homingDetectionDistance, homingDetectionRadius, 0, DetectionBias.Direction);
                 RingDetector = new Overlap_Sphere(gameObject, 5, ringLayer, lightDetectionDistance, lightDetectionRadius, wallLayer, DetectionBias.Direction);
 
                 RailDetectorL = new Overlap_Sphere(gameObject, 5, railLayer, railDetectionDistance, railDetectionRadius, wallLayer, DetectionBias.Proximity);

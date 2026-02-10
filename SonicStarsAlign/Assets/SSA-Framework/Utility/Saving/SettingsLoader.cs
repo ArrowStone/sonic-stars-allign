@@ -79,8 +79,8 @@ public class SettingsLoader : MonoBehaviour
         }
 
         cam.farClipPlane = 100f + (viewDist * 900f);
-                CMCamera.Lens.FarClipPlane = 100f + (viewDist * 900f); ;
-                cameraData.antialiasing = AAModes[AAMode];
+        CMCamera.Lens.FarClipPlane = 100f + (viewDist * 900f); ;
+        cameraData.antialiasing = AAModes[AAMode];
         cameraData.antialiasingQuality = SMAAQualities[AAQuality];
         cameraData.taaSettings.quality = TAAQualities[AAQuality];
         pipelineAsset.renderScale = renderScale;

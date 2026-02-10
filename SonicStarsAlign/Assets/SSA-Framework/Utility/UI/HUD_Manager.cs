@@ -30,34 +30,21 @@ public class HUD_Manager : MonoBehaviour
 
             if (score - prevScore < ScorePopupIgnoreBelow) return;
 
-            int emptyIndex = popups.FindIndex(popup => popup == null);
+            CreateScorePopup((score - prevScore).ToString());
 
-            // checking if we already have 3 popups
-            if(emptyIndex == -1 && popups.Count > 2)
+            if(score - prevScore >= 700)
             {
-                return;
+                CreateScorePopup("SHREDDING!!!");
             }
-
-            GameObject newPopup = Instantiate(scorePopup, Canvas);
-
-            Debug.Log(emptyIndex);
-
-            if(emptyIndex == -1)
+            else if(score - prevScore >= 500)
             {
-                emptyIndex = popups.Count;
-                popups.Add(newPopup);
+                CreateScorePopup("OUTSTANDING!!");
             }
-            else
+            else if(score - prevScore >= 200)
             {
-                popups[emptyIndex] = newPopup;
+                CreateScorePopup("NEAT!");
             }
-
-            newPopup.GetComponentInChildren<TextMeshProUGUI>().text = (score - prevScore).ToString();
-            RectTransform popupTransform = (RectTransform) newPopup.transform;
-
-            Vector2 popupPosition = popupTransform.anchoredPosition;
-            popupPosition.y -= PopupOffset * emptyIndex;
-            popupTransform.anchoredPosition = popupPosition;
+            
         }
 
         _ctx.Chs.RingSet += SetRings;
@@ -70,5 +57,34 @@ public class HUD_Manager : MonoBehaviour
     private void SetText(int i, string text)
     {
         textObjects[i].text = text;
+    }
+    public void CreateScorePopup(string popupText)
+    {
+        int emptyIndex = popups.FindIndex(popup => popup == null);
+
+        // checking if we already have 3 popups
+        if(emptyIndex == -1 && popups.Count > 2)
+        {
+            return;
+        }
+
+        GameObject newPopup = Instantiate(scorePopup, Canvas);
+
+        if(emptyIndex == -1)
+        {
+            emptyIndex = popups.Count;
+            popups.Add(newPopup);
+        }
+        else
+        {
+            popups[emptyIndex] = newPopup;
+        }
+
+        newPopup.GetComponentInChildren<TextMeshProUGUI>().text = popupText;
+        RectTransform popupTransform = (RectTransform) newPopup.transform;
+
+        Vector2 popupPosition = popupTransform.anchoredPosition;
+        popupPosition.y -= PopupOffset * emptyIndex;
+        popupTransform.anchoredPosition = popupPosition;
     }
 }

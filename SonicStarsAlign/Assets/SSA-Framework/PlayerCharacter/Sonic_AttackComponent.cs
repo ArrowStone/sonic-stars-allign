@@ -6,6 +6,7 @@ public class Sonic_AttackComponent : MonoBehaviour
     private Sonic_PlayerStateMachine ctx;
     public AttackLibrary Library;
     public Vector3 RecoilVector;
+    public int comboLength;
 
     private void OnEnable()
     {
@@ -45,10 +46,24 @@ public class Sonic_AttackComponent : MonoBehaviour
     {
         Library.AttackUpdate(Time.fixedDeltaTime);
 
-        if (!ctx.Jumping && jumping)
+        if (!ctx.Jumping && jumping && ctx.CurrentEstate != PlayerStates.Air)
         {
             Library.StopAttack("Spin");
             jumping = false;
+        }
+
+        if(ctx.CurrentEstate == PlayerStates.Ground)
+        {
+            if (comboLength > 0) Debug.Log("Combo of length " + comboLength);
+
+            int scoreAdd = 0;
+
+            if(comboLength > 2) scoreAdd = 200;
+            if(comboLength > 4) scoreAdd = 700;
+            if(comboLength > 6) scoreAdd = 1000;
+
+            ctx.Chs.Score += scoreAdd;
+            comboLength = 0;
         }
     }
 
@@ -101,6 +116,8 @@ public class Sonic_AttackComponent : MonoBehaviour
         {
             return;
         }
+
+        comboLength += 1;
 
         if (ctx.CurrentEstate is PlayerStates.HomingAttack)
         {
