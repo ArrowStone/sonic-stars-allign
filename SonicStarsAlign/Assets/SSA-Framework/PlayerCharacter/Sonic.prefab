@@ -953,7 +953,7 @@ GameObject:
   - component: {fileID: 701083756679323822}
   - component: {fileID: 1946878119361867871}
   m_Layer: 11
-  m_Name: Player
+  m_Name: Sonic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
