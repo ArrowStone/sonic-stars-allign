@@ -138,7 +138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1426144978911896763}
-  - component: {fileID: 7032989102020537418}
+  - component: {fileID: 4215967678924571685}
   m_Layer: 11
   m_Name: Collision Offset Target
   m_TagString: Untagged
@@ -161,7 +161,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6491936539475151559}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7032989102020537418
+--- !u!114 &4215967678924571685
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,28 +170,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1514013643745019404}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 025dd8a9986532a48a5fea4a4fd2b824, type: 3}
+  m_Script: {fileID: 11500000, guid: 80da0993c55d63140b14e61c21ff0002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _isSelected: 0
   _hasVisualisationScripted: 1
-  _viewVisualisationData: 0
-  _viewVisualisationDataHidden: 0
+  _viewVisualisationData: 1
+  _viewVisualisationDataHidden: 1
   _drawAtAllTimes: 1
   _drawIfParentSelected: 0
-  _normalOutlineColour: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _selectedOutlineColour: {r: 1, g: 1, b: 1, a: 1}
+  _normalOutlineColour: {r: 1, g: 0.51886785, b: 0.51886785, a: 1}
+  _selectedOutlineColour: {r: 1, g: 0.51886785, b: 0.51886785, a: 1}
   _normalFillColour: {r: 1, g: 1, b: 1, a: 0}
   _selectedFillColour: {r: 1, g: 1, b: 1, a: 0.1}
   _maxDistanceFromCameraToDraw: 1200
-  _thickness: 3.23
-  _scale: 0.3
-  _forwards: 1
-  _backwards: 0
-  _upwards: 1
-  _downwards: 0
-  _right: 0
-  _left: 0
+  size: 0.15
+  Shape: 1
 --- !u!1 &3014832451933456985
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,7 +195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8820548336483319809}
-  - component: {fileID: 1132870655003509495}
+  - component: {fileID: 1977259012141141874}
   m_Layer: 11
   m_Name: Vertical Offset Target
   m_TagString: Untagged
@@ -224,37 +218,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6491936539475151559}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1132870655003509495
+--- !u!114 &1977259012141141874
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3014832451933456985}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 025dd8a9986532a48a5fea4a4fd2b824, type: 3}
+  m_Script: {fileID: 11500000, guid: 80da0993c55d63140b14e61c21ff0002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isSelected: 0
+  _isSelected: 1
   _hasVisualisationScripted: 1
-  _viewVisualisationData: 0
-  _viewVisualisationDataHidden: 0
+  _viewVisualisationData: 1
+  _viewVisualisationDataHidden: 1
   _drawAtAllTimes: 1
   _drawIfParentSelected: 0
-  _normalOutlineColour: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _selectedOutlineColour: {r: 1, g: 1, b: 1, a: 1}
+  _normalOutlineColour: {r: 1, g: 0.51886785, b: 0.51886785, a: 1}
+  _selectedOutlineColour: {r: 1, g: 0.51886785, b: 0.51886785, a: 1}
   _normalFillColour: {r: 1, g: 1, b: 1, a: 0}
   _selectedFillColour: {r: 1, g: 1, b: 1, a: 0.1}
   _maxDistanceFromCameraToDraw: 1200
-  _thickness: 3.23
-  _scale: 0.3
-  _forwards: 1
-  _backwards: 0
-  _upwards: 1
-  _downwards: 0
-  _right: 0
-  _left: 0
+  size: 0.15
+  Shape: 1
 --- !u!1 &4057180974824396486
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,6 +252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6491936539475151559}
+  - component: {fileID: 2111847420787060327}
   m_Layer: 11
   m_Name: Camera Target Base
   m_TagString: Untagged
@@ -289,6 +278,37 @@ Transform:
   - {fileID: 8820548336483319809}
   m_Father: {fileID: 4762720238778129734}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2111847420787060327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4057180974824396486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025dd8a9986532a48a5fea4a4fd2b824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isSelected: 0
+  _hasVisualisationScripted: 1
+  _viewVisualisationData: 1
+  _viewVisualisationDataHidden: 1
+  _drawAtAllTimes: 0
+  _drawIfParentSelected: 0
+  _normalOutlineColour: {r: 0.13508701, g: 0, b: 1, a: 1}
+  _selectedOutlineColour: {r: 0, g: 0.020625114, b: 1, a: 1}
+  _normalFillColour: {r: 1, g: 1, b: 1, a: 0}
+  _selectedFillColour: {r: 1, g: 1, b: 1, a: 0.1}
+  _maxDistanceFromCameraToDraw: 1200
+  _thickness: 5.02
+  _scale: 0.44
+  _forwards: 1
+  _backwards: 0
+  _upwards: 1
+  _downwards: 0
+  _right: 0
+  _left: 0
 --- !u!1 &4305991935861906932
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +318,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3588364039322496579}
-  - component: {fileID: 7933950346820097928}
+  - component: {fileID: 4196767156521119482}
   m_Layer: 11
   m_Name: Main CamTarget
   m_TagString: Untagged
@@ -321,7 +341,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6491936539475151559}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7933950346820097928
+--- !u!114 &4196767156521119482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -330,28 +350,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 4305991935861906932}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 025dd8a9986532a48a5fea4a4fd2b824, type: 3}
+  m_Script: {fileID: 11500000, guid: 80da0993c55d63140b14e61c21ff0002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _isSelected: 0
   _hasVisualisationScripted: 1
-  _viewVisualisationData: 0
-  _viewVisualisationDataHidden: 0
+  _viewVisualisationData: 1
+  _viewVisualisationDataHidden: 1
   _drawAtAllTimes: 1
   _drawIfParentSelected: 0
-  _normalOutlineColour: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  _selectedOutlineColour: {r: 1, g: 1, b: 1, a: 1}
+  _normalOutlineColour: {r: 1, g: 0, b: 0, a: 1}
+  _selectedOutlineColour: {r: 1, g: 0, b: 0, a: 1}
   _normalFillColour: {r: 1, g: 1, b: 1, a: 0}
   _selectedFillColour: {r: 1, g: 1, b: 1, a: 0.1}
   _maxDistanceFromCameraToDraw: 1200
-  _thickness: 3.23
-  _scale: 0.3
-  _forwards: 1
-  _backwards: 0
-  _upwards: 1
-  _downwards: 0
-  _right: 0
-  _left: 0
+  size: 0.2
+  Shape: 1
 --- !u!1 &4497414902112148468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1666,6 +1680,7 @@ GameObject:
   - component: {fileID: 2915567401409790432}
   - component: {fileID: 1408359879882202046}
   - component: {fileID: 5570304920696539352}
+  - component: {fileID: 3736239441605063074}
   m_Layer: 11
   m_Name: Player_Rigidbody
   m_TagString: Untagged
@@ -1713,7 +1728,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.34
   m_Height: 0.875
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -1741,7 +1756,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 3
 --- !u!114 &218597422485095100
@@ -2105,6 +2120,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3736239441605063074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8760114905739693595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07416f7005f5a844ab65492b50787b1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DummyText: 0
 --- !u!1001 &1290237487256648732
 PrefabInstance:
   m_ObjectHideFlags: 0

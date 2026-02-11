@@ -28,7 +28,7 @@ public class Sonic_GroundState : IState
 
 			Vector3 targetPos =_ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover;
 
-			_ctx.Rb.position = Vector3.Lerp(_ctx.Rb.position,targetPos,0.5f);
+                        Player_StaticFunctions.MoveRBPosition(_ctx.Rb, Vector3.Lerp(_ctx.Rb.position, targetPos, 0.5f), "Enter Ground State");
 		}
 
 		_ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundNormal);

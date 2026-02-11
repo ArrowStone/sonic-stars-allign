@@ -234,7 +234,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         }
 
         public void Respawn () {
-                transform.SetPositionAndRotation(Chs.SpawnData.Position, Chs.SpawnData.Rotation);
+                Player_StaticFunctions.SetTransform(transform, Chs.SpawnData.Position, Chs.SpawnData.Rotation, "Respawn");
                 Death = false;
                 MachineTransition(PlayerStates.Ground);
         }
@@ -259,7 +259,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         public void Physics_Snap ( Vector3 _point ) {
                 if (!Physics_Sweep(_point, out _))
                 {
-                        Rb.MovePosition(_point);
+                        Player_StaticFunctions.MoveRBPosition(Rb, _point, "Physics Snap");
                 }
         }
 
@@ -267,7 +267,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                 Vector3 _v = Vector3.Lerp(transform.position, _point, _time);
                 if (!Physics_Sweep(_v, out _))
                 {
-                        transform.position = _v;
+                        Player_StaticFunctions.SetTransform(transform, _v, transform.rotation, "Physics Snap");
                 }
         }
 

@@ -373,7 +373,8 @@ public class Sonic_AirState : IState
         endPosition += displacement;
 
         //_ctx.Physics_Snap(endPosition); // Set the position
-        _ctx.Rb.transform.position = endPosition;
+        //_ctx.Rb.transform.position = endPosition;
+                Player_StaticFunctions.SetRBPosition(_ctx.Rb, endPosition, "Ledge Grab");
         
         _ctx.MachineTransition(PlayerStates.LedgeGrab); // Change state
     }

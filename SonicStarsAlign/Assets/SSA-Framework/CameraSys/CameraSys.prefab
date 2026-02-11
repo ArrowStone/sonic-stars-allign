@@ -49,7 +49,7 @@ MonoBehaviour:
   DummyText: 0
   CamTransform: {fileID: 2730942054133459718}
   Input: {fileID: 0}
-  SetPositionAndRotationManually: 1
+  SetPositionAndRotationManually: 0
   WeightCurve:
     serializedVersion: 2
     m_Curve:
@@ -88,17 +88,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DummyText: 0
   Brain: {fileID: 2452809473747569026}
+  PlayerRB: {fileID: 0}
   DummyText3: 0
   MainTarget: {fileID: 0}
   BaseTarget: {fileID: 0}
   TargetCollisionOffset: {fileID: 0}
+  UseTargetCollisionOffset: 1
   TargetAdditionalVerticalOffset: {fileID: 0}
+  UseTargetVerticalOffset: 0
+  TargetShoulderOffset: {fileID: 0}
+  UseTargetShoulderOffset: 1
   DummyText2: 0
   CMCamera: {fileID: 1691193734993029450}
   ComposerToOverwrite: {fileID: 6611107125198237596}
   OrbitalToOverwrite: {fileID: 5153416008075702613}
   DeoccluderToOverwrite: {fileID: 2591128158740404477}
-  DecolliderToOverwrite: {fileID: 6688665525823516562}
   CineCameraWhenBehind:
     screenPosition: {x: 0, y: 0}
     OrbitNewSettings:
@@ -119,8 +123,8 @@ MonoBehaviour:
     hardLimitsOffset: {x: 0, y: 0.1}
     centerOnActivate: 1
     targetOffset: {x: 0, y: 0, z: 0}
-    damping: {x: 0.2, y: 0.3, z: 0.2}
-    lookahead: 1
+    damping: {x: 0, y: 0, z: 0}
+    lookahead: 0
     time: 0.01
     smoothing: 0.2
     ignoreY: 1
@@ -144,14 +148,16 @@ MonoBehaviour:
     hardLimitsOffset: {x: 0, y: 0.1}
     centerOnActivate: 1
     targetOffset: {x: 0, y: 0, z: 0}
-    damping: {x: 0.05, y: 0.2, z: 0.05}
-    lookahead: 1
-    time: 0.015
+    damping: {x: 0, y: 0, z: 0}
+    lookahead: 0
+    time: 0.025
     smoothing: 0.25
     ignoreY: 1
   CameraCollidesWith:
     serializedVersion: 2
     m_Bits: 49153
+  BaseDistanceModifier: 1
+  MinSpeedToAutoRecenter: {x: 0, y: 0}
   TargetDistance: -5
   Offset: {x: 0, y: 0, z: 0}
   YLimits:
@@ -207,8 +213,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5559582077744365590}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.000000024972016, y: 0.99777454, z: -0.06667864, w: -0.00000037367948}
-  m_LocalPosition: {x: -178.2799, y: -20.44101, z: 96.606255}
+  m_LocalRotation: {x: -0.066678606, y: -0.00000041729365, z: 0.000000027886617, w: -0.99777454}
+  m_LocalPosition: {x: -178.27992, y: -20.44101, z: 88.99398}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -365,14 +371,13 @@ GameObject:
   - component: {fileID: 203515578868880786}
   - component: {fileID: 6611107125198237596}
   - component: {fileID: 2591128158740404477}
-  - component: {fileID: 6688665525823516562}
   m_Layer: 0
   m_Name: Cinemachine Camera Transform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2620728555040612940
 Transform:
   m_ObjectHideFlags: 0
@@ -381,8 +386,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7680409500595581811}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.000000024972008, y: 0.99777454, z: -0.06667863, w: -0.00000037367948}
-  m_LocalPosition: {x: -178.2799, y: -20.44101, z: 96.606255}
+  m_LocalRotation: {x: -0.0666786, y: -0.00000041729362, z: 0.000000027886614, w: -0.99777454}
+  m_LocalPosition: {x: -178.27992, y: -20.44101, z: 88.99398}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -606,14 +611,14 @@ MonoBehaviour:
     SplineCurvature: 0
   RecenteringTarget: 3
   HorizontalAxis:
-    Value: 0
-    Center: 0
+    Value: -180
+    Center: -180
     Range: {x: -180, y: 180}
     Wrap: 1
     Recentering:
-      Enabled: 0
+      Enabled: 1
       Wait: 1
-      Time: 2
+      Time: 0.7
     Restrictions: 0
   VerticalAxis:
     Value: 17.5
@@ -708,19 +713,19 @@ MonoBehaviour:
   Composition:
     ScreenPosition: {x: 0, y: 0}
     DeadZone:
-      Enabled: 1
+      Enabled: 0
       Size: {x: 0.2, y: 0.2}
     HardLimits:
-      Enabled: 1
+      Enabled: 0
       Size: {x: 0.8, y: 0.8}
       Offset: {x: 0, y: 0}
-  CenterOnActivate: 1
+  CenterOnActivate: 0
   TargetOffset: {x: 0, y: 0, z: 0}
   Damping: {x: 0, y: 0}
   Lookahead:
-    Enabled: 1
-    Time: 0.02
-    Smoothing: 0.3
+    Enabled: 0
+    Time: 0
+    Smoothing: 0
     IgnoreY: 1
 --- !u!114 &2591128158740404477
 MonoBehaviour:
@@ -741,12 +746,12 @@ MonoBehaviour:
   TransparentLayers:
     serializedVersion: 2
     m_Bits: 0
-  MinimumDistanceFromTarget: 0.01
+  MinimumDistanceFromTarget: 0.02
   AvoidObstacles:
     Enabled: 1
     DistanceLimit: 0
     MinimumOcclusionTime: 0
-    CameraRadius: 0.3
+    CameraRadius: 0.25
     UseFollowTarget:
       Enabled: 1
       YOffset: 0
@@ -761,36 +766,6 @@ MonoBehaviour:
     NearLimit: 5
     FarLimit: 30
     MaxQualityBoost: 0.2
---- !u!114 &6688665525823516562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7680409500595581811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca7de3aefa901374ba29464584a3109a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CameraRadius: 0.201
-  Decollision:
-    Enabled: 1
-    ObstacleLayers:
-      serializedVersion: 2
-      m_Bits: 16385
-    UseFollowTarget:
-      Enabled: 0
-      YOffset: 0
-    Damping: 0.5
-    SmoothingTime: 0
-  TerrainResolution:
-    Enabled: 1
-    TerrainLayers:
-      serializedVersion: 2
-      m_Bits: 1
-    MaximumRaycast: 10
-    Damping: 0.5
 --- !u!1 &9136669471803312224
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,6 +814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointPlayer: {fileID: 330013986443441624}
+  CMCamera: {fileID: 1691193734993029450}
   profile: {fileID: 11400000, guid: ab09877e2e707104187f6f83e2f62510, type: 2}
   pipelineAsset: {fileID: 11400000, guid: 4b83569d67af61e458304325a23e5dfd, type: 2}
   AAModes: 00000000010000000200000003000000
