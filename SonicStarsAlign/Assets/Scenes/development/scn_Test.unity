@@ -43147,9 +43147,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1282866121}
     - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: CineCameraWhenBehind.damping.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: CineCameraWhenBehind.damping.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: CineCameraWhenBehind.lookahead
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
       propertyPath: TargetAdditionalVerticalOffset
       value: 
       objectReference: {fileID: 687586195}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: CineCameraWhenInFront.damping.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: CineCameraWhenInFront.damping.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: CineCameraWhenInFront.lookahead
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1691193734993029450, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
