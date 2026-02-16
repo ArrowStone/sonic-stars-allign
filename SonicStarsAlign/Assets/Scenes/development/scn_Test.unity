@@ -14270,6 +14270,11 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!4 &1052571798 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1426144978911896763, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
+  m_PrefabInstance: {fileID: 7424688648105209037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1058412271
 GameObject:
   m_ObjectHideFlags: 0
@@ -43139,6 +43144,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7424688648105209038}
     - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: PlayerCTX
+      value: 
+      objectReference: {fileID: 948741069}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
       propertyPath: BaseTarget
       value: 
       objectReference: {fileID: 471168432}
@@ -43146,6 +43155,22 @@ PrefabInstance:
       propertyPath: MainTarget
       value: 
       objectReference: {fileID: 1282866121}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: TargetLookAheadOffset
+      value: 
+      objectReference: {fileID: 1052571798}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: UseTargetVerticalOffset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: UseTargetLookAheadOffset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: FOVBySpeed.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
       propertyPath: CineCameraWhenBehind.damping.x
       value: 0
@@ -43174,6 +43199,98 @@ PrefabInstance:
       propertyPath: CineCameraWhenInFront.lookahead
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: FOVBySpeed.m_Curve.Array.data[1].time
+      value: 10.071409
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: FOVBySpeed.m_Curve.Array.data[2].time
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: CineCameraWhenBehind.lookAheadModifier
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: FOVBySpeed.m_Curve.Array.data[0].value
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: FOVBySpeed.m_Curve.Array.data[1].value
+      value: 78.911545
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: FOVBySpeed.m_Curve.Array.data[2].value
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: CineCameraWhenInFront.lookAheadModifier
+      value: 1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: FOVBySpeed.m_Curve.Array.data[1].inSlope
+      value: 1.7143025
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: FOVBySpeed.m_Curve.Array.data[1].inWeight
+      value: 0.15385132
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: FOVBySpeed.m_Curve.Array.data[1].outSlope
+      value: 1.7143025
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: DistanceModifierBySpeed.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: FOVBySpeed.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: DistanceModifierBySpeed.m_Curve.Array.data[1].time
+      value: 11.659209
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: DistanceModifierBySpeed.m_Curve.Array.data[2].time
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: DistanceModifierBySpeed.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: DistanceModifierBySpeed.m_Curve.Array.data[1].value
+      value: 0.8466223
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: DistanceModifierBySpeed.m_Curve.Array.data[2].value
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: CineCameraWhenInFront.OrbitNewSettings.Center.Radius
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: DistanceModifierBySpeed.m_Curve.Array.data[1].inSlope
+      value: -0.026658054
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: VerticalOffsetByViewAngle.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: DistanceModifierBySpeed.m_Curve.Array.data[1].inWeight
+      value: 0.15385132
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: DistanceModifierBySpeed.m_Curve.Array.data[1].outSlope
+      value: -0.026658054
+      objectReference: {fileID: 0}
+    - target: {fileID: 330013986443441624, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: DistanceModifierBySpeed.m_Curve.Array.data[1].outWeight
+      value: 0.10972939
+      objectReference: {fileID: 0}
     - target: {fileID: 1691193734993029450, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
@@ -43182,6 +43299,14 @@ PrefabInstance:
       propertyPath: Input
       value: 
       objectReference: {fileID: 1263480790}
+    - target: {fileID: 2620728555040612940, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -20.526009
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730942054133459718, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -20.526009
+      objectReference: {fileID: 0}
     - target: {fileID: 5153416008075702613, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
       propertyPath: HorizontalAxis.Center
       value: -180
@@ -44186,6 +44311,22 @@ PrefabInstance:
       propertyPath: CameraBrain
       value: 
       objectReference: {fileID: 318483110}
+    - target: {fileID: 1514013643745019404, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
+      propertyPath: m_Name
+      value: Look Ahead Offset Target
+      objectReference: {fileID: 0}
+    - target: {fileID: 1977259012141141874, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215967678924571685, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215967678924571685, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
+      propertyPath: _isSelected
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6094424250598897931, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 38.987244
@@ -44230,6 +44371,10 @@ PrefabInstance:
       propertyPath: InputRef
       value: 
       objectReference: {fileID: 1506604440}
+    - target: {fileID: 6491936539475151559, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.483
+      objectReference: {fileID: 0}
     - target: {fileID: 6509000225257215466, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
       propertyPath: m_Name
       value: Sonic

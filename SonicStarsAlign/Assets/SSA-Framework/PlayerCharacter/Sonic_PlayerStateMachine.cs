@@ -88,6 +88,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         public Vector3 VerticalVelocity { get; set; } = Vector3.zero;
         public Collider TriggerBuffer { get; set; }
         public Vector3 CurrentMoveDirection { get; set; }
+        public float PlayerRunningSpeed { get; set; } = 0;
 
         public Vector3 Velocity {
                 get => Rb.linearVelocity;
@@ -219,6 +220,9 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
         public void FixedUpdate () {
                 base.MachineFixedUpdate();
+
+                Vector3 relevantVelocity = transform.InverseTransformDirection(Rb.linearVelocity);
+                PlayerRunningSpeed = new Vector3 (relevantVelocity.x, 0, relevantVelocity.z).magnitude;
         }
 
         public void LateUpdate () {
