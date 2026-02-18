@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 3519452944739281372}
   - component: {fileID: 2731637571785751028}
   m_Layer: 5
-  m_Name: ScorePopup
+  m_Name: ScoreTextPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

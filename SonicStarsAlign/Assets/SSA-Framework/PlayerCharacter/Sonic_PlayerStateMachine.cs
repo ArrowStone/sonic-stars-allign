@@ -170,8 +170,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                 GroundCast = new Cast_Ray(groundRayLength, groundLayer);
                 WallCast = new Cast_Ray(groundRayLength, wallLayer);
                 CeilCast = new Cast_Ray(groundRayLength, wallLayer);
-                // Have to set layer blockmask to empty otherwise you can't home onto grounded enemies for some reason
-                HomingTargetDetector = new Overlap_Sphere(gameObject, 5, homingTargetLayer, homingDetectionDistance, homingDetectionRadius, 0, DetectionBias.Direction);
+                HomingTargetDetector = new Overlap_Sphere(gameObject, 50, homingTargetLayer, homingDetectionDistance, homingDetectionRadius, wallLayer, DetectionBias.Proximity);
                 RingDetector = new Overlap_Sphere(gameObject, 5, ringLayer, lightDetectionDistance, lightDetectionRadius, wallLayer, DetectionBias.Direction);
 
                 RailDetectorL = new Overlap_Sphere(gameObject, 5, railLayer, railDetectionDistance, railDetectionRadius, wallLayer, DetectionBias.Proximity);

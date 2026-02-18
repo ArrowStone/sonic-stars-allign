@@ -43,7 +43,7 @@ public class Overlap_Sphere
         _direction.Normalize();
         TargetOutput = null;
         TargetColliders = new Collider[_maxCount];
-        _count = Physics.OverlapSphereNonAlloc(_position + (_direction * DetectionDistance), DetectionRadius, TargetColliders, _mask);
+        _count = Physics.OverlapSphereNonAlloc(_position + (_direction * DetectionDistance), DetectionRadius, TargetColliders, _mask, QueryTriggerInteraction.Collide);
         TargetDetected = _count > 0;
 
         if (TargetDetected)
