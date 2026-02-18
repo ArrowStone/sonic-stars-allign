@@ -41,7 +41,7 @@ public class HUD_Manager : MonoBehaviour
         Vector2 screenPos = Camera.main.WorldToScreenPoint(targetHomingPos);
         if(screenPos.x < 0 || screenPos.x > Screen.width || screenPos.y < 0 || screenPos.y > Screen.height) screenPos = new Vector2(-1000, -1000);
 
-        homingIndicator.anchoredPosition = screenPos;
+        homingIndicator.position = screenPos;
     }
 
     // Initialising automatic counters like rings and score
