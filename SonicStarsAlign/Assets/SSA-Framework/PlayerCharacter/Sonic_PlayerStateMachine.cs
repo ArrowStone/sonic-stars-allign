@@ -10,6 +10,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         public Animator Anim;
         public CapsuleCollider Cl;
         public Panel_Collider TriggerCl;
+        [SerializeField] private PlayerCharacterParameters airChp;
+        [SerializeField] private PlayerCharacterParameters waterChp;
         public PlayerCharacterParameters Chp;
         public PlayerCharacterStats Chs;
         public Sonic_SoundComponent Snd;
@@ -35,6 +37,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         public LayerMask ledgeLayer;
 
         public LayerMask wallRunLayer;
+        public LayerMask waterLayer;
         [Space]
         [SerializeField] private float homingDetectionDistance;
 
@@ -67,8 +70,30 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         [SerializeField] private Vector3 crouchCollCenter;
 
         [SerializeField] private float crouchCollHeight;
+        private bool _inWater;
 
-        [SerializeField] private bool _inWater;
+        public bool InWater
+        {
+                get 
+                {
+                        return _inWater;
+                }
+                set
+                {
+                        _inWater = value;
+                        if(value)
+                        {
+                                Chp = waterChp;
+                                Debug.Log("Water!");
+                        }
+                        else
+                        {
+                                Chp = airChp;
+                                Debug.Log("Air!");
+                        }
+                }
+        }
+        public bool runningOnWater;
 
         [SerializeField] public Vector3 WallRunNormal;
         [SerializeField] public bool OnWall;
@@ -103,10 +128,9 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                 }
         }
 
-        private Vector3 PositionLastFrame;
-
         public SplineHandler SplnHandler { get; set; }
         public Cast_Ray GroundCast { get; private set; }
+        public Cast_Ray WaterCast { get; private set; }
         public Cast_Ray WallCast { get; private set; }
         public Cast_Ray CeilCast { get; private set; }
         public Overlap_Sphere RingDetector { get; private set; }
@@ -168,6 +192,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
         public void ComponentSetup () {
                 GroundCast = new Cast_Ray(groundRayLength, groundLayer);
+                WaterCast = new Cast_Ray(groundRayLength, waterLayer);
                 WallCast = new Cast_Ray(groundRayLength, wallLayer);
                 CeilCast = new Cast_Ray(groundRayLength, wallLayer);
                 HomingTargetDetector = new Overlap_Sphere(gameObject, 50, homingTargetLayer, homingDetectionDistance, homingDetectionRadius, wallLayer, DetectionBias.Proximity);
@@ -177,6 +202,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                 RailDetectorR = new Overlap_Sphere(gameObject, 5, railLayer, railDetectionDistance, railDetectionRadius, wallLayer, DetectionBias.Proximity);
 
                 SplnHandler = new SplineHandler();
+
+                Chp = airChp;
         }
 
         public void StateSetup () {
@@ -195,7 +222,6 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                 States.Add(PlayerStates.RailSwitch, new Sonic_RailSwitchState(this));
                 States.Add(PlayerStates.Win, new Sonic_WinState(this));
                 States.Add(PlayerStates.DropDash, new Sonic_DropDashState(this));
-                States.Add(PlayerStates.Water, new Sonic_WaterState(this));
                 States.Add(PlayerStates.SweepKick, new Sonic_SweepKickState(this));
                 States.Add(PlayerStates.WallRun, new Sonic_WallRunState(this));
                 States.Add(PlayerStates.WallJump, new Sonic_WallJumpState(this));
@@ -226,8 +252,6 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
         public void LateUpdate () {
                 base.MachineLateUpdate();
-
-                PositionLastFrame = transform.position;
         }
 
         #region AdditionalFunctions
@@ -437,43 +461,23 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         }
 
         private void OnTriggerEnter ( Collider other ) {
-                if (other.CompareTag("Water"))
+                Debug.Log(other.name);
+                if (FrameworkUtility.CompareLayer(other.gameObject.layer, waterLayer))
                 {
-                        // If not fast enough, fall in
-                        if (HorizontalVelocity.magnitude < Chp.WaterRunThreshold)
-                        {
-                                _inWater = true;
-                                MachineTransition(PlayerStates.Water);
-                        }
-                        // Otherwise: stay in Air/Ground and run across water
+                        InWater = true;
                 }
         }
 
         private void OnTriggerExit ( Collider other ) {
-                if (other.CompareTag("Water"))
+                Debug.Log(other.name);
+                if (FrameworkUtility.CompareLayer(other.gameObject.layer, waterLayer))
                 {
-                        _inWater = false;
-
-                        // Safely return to Air if moving, Ground if landed
-                        if (GroundCast.Execute(transform.position, -GroundNormal))
-                        {
-                                MachineTransition(PlayerStates.Ground);
-                        }
-                        else
-                        {
-                                MachineTransition(PlayerStates.Air);
-                        }
+                        InWater = false;
                 }
         }
 
-        public bool IsInWater () {
-                return _inWater;
-        }
-
-        public bool CanRunOnWater () {
-                // Must be touching water surface
-                if (!_inWater) return false;
-
+        public bool CanRunOnWater ()
+        {
                 // Needs enough horizontal speed
                 if (HorizontalVelocity.magnitude < Chp.WaterRunThreshold) return false;
 
@@ -500,7 +504,6 @@ public enum PlayerStates
         Pully,
         Pole,
         DropDash,
-        Water,
         SweepKick,
         WallRun,
         WallJump,

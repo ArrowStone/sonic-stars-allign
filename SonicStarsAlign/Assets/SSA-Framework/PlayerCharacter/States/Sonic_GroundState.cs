@@ -7,6 +7,7 @@ public class Sonic_GroundState : IState
         private readonly Sonic_PlayerStateMachine _ctx;
         private bool _groundDetected;
         private float _slipState;
+        private bool wereInWater;
         public Sonic_GroundState ( Sonic_PlayerStateMachine _machine ) {
                 _ctx = _machine;
         }
@@ -15,6 +16,7 @@ public class Sonic_GroundState : IState
                 #region Misc
 
                 _groundDetected = true;
+                wereInWater = _ctx.InWater;
 
                 #endregion Misc
 
@@ -54,8 +56,32 @@ public class Sonic_GroundState : IState
         public void FixedUpdateState () {
                 float _delta = Time.fixedDeltaTime;
 
-                if (!GroundCheck())
+                /*if (_ctx.InWater && !wereInWater && _ctx.CanRunOnWater())
                 {
+                        // Were on ground but entered water with enough speed - 
+                        // Entering water run
+                        _ctx.runningOnWater = true;
+                        _ctx.InWater = false;
+                        Debug.Log("Water run!");
+                }*/
+
+                // Skip normal groundcheck when running on water
+                if (_ctx.runningOnWater)
+                {
+                        Debug.Log(_ctx.Velocity);
+                        if (!_ctx.CanRunOnWater())
+                        {
+                                // Not fast enough - sink into water and fall
+                                _ctx.runningOnWater = false;
+                                _ctx.InWater = true;
+                                Debug.Log("Burlb!");
+                                AirSwitchConditions();
+                                return;
+                        }
+                }
+                else if (!GroundCheck())
+                {
+                        Debug.Log("No ground");
                         AirSwitchConditions();
                         return;
                 }
@@ -78,21 +104,6 @@ public class Sonic_GroundState : IState
                 _ctx.Physics_ApplyVelocity();
 
                 _ctx.RingCheck();
-
-                if (_ctx.IsInWater())
-                {
-                        if (_ctx.CanRunOnWater())
-                        {
-                                // Player stays in ground state → running across water
-                                return;
-                        }
-                        else
-                        {
-                                // Not fast enough → sink into water
-                                _ctx.MachineTransition(PlayerStates.Water);
-                                return;
-                        }
-                }
         }
 
         public void LateUpdateState () {
@@ -105,8 +116,18 @@ public class Sonic_GroundState : IState
         #region Util
 
         private bool GroundCheck () {
-                _groundDetected = _ctx.GroundCast.Execute(_ctx.Rb.transform.position, -_ctx.GroundNormal);
-                return _groundDetected && Vector3.Angle(_ctx.GroundCast.HitInfo.normal, _ctx.GroundNormal) <= _ctx.Chp.MaxGroundDeviation;
+                if (!_ctx.runningOnWater)
+                {
+                        _groundDetected = _ctx.GroundCast.Execute(_ctx.Rb.transform.position, -_ctx.GroundNormal);
+                        return _groundDetected && Vector3.Angle(_ctx.GroundCast.HitInfo.normal, _ctx.GroundNormal) <= _ctx.Chp.MaxGroundDeviation;
+                }
+                else
+                {
+                        // Water acts as the ground
+                        _groundDetected = _ctx.WaterCast.Execute(_ctx.Rb.transform.position, -_ctx.GroundNormal);
+                        _ctx.GroundCast.HitInfo = _ctx.WaterCast.HitInfo;
+                        return _groundDetected;
+                }
         }
 
         private bool SlipCheck () {

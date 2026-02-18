@@ -1792,6 +1792,8 @@ MonoBehaviour:
   Anim: {fileID: 8171554605671412702}
   Cl: {fileID: 6081405800739371547}
   TriggerCl: {fileID: 7840888026047444901}
+  airChp: {fileID: 11400000, guid: 5976ffd069f1d92438628fdafda3acd7, type: 2}
+  waterChp: {fileID: 11400000, guid: 142fc9ca6ae7f1fb297295f74cfa1e22, type: 2}
   Chp: {fileID: 11400000, guid: 5976ffd069f1d92438628fdafda3acd7, type: 2}
   Chs: {fileID: 11400000, guid: 8f028f94bbfd98d48acca61a86e60e62, type: 2}
   Snd: {fileID: 1408359879882202046}
@@ -1867,6 +1869,9 @@ MonoBehaviour:
   wallRunLayer:
     serializedVersion: 2
     m_Bits: 32768
+  waterLayer:
+    serializedVersion: 2
+    m_Bits: 65536
   homingDetectionDistance: 8
   homingDetectionRadius: 15
   lightDetectionDistance: 2
@@ -1885,7 +1890,6 @@ MonoBehaviour:
   normCollHeight: 0
   crouchCollCenter: {x: 0, y: 0, z: 0}
   crouchCollHeight: 0
-  _inWater: 0
   WallRunNormal: {x: 0, y: 0, z: 0}
   OnWall: 0
   ledgeGrabInitialVelocity: {x: 0, y: 0, z: 0}

@@ -22,6 +22,12 @@ public static class FrameworkUtility
         Vector3 Difference = a - b;
         return Difference.magnitude <= _deadZone;
     }
+
+    public static bool CompareLayer(int layer, LayerMask layerMask)
+    {
+        // Thanks, unity forum internet person
+        return (layerMask & 1 << layer) == 1 << layer;
+    }
 }
 
 public struct PosRot
