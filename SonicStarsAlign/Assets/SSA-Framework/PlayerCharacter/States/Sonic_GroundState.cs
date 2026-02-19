@@ -56,32 +56,37 @@ public class Sonic_GroundState : IState
         public void FixedUpdateState () {
                 float _delta = Time.fixedDeltaTime;
 
-                /*if (_ctx.InWater && !wereInWater && _ctx.CanRunOnWater())
+                if (_ctx.InWater && !wereInWater && _ctx.CanRunOnWater())
                 {
                         // Were on ground but entered water with enough speed - 
                         // Entering water run
                         _ctx.runningOnWater = true;
                         _ctx.InWater = false;
                         Debug.Log("Water run!");
-                }*/
+                }
 
                 // Skip normal groundcheck when running on water
                 if (_ctx.runningOnWater)
                 {
-                        Debug.Log(_ctx.Velocity);
                         if (!_ctx.CanRunOnWater())
                         {
                                 // Not fast enough - sink into water and fall
                                 _ctx.runningOnWater = false;
                                 _ctx.InWater = true;
-                                Debug.Log("Burlb!");
                                 AirSwitchConditions();
                                 return;
                         }
+                        if(GroundCheck() && !WaterCheck())
+                        {
+                                // Emerging on land
+                                Debug.Log("Landing!");
+                                _ctx.runningOnWater = false;
+                                _ctx.InWater = false; 
+                        }
+                        else WaterCheck();
                 }
                 else if (!GroundCheck())
                 {
-                        Debug.Log("No ground");
                         AirSwitchConditions();
                         return;
                 }
@@ -111,23 +116,22 @@ public class Sonic_GroundState : IState
 
         public void ExitState () {
                 _ctx.movementLockTimer = 0f;
+                _ctx.runningOnWater = false;
         }
 
         #region Util
 
         private bool GroundCheck () {
-                if (!_ctx.runningOnWater)
-                {
-                        _groundDetected = _ctx.GroundCast.Execute(_ctx.Rb.transform.position, -_ctx.GroundNormal);
-                        return _groundDetected && Vector3.Angle(_ctx.GroundCast.HitInfo.normal, _ctx.GroundNormal) <= _ctx.Chp.MaxGroundDeviation;
-                }
-                else
-                {
-                        // Water acts as the ground
-                        _groundDetected = _ctx.WaterCast.Execute(_ctx.Rb.transform.position, -_ctx.GroundNormal);
-                        _ctx.GroundCast.HitInfo = _ctx.WaterCast.HitInfo;
-                        return _groundDetected;
-                }
+                _groundDetected = _ctx.GroundCast.Execute(_ctx.Rb.transform.position, -_ctx.GroundNormal);
+                return _groundDetected && Vector3.Angle(_ctx.GroundCast.HitInfo.normal, _ctx.GroundNormal) <= _ctx.Chp.MaxGroundDeviation;
+        }
+
+        private bool WaterCheck()
+        {
+                // Water acts as ground when running on water
+                _groundDetected = _ctx.WaterCast.Execute(_ctx.Rb.transform.position, -_ctx.GroundNormal);
+                if(_groundDetected) _ctx.GroundCast.HitInfo = _ctx.WaterCast.HitInfo;
+                return _groundDetected; 
         }
 
         private bool SlipCheck () {

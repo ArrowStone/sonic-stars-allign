@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SonicWaterPlayerParameters
   m_EditorClassIdentifier: 
   BaseSpeed: 20
-  HardSpeedCap: 20
-  RailSpeedCap: 300
+  HardSpeedCap: 200
+  RailSpeedCap: 100
   Acceleration: 10
   Deceleration: 10
   GroundDrag: 5

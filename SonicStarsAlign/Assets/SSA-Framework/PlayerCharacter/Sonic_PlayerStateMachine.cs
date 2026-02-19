@@ -192,7 +192,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
         public void ComponentSetup () {
                 GroundCast = new Cast_Ray(groundRayLength, groundLayer);
-                WaterCast = new Cast_Ray(groundRayLength, waterLayer);
+                WaterCast = new Cast_Ray(groundRayLength, waterLayer, QueryTriggerInteraction.Collide);
                 WallCast = new Cast_Ray(groundRayLength, wallLayer);
                 CeilCast = new Cast_Ray(groundRayLength, wallLayer);
                 HomingTargetDetector = new Overlap_Sphere(gameObject, 50, homingTargetLayer, homingDetectionDistance, homingDetectionRadius, wallLayer, DetectionBias.Proximity);
