@@ -117,6 +117,9 @@ public class Sonic_GroundState : IState
         public void ExitState () {
                 _ctx.movementLockTimer = 0f;
                 _ctx.runningOnWater = false;
+
+                _ctx.CurrentMoveDirection = Vector3.zero;
+                _ctx.PreviousMoveDirection = Vector3.zero;
         }
 
         #region Util
@@ -263,6 +266,8 @@ public class Sonic_GroundState : IState
         }
 
         private void InputRotations () {
+                _ctx.PreviousMoveDirection = _ctx.CurrentMoveDirection;
+
                 _ctx.InputRotation = Mathf.Approximately(Vector3.Angle(_ctx.GroundNormal, _ctx.InputRef.up), 180)
                     ? Quaternion.FromToRotation(_ctx.InputRotation * Vector3.up, _ctx.GroundNormal) * _ctx.InputRotation
                     : Quaternion.FromToRotation(_ctx.InputRef.up, _ctx.GroundNormal);

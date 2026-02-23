@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "CharacterStats/Player Parameters")]
 public class PlayerCharacterParameters : ScriptableObject
 {
     [Header("Handling")]

@@ -24,8 +24,8 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
         [HideInInspector] public bool UseTargetLookAheadOffset;
         [ColourIfNull(0.6f , 0.2f , 0.2f , 2f), DrawTickBoxBefore("UseTargetVerticalOffset")]public Transform TargetAdditionalVerticalOffset;
         [HideInInspector] public bool UseTargetVerticalOffset;
-        [ColourIfNull(0.6f , 0.2f , 0.2f , 2f), DrawTickBoxBefore("UseTargetShoulderOffset")]public Transform TargetShoulderOffset;
-        [HideInInspector] public bool UseTargetShoulderOffset;
+        [ColourIfNull(0.6f , 0.2f , 0.2f , 2f), DrawTickBoxBefore("UseTargetTurnOffset")]public Transform TargetTurnOffset;
+        [HideInInspector] public bool UseTargetTurnOffset;
 
 
         #region Cinemachine Data
@@ -39,97 +39,18 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
         [ColourIfNull(0.6f , 0.2f , 0.2f , 2f)]       public CinemachineOrbitalFollow OrbitalToOverwrite;
         [ColourIfNull(0.6f , 0.2f , 0.2f , 2f)]       public CinemachineDeoccluder DeoccluderToOverwrite;
 
-        public CineCameraData CineCameraWhenBehind;
-        public CineCameraData CineCameraWhenInFront;
 
         private float _LerpBehindToInFront;
         private Cinemachine3OrbitRig.Settings _CurrentOrbitSize = new Cinemachine3OrbitRig.Settings();
 
-        [System.Serializable]
-        public class CineCameraData
-        {
-                public Vector2 screenPosition;
-                public Cinemachine3OrbitRig.Settings OrbitNewSettings;
-
-                [HideInInspector]
-                public bool deadZone = true;
-                [DrawTickBoxBefore("deadZone")]
-                public Vector2 deadZoneSize = new Vector2(0.2f,0.1f);
-
-                [HideInInspector]
-                public bool hardLimits = true;
-                [DrawTickBoxBefore("hardLimits")]
-                public Vector2 hardLimitsSize = new Vector2(0.8f,0.6f);
-                [DrawTickBoxBefore("hardLimits")]
-                public Vector2 hardLimitsOffset = new Vector2(0f,0f);
-
-                public bool centerOnActivate = true;
-
-                [Header("Target Tracking")]
-
-                public Vector3 targetOffset = new Vector3();
-                public Vector3 damping;
-                [Range(0,3)]
-                public float lookAheadModifier;
-   
-        }
-
-        public void ApplyComposerDataToComposer ( float lerpAmount ) {
-                // Framing / distance
-                _CurrentOrbitSize.Top.Radius = Mathf.Lerp(CineCameraWhenBehind.OrbitNewSettings.Top.Radius, CineCameraWhenInFront.OrbitNewSettings.Top.Radius, lerpAmount);
-                OrbitalToOverwrite.Orbits.Top.Height = Mathf.Lerp(CineCameraWhenBehind.OrbitNewSettings.Top.Height, CineCameraWhenInFront.OrbitNewSettings.Top.Height, lerpAmount);
-                _CurrentOrbitSize.Center.Radius = Mathf.Lerp(CineCameraWhenBehind.OrbitNewSettings.Center.Radius, CineCameraWhenInFront.OrbitNewSettings.Center.Radius, lerpAmount);
-                OrbitalToOverwrite.Orbits.Center.Height = Mathf.Lerp(CineCameraWhenBehind.OrbitNewSettings.Center.Height, CineCameraWhenInFront.OrbitNewSettings.Center.Height, lerpAmount);
-                _CurrentOrbitSize.Bottom.Radius = Mathf.Lerp(CineCameraWhenBehind.OrbitNewSettings.Bottom.Radius, CineCameraWhenInFront.OrbitNewSettings.Bottom.Radius, lerpAmount);
-                OrbitalToOverwrite.Orbits.Bottom.Height = Mathf.Lerp(CineCameraWhenBehind.OrbitNewSettings.Bottom.Height, CineCameraWhenInFront.OrbitNewSettings.Bottom.Height, lerpAmount);
-
-                ComposerToOverwrite.Composition.ScreenPosition = Vector2.Lerp(CineCameraWhenBehind.screenPosition, CineCameraWhenInFront.screenPosition, lerpAmount);
-
-                // Dead zone
-                ComposerToOverwrite.Composition.DeadZone.Enabled = lerpAmount < 0.5f ? CineCameraWhenBehind.deadZone : CineCameraWhenInFront.deadZone;
-                ComposerToOverwrite.Composition.DeadZone.Size = Vector2.Lerp(CineCameraWhenBehind.deadZoneSize, CineCameraWhenInFront.deadZoneSize, lerpAmount);
-
-                // Hard limits
-                ComposerToOverwrite.Composition.HardLimits.Enabled = lerpAmount < 0.5f ? CineCameraWhenBehind.hardLimits : CineCameraWhenInFront.hardLimits;
-                ComposerToOverwrite.Composition.HardLimits.Size = Vector2.Lerp(CineCameraWhenBehind.hardLimitsSize, CineCameraWhenInFront.hardLimitsSize, lerpAmount);
-                ComposerToOverwrite.Composition.HardLimits.Offset = Vector2.Lerp(CineCameraWhenBehind.hardLimitsOffset, CineCameraWhenInFront.hardLimitsOffset, lerpAmount);
-
-                // Activation behavior
-                ComposerToOverwrite.CenterOnActivate = lerpAmount < 0.5f ? CineCameraWhenBehind.centerOnActivate : CineCameraWhenInFront.centerOnActivate;
-
-                // Target tracking
-                ComposerToOverwrite.TargetOffset = Vector3.Lerp(CineCameraWhenBehind.targetOffset, CineCameraWhenInFront.targetOffset, lerpAmount);
-                OrbitalToOverwrite.TargetOffset = Vector3.Lerp(CineCameraWhenBehind.targetOffset, CineCameraWhenInFront.targetOffset, lerpAmount);
-                OrbitalToOverwrite.TrackerSettings.PositionDamping = Vector3.Lerp(CineCameraWhenBehind.damping, CineCameraWhenInFront.damping, lerpAmount);
-
-                // Lookahead
-                _currentLookAheadModifier = Mathf.Lerp(CineCameraWhenBehind.lookAheadModifier, CineCameraWhenInFront.lookAheadModifier, lerpAmount);
-        }
-
         #endregion
 
+        [Header("Objects With Data")]
+        [ColourIfNull(0.6f , 0.2f , 0.2f , 2f)] public CameraStatsPrimary PrimaryStats;
+        [ColourIfNull(0.6f , 0.2f , 0.2f , 2f)] public CameraStatsEffects EffectStats;
+
         [Header("Parameters")]
-        public LayerMask CameraCollidesWith;
-        public float BaseDistanceModifier = 1;
 
-        [Header("Tracking and view")]
-        public AnimationCurve FOVBySpeed = new AnimationCurve( new Keyframe[] { 
-                new Keyframe(0, 70),
-                new Keyframe(25, 90f),
-        } );
-        public AnimationCurve DistanceModifierBySpeed = new AnimationCurve( new Keyframe[] { 
-                new Keyframe(0, 1),
-                new Keyframe(25, 0.5f),
-        } );
-        [Tooltip("The x is the angle difference between camera and characters current 'up' vector, 0 - 180. Y is the vertical offset of the target up or down.")]
-        public AnimationCurve VerticalOffsetByViewAngle = new AnimationCurve( new Keyframe[] {
-                new Keyframe(0, 0.3f),
-                new Keyframe(90, 0),
-                new Keyframe(180, 0.3f),
-        } );
-
-        [Header("Recentering")]
-        public Vector2 MinSpeedToAutoRecenter;
 
         [Header("Legacy Parameters")]
         public float TargetDistance;
@@ -158,6 +79,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
         #region Util
 
         private float _currentPlayerRunningSpeed;
+        private float _previousPlayerRunningSpeed;
 
         private float _recenteringState;
         private bool _canCheckSpeedForRecenter = true;
@@ -190,7 +112,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
 
                 //Cinemachine setup
                 CMCamera.Target.TrackingTarget = MainTarget;
-                DeoccluderToOverwrite.CollideAgainst = CameraCollidesWith;
+                DeoccluderToOverwrite.CollideAgainst = EffectStats.CameraCollidesWith;
 
                 CompareCameraDirectionToCharacter(true);
         }
@@ -202,7 +124,6 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                 CompareCameraDirectionToCharacter();
                 CalculateTargetPlacement();
                 CalculateFOV();
-                CalculateDistanceModifier();
 
                 AutoRecenterCamera(false);
 
@@ -219,6 +140,8 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                 //_position = SmoothMove(Brain, UpdatePosition(_delta), _delta);
                 _position = UpdatePosition(_delta);
                 _rotation = UpdateRotation(_delta);
+
+                _previousPlayerRunningSpeed = _currentPlayerRunningSpeed;
         }
 
 
@@ -247,18 +170,38 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                                 _LerpBehindToInFront = Mathf.MoveTowards(_LerpBehindToInFront, cameraCurrentlyInfrontOfCharacter ? 1 : 0, (1 / howLongLerpTakes) * Time.deltaTime);
                         }
 
-                        ApplyComposerDataToComposer(_LerpBehindToInFront);
+                        //ApplyComposerDataToComposer(_LerpBehindToInFront);
+                        PrimaryStats.ApplyComposerDataToComposer(ref _CurrentOrbitSize, ref OrbitalToOverwrite, ref ComposerToOverwrite, ref _currentLookAheadModifier,_LerpBehindToInFront);
                         SetIsCameraInFrontOfCharacter(cameraCurrentlyInfrontOfCharacter);
                 }
         }
-
-        private void CalculateFOV () {
-                _currentFOV = Mathf.Lerp(_currentFOV, FOVBySpeed.Evaluate(_currentPlayerRunningSpeed), 0.2f);
-                CMCamera.Lens.FieldOfView = _currentFOV;
+        private bool IsPlayerAccelerating () {
+                return (_currentPlayerRunningSpeed >= _previousPlayerRunningSpeed) && _currentPlayerRunningSpeed > 1;
         }
 
-        private void CalculateDistanceModifier () {
-                _currentDistanceModifier = Mathf.Lerp(_currentDistanceModifier, DistanceModifierBySpeed.Evaluate(_currentPlayerRunningSpeed), 0.2f);
+        private void CalculateFOV () {
+                float targetFOV = EffectStats.FOVBySpeed.Evaluate(_currentPlayerRunningSpeed);
+                bool increaseValue = IsPlayerAccelerating();
+
+                //Either lerp or move values directly
+                switch(EffectStats.HowToAdjustFOV)
+                {
+                        case CameraStatsEffects.TypeOfFOVLerp.lerp:
+                                float minAmount = (increaseValue ? EffectStats.minAmountToAdjustFOV.x : EffectStats.minAmountToAdjustFOV.y) * Time.deltaTime;
+                                float newFOV = Mathf.Lerp(_currentFOV, targetFOV, (increaseValue ? EffectStats.lerpSpeeds.x : EffectStats.lerpSpeeds.y));
+
+                                if (Mathf.Abs(newFOV - _currentFOV) < minAmount)
+                                        newFOV = Mathf.MoveTowards(_currentFOV, targetFOV, minAmount);
+                                _currentFOV = newFOV;
+
+                                break;
+                        case CameraStatsEffects.TypeOfFOVLerp.moveTowards:
+                                _currentFOV = Mathf.MoveTowards(_currentFOV, targetFOV, Time.deltaTime * (increaseValue ? EffectStats.moveTowardsFOVSpeeds.x : EffectStats.moveTowardsFOVSpeeds.y));
+                                break;
+                }
+                CMCamera.Lens.FieldOfView = _currentFOV;
+
+                _currentDistanceModifier = EffectStats.DistanceModifierByFOV.Evaluate(_currentFOV);
                 OrbitalToOverwrite.Orbits.Top.Radius = _CurrentOrbitSize.Top.Radius * _currentDistanceModifier;
                 OrbitalToOverwrite.Orbits.Center.Radius = _CurrentOrbitSize.Center.Radius * _currentDistanceModifier;
                 OrbitalToOverwrite.Orbits.Bottom.Radius = _CurrentOrbitSize.Bottom.Radius * _currentDistanceModifier;
@@ -274,6 +217,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
 
                 OffsetByLookAhead();
                 OffsetByVertical();
+                OffsetByTurn();
 
                 //MainTarget.position = BaseTargetPosition + (TargetOffset / Mathf.Max(1, totalOffsets));
                 MainTarget.position = BaseTargetPosition + TargetOffset;
@@ -292,11 +236,8 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                         else
                                 TargetLookAheadOffset.localPosition = Vector3.Lerp(TargetLookAheadOffset.localPosition, Vector3.zero, 0.2f);
 
-                        if (PlayerRB.linearVelocity.sqrMagnitude > 10 * 10 || TargetLookAheadOffset.localPosition.sqrMagnitude > 0.1)
-                        {
-                                TargetOffset += TargetLookAheadOffset.position - BaseTargetPosition;
-                                totalOffsets++;
-                        }
+                        TargetOffset += TargetLookAheadOffset.position - BaseTargetPosition;
+                        totalOffsets++;
                 }
 
                 //Takes how much the camera is look from above or below the character, and moves the target slightly up or down. This allows the camera to look up without being stuck under the character model.
@@ -306,7 +247,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
       
                         float angle = Vector3.Angle(PlayerRB.transform.up, ComposerToOverwrite.transform.forward);
 
-                        Vector3 newPosition = PlayerRB.transform.up * VerticalOffsetByViewAngle.Evaluate(angle);
+                        Vector3 newPosition = PlayerRB.transform.up * EffectStats.VerticalOffsetByViewAngle.Evaluate(angle);
                         TargetOffset += Vector3.Lerp(_previousVerticalOffsetPosition, newPosition, 0.2f);
                         TargetAdditionalVerticalOffset.position = BaseTargetPosition + Vector3.Lerp(_previousVerticalOffsetPosition, newPosition, 0.2f);
                         totalOffsets++;
@@ -314,6 +255,13 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                         _previousVerticalOffsetPosition = newPosition;
                 }
 
+                void OffsetByTurn () {
+                        if (!UseTargetTurnOffset || !TargetTurnOffset)
+                                return;
+
+                        //Debug.Log("From " + PlayerCTX.PreviousMoveDirection + " To " + PlayerCTX.CurrentMoveDirection);
+                        //Debug.Log("Is Turning = " + (PlayerCTX.PreviousMoveDirection != PlayerCTX.CurrentMoveDirection));
+                }
 
         }
 
@@ -387,20 +335,20 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                         OrbitalToOverwrite.HorizontalAxis.Recentering.Enabled = false;
                 else
                 {
-                        if (PlayerRB.linearVelocity.sqrMagnitude > MinSpeedToAutoRecenter.x * MinSpeedToAutoRecenter.x)
+                        if (PlayerRB.linearVelocity.sqrMagnitude > EffectStats.MinSpeedToAutoRecenter.x * EffectStats.MinSpeedToAutoRecenter.x)
                         {
                                 OrbitalToOverwrite.HorizontalAxis.Recentering.Enabled = true;
                         }
-                        else if (PlayerRB.linearVelocity.sqrMagnitude * 0.8f < MinSpeedToAutoRecenter.x * MinSpeedToAutoRecenter.x)
+                        else if (PlayerRB.linearVelocity.sqrMagnitude * 0.8f < EffectStats.MinSpeedToAutoRecenter.x * EffectStats.MinSpeedToAutoRecenter.x)
                                 OrbitalToOverwrite.HorizontalAxis.Recentering.Enabled = false;
                 }
 
                 //Vertical Recentering
-                if (PlayerRB.linearVelocity.sqrMagnitude > MinSpeedToAutoRecenter.y * MinSpeedToAutoRecenter.y)
+                if (PlayerRB.linearVelocity.sqrMagnitude > EffectStats.MinSpeedToAutoRecenter.y * EffectStats.MinSpeedToAutoRecenter.y)
                 {
                         OrbitalToOverwrite.VerticalAxis.Recentering.Enabled = true;
                 }
-                else if (PlayerRB.linearVelocity.sqrMagnitude * 0.8f < MinSpeedToAutoRecenter.y * MinSpeedToAutoRecenter.y)
+                else if (PlayerRB.linearVelocity.sqrMagnitude * 0.8f < EffectStats.MinSpeedToAutoRecenter.y * EffectStats.MinSpeedToAutoRecenter.y)
                         OrbitalToOverwrite.VerticalAxis.Recentering.Enabled = false;
         }
 

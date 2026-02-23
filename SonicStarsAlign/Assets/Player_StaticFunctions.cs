@@ -6,7 +6,7 @@ public class Player_StaticFunctions : MonoBehaviour
                 "For instance, SetTransform is a function here to track whenever the player's transform is manually set. ")]
         public bool DummyText;
 
-        private static int _fixedFrameNumber;
+        public static int _fixedFrameNumber;
 
         private void Start () {
                 _fixedFrameNumber = 0;

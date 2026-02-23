@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "CharacterStats/Player Stats")]
 public class PlayerCharacterStats : ScriptableObject
 {
     private float _rings;

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 
 
-[CreateAssetMenu(fileName = "Custom Inspector Style")]
+[CreateAssetMenu(menuName = "Utilities/Custom Inspector Style")]
 public class S_O_CustomInspectorStyle : ScriptableObject
 {
 	public float __spaceSize = 1;
