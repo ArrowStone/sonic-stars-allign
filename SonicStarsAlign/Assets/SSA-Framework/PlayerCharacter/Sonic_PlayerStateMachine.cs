@@ -254,9 +254,20 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                 base.MachineLateUpdate();
         }
 
-        #region AdditionalFunctions
+        private void Awake()
+        {
+            PlayerCharacterParameters selected =
+                SceneSwitcher.Instance.GetCachedCharacter();
 
-        public void Physics_ApplyVelocity () {
+            if (selected != null)
+            {
+                Chp = selected;
+            }
+        }
+
+    #region AdditionalFunctions
+
+    public void Physics_ApplyVelocity () {
                 Velocity = HorizontalVelocity + VerticalVelocity;
         }
 

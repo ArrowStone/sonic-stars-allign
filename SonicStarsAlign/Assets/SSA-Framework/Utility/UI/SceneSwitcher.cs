@@ -7,7 +7,10 @@ public class SceneSwitcher : MonoBehaviour
 
     public static SceneSwitcher Instance;
 
+    private PlayerCharacterParameters cachedCharacter;
     private string cachedStageDisplayName;
+
+    public int gameplaySceneIndex;
 
     private void Awake()
     {
@@ -68,6 +71,15 @@ public class SceneSwitcher : MonoBehaviour
         return cachedScene;
     }
     */
+    public void CacheCharacter(PlayerCharacterParameters character)
+    {
+        cachedCharacter = character;
+    }
+
+    public PlayerCharacterParameters GetCachedCharacter()
+    {
+        return cachedCharacter;
+    }
     public void CacheStage(string displayName)
     {
         cachedStageDisplayName = displayName;
