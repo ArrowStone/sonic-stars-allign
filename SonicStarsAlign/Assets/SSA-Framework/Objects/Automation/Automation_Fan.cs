@@ -7,15 +7,11 @@ public class Automation_Fan : MonoBehaviour
     public Sonic_PlayerStateMachine ctx;
     public List<Rigidbody> rbs;
 
-    public void Update()
+    public void FixedUpdate()
     {
+        if(!ctx) return;
         foreach (Rigidbody r in rbs)
         {
-            if (rbs == null)
-            {
-                return;
-            }
-
             float _fr = Force.Evaluate(Vector3.Dot(transform.position - ctx.transform.position, transform.up)) * Time.deltaTime;
             Vector3 _force = transform.up * _fr;
 
@@ -29,7 +25,7 @@ public class Automation_Fan : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Rigidbody _rbs))
+        if (other.TryGetComponent(out Rigidbody _rbs) && !rbs.Contains(_rbs))
         {
             rbs.Add(_rbs);
         }
@@ -44,10 +40,6 @@ public class Automation_Fan : MonoBehaviour
         if (other.TryGetComponent(out Rigidbody _rbs))
         {
             rbs.Remove(_rbs);
-        }
-        if (other.TryGetComponent(out Sonic_PlayerStateMachine _ctx))
-        {
-            ctx = _ctx;
         }
     }
 }

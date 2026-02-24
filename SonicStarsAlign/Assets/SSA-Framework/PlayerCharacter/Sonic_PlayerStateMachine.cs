@@ -473,7 +473,6 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         }
 
         private void OnTriggerEnter ( Collider other ) {
-                Debug.Log(other.name);
                 if (FrameworkUtility.CompareLayer(other.gameObject.layer, waterLayer))
                 {
                         InWater = true;
@@ -481,7 +480,6 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         }
 
         private void OnTriggerExit ( Collider other ) {
-                Debug.Log(other.name);
                 if (FrameworkUtility.CompareLayer(other.gameObject.layer, waterLayer))
                 {
                         InWater = false;
