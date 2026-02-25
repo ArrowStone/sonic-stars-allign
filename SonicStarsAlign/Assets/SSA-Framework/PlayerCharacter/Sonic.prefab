@@ -276,6 +276,7 @@ Transform:
   - {fileID: 3588364039322496579}
   - {fileID: 1426144978911896763}
   - {fileID: 8820548336483319809}
+  - {fileID: 7415867056253409468}
   m_Father: {fileID: 4762720238778129734}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2111847420787060327
@@ -309,6 +310,63 @@ MonoBehaviour:
   _downwards: 0
   _right: 0
   _left: 0
+--- !u!1 &4285189642068876355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7415867056253409468}
+  - component: {fileID: 1074294842154298413}
+  m_Layer: 11
+  m_Name: Shoulder Offset Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7415867056253409468
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4285189642068876355}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6491936539475151559}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1074294842154298413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4285189642068876355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80da0993c55d63140b14e61c21ff0002, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isSelected: 0
+  _hasVisualisationScripted: 1
+  _viewVisualisationData: 1
+  _viewVisualisationDataHidden: 1
+  _drawAtAllTimes: 1
+  _drawIfParentSelected: 0
+  _normalOutlineColour: {r: 1, g: 0.51886785, b: 0.51886785, a: 1}
+  _selectedOutlineColour: {r: 1, g: 0.51886785, b: 0.51886785, a: 1}
+  _normalFillColour: {r: 1, g: 1, b: 1, a: 0}
+  _selectedFillColour: {r: 1, g: 1, b: 1, a: 0.1}
+  _maxDistanceFromCameraToDraw: 1200
+  size: 0.15
+  Shape: 1
 --- !u!1 &4305991935861906932
 GameObject:
   m_ObjectHideFlags: 0
@@ -1890,6 +1948,7 @@ MonoBehaviour:
   normCollHeight: 0
   crouchCollCenter: {x: 0, y: 0, z: 0}
   crouchCollHeight: 0
+  runningOnWater: 0
   WallRunNormal: {x: 0, y: 0, z: 0}
   OnWall: 0
   ledgeGrabInitialVelocity: {x: 0, y: 0, z: 0}

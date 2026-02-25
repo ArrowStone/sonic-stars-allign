@@ -6,7 +6,7 @@ public class Pause_Manager : MonoBehaviour
 {
     public GameObject pauseMenu;
     public MonoBehaviour[] gameComponents;
-    public bool paused = false;
+    public static bool paused = false;
     private InputComponent input;
     private bool wasPauseButtonReleased = true;
     void OnEnable()

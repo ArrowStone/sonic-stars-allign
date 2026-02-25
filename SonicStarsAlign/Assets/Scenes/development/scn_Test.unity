@@ -3646,63 +3646,11 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &281527399
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 281527400}
-  - component: {fileID: 281527401}
-  m_Layer: 11
-  m_Name: Shoulder Offset Target
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &281527400
+--- !u!4 &281527400 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 7415867056253409468, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
+  m_PrefabInstance: {fileID: 7424688648105209037}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 281527399}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 471168432}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &281527401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 281527399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80da0993c55d63140b14e61c21ff0002, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isSelected: 0
-  _hasVisualisationScripted: 1
-  _viewVisualisationData: 1
-  _viewVisualisationDataHidden: 1
-  _drawAtAllTimes: 1
-  _drawIfParentSelected: 0
-  _normalOutlineColour: {r: 1, g: 0.51886785, b: 0.51886785, a: 1}
-  _selectedOutlineColour: {r: 1, g: 0.51886785, b: 0.51886785, a: 1}
-  _normalFillColour: {r: 1, g: 1, b: 1, a: 0}
-  _selectedFillColour: {r: 1, g: 1, b: 1, a: 0.1}
-  _maxDistanceFromCameraToDraw: 1200
-  size: 0.15
-  Shape: 1
 --- !u!1 &287345010
 GameObject:
   m_ObjectHideFlags: 0
@@ -29212,7 +29160,6 @@ MonoBehaviour:
   pauseMenu: {fileID: 1214425177}
   gameComponents:
   - {fileID: 948741069}
-  paused: 0
 --- !u!114 &1494757881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44230,7 +44177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1977259012141141874, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4215967678924571685, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
       propertyPath: m_Enabled
@@ -44302,10 +44249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 6491936539475151559, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 281527400}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e41c41b3c42142a0b12ebda662940e3, type: 3}
 --- !u!54 &7424688648105209038 stripped

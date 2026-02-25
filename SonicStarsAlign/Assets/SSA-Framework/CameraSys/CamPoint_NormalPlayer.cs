@@ -85,6 +85,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
         private bool _canCheckSpeedForRecenter = true;
 
         private bool _isCameraInFrontOfCharacter;
+        private bool _canSetIsCameraInFrontOfCharacter = true;
         private float _CharacterCameraDot;
 
         private Vector3 _cashedTargetPosition;
@@ -95,9 +96,12 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
         private Vector2 _rot;
 
         //Tracking stats of camera
-        private float _currentLookAheadModifier;
         private float _currentFOV = 70;
         private float _currentDistanceModifier = 1;
+
+        //Offsets
+        private float _currentLookAheadModifier;
+        private float _currentTurnOffset = 0;
 
         private Vector3 _previousVerticalOffsetPosition;
 
@@ -118,6 +122,8 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
         }
 
         public void Execute ( float _delta ) {
+
+                if(Pause_Manager.paused) { return; }
 
                 _currentPlayerRunningSpeed = PlayerCTX.PlayerRunningSpeed;
 
@@ -171,7 +177,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                         }
 
                         //ApplyComposerDataToComposer(_LerpBehindToInFront);
-                        PrimaryStats.ApplyComposerDataToComposer(ref _CurrentOrbitSize, ref OrbitalToOverwrite, ref ComposerToOverwrite, ref _currentLookAheadModifier,_LerpBehindToInFront);
+                        PrimaryStats.ApplyComposerDataToComposer(ref _CurrentOrbitSize, ref OrbitalToOverwrite, ref ComposerToOverwrite, ref _currentLookAheadModifier, _LerpBehindToInFront);
                         SetIsCameraInFrontOfCharacter(cameraCurrentlyInfrontOfCharacter);
                 }
         }
@@ -184,7 +190,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                 bool increaseValue = IsPlayerAccelerating();
 
                 //Either lerp or move values directly
-                switch(EffectStats.HowToAdjustFOV)
+                switch (EffectStats.HowToAdjustFOV)
                 {
                         case CameraStatsEffects.TypeOfFOVLerp.lerp:
                                 float minAmount = (increaseValue ? EffectStats.minAmountToAdjustFOV.x : EffectStats.minAmountToAdjustFOV.y) * Time.deltaTime;
@@ -213,7 +219,6 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                 MainTarget.position = BaseTargetPosition;
 
                 Vector3 TargetOffset = Vector3.zero;
-                float totalOffsets = 0;
 
                 OffsetByLookAhead();
                 OffsetByVertical();
@@ -237,20 +242,18 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                                 TargetLookAheadOffset.localPosition = Vector3.Lerp(TargetLookAheadOffset.localPosition, Vector3.zero, 0.2f);
 
                         TargetOffset += TargetLookAheadOffset.position - BaseTargetPosition;
-                        totalOffsets++;
                 }
 
                 //Takes how much the camera is look from above or below the character, and moves the target slightly up or down. This allows the camera to look up without being stuck under the character model.
                 void OffsetByVertical () {
                         if (!UseTargetVerticalOffset || !TargetAdditionalVerticalOffset)
                                 return;
-      
+
                         float angle = Vector3.Angle(PlayerRB.transform.up, ComposerToOverwrite.transform.forward);
 
                         Vector3 newPosition = PlayerRB.transform.up * EffectStats.VerticalOffsetByViewAngle.Evaluate(angle);
                         TargetOffset += Vector3.Lerp(_previousVerticalOffsetPosition, newPosition, 0.2f);
                         TargetAdditionalVerticalOffset.position = BaseTargetPosition + Vector3.Lerp(_previousVerticalOffsetPosition, newPosition, 0.2f);
-                        totalOffsets++;
 
                         _previousVerticalOffsetPosition = newPosition;
                 }
@@ -259,8 +262,36 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                         if (!UseTargetTurnOffset || !TargetTurnOffset)
                                 return;
 
-                        //Debug.Log("From " + PlayerCTX.PreviousMoveDirection + " To " + PlayerCTX.CurrentMoveDirection);
-                        //Debug.Log("Is Turning = " + (PlayerCTX.PreviousMoveDirection != PlayerCTX.CurrentMoveDirection));
+                        if (_currentPlayerRunningSpeed < 10 && _currentTurnOffset < 0.01f)
+                                return;
+
+                        Vector3 relativeAngle = PlayerRB.transform.InverseTransformDirection(ComposerToOverwrite.transform.forward);
+                        relativeAngle.y = 0;
+                        relativeAngle = PlayerRB.transform.TransformDirection(relativeAngle);
+
+                        //Debug.Log(Vector3.Angle(PlayerRB.linearVelocity.normalized, relativeAngle));
+                        Debug.DrawRay(PlayerRB.transform.position, PlayerRB.linearVelocity * 2, Color.magenta);
+                        bool turningRight = Vector3.Dot(PlayerRB.transform.right, relativeAngle) < 0;
+                        if (_isCameraInFrontOfCharacter) turningRight = !turningRight;
+                        float angle = Vector3.Angle(PlayerRB.linearVelocity.normalized, relativeAngle);
+
+                        if (_currentPlayerRunningSpeed > 9 && angle > 8 && angle < 170)
+                        {
+                                _currentTurnOffset = Mathf.Lerp(_currentTurnOffset, EffectStats.TurnOffsetByAngle.Evaluate(angle) * (turningRight ? 1f : -1f), 
+                                        EffectStats.TurnOffsetLerpSpeed.x * Time.deltaTime);
+                        }
+                        else
+                                _currentTurnOffset = Mathf.Lerp(_currentTurnOffset, 0, EffectStats.TurnOffsetLerpSpeed.y * Time.deltaTime);
+
+                        //Debug.Log(_currentTurnOffset + " at " +angle);
+                        Vector3 offSetDirection = ComposerToOverwrite.transform.right;
+                        //Vector3 offSetDirection = PlayerRB.transform.right;
+                        offSetDirection = Vector3.ProjectOnPlane(offSetDirection.normalized, PlayerRB.transform.up);
+                        TargetTurnOffset.position = BaseTargetPosition + offSetDirection * _currentTurnOffset;
+
+                        TargetOffset += offSetDirection * _currentTurnOffset;
+                        return;
+
                 }
 
         }
@@ -368,21 +399,32 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
         #region AdditionalFunctions
 
         private void SetIsCameraInFrontOfCharacter ( bool value ) {
+                if(!_canSetIsCameraInFrontOfCharacter) { return; }
+
                 if (value != _isCameraInFrontOfCharacter)
                 {
-                        //If now behind character
-                        if (!value)
-                        {
-
-                        }
                         //If now in front of character
+                        if (value)
+                        {
+                                Debug.Log("Now in front of character at " +Player_StaticFunctions._fixedFrameNumber);
+                                StartCoroutine(TempDisableCheckSpeedForRecenter(0.5f));
+                        }
+                        //If now behind character
                         else
                         {
-                                StartCoroutine(TempDisableCheckSpeedForRecenter(0.5f));
+                                Debug.Log("Now behind character at " + Player_StaticFunctions._fixedFrameNumber);
                         }
 
                         _isCameraInFrontOfCharacter = value;
+                        StartCoroutine(DelayDetectingIfCameraInFront());
                 }
+        }
+
+        //To prevent weird cases where InFront is immediately set back to the inverse, add a delay.
+        private IEnumerator DelayDetectingIfCameraInFront () {
+                _canSetIsCameraInFrontOfCharacter = false;
+                yield return new WaitForSecondsRealtime(0.3f);
+                _canSetIsCameraInFrontOfCharacter = true;
         }
 
         public Quaternion UpdateRotation ( float _delta ) {

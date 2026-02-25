@@ -41,11 +41,25 @@ public class CameraStatsEffects : ScriptableObject
                 new Keyframe(90, 0.5f),
         } );
         [Header("Tracking and view")]
-        [Tooltip("The x is the angle difference between camera and characters current 'up' vector, 0 - 180. Y is the vertical offset of the target up or down.")]
+        [Tooltip("X is the angle difference between camera and characters current 'up' vector, 0 - 180. Y is the vertical offset of the target up or down.")]
         public AnimationCurve VerticalOffsetByViewAngle = new AnimationCurve( new Keyframe[] {
                 new Keyframe(0, 0.3f),
                 new Keyframe(90, 0),
                 new Keyframe(180, 0.3f),
+        } );
+
+        [Space]
+        [Tooltip("X is the lerp value used when going out to offset, Y is the value when returning to 0. Both are multiplied by time.deltatime.")]
+        public Vector2 TurnOffsetLerpSpeed = new Vector2 (3f, 4f);
+        [Tooltip("X is the angle difference between camera and characters current move direction, Y multiplies TurnOffSetAmount for higher or lower offsets")]
+        public AnimationCurve TurnOffsetByAngle = new AnimationCurve( new Keyframe[] {
+                new Keyframe(0, 0.0f),
+                new Keyframe(20, 0.1f),
+                new Keyframe(30, 0.7f),
+                new Keyframe(90, 0.8f),
+                new Keyframe(150, 0.7f),
+                new Keyframe(160, 0.1f),
+                new Keyframe(180, 0.0f),
         } );
 
         [Header("Recentering")]
