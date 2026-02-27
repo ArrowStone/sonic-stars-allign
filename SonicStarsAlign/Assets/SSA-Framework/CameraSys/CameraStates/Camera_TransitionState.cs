@@ -14,14 +14,11 @@ public class Camera_TransitionState : IState
 
     public void EnterState()
     {
-        #region Misc
 
         _time = 0;
         _duration = _ctx.WeightCurve.keys[_ctx.WeightCurve.length - 1].time;
 
-        #endregion Misc
-
-        _ctx.Point.OnEnter(_ctx);
+        _ctx.Point.OnEnterPoint(_ctx);
     }
 
     public void UpdateState()
@@ -52,7 +49,7 @@ public class Camera_TransitionState : IState
 
     public void TransitionMovement(float _delta)
     {
-        _ctx.Point.Execute(_delta);
+        _ctx.Point.ExecutePoint(_delta);
         var _transfrm = _ctx.Point.Transform();
         _ctx.transform.SetPositionAndRotation(Vector3.Lerp(_ctx.CashedTransform.Position, _transfrm.Position, _ctx.WeightCurve.Evaluate(_time)), Quaternion.Slerp(_ctx.CashedTransform.Rotation, _transfrm.Rotation, _ctx.WeightCurve.Evaluate(_time)));
     }

@@ -1,7 +1,7 @@
 ﻿using Unity.Mathematics;
 using UnityEngine;
 
-public class CamPoint_Pan : MonoBehaviour, ICamPoint
+public class CamPoint_Pan : MonoBehaviour, ICamPointStyle
 {
     public CamBrain Brain;
 
@@ -29,7 +29,7 @@ public class CamPoint_Pan : MonoBehaviour, ICamPoint
 
     #endregion Util
 
-    public void OnEnter(CamBrain _brain)
+    public void OnEnterPoint(CamBrain _brain)
     {
         Brain = _brain;
         _position = _brain.CashedTransform.Position;
@@ -39,7 +39,7 @@ public class CamPoint_Pan : MonoBehaviour, ICamPoint
         targetRb = Target.GetComponent<Rigidbody>();
     }
 
-    public void Execute(float _delta)
+    public void ExecutePoint(float _delta)
     {
         if (Target != null)
         {
@@ -50,7 +50,7 @@ public class CamPoint_Pan : MonoBehaviour, ICamPoint
         _rotation = UpdateRotation(_delta);
     }
 
-    public void OnExit()
+    public void OnExitPoint()
     {
         Brain = null;
     }

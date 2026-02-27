@@ -36,10 +36,11 @@ public class CameraTransitioner : MonoBehaviour
                                 PlayerCameraBrain = References.CameraBrain;
                 }
 
-                var _camPoint = Enter.Point.GetComponent<ICamPoint>();
+                //Get Point (Camera type) to set to from public Enter fields, and apply.
+                var _camPoint = Enter.Point.GetComponent<ICamPointStyle>();
                 PlayerCameraBrain.WeightCurve = Enter.WeightCurve;
-                PlayerCameraBrain.Point = _camPoint;
-                PlayerCameraBrain.MachineTransition(CameraStates.Transitioning);
+
+                SetPointAndTransitionState(_camPoint);
 
                 EnterEvent.Invoke();
         }
@@ -47,12 +48,20 @@ public class CameraTransitioner : MonoBehaviour
         private void TExit ( Collider _other ) {
                 if (Exit.Point == null) return;
 
-                var _camPoint = Exit.Point.GetComponent<ICamPoint>();
+                //Get Point (Camera type) to set to from public Exit fields, and apply.
+                ICamPointStyle _camPoint = Exit.Point.GetComponent<ICamPointStyle>();
                 PlayerCameraBrain.WeightCurve = Exit.WeightCurve;
-                PlayerCameraBrain.Point = _camPoint;
-                PlayerCameraBrain.MachineTransition(CameraStates.Transitioning);
+
+                SetPointAndTransitionState(_camPoint);
 
                 ExitEvent.Invoke();
+        }
+
+        private void SetPointAndTransitionState ( ICamPointStyle _camPoint ) {
+                //Set point first because OnEnterPoint will be called in when Transitioning State is entered.
+                PlayerCameraBrain.Point.OnExitPoint();
+                PlayerCameraBrain.Point = _camPoint;
+                PlayerCameraBrain.MachineTransition(CameraStates.Transitioning);
         }
 }
 

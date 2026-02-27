@@ -3,7 +3,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 
-public class CamPoint_FollowSpline : MonoBehaviour, ICamPoint
+public class CamPoint_FollowSpline : MonoBehaviour, ICamPointStyle
 {
     public CamBrain Brain;
 
@@ -35,7 +35,7 @@ public class CamPoint_FollowSpline : MonoBehaviour, ICamPoint
 
     #endregion Util
 
-    public void OnEnter(CamBrain _brain)
+    public void OnEnterPoint(CamBrain _brain)
     {
         targetRb = Target.GetComponent<Rigidbody>();
         Brain = _brain;
@@ -46,7 +46,7 @@ public class CamPoint_FollowSpline : MonoBehaviour, ICamPoint
         followOffset = -FollowDistance / TargetSpline.Spline.GetLength();
     }
 
-    public void Execute(float _delta)
+    public void ExecutePoint(float _delta)
     {
         if (Target != null)
         {
@@ -57,7 +57,7 @@ public class CamPoint_FollowSpline : MonoBehaviour, ICamPoint
         _rotation = UpdateRotation(_delta);
     }
 
-    public void OnExit()
+    public void OnExitPoint()
     {
         Brain = null;
     }

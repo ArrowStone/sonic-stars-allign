@@ -28,9 +28,7 @@ public class CameraStatsEffects : ScriptableObject
         [Tooltip("X is how much many values to adjust fov by when accelerating, y is when decelerating. Note that both of these values will be affected by delta time.")]
         [OnlyDrawIf("HowToAdjustFOV", TypeOfFOVLerp.moveTowards)]
         public Vector2 moveTowardsFOVSpeeds = new Vector2(1, 2);
-        //[Tooltip("X is how much many values to adjust distance by when accelerating, y is when decelerating. Note that both of these values will be affected by delta time.")]
-        //[OnlyDrawIf("HowToAdjustFOV", TypeOfFOVLerp.moveTowards)]
-        //public Vector2 moveTowardsDistanceModSpeeds = new Vector2(0.05f, 0.1f);
+
 
         public AnimationCurve FOVBySpeed = new AnimationCurve( new Keyframe[] {
                 new Keyframe(0, 70),
@@ -60,6 +58,13 @@ public class CameraStatsEffects : ScriptableObject
                 new Keyframe(150, 0.7f),
                 new Keyframe(160, 0.1f),
                 new Keyframe(180, 0.0f),
+        } );
+        [Tooltip("X is the time spent turning, Y multiplies the turn offset. Time turning goes down when turning stops, or camera moves a lot.")]
+        public AnimationCurve TurnOffsetMultiplyByTime = new AnimationCurve( new Keyframe[] {
+                new Keyframe(0, 0.8f),
+                new Keyframe(0.2f, 1f),
+                new Keyframe(0.5f, 1.2f),
+                new Keyframe(1, 1.5f),
         } );
 
         [Header("Recentering")]

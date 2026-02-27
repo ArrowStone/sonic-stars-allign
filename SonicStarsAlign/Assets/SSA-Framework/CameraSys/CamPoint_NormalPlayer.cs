@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using System.Collections;
 
 // Camera movement
-public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
+public class CamPoint_NormalPlayer : MonoBehaviour, ICamPointStyle
 {
 
         [SerializeField,TextSpace("This component handles all default behaviour for the camera when it is locked on the character in normal gameplay. Control, effects, follow, etc.")]
@@ -99,15 +99,21 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
         private float _currentFOV = 70;
         private float _currentDistanceModifier = 1;
 
+        private Vector2 _previousCameraAxisValues;
+        private Vector2 _currentCameraAxisValues;
+        private float _amountMovedHorizThisFrame;
+        private Vector2 _inputThisFrame;
+
         //Offsets
         private float _currentLookAheadModifier;
         private float _currentTurnOffset = 0;
+        private float _timeTurningPlayer;
 
         private Vector3 _previousVerticalOffsetPosition;
 
         #endregion Util
 
-        public void OnEnter ( CamBrain _brain ) {
+        public void OnEnterPoint ( CamBrain _brain ) {
                 Brain = _brain;
                 _position = _brain.CashedTransform.Position;
                 _rotation = _brain.CashedTransform.Rotation;
@@ -117,13 +123,17 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                 //Cinemachine setup
                 CMCamera.Target.TrackingTarget = MainTarget;
                 DeoccluderToOverwrite.CollideAgainst = EffectStats.CameraCollidesWith;
+                ComposerToOverwrite.enabled = true;
+                OrbitalToOverwrite.enabled = true;
 
                 CompareCameraDirectionToCharacter(true);
         }
 
-        public void Execute ( float _delta ) {
+        public void ExecutePoint ( float _delta ) {
 
                 if(Pause_Manager.paused) { return; }
+
+                GetCurrentCameraState();
 
                 _currentPlayerRunningSpeed = PlayerCTX.PlayerRunningSpeed;
 
@@ -148,16 +158,31 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                 _rotation = UpdateRotation(_delta);
 
                 _previousPlayerRunningSpeed = _currentPlayerRunningSpeed;
+
+                SetPreviousCameraState();
         }
 
 
-        public void OnExit () {
+        public void OnExitPoint () {
+                ComposerToOverwrite.enabled = false;
+                OrbitalToOverwrite.enabled = false;
                 Brain = null;
         }
 
         #region camera calculations
 
-        //Check if character is facing towards the camera and adjust the composer data accordingly.
+        //Central location for getting all values that may be relevant this frame.
+        private void GetCurrentCameraState () {
+                _currentCameraAxisValues = new Vector2(OrbitalToOverwrite.HorizontalAxis.Value, OrbitalToOverwrite.VerticalAxis.Value);
+                _amountMovedHorizThisFrame = Mathf.Abs(_currentCameraAxisValues.x - _previousCameraAxisValues.x);
+        }
+
+        //After all other code, set values to be compared to next frame.
+        private void SetPreviousCameraState () {
+                _previousCameraAxisValues = _currentCameraAxisValues;
+        }
+
+        //Check if character is facing towards the camera and adjust the CM data accordingly.
         private void CompareCameraDirectionToCharacter ( bool overwrite = false ) {
                 if (!ComposerToOverwrite || !OrbitalToOverwrite) { return; }
 
@@ -207,6 +232,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                 }
                 CMCamera.Lens.FieldOfView = _currentFOV;
 
+                //Apply distance relative to modifier, to ensure player doesn't become too small.
                 _currentDistanceModifier = EffectStats.DistanceModifierByFOV.Evaluate(_currentFOV);
                 OrbitalToOverwrite.Orbits.Top.Radius = _CurrentOrbitSize.Top.Radius * _currentDistanceModifier;
                 OrbitalToOverwrite.Orbits.Center.Radius = _CurrentOrbitSize.Center.Radius * _currentDistanceModifier;
@@ -258,6 +284,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                         _previousVerticalOffsetPosition = newPosition;
                 }
 
+                //Takes how much the camera is looking at the side of the player, and how long the player has been turning for, then offsets camera to its left or right.
                 void OffsetByTurn () {
                         if (!UseTargetTurnOffset || !TargetTurnOffset)
                                 return;
@@ -265,33 +292,44 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                         if (_currentPlayerRunningSpeed < 10 && _currentTurnOffset < 0.01f)
                                 return;
 
+                        //Calculate angle without up and down, to compare to player.
                         Vector3 relativeAngle = PlayerRB.transform.InverseTransformDirection(ComposerToOverwrite.transform.forward);
                         relativeAngle.y = 0;
                         relativeAngle = PlayerRB.transform.TransformDirection(relativeAngle);
+                        float angleDifference = Vector3.Angle(PlayerRB.linearVelocity.normalized, relativeAngle);
 
-                        //Debug.Log(Vector3.Angle(PlayerRB.linearVelocity.normalized, relativeAngle));
-                        Debug.DrawRay(PlayerRB.transform.position, PlayerRB.linearVelocity * 2, Color.magenta);
+                        //Detects left or right, so knows if player changes direction.
                         bool turningRight = Vector3.Dot(PlayerRB.transform.right, relativeAngle) < 0;
                         if (_isCameraInFrontOfCharacter) turningRight = !turningRight;
-                        float angle = Vector3.Angle(PlayerRB.linearVelocity.normalized, relativeAngle);
 
-                        if (_currentPlayerRunningSpeed > 9 && angle > 8 && angle < 170)
+                        //If player is turning, start moving to offset.
+                        if (_currentPlayerRunningSpeed > 9 && angleDifference > 8 && angleDifference < 170)
                         {
-                                _currentTurnOffset = Mathf.Lerp(_currentTurnOffset, EffectStats.TurnOffsetByAngle.Evaluate(angle) * (turningRight ? 1f : -1f), 
+                                _timeTurningPlayer = Mathf.MoveTowards(_timeTurningPlayer, 3, Time.deltaTime); //Offset max will gradually ramp up for long turns.
+                                _currentTurnOffset = Mathf.Lerp(_currentTurnOffset, 
+                                        EffectStats.TurnOffsetByAngle.Evaluate(angleDifference) * EffectStats.TurnOffsetMultiplyByTime.Evaluate(_timeTurningPlayer)* (turningRight ? 1f : -1f), 
                                         EffectStats.TurnOffsetLerpSpeed.x * Time.deltaTime);
                         }
+                        //If not turning, gradually remove offset.
                         else
+                        {
+                                _timeTurningPlayer = Mathf.MoveTowards(_timeTurningPlayer, 0, Time.deltaTime * 3);
                                 _currentTurnOffset = Mathf.Lerp(_currentTurnOffset, 0, EffectStats.TurnOffsetLerpSpeed.y * Time.deltaTime);
+                        }
 
-                        //Debug.Log(_currentTurnOffset + " at " +angle);
-                        Vector3 offSetDirection = ComposerToOverwrite.transform.right;
-                        //Vector3 offSetDirection = PlayerRB.transform.right;
+                        //Offset could be annoying if turning camera around player, so lessen offset if this happens.
+                        if(_amountMovedHorizThisFrame > 2.5f)
+                        {
+                                _timeTurningPlayer = Mathf.MoveTowards(_timeTurningPlayer, 0, Time.deltaTime * 2f);
+                                _currentTurnOffset = Mathf.Lerp(_currentTurnOffset, 0, EffectStats.TurnOffsetLerpSpeed.y * Time.deltaTime);
+                        }
+                     
+                        //Setting
+                        Vector3 offSetDirection = ComposerToOverwrite.transform.right;          
                         offSetDirection = Vector3.ProjectOnPlane(offSetDirection.normalized, PlayerRB.transform.up);
+
                         TargetTurnOffset.position = BaseTargetPosition + offSetDirection * _currentTurnOffset;
-
                         TargetOffset += offSetDirection * _currentTurnOffset;
-                        return;
-
                 }
 
         }
@@ -406,13 +444,13 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPoint
                         //If now in front of character
                         if (value)
                         {
-                                Debug.Log("Now in front of character at " +Player_StaticFunctions._fixedFrameNumber);
+   
                                 StartCoroutine(TempDisableCheckSpeedForRecenter(0.5f));
                         }
                         //If now behind character
                         else
                         {
-                                Debug.Log("Now behind character at " + Player_StaticFunctions._fixedFrameNumber);
+
                         }
 
                         _isCameraInFrontOfCharacter = value;

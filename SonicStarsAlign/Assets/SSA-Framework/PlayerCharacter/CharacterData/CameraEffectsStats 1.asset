@@ -179,4 +179,46 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  TurnOffsetMultiplyByTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.49440145
+      value: 1.1937586
+      inSlope: 0.6940107
+      outSlope: 0.6940107
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.081278525
+    - serializedVersion: 3
+      time: 1.5049406
+      value: 2.020845
+      inSlope: 0.84566134
+      outSlope: 0.84566134
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.050601017
+    - serializedVersion: 3
+      time: 3
+      value: 3
+      inSlope: -0.0000027350727
+      outSlope: -0.0000027350727
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.058305938
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   MinSpeedToAutoRecenter: {x: 15, y: 10}

@@ -10,7 +10,7 @@ public class CamBrain : StateMachine_MonoBase<CameraStates>
 
         public bool SetPositionAndRotationManually;
 
-        public ICamPoint Point;
+        public ICamPointStyle Point;
         public AnimationCurve WeightCurve;
 
         #region Util
@@ -60,6 +60,12 @@ public class CamBrain : StateMachine_MonoBase<CameraStates>
 
                 if(SetPositionAndRotationManually)
                         CamTransform.SetPositionAndRotation(CashedTransform.Position, CashedTransform.Rotation);
+        }
+
+        public void SetPoint (ICamPointStyle NewPoint) {
+                Point.OnExitPoint();
+                Point = NewPoint;
+                Point.OnEnterPoint(this);
         }
 
         #endregion Functions

@@ -11,7 +11,7 @@ public class CameraTransitionStart : MonoBehaviour
     public void Start()
     {
         _brain.Point = _player;
-        _player.OnEnter(_brain);
+        _player.OnEnterPoint(_brain);
         _brain.MachineTransition(CameraStates.Alive);
     }
 }

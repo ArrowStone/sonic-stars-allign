@@ -26,11 +26,11 @@ public class Camera_AliveState : IState
         }
 
         public void ExitState () {
-                _ctx.Point.OnExit();
+                _ctx.Point.OnExitPoint();
         }
 
         public void AliveMovement ( float _delta ) {
-                _ctx.Point.Execute(_delta);
+                _ctx.Point.ExecutePoint(_delta);
                 _ctx.ApplyPoint();
         }
 }
