@@ -37,7 +37,7 @@ public class CameraTransitioner : MonoBehaviour
                 }
 
                 //Get Point (Camera type) to set to from public Enter fields, and apply.
-                var _camPoint = Enter.Point.GetComponent<ICamPointStyle>();
+                ICamPointStyle _camPoint = Enter.Point.GetComponent<ICamPointStyle>();
                 PlayerCameraBrain.WeightCurve = Enter.WeightCurve;
 
                 SetPointAndTransitionState(_camPoint);
