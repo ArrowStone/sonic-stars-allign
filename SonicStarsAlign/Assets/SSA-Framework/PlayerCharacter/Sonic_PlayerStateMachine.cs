@@ -257,12 +257,23 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
         private void Awake()
         {
-            PlayerCharacterParameters selected =
-                SceneSwitcher.Instance.GetCachedCharacter();
-
-            if (selected != null)
+            if (SceneSwitcher.Instance != null)
             {
-                Chp = selected;
+                var selectedParams = SceneSwitcher.Instance.GetCachedCharacter();
+
+                if (selectedParams != null)
+                {
+                    Chp = selectedParams;
+                    airChp = selectedParams;
+                    //waterChp = selectedParams;
+                }
+
+                var selectedStats = SceneSwitcher.Instance.GetCachedStats();
+
+                if (selectedStats != null)
+                {
+                    Chs = selectedStats;
+                }
             }
         }
 
