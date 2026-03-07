@@ -118,7 +118,7 @@ public class Sonic_RollState : IState
                 }
                 else
                 {
-                    _ctx.HorizontalVelocity = _ctx.InputVector * Vector3.Dot(_ctx.InputVector, _ctx.HorizontalVelocity);
+                    _ctx.HorizontalVelocity = _ctx.PlayerDirection * Vector3.Dot(_ctx.PlayerDirection, _ctx.HorizontalVelocity);
                 }
             }
 
@@ -129,7 +129,7 @@ public class Sonic_RollState : IState
             }
 
             float _turnStrength = _ctx.Chp.TurnStrengthCurve.Evaluate(_ctx.HorizontalVelocity.magnitude) * Mathf.PI * _delta;
-            _ctx.HorizontalVelocity = Vector3.RotateTowards(_ctx.HorizontalVelocity, _ctx.InputVector * _ctx.HorizontalVelocity.magnitude, _turnStrength, 0);
+            _ctx.HorizontalVelocity = Vector3.RotateTowards(_ctx.HorizontalVelocity, _ctx.PlayerDirection * _ctx.HorizontalVelocity.magnitude, _turnStrength, 0);
         }
 
         float _deceleration = _ctx.Chp.RollDeceleration * _delta;

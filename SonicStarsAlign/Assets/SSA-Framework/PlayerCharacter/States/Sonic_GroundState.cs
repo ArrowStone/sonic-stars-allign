@@ -76,14 +76,13 @@ public class Sonic_GroundState : IState
                                 AirSwitchConditions();
                                 return;
                         }
-                        if(GroundCheck() && !WaterCheck())
+                        if(!WaterCheck() && GroundCheck())
                         {
                                 // Emerging on land
                                 Debug.Log("Landing!");
                                 _ctx.runningOnWater = false;
                                 _ctx.InWater = false; 
                         }
-                        else WaterCheck();
                 }
                 else if (!GroundCheck())
                 {
@@ -133,7 +132,7 @@ public class Sonic_GroundState : IState
         {
                 // Water acts as ground when running on water
                 _groundDetected = _ctx.WaterCast.Execute(_ctx.Rb.transform.position, -_ctx.GroundNormal);
-                if(_groundDetected) _ctx.GroundCast.HitInfo = _ctx.WaterCast.HitInfo;
+                if(_groundDetected) _ctx.GroundCast.HitInfo = _ctx.WaterCast.HitInfo; // Sometimes by genius is almost fightening
                 return _groundDetected; 
         }
 
@@ -207,21 +206,6 @@ public class Sonic_GroundState : IState
                 _ctx.Skid = false;
                 if (_ctx.InputVector.magnitude > 0.1)
                 {
-                        if (Vector3.Dot(_ctx.HorizontalVelocity.normalized, _ctx.InputVector) < _ctx.Chp.TurnDeviationCap)
-                        {
-                                float _break = _ctx.Chp.BreakStrength * _delta;
-                                _ctx.HorizontalVelocity = Vector3.MoveTowards(_ctx.HorizontalVelocity, Vector3.zero, _break);
-                                if (_ctx.HorizontalVelocity.magnitude > _ctx.Chp.MinBreakSpeed)
-                                {
-                                        _ctx.Skid = true;
-                                        return;
-                                }
-                                else if (_ctx.HorizontalVelocity.magnitude < _break)
-                                {
-                                        _ctx.HorizontalVelocity = _ctx.InputVector * Vector3.Dot(_ctx.InputVector, _ctx.HorizontalVelocity);
-                                }
-                        }
-
                         if (_ctx.HorizontalVelocity.magnitude < _ctx.Chp.BaseSpeed)
                         {
                                 float _acceleration = _ctx.Chp.Acceleration * _delta;
@@ -240,7 +224,7 @@ public class Sonic_GroundState : IState
                         }
 
                         float _turnStrength = _ctx.Chp.TurnStrengthCurve.Evaluate(_ctx.HorizontalVelocity.magnitude) * Mathf.PI * _delta;
-                        _ctx.HorizontalVelocity = Vector3.RotateTowards(_ctx.HorizontalVelocity, _ctx.InputVector * _ctx.HorizontalVelocity.magnitude, _turnStrength, 0);
+                        _ctx.HorizontalVelocity = Vector3.RotateTowards(_ctx.HorizontalVelocity, _ctx.PlayerDirection * _ctx.HorizontalVelocity.magnitude, _turnStrength, 0);
                 }
                 else
                 {

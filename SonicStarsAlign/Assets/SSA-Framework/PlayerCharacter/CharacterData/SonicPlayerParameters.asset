@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5bb2dbce231f94bbaeedd582baab8c, type: 3}
   m_Name: SonicPlayerParameters
   m_EditorClassIdentifier: 
-  BaseSpeed: 30
+  BaseSpeed: 50
   HardSpeedCap: 400
   RailSpeedCap: 300
-  Acceleration: 15
+  Acceleration: 30
   Deceleration: 29.75
   GroundDrag: 5
   RunSpeedThreshold: 12
@@ -27,7 +27,7 @@ MonoBehaviour:
       value: 90
       inSlope: 0
       outSlope: -45
-      tangentMode: 65
+      tangentMode: 1
       weightedMode: 2
       inWeight: 0
       outWeight: 0.8125
@@ -36,9 +36,9 @@ MonoBehaviour:
       value: 0
       inSlope: -45
       outSlope: -0.23060799
-      tangentMode: 5
+      tangentMode: 69
       weightedMode: 1
-      inWeight: 0.9
+      inWeight: 0.01666668
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -51,18 +51,18 @@ MonoBehaviour:
       value: 3
       inSlope: -0.00016107793
       outSlope: -0.01125
-      tangentMode: 65
+      tangentMode: 69
       weightedMode: 2
       inWeight: 0
-      outWeight: 0.3780184
+      outWeight: 0.0041666664
     - serializedVersion: 3
       time: 200
       value: 0.75
       inSlope: -0.01125
       outSlope: 0.000603775
-      tangentMode: 5
+      tangentMode: 69
       weightedMode: 1
-      inWeight: 0.38210768
+      inWeight: 1
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -152,14 +152,14 @@ MonoBehaviour:
   GravityForce: 45.9375
   FallVelCap: 30
   MinGroundStickSpeed: 6.25
-  MaxGroundDeviation: 30
+  MaxGroundDeviation: 100
   SlopeFactor: 50
   SlopeFactorRoll: 9.375
   SlopeFactorRollDown: 37.5
   RailSlopeInfluence: 15
   RailCrouchInfluence: 37.5
-  RollDeceleration: 7.5
-  SpinDashDeceleration: 15
+  RollDeceleration: 0
+  SpinDashDeceleration: 0
   MinRollSpeed: 1
   SpinDashHoldTime: 0.375
   SpinDashInitSpeed: 1

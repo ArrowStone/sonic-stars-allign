@@ -172,7 +172,7 @@ public class Sonic_AirState : IState
                 }
                 else if (_ctx.HorizontalVelocity.magnitude < _acceleration)
                 {
-                    _ctx.HorizontalVelocity = _ctx.InputVector * Vector3.Dot(_ctx.InputVector, _ctx.HorizontalVelocity);
+                    _ctx.HorizontalVelocity = _ctx.PlayerDirection * Vector3.Dot(_ctx.InputVector, _ctx.HorizontalVelocity);
                 }
             }
 
@@ -189,7 +189,7 @@ public class Sonic_AirState : IState
             }
 
             float _turnStrength = _ctx.Chp.TurnStrengthCurveAir.Evaluate(_ctx.HorizontalVelocity.magnitude) * Mathf.PI * _delta;
-            _ctx.HorizontalVelocity = Vector3.RotateTowards(_ctx.HorizontalVelocity, _ctx.InputVector * _ctx.HorizontalVelocity.magnitude, _turnStrength, 0);
+            _ctx.HorizontalVelocity = Vector3.RotateTowards(_ctx.HorizontalVelocity, _ctx.PlayerDirection * _ctx.HorizontalVelocity.magnitude, _turnStrength, 0);
         }
 
         AirDrag(_delta);
