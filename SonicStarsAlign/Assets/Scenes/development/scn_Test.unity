@@ -6288,6 +6288,11 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &498503752 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2620728555040612940, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+  m_PrefabInstance: {fileID: 2570230520030055649}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &511856889
 GameObject:
   m_ObjectHideFlags: 0
@@ -43123,6 +43128,10 @@ PrefabInstance:
       propertyPath: Input
       value: 
       objectReference: {fileID: 1263480790}
+    - target: {fileID: 2452809473747569026, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
+      propertyPath: CamTransform
+      value: 
+      objectReference: {fileID: 498503752}
     - target: {fileID: 2620728555040612940, guid: b9d0ea2ea2101928b89716b38cd84809, type: 3}
       propertyPath: m_LocalPosition.y
       value: -20.526009

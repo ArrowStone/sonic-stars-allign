@@ -166,7 +166,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPointStyle
         public void OnExitPoint () {
                 ComposerToOverwrite.enabled = false;
                 OrbitalToOverwrite.enabled = false;
-                Brain = null;
+                //Brain = null;
         }
 
         #region camera calculations
