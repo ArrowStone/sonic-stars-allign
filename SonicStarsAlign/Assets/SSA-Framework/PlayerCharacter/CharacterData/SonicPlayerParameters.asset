@@ -145,6 +145,7 @@ MonoBehaviour:
   MinBreakSpeed: 5
   BreakStrength: 70
   BreakStrengthAir: 70
+  RotationSmoothingSpeed: 5
   JumpForce: 20
   JumpCancel: 4
   SlipTime: 0.3333333
@@ -304,13 +305,7 @@ MonoBehaviour:
   DropDashBaseSpeed: 8
   DropDashChargeMultiplier: 4
   DropDashMaxCharge: 1
-  WaterSpeedCap: 8
-  WaterDeceleration: 4
-  WaterJumpStrength: 6
-  WaterGravityScale: 0.4
-  WaterMaxFallSpeed: 12
   WaterRunThreshold: 14
-  Gravity: {x: 0, y: -9.81, z: 0}
   WallAttachCheckDistance: 1
   WallRunGravityScale: 0.35
   WallRunSpeed: 12
@@ -324,3 +319,27 @@ MonoBehaviour:
   WallJumpMaxCharge: 1
   WallJumpMinStrength: 10
   WallJumpMaxStrength: 25
+  LedgeGrabVelocityDecrease:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -1
+      outSlope: -1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: -1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

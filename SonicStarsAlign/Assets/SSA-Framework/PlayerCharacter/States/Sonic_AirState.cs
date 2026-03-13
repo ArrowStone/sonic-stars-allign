@@ -7,6 +7,7 @@ public class Sonic_AirState : IState
     private bool _groundDetected;
     private float _ddchargeTime;
     private float _airDragTime;
+    private float _reactionInputTimer;
 
     public Sonic_AirState(Sonic_PlayerStateMachine _machine)
     {
@@ -20,6 +21,7 @@ public class Sonic_AirState : IState
         _groundDetected = false;
         _ddchargeTime = 0;
         _airDragTime = 0;
+        _reactionInputTimer = 0;
         _ctx.doneAirRotation = false;
         _ctx.fakeNormal = _ctx.GroundNormal;
 
@@ -74,10 +76,13 @@ public class Sonic_AirState : IState
 
         CheckForWallRun();
 
-        if(_ctx.doneAirRotation) // The rotation also acts as a ledge grab timeout timer
+        // Rotation also acts as a ledge grab timeout timer
+        if(_ctx.doneAirRotation) 
         {
             CheckForLedgeGrab();
         }
+
+        CheckForStoneSkip(_delta);
     }
 
     public void LateUpdateState()
@@ -359,8 +364,7 @@ public class Sonic_AirState : IState
 
         _ctx.ChangeKinematic(true); // Have to do this before changing the position and rotation
 
-        //_ctx.Physics_Rotate(-hit.normal, -_ctx.Gravity); // Face the ledge
-        _ctx.transform.forward = -hit.normal;
+        _ctx.transform.forward = -hit.normal; // Face the ledge
 
         endPosition.x = hit.point.x;
         endPosition.z = hit.point.z;
@@ -372,11 +376,46 @@ public class Sonic_AirState : IState
 
         endPosition += displacement;
 
-        //_ctx.Physics_Snap(endPosition); // Set the position
-        //_ctx.Rb.transform.position = endPosition;
-                Player_StaticFunctions.SetRBPosition(_ctx.Rb, endPosition, "Ledge Grab");
+        // Set position
+        Player_StaticFunctions.SetRBPosition(_ctx.Rb, endPosition, "Ledge Grab");
         
         _ctx.MachineTransition(PlayerStates.LedgeGrab); // Change state
+    }
+
+    void CheckForStoneSkip(float _delta)
+    {
+        if(_ctx.InWater) // Touching water
+        {
+            // Checking ig have enough speed and pressed the button soon enough
+            if(_reactionInputTimer > _ctx.Chp.stoneSkipCooldown && 
+            _ctx.Velocity.magnitude > _ctx.Chp.stoneSkipMinimumSpeed)
+            {
+                // Go up
+                _ctx.VerticalVelocity = -_ctx.VerticalVelocity;
+                _ctx.Physics_ApplyVelocity();
+
+                // Allow to stoneskip again soon
+                _reactionInputTimer = 0f;
+
+                // Don't slow down
+                _ctx.InWater = false;
+            }
+            else
+            {
+                // In water and didn't stoneskip => failed
+                _reactionInputTimer = 0f;
+                return;
+            }
+        }
+
+        if(_reactionInputTimer > 0f)
+        {
+            _reactionInputTimer -= _delta;
+        }
+        else if(_ctx.Input.ReactionInput.WasPressedThisFrame())
+        {
+            _reactionInputTimer = _ctx.Chp.stoneSkipCooldown + _ctx.Chp.stoneSkipWindow;
+        }
     }
 
     void RotateTowardVertical(float delta)

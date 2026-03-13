@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
@@ -20,8 +21,6 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
         [Header("Handling")]
         public AnimationCurve ChrTurn;
-        public AnimationCurve LedgeGrabVelocityDecrease;
-        public float RotationSmoothingSpeed;
 
         [Header("Collision")]
         public LayerMask groundLayer;

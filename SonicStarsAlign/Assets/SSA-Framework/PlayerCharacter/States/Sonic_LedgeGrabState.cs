@@ -41,7 +41,7 @@ public class Sonic_LedgeGrabState : IState
             _ctx.ChangeKinematic(false);
 
             // Decrease velocity over grab time
-            _ctx.ledgeGrabInitialVelocity = _ctx.ledgeGrabInitialVelocity * _ctx.LedgeGrabVelocityDecrease.Evaluate(Time.time - _ctx.ledgeGrabStartTime);
+            _ctx.ledgeGrabInitialVelocity = _ctx.ledgeGrabInitialVelocity * _ctx.Chp.LedgeGrabVelocityDecrease.Evaluate(Time.time - _ctx.ledgeGrabStartTime);
             _ctx.Rb.linearVelocity = _ctx.ledgeGrabInitialVelocity; // Restore the velocity from before the grab
             Debug.Log(_ctx.ledgeGrabInitialVelocity);
             

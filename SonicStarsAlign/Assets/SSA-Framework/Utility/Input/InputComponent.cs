@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Android;
 using UnityEngine.InputSystem;
 
 // Game input
@@ -21,6 +22,7 @@ public class InputComponent : MonoBehaviour
     public InputAction BackCameraInput { get; private set; }
     public InputAction StartInput { get; private set; }
     public InputAction SweepInput { get; private set; }
+    public InputAction Respawn { get; private set; }
 
     private void Awake()
     {
@@ -36,6 +38,7 @@ public class InputComponent : MonoBehaviour
         BackCameraInput = I.Player.BackCamera;
         StartInput = I.Player.Start;
         SweepInput = I.Player.SweepKick;
+        Respawn = I.Player.Respawn;
     }
 
     private void OnEnable()

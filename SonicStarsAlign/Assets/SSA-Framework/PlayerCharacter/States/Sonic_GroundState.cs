@@ -7,7 +7,7 @@ public class Sonic_GroundState : IState
         private readonly Sonic_PlayerStateMachine _ctx;
         private bool _groundDetected;
         private float _slipState;
-        private bool wereInWater;
+        private bool _wereInWater;
         public Sonic_GroundState ( Sonic_PlayerStateMachine _machine ) {
                 _ctx = _machine;
         }
@@ -16,7 +16,7 @@ public class Sonic_GroundState : IState
                 #region Misc
 
                 _groundDetected = true;
-                wereInWater = _ctx.InWater;
+                _wereInWater = _ctx.InWater;
 
                 #endregion Misc
 
@@ -56,7 +56,7 @@ public class Sonic_GroundState : IState
         public void FixedUpdateState () {
                 float _delta = Time.fixedDeltaTime;
 
-                if (_ctx.InWater && !wereInWater && _ctx.CanRunOnWater())
+                if (_ctx.InWater && !_wereInWater && _ctx.CanRunOnWater())
                 {
                         // Were on ground but entered water with enough speed - 
                         // Entering water run
@@ -199,7 +199,7 @@ public class Sonic_GroundState : IState
                 }
 
                 //Also smoothen rotation
-                _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, Vector3.Lerp(_ctx.transform.up, _ctx.GroundCast.HitInfo.normal, _delta * _ctx.RotationSmoothingSpeed));
+                _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, Vector3.Lerp(_ctx.transform.up, _ctx.GroundCast.HitInfo.normal, _delta * _ctx.Chp.RotationSmoothingSpeed));
         }
 
         private void Movement ( float _delta ) {

@@ -43,6 +43,7 @@ public class PlayerCharacterParameters : ScriptableObject
     public float BreakStrength;
 
     public float BreakStrengthAir;
+    public float RotationSmoothingSpeed;
 
     [Space]
     public float JumpForce;
@@ -133,13 +134,7 @@ public class PlayerCharacterParameters : ScriptableObject
 
     [Space]
     [Header("Water")]
-    public float WaterSpeedCap = 8f;           // max horizontal speed in water
-    public float WaterDeceleration = 4f;       // how quickly you slow down
-    public float WaterJumpStrength = 6f;       // jump force when in water
-    public float WaterGravityScale = 0.4f;     // scale gravity while submerged
-    public float WaterMaxFallSpeed = 12f;      // cap fall speed
     public float WaterRunThreshold = 14f;      // min speed needed to run across water
-    public Vector3 Gravity = new Vector3(0, -9.81f, 0);
 
     [Space]
     [Header("Wall Run")]
@@ -160,5 +155,14 @@ public class PlayerCharacterParameters : ScriptableObject
     public float WallJumpMinStrength = 10f;      // smallest jump strength
     public float WallJumpMaxStrength = 25f;      // largest jump strength
 
+    [Space]
+    [Header("Ledge Grab")]
+    public AnimationCurve LedgeGrabVelocityDecrease;
+
+    [Space]
+    [Header("Stone Skipping")]
+    public float stoneSkipMinimumSpeed = 14f;   // minimum speed for stone skipping
+    public float stoneSkipWindow = 0.5f;    // the number of seconds you need to press the button before hitting the water
+    public float stoneSkipCooldown = 1f;    // cooldown to prevent spamming
 
 }

@@ -71,6 +71,11 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
         {
             _ctx.InvinciblitiyState -= Time.fixedDeltaTime;
         }
+
+        if(_ctx.Input.Respawn.WasPressedThisFrame())
+        {
+            Death();
+        }
     }
 
     public void ApplyKnockback(Vector3 _knockback)
