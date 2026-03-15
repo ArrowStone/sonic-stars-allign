@@ -21,6 +21,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fd9305e8779000b0c9d89e8d49d6d725
+    m_Address: PhatBoy Slim College SDF
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: c9850b308c988fce9abcb018ce847c97, type: 2}
   m_SchemaSet:

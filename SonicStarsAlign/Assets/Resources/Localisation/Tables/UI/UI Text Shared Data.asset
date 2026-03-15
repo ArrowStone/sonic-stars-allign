@@ -16,19 +16,47 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: d8a569321f1e09e95a1400b0f86e70e4
   m_Entries:
   - m_Id: 156130910208
-    m_Key: pause
+    m_Key: pm_pause
     m_Metadata:
       m_Items: []
   - m_Id: 21210467442688
-    m_Key: resume
+    m_Key: pm_resume
     m_Metadata:
       m_Items: []
   - m_Id: 22017548001280
-    m_Key: scn_Test/Canvas/PauseMenu/ExitToTitleButton/Text (TMP)
+    m_Key: pm_exittotitle
     m_Metadata:
       m_Items: []
   - m_Id: 22204542656512
-    m_Key: scn_Test/Canvas/PauseMenu/ExitGameButton/Text (TMP)
+    m_Key: pm_exitgame
+    m_Metadata:
+      m_Items: []
+  - m_Id: 646173998227456
+    m_Key: mm_exitgame
+    m_Metadata:
+      m_Items: []
+  - m_Id: 646481671397376
+    m_Key: mm_adventure
+    m_Metadata:
+      m_Items: []
+  - m_Id: 646562415943680
+    m_Key: mm_setings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 646598843473920
+    m_Key: mm_extras
+    m_Metadata:
+      m_Items: []
+  - m_Id: 676447905685504
+    m_Key: placeholder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 689857007493120
+    m_Key: sstsct_start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 690063216254976
+    m_Key: menus_back
     m_Metadata:
       m_Items: []
   m_Metadata:

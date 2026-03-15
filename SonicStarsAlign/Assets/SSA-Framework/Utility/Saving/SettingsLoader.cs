@@ -8,13 +8,13 @@ using Unity.Cinemachine;
 // Code for loading and applying settings in the levels. Every parameter has to be hardcoded.
 public class SettingsLoader : MonoBehaviour
 {
-        [Header("References")]
+    [Header("References")]
     public CamPoint_NormalPlayer pointPlayer;
-        public CinemachineCamera CMCamera;
+    public CinemachineCamera CMCamera;
     public VolumeProfile profile;
     public UniversalRenderPipelineAsset pipelineAsset;
 
-        [Header("Qualities")]
+    [Header("Qualities")]
     public int[,] resolutions =
     {
         {0,0},
@@ -79,7 +79,8 @@ public class SettingsLoader : MonoBehaviour
         }
 
         cam.farClipPlane = 100f + (viewDist * 900f);
-        CMCamera.Lens.FarClipPlane = 100f + (viewDist * 900f); ;
+        if(CMCamera) // Absent in menu scenes
+        {CMCamera.Lens.FarClipPlane = 100f + (viewDist * 900f);}
         cameraData.antialiasing = AAModes[AAMode];
         cameraData.antialiasingQuality = SMAAQualities[AAQuality];
         cameraData.taaSettings.quality = TAAQualities[AAQuality];

@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    //private int cachedScene = 0;
+    private int cachedScene = 0;
 
     public static SceneSwitcher Instance;
 
@@ -15,18 +15,9 @@ public class SceneSwitcher : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // this keeps it alive across scenes
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
     }
 
-    /*public void SwitchScene(int _scn)
+    public void SwitchScene(int _scn)
     {
         if (_scn < 0)
         {
@@ -34,12 +25,19 @@ public class SceneSwitcher : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadSceneAsync(_scn);
+            SceneManager.LoadScene(_scn);
         }
     }
     public void AddScene(int _scn)
     {
-        SceneManager.LoadSceneAsync(_scn, LoadSceneMode.Additive);
+        if(_scn < 0)
+        {
+            ExitGame();
+        }
+        else 
+        {
+            SceneManager.LoadSceneAsync(_scn, LoadSceneMode.Additive);
+        }
     }
     public void DelScene(int _scn)
     {
@@ -55,6 +53,13 @@ public class SceneSwitcher : MonoBehaviour
         #endif
     }
 
+    public void AddCachedScene()
+    {
+        AddScene(cachedScene);
+    }
+
+    // Sorry lajeeth had to bring this back so main mneu buttons work
+
     public void CacheScene(int _scn)
     {
         cachedScene = _scn;
@@ -63,15 +68,6 @@ public class SceneSwitcher : MonoBehaviour
     {
         SwitchScene(cachedScene);
     }
-    public void AddCachedScene()
-    {
-        AddScene(cachedScene);
-    }
-    public int GetCachedScene()
-    {
-        return cachedScene;
-    }
-    */
     public void CacheCharacter(PlayerCharacterParameters character)
     {
         cachedCharacter = character;
@@ -98,9 +94,5 @@ public class SceneSwitcher : MonoBehaviour
     public string GetCachedStage()
     {
         return cachedStageDisplayName;
-    }
-    public void SwitchScene(int sceneIndex)
-    {
-        SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Single);
     }
 }

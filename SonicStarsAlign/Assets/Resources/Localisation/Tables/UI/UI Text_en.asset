@@ -34,6 +34,34 @@ MonoBehaviour:
     m_Localized: Exit Game
     m_Metadata:
       m_Items: []
+  - m_Id: 646173998227456
+    m_Localized: Exit Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 646598843473920
+    m_Localized: Extras & more
+    m_Metadata:
+      m_Items: []
+  - m_Id: 646562415943680
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 646481671397376
+    m_Localized: Adventure
+    m_Metadata:
+      m_Items: []
+  - m_Id: 676447905685504
+    m_Localized: Pingas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 689857007493120
+    m_Localized: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 690063216254976
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
