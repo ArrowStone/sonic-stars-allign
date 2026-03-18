@@ -15,12 +15,6 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-Russian (ru)
   m_GUID: 8d2df5848d015bf1197bef891bdc7764
   m_SerializeEntries:
-  - m_GUID: 435f63ae5a9a75719afa5aa6e74e7d41
-    m_Address: Vipnagorgialla SDF
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ru
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 74ce397c437cd937aad4ede1160f4eed
     m_Address: RussoOne-Regular SDF
     m_ReadOnly: 1
