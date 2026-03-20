@@ -1422,6 +1422,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GenericEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6886115211697191214, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 15830146094202309, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
     m_RemovedGameObjects: []
@@ -5175,6 +5179,10 @@ PrefabInstance:
     - target: {fileID: 6886115211697191214, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
       propertyPath: m_Name
       value: GenericEnemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886115211697191214, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 15830146094202309, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
@@ -12927,6 +12935,10 @@ PrefabInstance:
     - target: {fileID: 6886115211697191214, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
       propertyPath: m_Name
       value: GenericEnemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886115211697191214, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 15830146094202309, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
@@ -23158,6 +23170,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GenericEnemy (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6886115211697191214, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 15830146094202309, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
     m_RemovedGameObjects: []
@@ -30953,6 +30969,10 @@ PrefabInstance:
     - target: {fileID: 6886115211697191214, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
       propertyPath: m_Name
       value: GenericEnemy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886115211697191214, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 15830146094202309, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
@@ -43931,7 +43951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8751931353666102223, guid: 01e205996e4bf35a38fe0c44206e2b45, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -44376,7 +44396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7227980303123717656, guid: 5476038c66909debf92191b591ebe362, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -44776,7 +44796,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7597574013377244693, guid: d732ceae6e0b0816faedda66af00dbfa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
