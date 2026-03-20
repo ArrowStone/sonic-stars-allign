@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-English (en)
   m_GUID: 49773d134e03229a4a4ee48cf25ffd6c
   m_SerializeEntries:
+  - m_GUID: 83c443656fd8472469e0ed05d322520a
+    m_Address: NiseSegaSonic SDF
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fd9305e8779000b0c9d89e8d49d6d725
     m_Address: PhatBoy Slim College SDF
     m_ReadOnly: 1

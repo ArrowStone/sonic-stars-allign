@@ -4886,7 +4886,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 880585488}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -7542,6 +7542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointPlayer: {fileID: 0}
+  CMCamera: {fileID: 0}
   profile: {fileID: 11400000, guid: ab09877e2e707104187f6f83e2f62510, type: 2}
   pipelineAsset: {fileID: 11400000, guid: 4b83569d67af61e458304325a23e5dfd, type: 2}
   AAModes: 00000000010000000200000003000000
@@ -8226,6 +8227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cdc683a2fd56b047bc0f0b0b7c8afec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameplaySceneIndex: 0
 --- !u!114 &1885612090
 MonoBehaviour:
   m_ObjectHideFlags: 0
