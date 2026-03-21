@@ -435,17 +435,17 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - eventID: 15
+  - eventID: 0
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 5625611768602780027}
-          m_TargetAssemblyTypeName: Spawner, Assembly-CSharp
-          m_MethodName: Spawn
-          m_Mode: 2
+        - m_Target: {fileID: 5795209516076463780}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: Play
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 7479378380480015474, guid: 7b44ea6074d17b6eaa7a56cec8e71c0d, type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 

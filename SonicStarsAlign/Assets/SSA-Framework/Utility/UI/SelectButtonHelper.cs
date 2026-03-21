@@ -12,6 +12,7 @@ public class SelectButtonHelper : MonoBehaviour
         string stageName = selector.GetSelectedStage().displayName;
         Debug.Log("Caching Stage: " + stageName);
 
+        Debug.Log(SceneSwitcher.Instance);
         SceneSwitcher.Instance.CacheStage(stageName);
         SceneSwitcher.Instance.SwitchScene(loadingScreenSceneIndex);
     }

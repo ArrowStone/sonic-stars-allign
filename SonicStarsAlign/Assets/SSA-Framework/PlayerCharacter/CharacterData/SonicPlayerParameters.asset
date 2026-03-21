@@ -74,20 +74,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0.10931362
-      outSlope: 0.10931362
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 2
       inWeight: 0
       outWeight: 0.9291667
     - serializedVersion: 3
       time: 1
-      value: 1
-      inSlope: 3.8847067
-      outSlope: 3.8847067
+      value: 0.5
+      inSlope: 2.7901683
+      outSlope: 2.7901683
       tangentMode: 0
       weightedMode: 1
-      inWeight: 0.16250002
+      inWeight: 0.16613746
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -343,3 +343,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  stoneSkipMinimumSpeed: 14
+  stoneSkipWindow: 0.5
+  stoneSkipCooldown: 1
