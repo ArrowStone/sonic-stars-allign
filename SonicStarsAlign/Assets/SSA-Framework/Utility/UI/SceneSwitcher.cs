@@ -15,6 +15,7 @@ public class SceneSwitcher : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
     }
 
     public void SwitchScene(int _scn)
