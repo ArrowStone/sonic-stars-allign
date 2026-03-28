@@ -141,8 +141,8 @@ public class Sonic_WallRunState : IState
         _ctx.VerticalVelocity += _ctx.Gravity * _ctx.Chp.WallRunGravityScale * dt;
 
         // Adjust player rotation
-
         _ctx.PlayerDirection = wallForward;
+        _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity.normalized);
     }
 
     private void DoWallJump()
@@ -151,6 +151,7 @@ public class Sonic_WallRunState : IState
 
         _ctx.VerticalVelocity = jumpDir * _ctx.Chp.WallJumpStrength;
         _ctx.HorizontalVelocity = jumpDir * _ctx.Chp.WallJumpStrength;
+        _ctx.Physics_ApplyVelocity();
 
         _ctx.MachineTransition(PlayerStates.Air);
     }

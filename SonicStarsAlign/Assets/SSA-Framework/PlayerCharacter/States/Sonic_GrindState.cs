@@ -143,7 +143,7 @@ public class Sonic_GrindState : IState
         _norm = _ctx.SplnHandler.SplineNormal();
         _ctx.GroundNormal = _norm;
 
-        //_ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_vel, _ctx.GroundNormal);
+        _ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_vel, _ctx.GroundNormal);
         _pos = _ctx.SplnHandler.NewPosition();
         _difference = _pos - _ctx.Rb.transform.position;
     }
