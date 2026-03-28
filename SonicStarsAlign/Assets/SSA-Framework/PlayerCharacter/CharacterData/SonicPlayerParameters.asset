@@ -308,14 +308,14 @@ MonoBehaviour:
   WaterRunThreshold: 14
   WallAttachCheckDistance: 1
   WallRunGravityScale: 0.35
-  WallRunSpeed: 12
+  WallRunSpeed: 30
   WallJumpStrength: 18
   MaxWallRunTime: 2
   MinWallDot: 0.5
   MaxWallGravityDot: 0.2
   WallRunMinSpeed: 8
   MaxWallHeadOnDot: 0.7
-  WallRunVerticalControl: 4
+  WallRunVerticalControl: 15
   WallJumpMaxCharge: 1
   WallJumpMinStrength: 10
   WallJumpMaxStrength: 25

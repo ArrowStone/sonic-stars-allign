@@ -95,6 +95,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         public bool runningOnWater;
 
         [SerializeField] public Vector3 WallRunNormal;
+        [SerializeField] public bool WallRunDirection;
         [SerializeField] public bool OnWall;
         [SerializeField] public Vector3 ledgeGrabInitialVelocity;
         [SerializeField] public float ledgeGrabStartTime;
