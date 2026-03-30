@@ -108,6 +108,11 @@ public class SplineHandler
         return PreviousTangent;
     }
 
+    public float SplineCurvature()
+    {
+        return SplineUtility.EvaluateCurvature(ActiveSpline.Spline, Mathf.Clamp01(Time));
+    }
+
     public void Clear()
     {
         ActiveSpline = null;

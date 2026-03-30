@@ -301,7 +301,7 @@ MonoBehaviour:
   RailCollisionBounce: 5
   RailSwitchSpeed: 50
   RailSwitchDuration: 0.125
-  RailSwitchDeadZone: 45
+  RailSwitchDeadZone: 0.5
   DropDashBaseSpeed: 8
   DropDashChargeMultiplier: 4
   DropDashMaxCharge: 1

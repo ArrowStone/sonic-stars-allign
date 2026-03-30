@@ -10,6 +10,8 @@ public class Sonic_GrindState : IState
     private Vector3 _norm;
     private Vector3 _pos;
     private Vector3 _vel;
+    private float _railTurn;
+    private float _tilt;
 
     public Sonic_GrindState(Sonic_PlayerStateMachine _machine)
     {
@@ -72,8 +74,6 @@ public class Sonic_GrindState : IState
 
         _ctx.Snd.RailSource.pitch = Mathf.Lerp(_ctx.Snd.RailSource.pitch, Math.Clamp(_ctx.Rb.linearVelocity.magnitude * 0.05f, 0.8f, 1.2f), _delta * 10f);
         _ctx.Snd.RailSource.volume = Math.Clamp(_ctx.Rb.linearVelocity.magnitude * 0.03f, 0.1f, 0.7f);
-
-        Debug.Log(_ctx.SplnHandler.SpeedFactor);
     }
 
     public void LateUpdateState()
@@ -83,13 +83,14 @@ public class Sonic_GrindState : IState
     public void UpdateState()
     {
         //float _delta = Time.deltaTime;
+
+        Debug.DrawRay(_ctx.transform.position + Vector3.up, _ctx.transform.right * (_railTurn - _tilt), Color.yellow);
     }
 
     #region Util
 
     public void RailSwitchConditions()
     {
-        float _tilt = Vector3.SignedAngle(_ctx.PlayerDirection, _ctx.InputVector, _ctx.GroundNormal);
         if (_ctx.Input.JumpInput.WasPressedThisFrame())
         {
             Automation_GrindRail _grail;
@@ -159,6 +160,9 @@ public class Sonic_GrindState : IState
         //_ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_vel, _ctx.GroundNormal);
         _pos = _ctx.SplnHandler.NewPosition();
         _difference = _pos - _ctx.transform.position;
+
+        _tilt = Math.Clamp(Vector3.SignedAngle(_ctx.PlayerDirection, _ctx.InputVector, _ctx.GroundNormal) * 0.01111111111f, -1f, 1f);
+        _railTurn = _ctx.SplnHandler.SplineCurvature();
     }
 
     private void Rotation()
