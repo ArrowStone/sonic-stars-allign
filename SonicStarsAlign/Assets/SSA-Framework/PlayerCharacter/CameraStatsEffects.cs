@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEditor.EditorTools;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "CharacterStats/Camera Effects Stats")]
@@ -66,6 +67,8 @@ public class CameraStatsEffects : ScriptableObject
                 new Keyframe(0.5f, 1.2f),
                 new Keyframe(1, 1.5f),
         } );
+        [Tooltip("The distance the camera moves away from the wall by when wall running.")]
+        public float WallRunOffset = 3f;
 
         [Header("Recentering")]
         [Tooltip("The X is the min speed to enable recentering, the Y is the speed to disable recenter when slower than.")]

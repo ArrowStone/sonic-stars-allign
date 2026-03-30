@@ -249,6 +249,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPointStyle
                 OffsetByLookAhead();
                 OffsetByVertical();
                 OffsetByTurn();
+                OffsetIfWallRun();
 
                 //MainTarget.position = BaseTargetPosition + (TargetOffset / Mathf.Max(1, totalOffsets));
                 MainTarget.position = BaseTargetPosition + TargetOffset;
@@ -330,6 +331,15 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPointStyle
 
                         TargetTurnOffset.position = BaseTargetPosition + offSetDirection * _currentTurnOffset;
                         TargetOffset += offSetDirection * _currentTurnOffset;
+                }
+
+                // Offset the camera from the wall when wall running
+                void OffsetIfWallRun()
+                {
+                        if(PlayerCTX.CurrentEstate == PlayerStates.WallRun)
+                        {
+                                TargetOffset += PlayerCTX.WallRunNormal * EffectStats.WallRunOffset;
+                        }
                 }
 
         }

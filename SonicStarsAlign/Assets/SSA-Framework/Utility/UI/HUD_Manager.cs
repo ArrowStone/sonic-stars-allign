@@ -29,7 +29,6 @@ public class HUD_Manager : MonoBehaviour
         if(_ctx.HomingTargetDetector.TargetDetected && 
         Vector3.Angle((_ctx.HomingTargetDetector.TargetOutput.transform.position - _ctx.transform.position).normalized, Camera.main.transform.forward) < 90f)
         {
-            Debug.Log(Vector3.Angle((_ctx.HomingTargetDetector.TargetOutput.transform.position - _ctx.transform.position).normalized, Camera.main.transform.forward));
             homingIndicatorImage.enabled = true;
             targetHomingPos = _ctx.HomingTargetDetector.TargetOutput.transform.position;
         }

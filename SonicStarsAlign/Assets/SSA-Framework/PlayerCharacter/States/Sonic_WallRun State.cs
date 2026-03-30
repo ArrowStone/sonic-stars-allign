@@ -52,13 +52,6 @@ public class Sonic_WallRunState : IState
         }
 
 
-        if (_ctx.Input.JumpInput.IsPressed())
-        {
-            _ctx.MachineTransition(PlayerStates.WallJump);
-            return;
-        }
-
-
         ApplyPhysics(dt);
         _ctx.Physics_ApplyVelocity();
     }
@@ -74,7 +67,7 @@ public class Sonic_WallRunState : IState
     private bool StillOnWall()
     {
         RaycastHit hit;
-        Vector3 origin = _ctx.Rb.transform.position;
+        Vector3 origin = _ctx.transform.position;
 
         // Use the layer defined in the PlayerStateMachine
         if (Physics.Raycast(
@@ -124,18 +117,29 @@ public class Sonic_WallRunState : IState
         // Wall-aligned up/down direction
         Vector3 wallUp = GetWallUpDirection();
 
-        // Player vertical input (forward/back stick ignored)
-        float verticalInput = _ctx.Input.VectorMoveInput.z;
+        // Player horizontal input (forward/back stick ignored)
+        float horizontalInput = -_ctx.Input.VectorMoveInput.x;
+
+                // Applying direction
+        if(!_ctx.WallRunDirection)
+        {
+            wallForward = -wallForward;
+            horizontalInput = -horizontalInput;
+        }
 
         // Add controlled steering
         Vector3 steerVelocity =
             wallForward * _ctx.Chp.WallRunSpeed +
-            wallUp * (verticalInput * _ctx.Chp.WallRunVerticalControl);
+            wallUp * (horizontalInput * _ctx.Chp.WallRunVerticalControl);
 
         _ctx.HorizontalVelocity = steerVelocity;
 
         // Light gravity so player slowly slides down if idle
         _ctx.VerticalVelocity += _ctx.Gravity * _ctx.Chp.WallRunGravityScale * dt;
+
+        // Adjust player rotation
+        _ctx.PlayerDirection = wallForward;
+        _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity.normalized);
     }
 
     private void DoWallJump()
@@ -144,6 +148,7 @@ public class Sonic_WallRunState : IState
 
         _ctx.VerticalVelocity = jumpDir * _ctx.Chp.WallJumpStrength;
         _ctx.HorizontalVelocity = jumpDir * _ctx.Chp.WallJumpStrength;
+        _ctx.Physics_ApplyVelocity();
 
         _ctx.MachineTransition(PlayerStates.Air);
     }

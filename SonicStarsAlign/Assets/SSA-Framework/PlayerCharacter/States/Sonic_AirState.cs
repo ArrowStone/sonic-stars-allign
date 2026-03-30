@@ -74,8 +74,6 @@ public class Sonic_AirState : IState
         AirSwitchConditions();
         _ctx.Physics_ApplyVelocity();
 
-        CheckForWallRun();
-
         // Rotation also acts as a ledge grab timeout timer
         if(_ctx.doneAirRotation) 
         {
@@ -83,6 +81,7 @@ public class Sonic_AirState : IState
         }
 
         CheckForStoneSkip(_delta);
+        CheckForWallRun();
     }
 
     public void LateUpdateState()
@@ -308,6 +307,8 @@ public class Sonic_AirState : IState
                 {
                     _ctx.WallRunNormal = hit.normal;
                     _ctx.OnWall = true;
+                    
+                    _ctx.WallRunDirection = Vector3.Cross(_ctx.HorizontalVelocity.normalized, _ctx.WallRunNormal).y > 0;
 
                     _ctx.MachineTransition(PlayerStates.WallRun);
                     return;
@@ -372,7 +373,6 @@ public class Sonic_AirState : IState
         Vector3 displacement = _ctx.ledgeGrabDisplacement; // Adjustable displacement from the ledge
         displacement.x *= _ctx.transform.forward.x;
         displacement.z *= _ctx.transform.forward.z;
-        Debug.Log(_ctx.transform.forward);
 
         endPosition += displacement;
 

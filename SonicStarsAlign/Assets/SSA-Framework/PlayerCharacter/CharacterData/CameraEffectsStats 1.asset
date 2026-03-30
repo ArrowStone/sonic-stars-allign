@@ -221,4 +221,5 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  WallRunOffset: 2
   MinSpeedToAutoRecenter: {x: 15, y: 10}

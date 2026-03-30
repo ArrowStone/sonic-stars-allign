@@ -14,10 +14,13 @@ public class Sonic_GrindState : IState
     public Sonic_GrindState(Sonic_PlayerStateMachine _machine)
     {
         _ctx = _machine;
+        _ctx.railEndTime = Time.time;
     }
 
     public void EnterState()
     {
+        Debug.DrawRay(_ctx.transform.position, Vector3.up * 5f, Color.white, 10f);
+
         _ctx.ChangeKinematic(true);
         _difference = Vector3.Project(_ctx.Velocity, _ctx.SplnHandler.SplineTangent());
         _ctx.VerticalVelocity = Vector3.zero;
@@ -32,7 +35,11 @@ public class Sonic_GrindState : IState
 
     public void ExitState()
     {
+        Debug.DrawRay(_ctx.transform.position, Vector3.up * 5f, Color.black, 10f);
+
         _ctx.ChangeKinematic(false);
+        Debug.Log(_vel);
+        _ctx.HorizontalVelocity = _vel;
         _ctx.Physics_ApplyVelocity();
         _ctx.SplnHandler.Clear();
 
@@ -40,20 +47,14 @@ public class Sonic_GrindState : IState
 
         _ctx.Snd.RailSource.Stop();
         _ctx.Snd.RailSource.pitch = 1f;
+
+        _ctx.railEndTime = Time.time;
     }
 
     public void FixedUpdateState()
     {
-        _ctx.Snd.RailSource.pitch = Mathf.Lerp(_ctx.Snd.RailSource.pitch, Math.Clamp(_ctx.Rb.linearVelocity.magnitude * 0.05f, 0.9f, 1.2f), Time.fixedDeltaTime * 10f);
-    }
+        float _delta = Time.fixedDeltaTime;
 
-    public void LateUpdateState()
-    {
-    }
-
-    public void UpdateState()
-    {
-        float _delta = Time.deltaTime;
         _ctx.SplnHandler.SplineMove(_delta);
         if (_ctx.SplnHandler.Active)
         {
@@ -68,6 +69,20 @@ public class Sonic_GrindState : IState
         }
         _ctx.RailCheck();
         RailSwitchConditions();
+
+        _ctx.Snd.RailSource.pitch = Mathf.Lerp(_ctx.Snd.RailSource.pitch, Math.Clamp(_ctx.Rb.linearVelocity.magnitude * 0.05f, 0.8f, 1.2f), _delta * 10f);
+        _ctx.Snd.RailSource.volume = Math.Clamp(_ctx.Rb.linearVelocity.magnitude * 0.03f, 0.1f, 0.7f);
+
+        Debug.Log(_ctx.SplnHandler.SpeedFactor);
+    }
+
+    public void LateUpdateState()
+    {
+    }
+
+    public void UpdateState()
+    {
+        //float _delta = Time.deltaTime;
     }
 
     #region Util
@@ -84,7 +99,6 @@ public class Sonic_GrindState : IState
                 {
                     _ctx.SplnHandler.SwitchDir = _grail;
                     _ctx.MachineTransition(PlayerStates.RailSwitch);
-                    Debug.Log("L");
                     return;
                 }
             }
@@ -94,7 +108,6 @@ public class Sonic_GrindState : IState
                 {
                     _ctx.SplnHandler.SwitchDir = _grail;
                     _ctx.MachineTransition(PlayerStates.RailSwitch);
-                    Debug.Log("R");
                     return;
                 }
             }
@@ -145,7 +158,7 @@ public class Sonic_GrindState : IState
 
         //_ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_vel, _ctx.GroundNormal);
         _pos = _ctx.SplnHandler.NewPosition();
-        _difference = _pos - _ctx.Rb.transform.position;
+        _difference = _pos - _ctx.transform.position;
     }
 
     private void Rotation()

@@ -31,6 +31,11 @@ public class Automation_GrindRail : MonoBehaviour
 
     public void Execute(Sonic_PlayerStateMachine _ctx, float3 point)
     {
+        if(Time.time - _ctx.railEndTime < _ctx.railTimeout)
+        {
+            return;
+        }
+
         if (RefSpline == _ctx.SplnHandler.ActiveSpline)
         {
             return;
