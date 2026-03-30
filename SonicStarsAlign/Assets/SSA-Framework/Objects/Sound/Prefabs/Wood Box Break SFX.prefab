@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3179720721278850670
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1603225458932333582, guid: 9712ffe11e14e3eae975d20cfdb3f3cf, type: 3}
+      propertyPath: Priority
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 1603225458932333582, guid: 9712ffe11e14e3eae975d20cfdb3f3cf, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 532026b6b39c17a249861bd22353da90, type: 3}
+    - target: {fileID: 1603225458932333582, guid: 9712ffe11e14e3eae975d20cfdb3f3cf, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+    - target: {fileID: 4584726129559733156, guid: 9712ffe11e14e3eae975d20cfdb3f3cf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584726129559733156, guid: 9712ffe11e14e3eae975d20cfdb3f3cf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584726129559733156, guid: 9712ffe11e14e3eae975d20cfdb3f3cf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584726129559733156, guid: 9712ffe11e14e3eae975d20cfdb3f3cf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584726129559733156, guid: 9712ffe11e14e3eae975d20cfdb3f3cf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584726129559733156, guid: 9712ffe11e14e3eae975d20cfdb3f3cf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584726129559733156, guid: 9712ffe11e14e3eae975d20cfdb3f3cf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584726129559733156, guid: 9712ffe11e14e3eae975d20cfdb3f3cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584726129559733156, guid: 9712ffe11e14e3eae975d20cfdb3f3cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584726129559733156, guid: 9712ffe11e14e3eae975d20cfdb3f3cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5470945715569637916, guid: 9712ffe11e14e3eae975d20cfdb3f3cf, type: 3}
+      propertyPath: m_Name
+      value: Wood Box Break SFX
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9712ffe11e14e3eae975d20cfdb3f3cf, type: 3}

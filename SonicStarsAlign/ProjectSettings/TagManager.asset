@@ -18,7 +18,7 @@ TagManager:
   - SSA/Collectible
   - SSA/Player
   - SSA/Interactable_Rail
-  - 
+  - SSA/Effect
   - SSA/Surfaces/Floor
   - SSA/WallRun
   - SSA/Water

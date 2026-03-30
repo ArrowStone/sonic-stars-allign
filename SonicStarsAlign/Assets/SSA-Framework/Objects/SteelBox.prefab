@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2666923307427312874}
   - component: {fileID: 7088547257253956998}
   - component: {fileID: 5297539923407406272}
-  m_Layer: 14
+  m_Layer: 8
   m_Name: SteelBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5433553930973609168}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 363.9571, y: 15.191711, z: 84.98128}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
@@ -205,9 +205,21 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 46f1200c41b2dcd4a972a7bebdce67e2, type: 2}
+    - target: {fileID: -782207623202608722, guid: 3d8f37a2b6c47534db96c7e80735a732, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3d8f37a2b6c47534db96c7e80735a732, type: 3}
       propertyPath: m_Name
       value: cmn_obj_ironbox_SD
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3d8f37a2b6c47534db96c7e80735a732, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074669574446491207, guid: 3d8f37a2b6c47534db96c7e80735a732, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

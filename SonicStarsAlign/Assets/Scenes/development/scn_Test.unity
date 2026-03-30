@@ -44553,6 +44553,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1824001819670015961, guid: 6eb842888e4c6924c959d2c00f60df9f, type: 3}
+      propertyPath: _isSelected
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5682745484017281009, guid: 6eb842888e4c6924c959d2c00f60df9f, type: 3}
       propertyPath: m_Name
       value: DeathPlane
@@ -44883,7 +44887,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4091935854963311916, guid: b474c8b9eeeb60d4eb5d1b80038a58f6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 378.89
+      value: 380.233
       objectReference: {fileID: 0}
     - target: {fileID: 4091935854963311916, guid: b474c8b9eeeb60d4eb5d1b80038a58f6, type: 3}
       propertyPath: m_LocalPosition.y
