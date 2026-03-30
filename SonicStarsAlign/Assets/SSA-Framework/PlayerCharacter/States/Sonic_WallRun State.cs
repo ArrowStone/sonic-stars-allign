@@ -12,7 +12,6 @@ public class Sonic_WallRunState : IState
 
     public void EnterState()
     {
-        Debug.Log("Wallrun state!");
         _timer = 0f;
 
         // Lock vertical velocity
@@ -48,7 +47,6 @@ public class Sonic_WallRunState : IState
         // Check if we're still touching a valid wall AND moving at a valid angle
         if (!StillOnWall() || !HasValidWallRunAngle())
         {
-            Debug.Log("Leaving the wall!!");
             LeaveWall();
             return;
         }
@@ -64,7 +62,6 @@ public class Sonic_WallRunState : IState
     public void ExitState()
     {
         _ctx.OnWall = false;
-        Debug.Log("Cancelling wallrun!");
     }
 
     private bool StillOnWall()

@@ -305,7 +305,6 @@ public class Sonic_AirState : IState
 
                 if (intoWall > 0.2f)
                 {
-                    Debug.Log("Wallrun!");
                     _ctx.WallRunNormal = hit.normal;
                     _ctx.OnWall = true;
                     
@@ -374,7 +373,6 @@ public class Sonic_AirState : IState
         Vector3 displacement = _ctx.ledgeGrabDisplacement; // Adjustable displacement from the ledge
         displacement.x *= _ctx.transform.forward.x;
         displacement.z *= _ctx.transform.forward.z;
-        Debug.Log(_ctx.transform.forward);
 
         endPosition += displacement;
 

@@ -1,5 +1,6 @@
 using System;
 using JetBrains.Annotations;
+using Unity.Properties;
 using UnityEngine;
 
 public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
@@ -49,6 +50,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         [SerializeField] private float railDetectionDistance;
 
         [SerializeField] private float railDetectionRadius;
+        [SerializeField] public float railTimeout;
+        public float railEndTime;
         [SerializeField] public Vector3 ledgeGrabDisplacement;
         [SerializeField] public Vector3 ledgeGrabReleaseDisplacement;
 
@@ -83,12 +86,10 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                         if(value)
                         {
                                 Chp = waterChp;
-                                Debug.Log("Water!");
                         }
                         else
                         {
                                 Chp = airChp;
-                                Debug.Log("Air!");
                         }
                 }
         }
@@ -430,7 +431,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         #region Moves
 
         public void HomingCheck () {
-                HomingTargetDetector.Execute(transform.position, PlayerDirection);
+                HomingTargetDetector.Execute(transform.position - Gravity * 5f, PlayerDirection);
         }
 
         public void RingCheck () {

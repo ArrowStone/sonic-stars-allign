@@ -11,6 +11,7 @@ public class Sonic_RailSwitchState : IState
     private Vector3 _currPos;
     private Vector3 _startPos;
     private Vector3 _norm;
+    private Vector3 _startVel;
 
     private float _trgtlength;
     private float _speed;
@@ -25,6 +26,8 @@ public class Sonic_RailSwitchState : IState
 
     public void EnterState()
     {
+        _startVel = _ctx.HorizontalVelocity;
+
         _time = 0;
         _duration = _ctx.Chp.RailSwitchDuration;
 
@@ -52,20 +55,23 @@ public class Sonic_RailSwitchState : IState
         {
             ExitConditions();
         }
-        //_ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_vel, _ctx.Gravity);
+        
+        _ctx.Physics_ApplyVelocity();
     }
 
     public void ExitState()
     {
         _ctx.GroundNormal = _norm;
         _ctx.ChangeKinematic(false);
+
+        _ctx.HorizontalVelocity = _startVel;
         _ctx.Physics_ApplyVelocity();
     }
 
     private void RailSwitchMovement(float _delta)
     {
         _currPos = Vector3.Lerp(_startPos, _targetPos, _time / _duration);
-        //_vel = (_currPos - _ctx.Rb.transform.position) / Time.fixedDeltaTime;
+        _vel = (_currPos - _ctx.Rb.transform.position) / Time.fixedDeltaTime;
         _ctx.Physics_Snap(_currPos);
     }
 
