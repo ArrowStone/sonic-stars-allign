@@ -15,6 +15,8 @@ public class Movement_Aerial : MonoBehaviour, Enemy_MovementBase
         public float movementSpeed;
         public float rotationSpeed;
         public SplineContainer PathContainer;
+        private Vector3 homePoint;
+        private bool stationary = false;
         private Spline path;
         private float pathProgress = 0;
         private bool onPath = false;
@@ -24,6 +26,14 @@ public class Movement_Aerial : MonoBehaviour, Enemy_MovementBase
         void Awake () {
                 detector = new Overlap_Sphere(gameObject, 1, targetLayer, 0, detectionDistance, detectionBlockingMask, DetectionBias.Proximity);
                 Rb = GetComponent<Rigidbody>();
+                
+                if(!PathContainer)
+                {
+                        homePoint = transform.position;
+                        stationary = true;
+                        return;
+                }
+
                 path = PathContainer.Spline;
                 pathPosition = transform.position;
                 cachedPathPosition = pathPosition;
@@ -52,7 +62,15 @@ public class Movement_Aerial : MonoBehaviour, Enemy_MovementBase
 
                         if (onPath)
                         {
-                                pathPosition = PathContainer.transform.localToWorldMatrix.MultiplyPoint(path.EvaluatePosition(pathProgress));
+                                if(stationary)
+                                {
+                                        pathPosition = homePoint;
+                                }
+                                else
+                                {
+                                        pathPosition = PathContainer.transform.localToWorldMatrix.MultiplyPoint(path.EvaluatePosition(pathProgress));
+                                }
+
                                 if (Vector3.Distance(transform.position, pathPosition) > 5f)
                                 {
                                         pathPosition = cachedPathPosition;
@@ -66,8 +84,15 @@ public class Movement_Aerial : MonoBehaviour, Enemy_MovementBase
                         }
                         else
                         {
-                                SplineUtility.GetNearestPoint(path, PathContainer.transform.worldToLocalMatrix.MultiplyPoint(transform.position), out pathPosition, out pathProgress);
-                                targetLookPos = PathContainer.transform.localToWorldMatrix.MultiplyPoint(pathPosition);
+                                if(stationary)
+                                {
+                                        targetLookPos = homePoint;
+                                }
+                                else
+                                {
+                                        SplineUtility.GetNearestPoint(path, PathContainer.transform.worldToLocalMatrix.MultiplyPoint(transform.position), out pathPosition, out pathProgress);
+                                        targetLookPos = PathContainer.transform.localToWorldMatrix.MultiplyPoint(pathPosition);
+                                }
                                 if (Vector3.Distance(targetLookPos, transform.position) < 1f) onPath = true;
                         }
                 }

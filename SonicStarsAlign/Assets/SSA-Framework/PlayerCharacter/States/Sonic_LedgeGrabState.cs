@@ -33,17 +33,18 @@ public class Sonic_LedgeGrabState : IState
             displacement.z *= _ctx.transform.forward.z;
             _ctx.Rb.transform.position += displacement;
 
-            if(_ctx.ledgeGrabInitialVelocity.y < 0) // If players was going down, we need for them to go up after releasing the grab
+            if(_ctx.ledgeGrabVerticalVelocity.y < 0) // If players was going down, we need for them to go up after releasing the grab
             {
-                _ctx.ledgeGrabInitialVelocity.y = -_ctx.ledgeGrabInitialVelocity.y;
+                _ctx.ledgeGrabVerticalVelocity = -_ctx.ledgeGrabVerticalVelocity;
             }
 
-            _ctx.ChangeKinematic(false);
-
             // Decrease velocity over grab time
-            _ctx.ledgeGrabInitialVelocity = _ctx.ledgeGrabInitialVelocity * _ctx.Chp.LedgeGrabVelocityDecrease.Evaluate(Time.time - _ctx.ledgeGrabStartTime);
-            _ctx.Rb.linearVelocity = _ctx.ledgeGrabInitialVelocity; // Restore the velocity from before the grab
-            Debug.Log(_ctx.ledgeGrabInitialVelocity);
+            _ctx.ledgeGrabHorizontalVelocity = _ctx.ledgeGrabHorizontalVelocity * _ctx.Chp.LedgeGrabVelocityDecrease.Evaluate(Time.time - _ctx.ledgeGrabStartTime);
+            
+            // Restore the velocity from before the grab
+            _ctx.HorizontalVelocity = _ctx.ledgeGrabHorizontalVelocity;
+            _ctx.VerticalVelocity = _ctx.ledgeGrabVerticalVelocity;
+            _ctx.Physics_ApplyVelocity();
             
             _ctx.MachineTransition(PlayerStates.Air);
         }
@@ -56,6 +57,6 @@ public class Sonic_LedgeGrabState : IState
 
     public void ExitState()
     {
-        
+        _ctx.ChangeKinematic(false);
     }
 }

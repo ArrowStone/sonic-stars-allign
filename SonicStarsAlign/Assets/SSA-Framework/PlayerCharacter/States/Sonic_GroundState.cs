@@ -114,7 +114,6 @@ public class Sonic_GroundState : IState
         }
 
         public void ExitState () {
-                _ctx.movementLockTimer = 0f;
                 _ctx.runningOnWater = false;
 
                 _ctx.CurrentMoveDirection = Vector3.zero;
@@ -165,15 +164,15 @@ public class Sonic_GroundState : IState
                 if (Physics.OverlapCapsuleNonAlloc(point0, point1, 0.25f, colliders, _ctx.wallLayer) < 2f) _ctx.Physics_Snap(targetPos);
 
                 // Locking movement after a dash panel if needed
-                if (_ctx.movementLockTimer > 0f)
+                if (_ctx.MovementLockDistance > 0 && Vector3.Distance(_ctx.transform.position, _ctx.MovementLockStartPos) < _ctx.MovementLockDistance)
                 {
-                        _ctx.movementLockTimer -= _delta;
                         _ctx.PlayerDirection = Vector3.ProjectOnPlane(_ctx.PlayerDirection, _ctx.GroundNormal).normalized;
                         _ctx.InputVector = _ctx.PlayerDirection;
                 }
                 else
                 {
                         InputRotations();
+                        _ctx.MovementLockDistance = -1;
                 }
 
 
@@ -182,7 +181,7 @@ public class Sonic_GroundState : IState
 
         private void GroundRotation ( float _delta ) {
                 // Smoothing looks bad in a loop, disabling it there
-                if (_ctx.movementLockTimer > 0f)
+                if (Vector3.Distance(_ctx.transform.position, _ctx.MovementLockStartPos) < _ctx.MovementLockDistance)
                 {
                         _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundCast.HitInfo.normal);
                         return;

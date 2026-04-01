@@ -321,8 +321,14 @@ public class Sonic_AirState : IState
 
     private void CheckForLedgeGrab() // Also logic for ledge grabbing
     {
-        _ctx.ledgeGrabInitialVelocity = _ctx.Rb.linearVelocity; // Gotta save it while we have it
-        _ctx.ledgeGrabStartTime = Time.time; // This too
+        // Gotta save em while we have em
+        _ctx.ledgeGrabHorizontalVelocity = _ctx.HorizontalVelocity; 
+        _ctx.ledgeGrabVerticalVelocity = _ctx.VerticalVelocity; 
+
+        _ctx.HorizontalVelocity = Vector3.zero;
+        _ctx.VerticalVelocity = Vector3.zero;
+
+        _ctx.ledgeGrabStartTime = Time.time;
 
         Vector3 vertRayStart = _ctx.ledgeVericalRayPoint.position;
         Vector3 horzRayStart = _ctx.ledgeHorizontalRayPoint.position;

@@ -1,7 +1,10 @@
 {
     "name": "Prefab Palette",
     "rootNamespace": "PrefabPalette",
-    "references": [],
+    "references": [
+        "Unity.Splines",
+        "Unity.Splines.Editor"
+    ],
     "includePlatforms": [
         "Editor"
     ],

@@ -1,5 +1,11 @@
+using Codice.Utils;
+using TreeEditor;
 using UnityEditor;
+using UnityEditor.EditorTools;
+using UnityEditor.Splines;
+using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.Splines;
 
 namespace PrefabPalette
 {
@@ -40,6 +46,16 @@ namespace PrefabPalette
                 Transform parent = PrefabParentManager.GetAppropriateParent(context.SelectedPrefab);
                 currentPlacedObject = (GameObject)PrefabUtility.InstantiatePrefab(context.SelectedPrefab, parent);
                 currentPlacedObject.transform.SetPositionAndRotation(SceneInteraction.Position + settings.freeMode_placementOffset, context.Settings.placer_alignWithSurface ? Quaternion.FromToRotation(Vector3.up, lastSurfaceNormal) : Quaternion.identity);
+                
+                // SC: Edit the object's Spline if it's present
+                
+                SplineContainer spline = currentPlacedObject.GetComponentInChildren<SplineContainer>();
+                
+                if(spline)
+                {
+                    Selection.activeGameObject = spline.gameObject;
+                }
+
                 Undo.RegisterCreatedObjectUndo(currentPlacedObject, "Placed Prop");
 
                 e.Use();

@@ -98,7 +98,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         [SerializeField] public Vector3 WallRunNormal;
         [SerializeField] public bool WallRunDirection;
         [SerializeField] public bool OnWall;
-        [SerializeField] public Vector3 ledgeGrabInitialVelocity;
+        [SerializeField] public Vector3 ledgeGrabHorizontalVelocity;
+        [SerializeField] public Vector3 ledgeGrabVerticalVelocity;
         [SerializeField] public float ledgeGrabStartTime;
 
 
@@ -139,7 +140,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         public Overlap_Sphere HomingTargetDetector { get; private set; }
         public Overlap_Sphere RailDetectorL { get; private set; }
         public Overlap_Sphere RailDetectorR { get; private set; }
-        public float movementLockTimer;
+        public float MovementLockDistance;
+        public Vector3 MovementLockStartPos;
 
         #endregion Util
 

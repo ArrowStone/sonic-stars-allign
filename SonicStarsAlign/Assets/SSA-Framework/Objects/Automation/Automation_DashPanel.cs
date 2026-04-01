@@ -10,7 +10,7 @@ public class Automation_DashPanel : MonoBehaviour, IAutomation
     [Space]
     public bool Set;
 
-    public float movementLockTime;
+    public float movementLockDistance;
 
     public UnityEvent InteractionEvent;
 
@@ -25,7 +25,8 @@ public class Automation_DashPanel : MonoBehaviour, IAutomation
         {
             _ctx.GroundNormal = _ctx.GroundCast.HitInfo.normal;
             _ctx.MachineTransition(PlayerStates.Ground);
-            _ctx.movementLockTimer = movementLockTime;
+            _ctx.MovementLockDistance = movementLockDistance;
+            _ctx.MovementLockStartPos = transform.position;
         }
         else
         {
@@ -41,5 +42,13 @@ public class Automation_DashPanel : MonoBehaviour, IAutomation
             Rotation = Quaternion.LookRotation(_ctx.PlayerDirection, _ctx.GroundNormal)
         };
         return _transfrm;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        //Gizmos.DrawWireSphere(transform.position, movementLockDistance); 
+        Gizmos.DrawRay(transform.position, transform.forward * movementLockDistance);
+        Gizmos.DrawRay(transform.position + transform.forward * movementLockDistance, transform.right * 0.5f - transform.forward);
+        Gizmos.DrawRay(transform.position + transform.forward * movementLockDistance, - transform.right  * 0.5f - transform.forward);
     }
 }
