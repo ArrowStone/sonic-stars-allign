@@ -1929,9 +1929,11 @@ MonoBehaviour:
   WallRunNormal: {x: 0, y: 0, z: 0}
   WallRunDirection: 0
   OnWall: 0
-  ledgeGrabInitialVelocity: {x: 0, y: 0, z: 0}
+  ledgeGrabHorizontalVelocity: {x: 0, y: 0, z: 0}
+  ledgeGrabVerticalVelocity: {x: 0, y: 0, z: 0}
   ledgeGrabStartTime: 0
-  movementLockTimer: 0
+  MovementLockDistance: 0
+  MovementLockStartPos: {x: 0, y: 0, z: 0}
   airRotationSpeed: 8
   doneAirRotation: 1
   fakeNormal: {x: 0, y: 0, z: 0}
@@ -1991,6 +1993,15 @@ MonoBehaviour:
       Strength: 5
       RefreshRate: 0
     - Name: SDash
+      maxHitsCount: 10
+      radius: 0.5
+      Offset: {x: 0, y: -0.5, z: 0}
+      knockback: {x: 0, y: 0, z: -5}
+      knockbackApplication: 1
+      Damage: 5
+      Strength: 5
+      RefreshRate: 0.2
+    - Name: SweepKick
       maxHitsCount: 10
       radius: 0.5
       Offset: {x: 0, y: -0.5, z: 0}

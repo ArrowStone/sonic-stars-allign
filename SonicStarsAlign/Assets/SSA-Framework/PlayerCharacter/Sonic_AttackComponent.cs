@@ -79,6 +79,7 @@ public class Sonic_AttackComponent : MonoBehaviour
         Library.StopAttack("SDash");
         Library.StopAttack("Bounce");
         Library.StopAttack("HAttack");
+        Library.StopAttack("SweepKick");
 
         switch (_playerState)
         {
@@ -100,6 +101,11 @@ public class Sonic_AttackComponent : MonoBehaviour
             case PlayerStates.Bounce:
                 {
                     Library.StartAttack("Bounce");
+                    break;
+                }
+            case PlayerStates.SweepKick:
+                {
+                    Library.StartAttack("SweepKick");
                     break;
                 }
         }
