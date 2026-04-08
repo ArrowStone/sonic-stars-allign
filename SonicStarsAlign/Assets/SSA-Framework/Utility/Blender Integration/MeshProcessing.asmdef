@@ -1,9 +1,10 @@
 {
-    "name": "SSA.Utility.glTF",
-    "rootNamespace": "",
+    "name": "SSA.MeshProcessing",
+    "rootNamespace": "SSA.MeshProcessing",
     "references": [
         "glTFast",
-        "glTFast.Newtonsoft"
+        "glTFast.Newtonsoft",
+        "glTFast.Newtonsoft.Schema"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -12,12 +13,6 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [
-        {
-            "name": "com.unity.nuget.newtonsoft-json",
-            "expression": "3",
-            "define": "NEWTONSOFT_JSON"
-        }
-    ],
+    "versionDefines": [],
     "noEngineReferences": false
 }
