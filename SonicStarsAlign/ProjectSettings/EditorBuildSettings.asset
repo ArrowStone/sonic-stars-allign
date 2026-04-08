@@ -18,11 +18,11 @@ EditorBuildSettings:
     path: Assets/Scenes/development/scn_Settings.unity
     guid: 720611ac9d0c1aa6092386236f70c68c
   - enabled: 1
-    path: Assets/Scenes/development/scn_Test.unity
-    guid: dee0401f82bea4c47a882ba6dd017e90
-  - enabled: 1
     path: Assets/Scenes/development/scn_TitleCard.unity
     guid: 544074a648980af4c9ee719c12585566
+  - enabled: 1
+    path: Assets/Scenes/development/scn_Test.unity
+    guid: dee0401f82bea4c47a882ba6dd017e90
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 130a5e4fb1d275fee9e3c5601efd6161, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: fee0eb38ce4dedfe1a80e98a13ec6dd6, type: 2}

@@ -74,7 +74,7 @@ public class Sonic_RollState : IState
 
     private bool GroundCheck()
     {
-        _groundDetected = _ctx.GroundCast.Execute(_ctx.Rb.transform.position, -_ctx.GroundNormal);
+        _groundDetected = _ctx.GroundCast.Execute(_ctx.transform.position, -_ctx.GroundNormal);
         return _groundDetected && Vector3.Angle(_ctx.GroundCast.HitInfo.normal, _ctx.GroundNormal) <= _ctx.Chp.MaxGroundDeviation;
     }
 

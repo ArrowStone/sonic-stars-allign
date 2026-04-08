@@ -289,7 +289,7 @@ public class Sonic_AirState : IState
         RaycastHit hit;
 
         // Raycast forward from Sonic
-        Vector3 origin = _ctx.Rb.transform.position;
+        Vector3 origin = _ctx.transform.position;
         Vector3 dir = _ctx.PlayerDirection.normalized;
 
         if (Physics.Raycast(origin, dir, out hit, _ctx.Chp.WallAttachCheckDistance))

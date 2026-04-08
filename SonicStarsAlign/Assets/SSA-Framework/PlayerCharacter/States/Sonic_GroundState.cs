@@ -123,14 +123,14 @@ public class Sonic_GroundState : IState
         #region Util
 
         private bool GroundCheck () {
-                _groundDetected = _ctx.GroundCast.Execute(_ctx.Rb.transform.position, -_ctx.GroundNormal);
+                _groundDetected = _ctx.GroundCast.Execute(_ctx.transform.position, -_ctx.GroundNormal);
                 return _groundDetected && Vector3.Angle(_ctx.GroundCast.HitInfo.normal, _ctx.GroundNormal) <= _ctx.Chp.MaxGroundDeviation;
         }
 
         private bool WaterCheck()
         {
                 // Water acts as ground when running on water
-                _groundDetected = _ctx.WaterCast.Execute(_ctx.Rb.transform.position, -_ctx.GroundNormal);
+                _groundDetected = _ctx.WaterCast.Execute(_ctx.transform.position, -_ctx.GroundNormal);
                 if(_groundDetected) _ctx.GroundCast.HitInfo = _ctx.WaterCast.HitInfo; // Sometimes by genius is almost fightening
                 return _groundDetected; 
         }

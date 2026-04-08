@@ -18,7 +18,7 @@ public class AudioPlayIndependent : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else if (destroyAfterUI && SceneManager.GetActiveScene().buildIndex > 3) // For title music
+        else if (destroyAfterUI && SceneManager.GetActiveScene().buildIndex > 4) // For title music
         {
             Destroy(gameObject);
         }
