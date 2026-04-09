@@ -20,6 +20,9 @@ public class SceneSwitcher : MonoBehaviour
 
     public void SwitchScene(int _scn)
     {
+        // When in the pause menu
+        Time.timeScale = 1f;
+
         if (_scn < 0)
         {
             ExitGame();
