@@ -221,11 +221,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000008490542
+      value: 0.00000006112717
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000004414841
+      value: -0.000000003178439
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -406,6 +406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uri: Level/Newer Level/MAPV5.glb
   GroundLayer: 14
+  Player: {fileID: 1654810261}
 --- !u!4 &1546595923
 Transform:
   m_ObjectHideFlags: 0
@@ -415,7 +416,7 @@ Transform:
   m_GameObject: {fileID: 1546595921}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 315.61377, y: -250, z: 8.45227}
+  m_LocalPosition: {x: 315.61377, y: -2, z: 8.45227}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -530,6 +531,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
+--- !u!54 &1654810261 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 1935424960808076494, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
+  m_PrefabInstance: {fileID: 95659554}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

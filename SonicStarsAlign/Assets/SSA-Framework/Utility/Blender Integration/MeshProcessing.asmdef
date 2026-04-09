@@ -3,8 +3,7 @@
     "rootNamespace": "SSA.MeshProcessing",
     "references": [
         "glTFast",
-        "glTFast.Newtonsoft",
-        "glTFast.Newtonsoft.Schema"
+        "glTFast.Newtonsoft"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

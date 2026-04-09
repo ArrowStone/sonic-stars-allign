@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Splines;
 
+
 public class Automation_PoleSwing : MonoBehaviour, IAutomation
 {
     public float2 Range;

@@ -11,12 +11,14 @@ using GLTFast.Logging;
 using UnityEngine;
 using GltfImport = GLTFast.Newtonsoft.GltfImport;
 
-class CustomGltfImport : MonoBehaviour
+class ExtraDataProcessor : MonoBehaviour
 {
     // Path to the gltf asset to be imported
     public string uri;
     public int GroundLayer;
     static int s_GroundLayer;
+    public Rigidbody Player;
+    static Rigidbody s_Player;
 
     async void Start()
     {
@@ -28,6 +30,7 @@ class CustomGltfImport : MonoBehaviour
         try
         {
             s_GroundLayer = GroundLayer;
+            s_Player = Player;
             ImportAddonRegistry.RegisterImportAddon(new ExtraDataExtractor());
             var gltfImport = new GltfImport(logger:new ConsoleLogger());
             await gltfImport.Load(ResolveLoadUri(uri));
@@ -69,7 +72,7 @@ class CustomGltfImport : MonoBehaviour
             var goInstantiator = instantiator as GameObjectInstantiator;
             if (goInstantiator == null)
                 return;
-            _ = new MyInstantiatorAddon(m_GltfImport, goInstantiator, s_GroundLayer);
+            _ = new ExtraDataAddon(m_GltfImport, goInstantiator, s_GroundLayer, s_Player);
         }
 
         public override bool SupportsGltfExtension(string extensionName)
@@ -79,17 +82,19 @@ class CustomGltfImport : MonoBehaviour
     }
 }
 
-class MyInstantiatorAddon
+class ExtraDataAddon
 {
     readonly GltfImport m_GltfImport;
     readonly GameObjectInstantiator m_Instantiator;
     readonly int m_GroundLayer;
+    readonly Rigidbody m_Player;
 
-    public MyInstantiatorAddon(GltfImport gltfImport, GameObjectInstantiator instantiator, int GroundLayer)
+    public ExtraDataAddon(GltfImport gltfImport, GameObjectInstantiator instantiator, int groundLayer, Rigidbody player)
     {
         m_GltfImport = gltfImport;
         m_Instantiator = instantiator;
-        m_GroundLayer = GroundLayer;
+        m_GroundLayer = groundLayer;
+        m_Player = player;
         m_Instantiator.NodeCreated += OnNodeCreated;
         m_Instantiator.EndSceneCompleted += () =>
         {
@@ -106,13 +111,14 @@ class MyInstantiatorAddon
         GLTFast.Newtonsoft.Schema.Node node = gltf.Nodes[(int)nodeIndex] as GLTFast.Newtonsoft.Schema.Node;
         GLTFast.Newtonsoft.Schema.UnclassifiedData extras = node?.extras;
 
+        gameObject.layer = m_GroundLayer;
+
         if (extras == null)
             return;
 
-        // Access values in the extras property
+        // Access extra properties
         ExtraData component = gameObject.AddComponent<ExtraData>();
         component.extras = extras;
-
-        gameObject.layer = m_GroundLayer;
+        component.Player = m_Player;
     }
 }
