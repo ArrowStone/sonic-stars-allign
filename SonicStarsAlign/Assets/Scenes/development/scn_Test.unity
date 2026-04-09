@@ -9643,6 +9643,17 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &752607071 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7881546424201047853, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
+  m_PrefabInstance: {fileID: 8878291447590178891}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cdc683a2fd56b047bc0f0b0b7c8afec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &765290886
 GameObject:
   m_ObjectHideFlags: 0
@@ -12439,6 +12450,21 @@ MonoBehaviour:
   CurStageData: {fileID: 11400000, guid: cd1fe3b8682ce3c4c9121affe1ca87bd, type: 2}
   Place: 3
   ScoreValue: 200
+  OnAllRedRingsCollected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 752607071}
+        m_TargetAssemblyTypeName: SceneSwitcher, Assembly-CSharp
+        m_MethodName: SwitchScene
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!135 &1018228855
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -13138,6 +13164,21 @@ MonoBehaviour:
   CurStageData: {fileID: 11400000, guid: cd1fe3b8682ce3c4c9121affe1ca87bd, type: 2}
   Place: 1
   ScoreValue: 200
+  OnAllRedRingsCollected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 752607071}
+        m_TargetAssemblyTypeName: SceneSwitcher, Assembly-CSharp
+        m_MethodName: SwitchScene
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!135 &1038675558
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -31320,6 +31361,21 @@ MonoBehaviour:
   CurStageData: {fileID: 11400000, guid: cd1fe3b8682ce3c4c9121affe1ca87bd, type: 2}
   Place: 4
   ScoreValue: 200
+  OnAllRedRingsCollected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 752607071}
+        m_TargetAssemblyTypeName: SceneSwitcher, Assembly-CSharp
+        m_MethodName: SwitchScene
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!135 &1758293602
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -38317,6 +38373,21 @@ MonoBehaviour:
   CurStageData: {fileID: 11400000, guid: cd1fe3b8682ce3c4c9121affe1ca87bd, type: 2}
   Place: 2
   ScoreValue: 200
+  OnAllRedRingsCollected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 752607071}
+        m_TargetAssemblyTypeName: SceneSwitcher, Assembly-CSharp
+        m_MethodName: SwitchScene
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!135 &1921589480
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -41095,6 +41166,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1280102106122035303, guid: 4d92249c170ffe746b07a5147cf95955, type: 3}
+      propertyPath: OnAllRedRingsCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280102106122035303, guid: 4d92249c170ffe746b07a5147cf95955, type: 3}
+      propertyPath: OnAllRedRingsCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280102106122035303, guid: 4d92249c170ffe746b07a5147cf95955, type: 3}
+      propertyPath: OnAllRedRingsCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 752607071}
+    - target: {fileID: 1280102106122035303, guid: 4d92249c170ffe746b07a5147cf95955, type: 3}
+      propertyPath: OnAllRedRingsCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280102106122035303, guid: 4d92249c170ffe746b07a5147cf95955, type: 3}
+      propertyPath: OnAllRedRingsCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SwitchScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280102106122035303, guid: 4d92249c170ffe746b07a5147cf95955, type: 3}
+      propertyPath: OnAllRedRingsCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneSwitcher, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280102106122035303, guid: 4d92249c170ffe746b07a5147cf95955, type: 3}
+      propertyPath: OnAllRedRingsCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4553716114599546123, guid: 4d92249c170ffe746b07a5147cf95955, type: 3}
       propertyPath: m_Name
       value: RedRing
@@ -42243,15 +42342,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.05192654
+      value: 0.051926542
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000012056286
+      value: 0.00000013645425
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000062688703
+      value: -0.00000000709517
       objectReference: {fileID: 0}
     - target: {fileID: 7625700868651072994, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_Name
