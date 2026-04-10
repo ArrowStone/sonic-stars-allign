@@ -1,0 +1,33 @@
+// SPDX-FileCopyrightText: 2023 Unity Technologies and the glTFast authors
+// SPDX-License-Identifier: Apache-2.0
+
+namespace SSA.ExtraData
+{
+    using UnityEngine;
+    using Schema = GLTFast.Newtonsoft.Schema;
+
+    public class ExtraData : MonoBehaviour
+    {
+        public Schema.UnclassifiedData extrasData;
+        public int objectType = -1;
+
+        public Rigidbody Player;
+
+        public GameObject[] LevelObjectPrefabs;
+
+        void Awake()
+        {
+            extrasData.TryGetValue("obj_type", out objectType);
+
+            if(objectType == -1)
+            {
+                if(gameObject.TryGetComponent(out MeshFilter meshFilter))
+                    gameObject.AddComponent<MeshCollider>().sharedMesh = meshFilter.sharedMesh;
+                return;
+            }
+
+            GameObject newObject = Instantiate(LevelObjectPrefabs[objectType], transform.position, transform.rotation);
+            transform.parent = newObject.transform;
+        }
+    }    
+}

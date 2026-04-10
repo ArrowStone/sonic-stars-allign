@@ -12,6 +12,7 @@ public class GoalRing : CollectableBase
             CollectionEvent.Invoke();
             _ctx.MachineTransition(PlayerStates.Win);
             Data.Complete = true;
+            DataSaver.RecordStageData(Data);
             RankCalc(_ctx);
         }
     }

@@ -41862,10 +41862,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goal Ring
       objectReference: {fileID: 0}
-    - target: {fileID: 7655911919764013518, guid: ac618e7758f400149912444418544d6c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -42346,11 +42342,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000013645425
+      value: 0.00000011267597
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00000000709517
+      value: -0.000000005858778
       objectReference: {fileID: 0}
     - target: {fileID: 7625700868651072994, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_Name
