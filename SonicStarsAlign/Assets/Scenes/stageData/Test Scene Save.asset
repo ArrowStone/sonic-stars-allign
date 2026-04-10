@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d46b4dd9bee43f4f9d20dbbffa27d18, type: 3}
-  m_Name: Test Scene Save Data
+  m_Name: Test Scene Save
   m_EditorClassIdentifier: 
   saveFile: test_scene
   Complete: 1
+  Rank: 0
   RedRings: 0000000000
+  bestTime: 0
+  bestScore: 0
   RankScores: e8030000d0070000b80b0000a00f0000
   StageRingCount: 30

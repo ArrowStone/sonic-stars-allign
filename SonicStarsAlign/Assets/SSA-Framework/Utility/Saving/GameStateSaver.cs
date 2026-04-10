@@ -8,10 +8,10 @@ public class GameStateSaver : ScriptableObject
     public void LoadData()
     {
         if(StageDataAssets == null) return;
-        
+
         for(int i=0; i<StageDataAssets.Length; i++)
         {
-            DataSaver.ReadStageData(StageDataAssets[i]);
+            DataSaving.ReadStageData(StageDataAssets[i]);
         }
     }
 

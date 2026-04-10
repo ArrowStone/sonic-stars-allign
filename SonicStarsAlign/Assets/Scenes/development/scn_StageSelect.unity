@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 36213822}
   - component: {fileID: 36213821}
   m_Layer: 5
-  m_Name: Rank Number
+  m_Name: Score Number
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -414,7 +414,7 @@ PrefabInstance:
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1930084644}
+      objectReference: {fileID: 0}
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -636,7 +636,7 @@ PrefabInstance:
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1930084644}
+      objectReference: {fileID: 0}
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -971,7 +971,7 @@ PrefabInstance:
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1930084644}
+      objectReference: {fileID: 0}
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -1458,7 +1458,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1467,11 +1467,11 @@ PrefabInstance:
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 649917938}
+      objectReference: {fileID: 502357475}
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1930084644}
+      objectReference: {fileID: 0}
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -1828,7 +1828,7 @@ GameObject:
   - component: {fileID: 697973200}
   - component: {fileID: 697973199}
   m_Layer: 5
-  m_Name: Best Rank Top
+  m_Name: Best Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1873,7 +1873,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BEST RANK
+  m_text: 'BEST SCORE
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c969e440dd9cf024da5a57db70e6bd1b, type: 2}
   m_sharedMaterial: {fileID: 651759300119369615, guid: c969e440dd9cf024da5a57db70e6bd1b, type: 2}
@@ -1997,18 +1999,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stages:
-  - displayName: Test
+  - data: {fileID: 11400000, guid: cd1fe3b8682ce3c4c9121affe1ca87bd, type: 2}
+    displayName: Test
     sceneIndex: 4
     preview: {fileID: 21300000, guid: 3b6f040763cb85e4b917498567771ab4, type: 3}
     nameSprite: {fileID: 21300000, guid: 77620f086dd78f94eb1f3a5d4483d00d, type: 3}
     loadingName: {fileID: 21300000, guid: 8d56004b0549a00428ac534f2b7bf0b1, type: 3}
-  - displayName: Neo
+  - data: {fileID: 11400000, guid: 328a85c0e526200cb8d802a5539e2699, type: 2}
+    displayName: Neo
     sceneIndex: 0
     preview: {fileID: 21300000, guid: 8c2994e0ecf1cc54a8adfd38e5324ff4, type: 3}
     nameSprite: {fileID: 21300000, guid: ca2db0eb84e501547a637c43ac656156, type: 3}
     loadingName: {fileID: 21300000, guid: 9f0ffec337860fd4bb3f4ff909548265, type: 3}
   stagePreview: {fileID: 46039372}
   stageNameImage: {fileID: 1495192438}
+  redRingIcons:
+  - {fileID: 724747246}
+  - {fileID: 1319086602}
+  - {fileID: 1220305196}
+  - {fileID: 505922682}
+  - {fileID: 600363041}
+  bestTimeText: {fileID: 24640010}
+  bestScoreText: {fileID: 36213821}
 --- !u!1 &707851222
 GameObject:
   m_ObjectHideFlags: 0
@@ -2242,7 +2254,7 @@ PrefabInstance:
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1930084644}
+      objectReference: {fileID: 0}
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -2556,7 +2568,7 @@ PrefabInstance:
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1930084644}
+      objectReference: {fileID: 0}
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -2791,7 +2803,7 @@ PrefabInstance:
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1930084644}
+      objectReference: {fileID: 0}
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -2922,7 +2934,7 @@ GameObject:
   - component: {fileID: 1205789370}
   - component: {fileID: 1205789369}
   m_Layer: 5
-  m_Name: Best Rank Bottom
+  m_Name: Best Rank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3586,7 +3598,7 @@ PrefabInstance:
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1930084644}
+      objectReference: {fileID: 0}
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -4091,7 +4103,6 @@ GameObject:
   - component: {fileID: 1930084647}
   - component: {fileID: 1930084646}
   - component: {fileID: 1930084645}
-  - component: {fileID: 1930084644}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -4099,28 +4110,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &1930084644
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1930084642}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f21d31a9cb513f9a2b857034684d1ceb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1930084645
 MonoBehaviour:
   m_ObjectHideFlags: 0

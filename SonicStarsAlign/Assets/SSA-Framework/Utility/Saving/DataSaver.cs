@@ -2,7 +2,7 @@ using UnityEngine;
 using System.IO;
 
 // Handles writing the save data to a pernament storage as well as retrieving data.
-public static class DataSaver
+public static class DataSaving
 {
     public static string GetSaveFileForStage(StageData data)
     {
@@ -37,5 +37,6 @@ public static class DataSaver
             string textData = File.ReadAllText(filePath, System.Text.Encoding.UTF8);
             JsonUtility.FromJsonOverwrite(textData, data);
         }
+        else Debug.Log("No file for " + data.saveFile);
     }
 }

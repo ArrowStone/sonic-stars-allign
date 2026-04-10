@@ -12452,19 +12452,7 @@ MonoBehaviour:
   ScoreValue: 200
   OnAllRedRingsCollected:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 752607071}
-        m_TargetAssemblyTypeName: SceneSwitcher, Assembly-CSharp
-        m_MethodName: SwitchScene
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!135 &1018228855
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -13166,19 +13154,7 @@ MonoBehaviour:
   ScoreValue: 200
   OnAllRedRingsCollected:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 752607071}
-        m_TargetAssemblyTypeName: SceneSwitcher, Assembly-CSharp
-        m_MethodName: SwitchScene
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!135 &1038675558
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -31363,19 +31339,7 @@ MonoBehaviour:
   ScoreValue: 200
   OnAllRedRingsCollected:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 752607071}
-        m_TargetAssemblyTypeName: SceneSwitcher, Assembly-CSharp
-        m_MethodName: SwitchScene
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!135 &1758293602
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -38375,19 +38339,7 @@ MonoBehaviour:
   ScoreValue: 200
   OnAllRedRingsCollected:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 752607071}
-        m_TargetAssemblyTypeName: SceneSwitcher, Assembly-CSharp
-        m_MethodName: SwitchScene
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!135 &1921589480
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -41168,7 +41120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1280102106122035303, guid: 4d92249c170ffe746b07a5147cf95955, type: 3}
       propertyPath: OnAllRedRingsCollected.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1280102106122035303, guid: 4d92249c170ffe746b07a5147cf95955, type: 3}
       propertyPath: OnAllRedRingsCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -42338,15 +42290,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.051926542
+      value: 0.05192654
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000011267597
+      value: 0.00000008093231
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000005858778
+      value: -0.000000004208212
       objectReference: {fileID: 0}
     - target: {fileID: 7625700868651072994, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_Name
