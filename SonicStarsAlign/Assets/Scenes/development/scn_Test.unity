@@ -41768,6 +41768,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 807510107}
     m_Modifications:
     - target: {fileID: 132287486102300894, guid: ac618e7758f400149912444418544d6c, type: 3}
+      propertyPath: WinSceneIndex
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 132287486102300894, guid: ac618e7758f400149912444418544d6c, type: 3}
       propertyPath: GameStateSaver
       value: 
       objectReference: {fileID: 1232935856}
@@ -42327,15 +42331,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.051926542
+      value: 0.05192654
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000080971525
+      value: 0.00000016827634
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000042102517
+      value: -0.000000008749812
       objectReference: {fileID: 0}
     - target: {fileID: 6672947633434346199, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: hudManager

@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
-
 public class GoalRing : CollectableBase
 {
     public StageData Data;
     public GameStateManager GameStateSaver;
+    public int WinSceneIndex;
 
     public override void Collection(Collider _triggerer)
     {
@@ -15,7 +16,15 @@ public class GoalRing : CollectableBase
             GameStateSaver.UpdateStageData(Data);
             Data.Complete = true;
             DataSaving.RecordStageData(Data);
-            RankCalc(_ctx);
+
+            int rank = RankCalc(_ctx);
+            SceneSwitcher.Instance.CacheWinData(
+                _ctx.Chs.Score,
+                GameStateSaver.hudManager.stageTimer,
+                _ctx.Chs.Rings,
+                rank
+            );
+            SceneSwitcher.Instance.SwitchScene(WinSceneIndex);
         }
     }
 
