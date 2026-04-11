@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3082412315864591400}
+  - component: {fileID: 6672947633434346199}
   m_Layer: 0
   m_Name: Sonic
   m_TagString: Untagged
@@ -33,6 +34,21 @@ Transform:
   - {fileID: 2334801809093330340}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6672947633434346199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3517197781324340055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf629c2a41cb2f27e8f7950be5e9cd6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StageDataAssets: []
+  ctx: {fileID: 2410846063761883630}
+  hudManager: {fileID: 0}
 --- !u!1001 &8345064151961079674
 PrefabInstance:
   m_ObjectHideFlags: 0

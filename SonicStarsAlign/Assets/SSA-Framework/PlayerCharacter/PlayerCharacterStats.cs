@@ -12,9 +12,9 @@ public class PlayerCharacterStats : ScriptableObject
         set { RingSet?.Invoke(value, _rings); _rings = value;}
     }
 
-    private float _score;
+    private int _score;
 
-    public float Score
+    public int Score
     {
         get { return _score; }
         set { ScoreSet?.Invoke(value, _score); _score = value;}

@@ -96,7 +96,16 @@ public class StageSelector : MonoBehaviour
             redRingIcons[i].color = current.data.RedRings[i] ? Color.red : Color.white;
         }
 
-        bestTimeText.text = current.data.bestTime.ToString();
+        float bestTime = current.data.bestTime;
+        int minutes = (int) (bestTime / 60);
+        int seconds = (int) (bestTime - 0.5f) % 60;
+        int decimals = (int) (bestTime * 100 % 100);
+        if(decimals > 99) decimals -= 100;
+
+        bestTimeText.text = string.Format("{0:00}:{1:00}.{2:00}", 
+            minutes,
+            seconds, 
+            decimals);
         bestScoreText.text = current.data.bestScore.ToString();
 
         // Optional: debug log

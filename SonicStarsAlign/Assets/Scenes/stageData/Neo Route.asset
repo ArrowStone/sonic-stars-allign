@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d46b4dd9bee43f4f9d20dbbffa27d18, type: 3}
   m_Name: Neo Route
   m_EditorClassIdentifier: 
-  saveFile: 
+  saveFile: neoroute
   Complete: 0
   Rank: 0
   RedRings: 0000000000
+  bestTime: 0
+  bestScore: 0
   RankScores: e8030000d0070000b80b0000a00f0000
   StageRingCount: 0

@@ -1,10 +1,12 @@
+using System;
 using UnityEngine;
 
 // Obtains the required data to be saved as well as setting the saved values when loading.
-[CreateAssetMenu]
-public class GameStateSaver : ScriptableObject
+public class GameStateManager : MonoBehaviour
 {
     public StageData[] StageDataAssets;
+    public Sonic_PlayerStateMachine ctx;
+    public HUD_Manager hudManager;
     public void LoadData()
     {
         if(StageDataAssets == null) return;
@@ -15,7 +17,13 @@ public class GameStateSaver : ScriptableObject
         }
     }
 
-    void OnEnable()
+    public void UpdateStageData(StageData data)
+    {
+        data.bestTime = Math.Max(data.bestTime, hudManager.stageTimer);
+        data.bestScore = Math.Max(data.bestScore, ctx.Chs.Score);
+    }
+
+    void Awake()
     {
         LoadData();
     }

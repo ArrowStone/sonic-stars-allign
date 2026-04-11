@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.SmartFormat.Extensions;
 using UnityEngine.UI;
 
 // Simplifies and unifies interaction with the HUD.
@@ -11,6 +12,7 @@ public class HUD_Manager : MonoBehaviour
     [SerializeField] private GameObject scoreImagePopup;
     [SerializeField] private RectTransform Canvas;
     [SerializeField] private RectTransform homingIndicator;
+    [SerializeField] private TMP_Text TimeCounter;
     private Image homingIndicatorImage;
     private Vector3 targetHomingPos;
 
@@ -18,30 +20,10 @@ public class HUD_Manager : MonoBehaviour
     public int maxPopupCount;
     public float ScorePopupIgnoreBelow;
     public float PopupOffset;
+    public float stageTimer;
     public Sonic_PlayerStateMachine _ctx;
 
     private List<GameObject> popups = new List<GameObject>();
-
-    // Homing indicator
-    private void FixedUpdate()
-    {
-        _ctx.HomingCheck();
-        if(_ctx.HomingTargetDetector.TargetDetected && 
-        Vector3.Angle((_ctx.HomingTargetDetector.TargetOutput.transform.position - _ctx.transform.position).normalized, Camera.main.transform.forward) < 90f)
-        {
-            homingIndicatorImage.enabled = true;
-            targetHomingPos = _ctx.HomingTargetDetector.TargetOutput.transform.position;
-        }
-        else homingIndicatorImage.enabled = false;
-    }
-
-    private void Update()
-    {
-        Vector2 screenPos = Camera.main.WorldToScreenPoint(targetHomingPos);
-        if(screenPos.x < 0 || screenPos.x > Screen.width || screenPos.y < 0 || screenPos.y > Screen.height) screenPos = new Vector2(-1000, -1000);
-
-        homingIndicator.position = screenPos;
-    }
 
     // Initialising automatic counters like rings and score
     private void Awake()
@@ -80,6 +62,44 @@ public class HUD_Manager : MonoBehaviour
 
         _ctx.Chs.Rings = _ctx.Chs.Rings;
         _ctx.Chs.Score = _ctx.Chs.Score;
+
+        stageTimer = 0;
+    }
+
+    // Homing indicator
+    private void FixedUpdate()
+    {
+        float _delta = Time.fixedDeltaTime;
+
+        _ctx.HomingCheck();
+        if(_ctx.HomingTargetDetector.TargetDetected && 
+        Vector3.Angle((_ctx.HomingTargetDetector.TargetOutput.transform.position - _ctx.transform.position).normalized, Camera.main.transform.forward) < 90f)
+        {
+            homingIndicatorImage.enabled = true;
+            targetHomingPos = _ctx.HomingTargetDetector.TargetOutput.transform.position;
+        }
+        else homingIndicatorImage.enabled = false;
+
+        stageTimer += _delta;
+    }
+
+    private void Update()
+    {
+        Vector2 screenPos = Camera.main.WorldToScreenPoint(targetHomingPos);
+        if(screenPos.x < 0 || screenPos.x > Screen.width || screenPos.y < 0 || screenPos.y > Screen.height) 
+            screenPos = new Vector2(-1000, -1000);
+
+        homingIndicator.position = screenPos;
+
+        int minutes = (int) (stageTimer / 60);
+        int seconds = (int) (stageTimer - 0.5f) % 60;
+        int decimals = (int) (stageTimer * 100 % 100);
+        if(decimals > 99) decimals -= 100;
+
+        TimeCounter.text = string.Format("<mspace=330>{0:00}:{1:00}.{2:00}</mspace>", 
+            minutes,
+            seconds, 
+            decimals);
     }
 
     private void SetText(int i, string text)

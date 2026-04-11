@@ -20071,6 +20071,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1232935856 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6672947633434346199, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
+  m_PrefabInstance: {fileID: 7913363935828492100}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf629c2a41cb2f27e8f7950be5e9cd6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1236188109
 GameObject:
   m_ObjectHideFlags: 0
@@ -36804,6 +36815,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 8274633191215835726, guid: d490bfc6a013e870a9cadda29561ddc2, type: 3}
+--- !u!114 &1842016036 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7320217664757444720, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
+  m_PrefabInstance: {fileID: 8878291447590178891}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1843135560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38024,6 +38046,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1896651524 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9190026517948026943, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
+  m_PrefabInstance: {fileID: 8878291447590178891}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb86f7237faa4d8ebe73e4df731bfc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1897713533
 GameObject:
   m_ObjectHideFlags: 0
@@ -41735,6 +41768,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 807510107}
     m_Modifications:
     - target: {fileID: 132287486102300894, guid: ac618e7758f400149912444418544d6c, type: 3}
+      propertyPath: GameStateSaver
+      value: 
+      objectReference: {fileID: 1232935856}
+    - target: {fileID: 132287486102300894, guid: ac618e7758f400149912444418544d6c, type: 3}
       propertyPath: CollectionEvent.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -42290,16 +42327,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.05192654
+      value: 0.051926542
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000008093231
+      value: 0.000000080971525
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000004208212
+      value: -0.0000000042102517
       objectReference: {fileID: 0}
+    - target: {fileID: 6672947633434346199, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
+      propertyPath: hudManager
+      value: 
+      objectReference: {fileID: 1896651524}
     - target: {fileID: 7625700868651072994, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_Name
       value: Sonic Model
@@ -42466,6 +42507,10 @@ PrefabInstance:
       propertyPath: _ctx
       value: 
       objectReference: {fileID: 948741069}
+    - target: {fileID: 9190026517948026943, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
+      propertyPath: TimeCounter
+      value: 
+      objectReference: {fileID: 1842016036}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

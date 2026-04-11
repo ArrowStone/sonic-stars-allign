@@ -3,6 +3,7 @@ using UnityEngine;
 public class GoalRing : CollectableBase
 {
     public StageData Data;
+    public GameStateManager GameStateSaver;
 
     public override void Collection(Collider _triggerer)
     {
@@ -11,6 +12,7 @@ public class GoalRing : CollectableBase
             _ctx.Snd.PlaySound("GoalRing");
             CollectionEvent.Invoke();
             _ctx.MachineTransition(PlayerStates.Win);
+            GameStateSaver.UpdateStageData(Data);
             Data.Complete = true;
             DataSaving.RecordStageData(Data);
             RankCalc(_ctx);
