@@ -11,9 +11,9 @@ public class HUD_Manager : MonoBehaviour
     [SerializeField] private GameObject scoreTextPopup;
     [SerializeField] private GameObject scoreImagePopup;
     [SerializeField] private RectTransform Canvas;
-    [SerializeField] private RectTransform homingIndicator;
+    [SerializeField] private RectTransform HomingReticle;
     [SerializeField] private TMP_Text TimeCounter;
-    private Image homingIndicatorImage;
+    private Animator homingReticleAnimator;
     private Vector3 targetHomingPos;
 
     public Sprite[] scoreEncouragementImages;
@@ -28,7 +28,7 @@ public class HUD_Manager : MonoBehaviour
     // Initialising automatic counters like rings and score
     private void Awake()
     {
-        homingIndicatorImage = homingIndicator.GetComponent<Image>();
+        homingReticleAnimator = HomingReticle.GetComponent<Animator>();
 
         void SetRings(float rings, float _)
         {
@@ -75,10 +75,10 @@ public class HUD_Manager : MonoBehaviour
         if(_ctx.HomingTargetDetector.TargetDetected && 
         Vector3.Angle((_ctx.HomingTargetDetector.TargetOutput.transform.position - _ctx.transform.position).normalized, Camera.main.transform.forward) < 90f)
         {
-            homingIndicatorImage.enabled = true;
+            homingReticleAnimator.SetBool("Active", true);
             targetHomingPos = _ctx.HomingTargetDetector.TargetOutput.transform.position;
         }
-        else homingIndicatorImage.enabled = false;
+        else homingReticleAnimator.SetBool("Active", false);
 
         stageTimer += _delta;
     }
@@ -89,7 +89,7 @@ public class HUD_Manager : MonoBehaviour
         if(screenPos.x < 0 || screenPos.x > Screen.width || screenPos.y < 0 || screenPos.y > Screen.height) 
             screenPos = new Vector2(-1000, -1000);
 
-        homingIndicator.position = screenPos;
+        HomingReticle.position = screenPos;
 
         int minutes = (int) (stageTimer / 60);
         int seconds = (int) (stageTimer - 0.5f) % 60;

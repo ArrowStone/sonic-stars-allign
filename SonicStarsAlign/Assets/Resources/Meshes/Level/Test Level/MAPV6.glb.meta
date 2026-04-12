@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e6e50112e323325b9b6376993d09b73a
+guid: 8ed7ea0843703b97a98df69089887798
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -12,7 +12,7 @@ ScriptedImporter:
     generateSecondaryUVSet: 0
   importSettings:
     nodeNameMethod: 1
-    animationMethod: 0
+    animationMethod: 2
     generateMipMaps: 1
     texturesReadable: 0
     defaultMinFilterMode: 9729
@@ -34,3 +34,7 @@ ScriptedImporter:
     code: 20
     messages:
     - KHR_materials_specular
+  - type: 2
+    code: 20
+    messages:
+    - KHR_materials_ior
