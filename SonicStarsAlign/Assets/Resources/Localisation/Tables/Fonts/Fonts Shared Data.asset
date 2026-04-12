@@ -41,7 +41,6 @@ MonoBehaviour:
         m_Entries:
         - m_KeyId: 10001358848
           m_TableCodes:
-          - en
           - ru
         - m_KeyId: 634803336552448
           m_TableCodes:
