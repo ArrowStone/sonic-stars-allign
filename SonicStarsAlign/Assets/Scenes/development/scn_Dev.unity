@@ -39414,7 +39414,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -42320,10 +42320,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.05192654
+      value: 0.051926535
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.y
+<<<<<<< HEAD
 <<<<<<< HEAD:SonicStarsAlign/Assets/Scenes/development/scn_Test.unity
       value: 0.00000016827634
       objectReference: {fileID: 0}
@@ -42337,6 +42338,13 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.0000000050365516
 >>>>>>> a96dac6 (Fancy homing reticle + renamed some stuff):SonicStarsAlign/Assets/Scenes/development/scn_Dev.unity
+=======
+      value: 0.000000065119295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.0000000033859875
+>>>>>>> 7eff0cb (Lighting fix)
       objectReference: {fileID: 0}
     - target: {fileID: 6672947633434346199, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: hudManager
