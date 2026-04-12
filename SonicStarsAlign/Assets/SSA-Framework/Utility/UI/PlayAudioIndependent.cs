@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class AudioPlayIndependent : MonoBehaviour
 {
     private AudioSource source;
-    [SerializeField] bool destroyAfterUI;
+    [SerializeField] int destroyAfterBuildIndex = 10000;
 
     void Awake()
     {
@@ -18,7 +18,7 @@ public class AudioPlayIndependent : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else if (destroyAfterUI && SceneManager.GetActiveScene().buildIndex > 4) // For title music
+        else if (SceneManager.GetActiveScene().buildIndex > destroyAfterBuildIndex) // For title music
         {
             Destroy(gameObject);
         }
