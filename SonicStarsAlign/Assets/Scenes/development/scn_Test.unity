@@ -94,7 +94,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: dbb1db83c65770b46916efc08217d394, type: 2}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 15717145331302d428bfa03d30175ffb, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 6721f39c3f901cdee8fb5a775fd1c14c, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -36815,6 +36815,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 8274633191215835726, guid: d490bfc6a013e870a9cadda29561ddc2, type: 3}
+--- !u!114 &1842016036 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7320217664757444720, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
+  m_PrefabInstance: {fileID: 8878291447590178891}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1843135560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39414,7 +39425,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -42256,15 +42267,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3082412315864591400, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 308.818
+      value: 310.47275
       objectReference: {fileID: 0}
     - target: {fileID: 3082412315864591400, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 134.28
+      value: 137.75682
       objectReference: {fileID: 0}
     - target: {fileID: 3082412315864591400, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.446
+      value: 9.728162
       objectReference: {fileID: 0}
     - target: {fileID: 3082412315864591400, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -42320,31 +42331,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.051926535
+      value: 0.051926542
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.y
-<<<<<<< HEAD
-<<<<<<< HEAD:SonicStarsAlign/Assets/Scenes/development/scn_Test.unity
-      value: 0.00000016827634
+      value: 0.00000013653268
       objectReference: {fileID: 0}
     - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000008749812
-=======
-      value: 0.000000096862934
-      objectReference: {fileID: 0}
-    - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.0000000050365516
->>>>>>> a96dac6 (Fancy homing reticle + renamed some stuff):SonicStarsAlign/Assets/Scenes/development/scn_Dev.unity
-=======
-      value: 0.000000065119295
-      objectReference: {fileID: 0}
-    - target: {fileID: 6309874158093708598, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.0000000033859875
->>>>>>> 7eff0cb (Lighting fix)
+      value: -0.0000000070992483
       objectReference: {fileID: 0}
     - target: {fileID: 6672947633434346199, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: hudManager
@@ -42428,22 +42423,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 1519987476001317895, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2234342915584395770, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
       propertyPath: 'gameComponents.Array.data[0]'
       value: 
       objectReference: {fileID: 948741069}
-    - target: {fileID: 4048693581576090360, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7869518016308517727, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8562045173513120289, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -42528,6 +42511,10 @@ PrefabInstance:
       propertyPath: _ctx
       value: 
       objectReference: {fileID: 948741069}
+    - target: {fileID: 9190026517948026943, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
+      propertyPath: TimeCounter
+      value: 
+      objectReference: {fileID: 1842016036}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
