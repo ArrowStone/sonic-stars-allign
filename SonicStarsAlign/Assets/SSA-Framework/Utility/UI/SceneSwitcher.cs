@@ -17,6 +17,7 @@ public class SceneSwitcher : MonoBehaviour
     private float cachedTime;
     private float cachedRings;
     private int cachedRank;
+    private bool redRingsUnlocked = false;
 
     private void Awake()
     {
@@ -114,5 +115,14 @@ public class SceneSwitcher : MonoBehaviour
     public (int score, float time, float rings, int rank) GetWinData()
     {
         return (cachedScore, cachedTime, cachedRings, cachedRank);
+    }
+    public void SetRedRingUnlock()
+    {
+        redRingsUnlocked = true;
+    }
+
+    public bool GetRedRingUnlock()
+    {
+        return redRingsUnlocked;
     }
 }

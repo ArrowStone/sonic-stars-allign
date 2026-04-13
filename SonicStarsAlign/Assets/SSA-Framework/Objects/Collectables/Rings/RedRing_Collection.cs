@@ -4,7 +4,6 @@ using UnityEngine.Events;
 public class RedRing_Collection : CollectableBase
 {
     public StageData CurStageData;
-
     public int Place;
     public int ScoreValue;
     public UnityEvent OnAllRedRingsCollected;
@@ -18,10 +17,14 @@ public class RedRing_Collection : CollectableBase
             _ctx.Chs.Score += ScoreValue;
 
             if (AllRedRingsCollected())
-                Debug.Log("All red rings collected");
+            {
+                Debug.Log("All red rings collected!");
+                DataSaving.RecordStageData(CurStageData); // saves to disk
                 OnAllRedRingsCollected.Invoke();
+            }
         }
     }
+
     private bool AllRedRingsCollected()
     {
         foreach (bool ring in CurStageData.RedRings)
