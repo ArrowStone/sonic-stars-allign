@@ -354,6 +354,8 @@ public class Sonic_AirState : IState
             return;
         }
 
+        Vector3 topNormal = hit.normal;
+
         endPosition.y = hit.point.y;
         // The relative Y value of the horizontal ledge point actually controls the displacement from the y coordinate of the ledge surface
         horzRayStart.y = hit.point.y + _ctx.ledgeHorizontalRayPoint.localPosition.y; 
@@ -365,7 +367,12 @@ public class Sonic_AirState : IState
          // Ideally the second ray should hit the ledge but it's impossible to guarantee, so we check
         if (!success)
         {
-            Debug.DrawRay(ray.origin, ray.direction, Color.cyan, 1f);
+            return;
+        }
+
+        // If the second ray's normal close to the first normal then it's a flat surface and not a ledge
+        if(Vector3.Angle(hit.normal, topNormal) < _ctx.Chp.MaxGroundDeviation)
+        {
             return;
         }
 
