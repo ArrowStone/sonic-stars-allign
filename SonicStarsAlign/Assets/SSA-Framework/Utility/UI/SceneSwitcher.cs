@@ -13,6 +13,12 @@ public class SceneSwitcher : MonoBehaviour
 
     public int gameplaySceneIndex;
 
+    private int cachedScore;
+    private float cachedTime;
+    private float cachedRings;
+    private int cachedRank;
+    private bool redRingsUnlocked = false;
+
     private void Awake()
     {
         Instance = this;
@@ -20,6 +26,9 @@ public class SceneSwitcher : MonoBehaviour
 
     public void SwitchScene(int _scn)
     {
+        // When in the pause menu
+        Time.timeScale = 1f;
+
         if (_scn < 0)
         {
             ExitGame();
@@ -95,5 +104,25 @@ public class SceneSwitcher : MonoBehaviour
     public string GetCachedStage()
     {
         return cachedStageDisplayName;
+    }
+    public void CacheWinData(int score, float time, float rings, int rank)
+    {
+        cachedScore = score;
+        cachedTime = time;
+        cachedRings = rings;
+        cachedRank = rank;
+    }
+    public (int score, float time, float rings, int rank) GetWinData()
+    {
+        return (cachedScore, cachedTime, cachedRings, cachedRank);
+    }
+    public void SetRedRingUnlock()
+    {
+        redRingsUnlocked = true;
+    }
+
+    public bool GetRedRingUnlock()
+    {
+        return redRingsUnlocked;
     }
 }

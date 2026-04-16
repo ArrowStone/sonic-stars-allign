@@ -406,12 +406,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 163707184}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19d7606569a7fdb28bbd11b3719b7cc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyAfterUI: 0
+  destroyAfterUI: 1
 --- !u!1 &412203932
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,6 +811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cdc683a2fd56b047bc0f0b0b7c8afec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameplaySceneIndex: 0
 --- !u!114 &917420551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1314,6 +1315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointPlayer: {fileID: 0}
+  CMCamera: {fileID: 0}
   profile: {fileID: 11400000, guid: ab09877e2e707104187f6f83e2f62510, type: 2}
   pipelineAsset: {fileID: 11400000, guid: 4b83569d67af61e458304325a23e5dfd, type: 2}
   AAModes: 00000000010000000200000003000000

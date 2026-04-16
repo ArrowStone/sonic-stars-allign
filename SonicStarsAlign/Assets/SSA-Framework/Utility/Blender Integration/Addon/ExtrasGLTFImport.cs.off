@@ -1,0 +1,133 @@
+// Based on the example provided by Unity:
+// SPDX-FileCopyrightText: 2023 Unity Technologies and the glTFast authors
+// SPDX-License-Identifier: Apache-2.0
+
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using GLTFast.Addons;
+using GLTFast;
+using GLTFast.Logging;
+using UnityEngine;
+using GltfImport = GLTFast.Newtonsoft.GltfImport;
+using Schema = GLTFast.Newtonsoft.Schema;
+using SSA.ExtraData;
+
+class ExtraDataProcessor : MonoBehaviour
+{
+    // Path to the gltf asset to be imported
+    public string uri;
+    public int GroundLayer;
+    static int s_GroundLayer;
+    public Rigidbody Player;
+    static Rigidbody s_Player;
+    public GameObject[] LevelObjectPrefabs;
+    static GameObject[] s_LevelObjectPrefabs;
+
+    async void Start()
+    {
+        await LoadGltf();
+    }
+
+    public async Task LoadGltf()
+    {
+        try
+        {
+            s_GroundLayer = GroundLayer;
+            s_Player = Player;
+            s_LevelObjectPrefabs = LevelObjectPrefabs;
+            ImportAddonRegistry.RegisterImportAddon(new ExtraDataExtractor());
+            var gltfImport = new GltfImport(logger:new ConsoleLogger());
+            await gltfImport.Load(ResolveLoadUri(uri));
+            await gltfImport.InstantiateMainSceneAsync(transform);
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
+    }
+
+    static string ResolveLoadUri(string source)
+    {
+        DirectoryInfo projectRoot = Directory.GetParent(Application.dataPath);
+        string fullPath = Path.GetFullPath(projectRoot.FullName + "/Assets/Resources/Meshes/" + source);
+        return fullPath;
+    }
+
+    class ExtraDataExtractor : ImportAddon<ExtractorInstance> { }
+
+    class ExtractorInstance : ImportAddonInstance
+    {
+        GltfImport m_GltfImport;
+
+        public override void Dispose() { }
+
+        public override void Inject(GltfImportBase gltfImport)
+        {
+            var newtonsoftGltfImport = gltfImport as GltfImport;
+            if (newtonsoftGltfImport == null)
+                return;
+
+            m_GltfImport = newtonsoftGltfImport;
+            newtonsoftGltfImport.AddImportAddonInstance(this);
+        }
+
+        public override void Inject(IInstantiator instantiator)
+        {
+            var goInstantiator = instantiator as GameObjectInstantiator;
+            if (goInstantiator == null)
+                return;
+            _ = new ExtraDataAddon(m_GltfImport, goInstantiator, s_GroundLayer, s_Player, s_LevelObjectPrefabs);
+        }
+
+        public override bool SupportsGltfExtension(string extensionName)
+        {
+            return false;
+        }
+    }
+}
+
+class ExtraDataAddon
+{
+    readonly GltfImport m_GltfImport;
+    readonly GameObjectInstantiator m_Instantiator;
+    readonly int m_GroundLayer;
+    readonly Rigidbody m_Player;
+    readonly GameObject[] m_LevelObjectPrefabs;
+
+    public ExtraDataAddon(GltfImport gltfImport, GameObjectInstantiator instantiator, int groundLayer, Rigidbody player, GameObject[] LevelObjectPrefabs)
+    {
+        m_GltfImport = gltfImport;
+        m_Instantiator = instantiator;
+        m_GroundLayer = groundLayer;
+        m_Player = player;
+        m_LevelObjectPrefabs = LevelObjectPrefabs;
+        m_Instantiator.NodeCreated += OnNodeCreated;
+        m_Instantiator.EndSceneCompleted += () =>
+        {
+            m_Instantiator.NodeCreated -= OnNodeCreated;
+        };
+    }
+
+    void OnNodeCreated(uint nodeIndex, GameObject gameObject)
+    {
+        // De-serialize glTF JSON
+        
+        Schema.Root gltf = m_GltfImport.GetSourceRoot();
+
+        Schema.Node node = gltf.Nodes[(int)nodeIndex] as Schema.Node;
+        Schema.UnclassifiedData extras = node?.extras;
+
+        gameObject.layer = m_GroundLayer;
+
+        if (extras == null)
+            return;
+
+        // Access extra properties
+        ExtraData extraData = gameObject.AddComponent<ExtraData>();
+
+        extraData.extrasData = extras;
+        extraData.Player = m_Player;
+        extraData.LevelObjectPrefabs = m_LevelObjectPrefabs;
+    }
+}

@@ -32,10 +32,12 @@ public class Sonic_SweepKickState : IState
         _ctx.Physics_ApplyVelocity();
     }
 
-    public void UpdateState()
+    public void UpdateState() { }
+
+    public void FixedUpdateState()
     {
-        float delta = Time.deltaTime;
-        _kickTimer += delta;
+        float _delta = Time.deltaTime;
+        _kickTimer += _delta;
 
         // check hit window
         if (_kickTimer >= _kickDamageWindow && !_hasHit)
@@ -43,18 +45,32 @@ public class Sonic_SweepKickState : IState
             TryDoKickDamage();
         }
 
+
+        // Jumping out of the kick
+        if(_ctx.Input.JumpInput.WasPressedThisFrame())
+        {
+            _ctx.Jump();
+            return;
+        }
+
+        // Leaving the ground
+        if(!GroundCheck())
+        {
+            _ctx.MachineTransition(PlayerStates.Air);
+            return;
+        }
+
         // end the move
         if (_kickTimer >= _kickDuration)
         {
-			
             _ctx.MachineTransition(PlayerStates.Ground);
+            return;
         }
-    }
 
-    public void FixedUpdateState()
-    {
         // keep momentum going while kicking
-        _ctx.Physics_ApplyVelocity();
+        //_ctx.Physics_ApplyVelocity();
+
+        GroundApplication(_delta);
     }
 
     public void LateUpdateState() { }
@@ -81,5 +97,21 @@ public class Sonic_SweepKickState : IState
             _ctx.Velocity += _ctx.PlayerDirection * _kickSpeedBoost;
             break;
         }
+    }
+
+    private bool GroundCheck () {
+            return _ctx.GroundCast.Execute(_ctx.transform.position, -_ctx.GroundNormal) &&
+                Vector3.Angle(_ctx.GroundCast.HitInfo.normal, _ctx.GroundNormal) <= _ctx.Chp.MaxGroundDeviation;
+    }
+
+    private void GroundApplication(float _delta)
+    {
+        _ctx.GroundNormal = _ctx.GroundCast.HitInfo.normal;
+        _ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_ctx.Velocity, _ctx.GroundNormal).normalized * _ctx.Velocity.magnitude;
+        _ctx.PlayerDirection = _ctx.HorizontalVelocity.normalized;
+        _ctx.Physics_Snap(_ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover);
+        _ctx.Physics_ApplyVelocity();
+
+        _ctx.Physics_Rotate(_ctx.PlayerDirection, Vector3.Lerp(_ctx.transform.up, _ctx.GroundCast.HitInfo.normal, _delta * _ctx.Chp.RotationSmoothingSpeed));
     }
 }

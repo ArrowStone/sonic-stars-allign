@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5bb2dbce231f94bbaeedd582baab8c, type: 3}
   m_Name: SonicPlayerParameters
   m_EditorClassIdentifier: 
-  BaseSpeed: 50
+  BaseSpeed: 30
   HardSpeedCap: 400
   RailSpeedCap: 300
-  Acceleration: 30
+  Acceleration: 20
   Deceleration: 29.75
   GroundDrag: 5
   RunSpeedThreshold: 12
@@ -151,17 +151,17 @@ MonoBehaviour:
   SlipTime: 0.3333333
   LookBackTransitionSpeed: 5
   GravityForce: 45.9375
-  FallVelCap: 30
+  FallVelCap: 50
   MinGroundStickSpeed: 6.25
   MaxGroundDeviation: 70
-  SlopeFactor: 0
-  SlopeFactorRoll: 9.375
-  SlopeFactorRollDown: 37.5
+  SlopeFactor: 30
+  SlopeFactorRoll: 10
+  SlopeFactorRollDown: 100
   RailSlopeInfluence: 15
   RailCrouchInfluence: 37.5
-  RollDeceleration: 0
-  SpinDashDeceleration: 0
-  MinRollSpeed: 1
+  RollDeceleration: 2
+  SpinDashDeceleration: 2
+  MinRollSpeed: 5
   SpinDashHoldTime: 0.375
   SpinDashInitSpeed: 1
   SpinDashOutput:
