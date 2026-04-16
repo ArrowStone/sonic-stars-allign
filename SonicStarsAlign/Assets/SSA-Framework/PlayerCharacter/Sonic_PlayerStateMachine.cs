@@ -6,6 +6,7 @@ using UnityEngine;
 public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 {
         public InputComponent Input;
+        public Sonic_ModelManager ModelManager;
 
         public Transform InputRef;
         public Rigidbody Rb;
@@ -453,6 +454,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                 Physics_ApplyVelocity();
 
                 Jumping = true;
+                ModelManager.EnterBall();
                 MachineTransition(PlayerStates.Air);
         }
 

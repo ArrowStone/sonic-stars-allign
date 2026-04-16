@@ -90,6 +90,7 @@ public class Sonic_AirState : IState
 
     public void ExitState()
     {
+                _ctx.ModelManager.ExitBall();
     }
 
     #region Util
