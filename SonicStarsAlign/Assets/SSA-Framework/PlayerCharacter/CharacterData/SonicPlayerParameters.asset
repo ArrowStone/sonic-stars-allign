@@ -17,7 +17,7 @@ MonoBehaviour:
   RailSpeedCap: 300
   Acceleration: 20
   Deceleration: 29.75
-  GroundDrag: 5
+  GroundDrag: 1
   RunSpeedThreshold: 12
   TurnDeceleration:
     serializedVersion: 2
