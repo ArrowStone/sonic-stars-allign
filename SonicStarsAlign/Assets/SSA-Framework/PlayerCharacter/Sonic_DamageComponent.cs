@@ -67,6 +67,7 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
         if (_ctx.InvinciblitiyState > 0)
         {
             _ctx.InvinciblitiyState -= Time.fixedDeltaTime;
+            Debug.Log(_ctx.InvinciblitiyState);
         }
 
         if(_ctx.Input.Respawn.WasPressedThisFrame())
@@ -88,6 +89,7 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
 
     public void RingLoss()
     {
+        if(_ctx.Death) return;
         Debug.Log("Ring loss");
         if (_ctx.Chs.Shield != null)
         {

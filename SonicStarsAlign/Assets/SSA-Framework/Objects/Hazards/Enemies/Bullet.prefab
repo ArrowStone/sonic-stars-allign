@@ -333,3 +333,4 @@ MonoBehaviour:
   Knockback: {x: 0, y: 10, z: -10}
   KnockbackApplication: 1
   Strength: 1
+  PlayerOnly: 1

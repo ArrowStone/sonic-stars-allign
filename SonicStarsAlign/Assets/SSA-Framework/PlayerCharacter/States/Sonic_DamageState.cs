@@ -20,15 +20,10 @@ public class Sonic_DamageState : IState
     {
         float _delta = Time.deltaTime;
 
-        if (GroundCheck())
-        {
-        }
-        else
-        {
-            Gravity(_delta);
-            HurtMovement(_delta);
-            HurtRotation();
-        }
+        if(!GroundCheck()) Gravity(_delta);
+        HurtMovement(_delta);
+        HurtRotation();
+
         _ctx.Physics_ApplyVelocity();
         HurtSwitchConditions();
     }

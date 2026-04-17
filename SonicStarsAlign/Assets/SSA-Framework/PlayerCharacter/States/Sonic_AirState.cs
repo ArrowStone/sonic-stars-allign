@@ -323,6 +323,11 @@ public class Sonic_AirState : IState
 
     private void CheckForLedgeGrab() // Also logic for ledge grabbing
     {
+        if(Vector3.Dot(_ctx.VerticalVelocity.normalized, _ctx.Gravity) < 0)
+        {
+            // Moving upwards - don't grab
+            return;
+        }
         // Gotta save em while we have em
         _ctx.ledgeGrabHorizontalVelocity = _ctx.HorizontalVelocity; 
         _ctx.ledgeGrabVerticalVelocity = _ctx.VerticalVelocity; 

@@ -29,10 +29,6 @@ MonoBehaviour:
     Clip:
     - {fileID: 8300000, guid: ff749f902d716ca538fbd4134a7dd870, type: 3}
     Channel: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
-  - Name: SpinDashStart
-    Clip:
-    - {fileID: 8300000, guid: 070237532a0d58160ac70bececd459a9, type: 3}
-    Channel: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
   - Name: SpinDashAway
     Clip:
     - {fileID: 8300000, guid: d3fc041d246a0043facee30d7d97c820, type: 3}

@@ -27,7 +27,7 @@ public class Movement_Aerial : MonoBehaviour, Enemy_MovementBase
                 detector = new Overlap_Sphere(gameObject, 1, targetLayer, 0, detectionDistance, detectionBlockingMask, DetectionBias.Proximity);
                 Rb = GetComponent<Rigidbody>();
                 
-                if(!PathContainer)
+                if(PathContainer == null)
                 {
                         homePoint = transform.position;
                         stationary = true;
@@ -49,7 +49,7 @@ public class Movement_Aerial : MonoBehaviour, Enemy_MovementBase
 
                 Vector3 targetLookPos;
 
-                if (target)
+                if (target != null)
                 {
                         targetLookPos = target.position;
                         onPath = false;
@@ -96,7 +96,13 @@ public class Movement_Aerial : MonoBehaviour, Enemy_MovementBase
                                 if (Vector3.Distance(targetLookPos, transform.position) < 1f) onPath = true;
                         }
                 }
-                targetRotation = Quaternion.LookRotation((targetLookPos - transform.position).normalized);
+                Vector3 direction = (targetLookPos - transform.position).normalized;
+                if(direction.magnitude == 0) 
+                {
+                        Rb.linearVelocity = Vector3.zero;
+                        return;
+                }
+                targetRotation = Quaternion.LookRotation(direction);
 
                 Quaternion newRotation = Quaternion.Lerp(transform.rotation, targetRotation, _delta * rotationSpeed);
                 Player_StaticFunctions.SetTransformRotation(transform, newRotation, "Aerial Movement");

@@ -135,7 +135,6 @@ public class Sonic_RollState : IState
                 //if (Vector3.Angle(-_ctx.Gravity, _ctx.GroundNormal) <= FrameworkUtility.FloorAngle) return;
 
                 float _slopeFactor = _ctx.Chp.SlopeFactorRoll * _delta;
-                Debug.Log(Vector3.Dot(_ctx.Gravity, _ctx.HorizontalVelocity.normalized));
                 if (Vector3.Dot(_ctx.Gravity, _ctx.HorizontalVelocity.normalized) >= 0)
                 {
                         _slopeFactor = _ctx.Chp.SlopeFactorRollDown * _delta;

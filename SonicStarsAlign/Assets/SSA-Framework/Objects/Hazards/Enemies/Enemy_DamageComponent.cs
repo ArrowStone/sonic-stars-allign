@@ -48,7 +48,6 @@ public class Enemy_DamageComponent : MonoBehaviour, IDamageable
         if (other.TryGetComponent(out _ctx) && other.TryGetComponent(out _damaged) && 
             !other.GetComponent<Sonic_AttackComponent>().Library.Active())
         {
-            Debug.Log(_ctx.CurrentEstate);
             switch (KnockbackApplication)
             {
                 case Hazards_HitStyle.Local:

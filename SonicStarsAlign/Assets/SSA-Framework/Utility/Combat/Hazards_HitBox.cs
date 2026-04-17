@@ -12,11 +12,14 @@ public class Hazards_HitBox : MonoBehaviour
     [SerializeField] private Vector3 Knockback;
     [SerializeField] private Hazards_HitStyle KnockbackApplication;
     [SerializeField] private int Strength;
+    [SerializeField] private bool PlayerOnly;
 
     private void OnTriggerEnter(Collider other)
     {
         if (isActiveAndEnabled && other.TryGetComponent(out Damaged))
         {
+            if(PlayerOnly && !other.gameObject.CompareTag("Player")) return;
+            
             switch (KnockbackApplication)
             {
                 case Hazards_HitStyle.Local:

@@ -21,7 +21,11 @@ public class Sonic_PullyState : IState
 
     public void UpdateState()
     {
-        float _delta = Time.deltaTime;
+    }
+
+    public void FixedUpdateState()
+    {
+        float _delta = Time.fixedDeltaTime;
         _ctx.SplnHandler.SplineMove(_delta);
         if (_ctx.SplnHandler.Active)
         {
@@ -31,10 +35,6 @@ public class Sonic_PullyState : IState
         }
 
         AutomationSwitchConditions();
-    }
-
-    public void FixedUpdateState()
-    {
     }
 
     public void LateUpdateState()

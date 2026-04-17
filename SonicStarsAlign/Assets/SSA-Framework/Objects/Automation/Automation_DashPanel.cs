@@ -44,7 +44,7 @@ public class Automation_DashPanel : MonoBehaviour, IAutomation
         return _transfrm;
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         //Gizmos.DrawWireSphere(transform.position, movementLockDistance); 
         Gizmos.DrawRay(transform.position, transform.forward * movementLockDistance);

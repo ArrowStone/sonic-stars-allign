@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae5bb2dbce231f94bbaeedd582baab8c, type: 3}
-  m_Name: SonicWaterPlayerParameters
+  m_Name: SonicWaterParameters
   m_EditorClassIdentifier: 
-  BaseSpeed: 20
-  HardSpeedCap: 200
-  RailSpeedCap: 100
-  Acceleration: 10
-  Deceleration: 10
+  BaseSpeed: 25
+  HardSpeedCap: 400
+  RailSpeedCap: 300
+  Acceleration: 15
+  Deceleration: 29.75
   GroundDrag: 5
   RunSpeedThreshold: 12
   TurnDeceleration:
@@ -27,7 +27,7 @@ MonoBehaviour:
       value: 90
       inSlope: 0
       outSlope: -45
-      tangentMode: 65
+      tangentMode: 1
       weightedMode: 2
       inWeight: 0
       outWeight: 0.8125
@@ -36,9 +36,9 @@ MonoBehaviour:
       value: 0
       inSlope: -45
       outSlope: -0.23060799
-      tangentMode: 5
+      tangentMode: 69
       weightedMode: 1
-      inWeight: 0.9
+      inWeight: 0.01666668
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -51,18 +51,18 @@ MonoBehaviour:
       value: 3
       inSlope: -0.00016107793
       outSlope: -0.01125
-      tangentMode: 65
+      tangentMode: 69
       weightedMode: 2
       inWeight: 0
-      outWeight: 0.3780184
+      outWeight: 0.0041666664
     - serializedVersion: 3
       time: 200
       value: 0.75
       inSlope: -0.01125
       outSlope: 0.000603775
-      tangentMode: 5
+      tangentMode: 69
       weightedMode: 1
-      inWeight: 0.38210768
+      inWeight: 1
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -74,25 +74,25 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0.10931362
-      outSlope: 0.10931362
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 2
       inWeight: 0
       outWeight: 0.9291667
     - serializedVersion: 3
       time: 1
-      value: 1
-      inSlope: 3.8847067
-      outSlope: 3.8847067
+      value: 0.5
+      inSlope: 2.7901683
+      outSlope: 2.7901683
       tangentMode: 0
       weightedMode: 1
-      inWeight: 0.16250002
+      inWeight: 0.16613746
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  AccelerationAir: 5
+  AccelerationAir: 11.25
   TurnDecelerationAir:
     serializedVersion: 2
     m_Curve:
@@ -146,22 +146,22 @@ MonoBehaviour:
   BreakStrength: 70
   BreakStrengthAir: 70
   RotationSmoothingSpeed: 5
-  JumpForce: 40
+  JumpForce: 20
   JumpCancel: 4
   SlipTime: 0.3333333
   LookBackTransitionSpeed: 5
-  GravityForce: 10
-  FallVelCap: 10
+  GravityForce: 30
+  FallVelCap: 50
   MinGroundStickSpeed: 6.25
-  MaxGroundDeviation: 30
-  SlopeFactor: 50
-  SlopeFactorRoll: 9.375
-  SlopeFactorRollDown: 37.5
+  MaxGroundDeviation: 70
+  SlopeFactor: 20
+  SlopeFactorRoll: 10
+  SlopeFactorRollDown: 100
   RailSlopeInfluence: 15
   RailCrouchInfluence: 37.5
-  RollDeceleration: 7.5
-  SpinDashDeceleration: 15
-  MinRollSpeed: 1
+  RollDeceleration: 0.1
+  SpinDashDeceleration: 2
+  MinRollSpeed: 5
   SpinDashHoldTime: 0.375
   SpinDashInitSpeed: 1
   SpinDashOutput:
@@ -169,57 +169,21 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 8
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
+      value: 30
+      inSlope: 0
+      outSlope: 30
+      tangentMode: 69
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0.09299191
     - serializedVersion: 3
       time: 1
-      value: 16
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 2
-      value: 25
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    - serializedVersion: 3
-      time: 3
-      value: 33
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 4
-      value: 40
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 5
-      value: 45
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
-      weightedMode: 0
-      inWeight: 0
+      value: 60
+      inSlope: 30
+      outSlope: 0
+      tangentMode: 69
+      weightedMode: 3
+      inWeight: 0.22843665
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -301,21 +265,21 @@ MonoBehaviour:
   RailCollisionBounce: 5
   RailSwitchSpeed: 50
   RailSwitchDuration: 0.125
-  RailSwitchDeadZone: 45
+  RailSwitchDeadZone: 0.5
   DropDashBaseSpeed: 8
   DropDashChargeMultiplier: 4
   DropDashMaxCharge: 1
   WaterRunThreshold: 14
   WallAttachCheckDistance: 1
   WallRunGravityScale: 0.35
-  WallRunSpeed: 12
+  WallRunSpeed: 30
   WallJumpStrength: 18
   MaxWallRunTime: 2
   MinWallDot: 0.5
   MaxWallGravityDot: 0.2
   WallRunMinSpeed: 8
   MaxWallHeadOnDot: 0.7
-  WallRunVerticalControl: 4
+  WallRunVerticalControl: 15
   WallJumpMaxCharge: 1
   WallJumpMinStrength: 10
   WallJumpMaxStrength: 25
@@ -343,3 +307,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  stoneSkipMinimumSpeed: 14
+  stoneSkipWindow: 0.5
+  stoneSkipCooldown: 1

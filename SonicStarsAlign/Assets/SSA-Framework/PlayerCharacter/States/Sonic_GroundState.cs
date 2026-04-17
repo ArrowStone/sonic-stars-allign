@@ -163,6 +163,12 @@ public class Sonic_GroundState : IState
                 // Simple point check isn't enough, player can sometimes clip
                 if (Physics.OverlapCapsuleNonAlloc(point0, point1, 0.25f, colliders, _ctx.wallLayer) < 2f) _ctx.Physics_Snap(targetPos);
 
+                // If stopped => unlock movement
+                if (_ctx.Velocity.magnitude == 0)
+                {
+                        _ctx.MovementLockDistance = 0;
+                }
+
                 // Locking movement after a dash panel if needed
                 if (_ctx.MovementLockDistance > 0 && Vector3.Distance(_ctx.transform.position, _ctx.MovementLockStartPos) < _ctx.MovementLockDistance)
                 {
