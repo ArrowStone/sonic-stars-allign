@@ -4,7 +4,7 @@ public class Sonic_SpinDashState : IState
 {
     private readonly Sonic_PlayerStateMachine _ctx;
     private bool _groundDetected;
-    private int _spincharge;
+    private float _spincharge;
 
     public Sonic_SpinDashState(Sonic_PlayerStateMachine _machine)
     {
@@ -20,6 +20,11 @@ public class Sonic_SpinDashState : IState
         _groundDetected = true;
         _ctx.Skid = false;
         _spincharge = 0;
+
+        _ctx.ModelManager.EnterBall();
+
+        _ctx.Snd.RailSpinSource.clip = _ctx.Snd.spinUpSound;
+        _ctx.Snd.RailSpinSource.Play();
 
         #endregion Misc
 
@@ -44,6 +49,12 @@ public class Sonic_SpinDashState : IState
     public void UpdateState()
     {
         float _delta = Time.deltaTime;
+    }
+
+    public void FixedUpdateState()
+    {
+        float _delta = Time.fixedDeltaTime;
+
         if (!GroundCheck())
         {
             AirSwitchConditions();
@@ -54,17 +65,14 @@ public class Sonic_SpinDashState : IState
         SlopePhysics(_delta);
         Movement(_delta);
 
-        GroundSwitchConditions();
+        GroundSwitchConditions(_delta);
         _ctx.Physics_ApplyVelocity();
-    }
-
-    public void FixedUpdateState()
-    {
-        float _delta = Time.fixedDeltaTime;
     }
 
     public void ExitState()
     {
+        _ctx.Snd.RailSpinSource.Stop();
+        _ctx.Snd.RailSpinSource.pitch = 1f;
     }
 
     public void LateUpdateState()
@@ -125,15 +133,16 @@ public class Sonic_SpinDashState : IState
         _ctx.InputVector = _ctx.InputRotation * _ctx.InputRef.rotation * _ctx.Input.VectorMoveInput.normalized;
     }
 
-    private void GroundSwitchConditions()
+    private void GroundSwitchConditions(float delta)
     {
-        if (_ctx.Input.JumpInput.WasPressedThisFrame())
+        _spincharge += delta;
+        float spinSpeed = _ctx.Chp.SpinDashOutput.Evaluate(_spincharge);
+        _ctx.ModelManager.ballRollSpeed = spinSpeed;
+         _ctx.Snd.RailSpinSource.pitch = spinSpeed * 0.0167f;
+        if (_ctx.Input.BounceInput.WasReleasedThisFrame())
         {
-            _spincharge++;
-        }
-        if (_ctx.Input.CrouchInput.WasReleasedThisFrame())
-        {
-            _ctx.Velocity = _ctx.PlayerDirection * _ctx.Chp.SpinDashOutput.Evaluate(_spincharge);
+            _ctx.Velocity = _ctx.PlayerDirection * spinSpeed;
+            _ctx.Snd.PlaySound("SpinDashAway");
             _ctx.MachineTransition(PlayerStates.Roll);
             return;
         }

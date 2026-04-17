@@ -13,6 +13,7 @@ public class Sonic_ModelManager : MonoBehaviour
         [SerializeField] Animator NormalAnimator;
         [SerializeField] Animator BallAnimator;
 
+        public float ballRollSpeed;
 
         private bool inBall = true;
 
@@ -20,7 +21,7 @@ public class Sonic_ModelManager : MonoBehaviour
                 ExitBall();
         }
 
-        private void Update () {
+        private void FixedUpdate () {
  
                 if ( inBall && _CTX.CurrentEstate is PlayerStates.Air)
                 {
@@ -28,8 +29,7 @@ public class Sonic_ModelManager : MonoBehaviour
                 }
                 else if (inBall)
                 {
-                        Debug.Log(_CTX.PlayerRunningSpeed);
-                        BallAnimator.SetFloat("Speed", _CTX.PlayerRunningSpeed);
+                        BallAnimator.SetFloat("Speed", ballRollSpeed);
                 }
         }
 

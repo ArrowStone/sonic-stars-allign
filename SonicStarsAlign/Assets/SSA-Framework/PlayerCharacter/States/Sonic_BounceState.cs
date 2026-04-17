@@ -20,6 +20,9 @@ public class Sonic_BounceState : IState
 
 		_ctx.Anim.SetInteger("State", 1);
 
+        _ctx.ModelManager.EnterBall();
+        _ctx.ModelManager.ballRollSpeed = 40f;
+
         #endregion Misc
 
         #region Collision

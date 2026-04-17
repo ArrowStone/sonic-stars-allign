@@ -18,6 +18,7 @@ public class Sonic_RollState : IState
                 _ctx.Anim.SetInteger("State", 1);
                 _ctx.ModelManager.EnterBall();
 
+
                 #endregion Misc
 
                 #region Collision
@@ -63,7 +64,6 @@ public class Sonic_RollState : IState
         }
 
         public void ExitState () {
-                _ctx.ModelManager.ExitBall();
         }
 
         #region Util
@@ -77,6 +77,8 @@ public class Sonic_RollState : IState
                 _ctx.GroundNormal = _ctx.GroundCast.HitInfo.normal;
                 _ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_ctx.Velocity, _ctx.GroundNormal).normalized * _ctx.Velocity.magnitude;
                 _ctx.Physics_Snap(_ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover);
+
+                _ctx.ModelManager.ballRollSpeed = _ctx.PlayerRunningSpeed;
 
                 InputRotations();
                 GroundRotation(_delta);
@@ -130,10 +132,11 @@ public class Sonic_RollState : IState
         }
 
         private void SlopePhysics ( float _delta ) {
-                if (Vector3.Angle(-_ctx.Gravity, _ctx.GroundNormal) <= FrameworkUtility.FloorAngle) return;
+                //if (Vector3.Angle(-_ctx.Gravity, _ctx.GroundNormal) <= FrameworkUtility.FloorAngle) return;
 
                 float _slopeFactor = _ctx.Chp.SlopeFactorRoll * _delta;
-                if (Vector3.Dot(_ctx.HorizontalVelocity, _ctx.Gravity) >= 0)
+                Debug.Log(Vector3.Dot(_ctx.Gravity, _ctx.HorizontalVelocity.normalized));
+                if (Vector3.Dot(_ctx.Gravity, _ctx.HorizontalVelocity.normalized) >= 0)
                 {
                         _slopeFactor = _ctx.Chp.SlopeFactorRollDown * _delta;
                 }
@@ -154,9 +157,10 @@ public class Sonic_RollState : IState
                 if (_ctx.HorizontalVelocity.magnitude < _ctx.Chp.MinRollSpeed || _ctx.Input.CrouchInput.WasPressedThisFrame())
                 {
                         _ctx.MachineTransition(PlayerStates.Ground);
+                        _ctx.ModelManager.ExitBall();
                 }
 
-                if (_ctx.Input.CrouchInput.IsPressed() && _ctx.Input.JumpInput.WasPressedThisFrame())
+                if (_ctx.Input.BounceInput.WasPressedThisFrame())
                 {
                         _ctx.MachineTransition(PlayerStates.Spindash);
                         return;
@@ -169,6 +173,7 @@ public class Sonic_RollState : IState
         }
 
         private void AirSwitchConditions () {
+                _ctx.ModelManager.ExitBall();
                 _ctx.MachineTransition(PlayerStates.Air);
         }
 

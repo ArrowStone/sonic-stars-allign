@@ -24,6 +24,7 @@ public class Sonic_AirState : IState
         _reactionInputTimer = 0;
         _ctx.doneAirRotation = false;
         _ctx.fakeNormal = _ctx.GroundNormal;
+        _ctx.ModelManager.ballRollSpeed = 40f;
 
         #endregion Misc
 

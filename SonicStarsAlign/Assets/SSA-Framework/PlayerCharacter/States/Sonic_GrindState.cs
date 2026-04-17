@@ -29,8 +29,8 @@ public class Sonic_GrindState : IState
 
         _ctx.Snd.PlaySound("RailLand");
 
-        _ctx.Snd.RailSource.clip = _ctx.Snd.railGrindSound;
-        _ctx.Snd.RailSource.Play();
+        _ctx.Snd.RailSpinSource.clip = _ctx.Snd.railGrindSound;
+        _ctx.Snd.RailSpinSource.Play();
 
         RailApplication();
     }
@@ -47,8 +47,8 @@ public class Sonic_GrindState : IState
 
         _vel = Vector3.zero;
 
-        _ctx.Snd.RailSource.Stop();
-        _ctx.Snd.RailSource.pitch = 1f;
+        _ctx.Snd.RailSpinSource.Stop();
+        _ctx.Snd.RailSpinSource.pitch = 1f;
 
         _ctx.railEndTime = Time.time;
     }
@@ -72,8 +72,8 @@ public class Sonic_GrindState : IState
         _ctx.RailCheck();
         RailSwitchConditions();
 
-        _ctx.Snd.RailSource.pitch = Mathf.Lerp(_ctx.Snd.RailSource.pitch, Math.Clamp(_ctx.Rb.linearVelocity.magnitude * 0.05f, 0.8f, 1.2f), _delta * 10f);
-        _ctx.Snd.RailSource.volume = Math.Clamp(_ctx.Rb.linearVelocity.magnitude * 0.03f, 0.1f, 0.7f);
+        _ctx.Snd.RailSpinSource.pitch = Mathf.Lerp(_ctx.Snd.RailSpinSource.pitch, Math.Clamp(_ctx.Rb.linearVelocity.magnitude * 0.05f, 0.8f, 1.2f), _delta * 10f);
+        _ctx.Snd.RailSpinSource.volume = Math.Clamp(_ctx.Rb.linearVelocity.magnitude * 0.03f, 0.1f, 0.7f);
     }
 
     public void LateUpdateState()

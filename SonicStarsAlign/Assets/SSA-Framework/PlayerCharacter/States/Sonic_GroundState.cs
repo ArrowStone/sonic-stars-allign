@@ -274,7 +274,7 @@ public class Sonic_GroundState : IState
                         _ctx.MachineTransition(PlayerStates.LightSpeedDash);
                 }
 
-                if (_ctx.Input.CrouchInput.IsPressed() && _ctx.Input.JumpInput.WasPressedThisFrame())
+                if (_ctx.Input.BounceInput.WasPressedThisFrame())
                 {
                         _ctx.MachineTransition(PlayerStates.Spindash);
                         _ctx.Snd.PlaySound("Jump");

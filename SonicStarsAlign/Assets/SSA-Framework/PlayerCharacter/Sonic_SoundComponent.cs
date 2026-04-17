@@ -15,7 +15,7 @@ public class Sonic_SoundComponent : MonoBehaviour
 
     public AudioSource[] AudioSources;
 	public AudioSource VoiceAudioSource;
-	public AudioSource RailSource;
+	public AudioSource RailSpinSource;
 
 	public Sounds_Database CommonSounds;
 	public SoundType[] Sounds;
@@ -30,6 +30,7 @@ public class Sonic_SoundComponent : MonoBehaviour
     public AudioClip railGrindSound;
     public AudioClip railSwitchSound;
     public AudioClip railLandSound;
+    public AudioClip spinUpSound;
 
     [Header ("Collectables")]
     public AudioClip ringSound;

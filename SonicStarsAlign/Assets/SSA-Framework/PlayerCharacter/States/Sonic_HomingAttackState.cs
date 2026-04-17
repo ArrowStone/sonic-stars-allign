@@ -19,6 +19,8 @@ public class Sonic_HomingAttackState : IState
 
         _targetPos = _ctx.HomingTargetDetector.TargetOutput.transform.position;
         _difference = _targetPos - _ctx.Rb.transform.position;
+
+        _ctx.ModelManager.ballRollSpeed = 40f;
     }
 
     public void UpdateState()

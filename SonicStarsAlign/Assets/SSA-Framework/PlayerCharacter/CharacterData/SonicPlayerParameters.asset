@@ -17,7 +17,7 @@ MonoBehaviour:
   RailSpeedCap: 300
   Acceleration: 20
   Deceleration: 29.75
-  GroundDrag: 1
+  GroundDrag: 0
   RunSpeedThreshold: 12
   TurnDeceleration:
     serializedVersion: 2
@@ -154,12 +154,12 @@ MonoBehaviour:
   FallVelCap: 50
   MinGroundStickSpeed: 6.25
   MaxGroundDeviation: 70
-  SlopeFactor: 30
+  SlopeFactor: 20
   SlopeFactorRoll: 10
   SlopeFactorRollDown: 100
   RailSlopeInfluence: 15
   RailCrouchInfluence: 37.5
-  RollDeceleration: 2
+  RollDeceleration: 0.1
   SpinDashDeceleration: 2
   MinRollSpeed: 5
   SpinDashHoldTime: 0.375
@@ -169,57 +169,21 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 8
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
+      value: 30
+      inSlope: 0
+      outSlope: 30
+      tangentMode: 69
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0.09299191
     - serializedVersion: 3
       time: 1
-      value: 16
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 2
-      value: 25
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    - serializedVersion: 3
-      time: 3
-      value: 33
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 4
-      value: 40
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 5
-      value: 45
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
-      weightedMode: 0
-      inWeight: 0
+      value: 60
+      inSlope: 30
+      outSlope: 0
+      tangentMode: 69
+      weightedMode: 3
+      inWeight: 0.22843665
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
