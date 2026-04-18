@@ -26,6 +26,11 @@ public class Sonic_AirState : IState
         _ctx.fakeNormal = _ctx.GroundNormal;
         _ctx.ModelManager.ballRollSpeed = 40f;
 
+        /*if(_ctx.Anim.GetInteger("State") == 0)
+        {
+            _ctx.Anim.SetInteger("State", 5);
+        }*/
+
         #endregion Misc
 
         #region Collision
@@ -92,7 +97,7 @@ public class Sonic_AirState : IState
 
     public void ExitState()
     {
-                _ctx.ModelManager.ExitBall();
+        _ctx.ModelManager.ExitBall();
     }
 
     #region Util
@@ -257,7 +262,6 @@ public class Sonic_AirState : IState
         }
         if (_ctx.RingDetector.TargetDetected && _ctx.Input.ReactionInput.WasPressedThisFrame())
         {
-            _ctx.Snd.PlaySound("LightDash");
             _ctx.MachineTransition(PlayerStates.LightSpeedDash);
         }
         if (_ctx.Input.BounceInput.WasPressedThisFrame())
@@ -265,7 +269,7 @@ public class Sonic_AirState : IState
             _ctx.Snd.PlaySound("Bounce");
             _ctx.MachineTransition(PlayerStates.Bounce);
         }
-        if (!_ctx.Input.CrouchInput.IsPressed() && _ctx.Input.JumpInput.WasPressedThisFrame() && _ctx.AirDashes > 0)
+        if (_ctx.Input.JumpInput.WasPressedThisFrame() && _ctx.AirDashes > 0)
         {
             _ctx.Snd.PlaySound("Homing");
             _ctx.AirDashes--;

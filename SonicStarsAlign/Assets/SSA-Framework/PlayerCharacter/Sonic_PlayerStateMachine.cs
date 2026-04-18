@@ -472,6 +472,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
                 Physics_ApplyVelocity();
                 MachineTransition(PlayerStates.Air);
+                ModelManager.ExitBall();
+                Anim.SetInteger("State", 4);
         }
 
         #endregion Moves

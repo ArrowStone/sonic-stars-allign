@@ -1454,6 +1454,10 @@ PrefabInstance:
       value: -679
       objectReference: {fileID: 0}
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 433825212}
@@ -5137,6 +5141,10 @@ PrefabInstance:
     - target: {fileID: 6394421577499944272, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -679
+      objectReference: {fileID: 0}
+    - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_TargetGraphic

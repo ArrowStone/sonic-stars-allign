@@ -17,6 +17,7 @@ public class Sonic_GroundState : IState
 
                 _groundDetected = true;
                 _wereInWater = _ctx.InWater;
+                _ctx.AirDashes = 1;
 
                 #endregion Misc
 

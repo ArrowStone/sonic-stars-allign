@@ -21,7 +21,7 @@ public class Sonic_HomingAttackState : IState
         _targetPos = _ctx.HomingTargetDetector.TargetOutput.transform.position;
         _difference = _targetPos - _ctx.Rb.transform.position;
 
-        _ctx.ModelManager.EnterBall();
+        _ctx.Anim.SetInteger("State", 4);
         _ctx.ModelManager.ballRollSpeed = 40f;
     }
 
@@ -53,6 +53,7 @@ public class Sonic_HomingAttackState : IState
     public void ExitState()
     {
         _ctx.ChangeKinematic(false);
+        _ctx.AirDashes = 1;
     }
 
     private void HomingAttackMovement(float _delta)
@@ -89,8 +90,14 @@ public class Sonic_HomingAttackState : IState
     {
         _ctx.ChangeKinematic(false);
         _ctx.VerticalVelocity = -_ctx.Gravity * _ctx.Chp.HomingAttackBounceForce;
-        _ctx.HorizontalVelocity = Vector3.zero;
+        //_ctx.HorizontalVelocity = Vector3.zero;
+        /*if(_ctx.Input.AttackInput.IsPressed())
+            _ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_vel, -_ctx.Gravity);*/
+        
         _ctx.Physics_ApplyVelocity();
+
+        _ctx.ModelManager.EnterBall();
+
         _ctx.MachineTransition(PlayerStates.Air);
     }
 }

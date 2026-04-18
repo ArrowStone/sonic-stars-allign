@@ -21,7 +21,8 @@ public class Sonic_GrindState : IState
 
     public void EnterState()
     {
-        Debug.DrawRay(_ctx.transform.position, Vector3.up * 5f, Color.white, 10f);
+        //Debug.DrawRay(_ctx.transform.position, Vector3.up * 5f, Color.white, 10f);
+        _ctx.Anim.SetInteger("State", 2);
 
         _ctx.ChangeKinematic(true);
         _difference = Vector3.Project(_ctx.Velocity, _ctx.SplnHandler.SplineTangent());
@@ -93,6 +94,7 @@ public class Sonic_GrindState : IState
     {
         if (_ctx.Input.JumpInput.WasPressedThisFrame())
         {
+            _ctx.Anim.SetInteger("State", 1);
             Automation_GrindRail _grail;
             if (_tilt < -_ctx.Chp.RailSwitchDeadZone && _ctx.RailDetectorL.TargetDetected)
             {
@@ -116,6 +118,7 @@ public class Sonic_GrindState : IState
         }
         if (!_ctx.SplnHandler.Active)
         {
+            _ctx.Anim.SetInteger("State", 0);
             if (_ctx.GroundCast.Execute(_ctx.Rb.transform.position, -_ctx.GroundNormal))
             {
                 _ctx.MachineTransition(PlayerStates.Ground);

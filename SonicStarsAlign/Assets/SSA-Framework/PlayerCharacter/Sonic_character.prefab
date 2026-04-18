@@ -2049,7 +2049,7 @@ MonoBehaviour:
   ModelManager: {fileID: 0}
   InputRef: {fileID: 0}
   Rb: {fileID: 7937978964724185185}
-  Anim: {fileID: 8171554605671412702}
+  Anim: {fileID: 2983101309276532850}
   Cl: {fileID: 6081405800739371547}
   TriggerCl: {fileID: 7840888026047444901}
   airChp: {fileID: 11400000, guid: 5976ffd069f1d92438628fdafda3acd7, type: 2}
@@ -6485,9 +6485,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 36c276eb2123e86ebb97207b2b021ef9, type: 2}
     - target: {fileID: -1825877466979311053, guid: 9ee89152ab6641d35b16ef100b493dfe, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fdc5447ad926e965999f4102d83e820f, type: 2}
+    - target: {fileID: -1825877466979311053, guid: 9ee89152ab6641d35b16ef100b493dfe, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
       objectReference: {fileID: 2100000, guid: d01b43ac1a0a77e0ab0215d2c8d5c954, type: 2}
+    - target: {fileID: -325217382613624396, guid: 9ee89152ab6641d35b16ef100b493dfe, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c6428b0cb8fce71b38c2315c1fe175e2, type: 2}
     - target: {fileID: -325217382613624396, guid: 9ee89152ab6641d35b16ef100b493dfe, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 

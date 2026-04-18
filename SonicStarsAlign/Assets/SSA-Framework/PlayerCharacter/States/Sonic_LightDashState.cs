@@ -17,6 +17,8 @@ public class Sonic_LightDashState : IState
     {
         _ctx.ChangeKinematic(true);
         _ctx.GroundNormal = -_ctx.Gravity.normalized;
+        _ctx.Anim.SetInteger("State", 4);
+        _ctx.Snd.PlaySound("LightDash");
     }
 
     public void UpdateState()
@@ -89,6 +91,7 @@ public class Sonic_LightDashState : IState
 
     private void AirSwitchConditions()
     {
+        _ctx.Anim.SetInteger("State", 0);
         _ctx.MachineTransition(PlayerStates.Air);
     }
 }
