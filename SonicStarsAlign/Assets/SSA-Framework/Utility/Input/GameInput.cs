@@ -491,7 +491,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c0bc0527-1ca0-4c0f-be21-854ff7615c9c"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
