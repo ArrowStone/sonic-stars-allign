@@ -48,7 +48,7 @@ public class Automation_Pully : MonoBehaviour
         _ctx.MachineTransition(PlayerStates.Pully);
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
         if (_active) return;
 

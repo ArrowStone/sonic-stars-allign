@@ -205,7 +205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8586483995185164761}
   - component: {fileID: 2128323746282796883}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: VelocitySpring
   m_TagString: Untagged
   m_Icon: {fileID: 0}

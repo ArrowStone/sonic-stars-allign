@@ -2840,6 +2840,18 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 150
       objectReference: {fileID: 0}
+    - target: {fileID: 2206359818625499672, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206359818625499672, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206359818625499672, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6627451
+      objectReference: {fileID: 0}
     - target: {fileID: 2279255794877722672, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_Name
       value: ExtrasButton
@@ -2850,7 +2862,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -4871,6 +4883,18 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 150
       objectReference: {fileID: 0}
+    - target: {fileID: 2206359818625499672, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6603774
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206359818625499672, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6603774
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206359818625499672, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6603774
+      objectReference: {fileID: 0}
     - target: {fileID: 2279255794877722672, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_Name
       value: SettingsButton
@@ -4881,7 +4905,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

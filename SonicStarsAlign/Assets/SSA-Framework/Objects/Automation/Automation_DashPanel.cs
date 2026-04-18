@@ -41,6 +41,13 @@ public class Automation_DashPanel : MonoBehaviour, IAutomation
             Position = _ctx.Rb.transform.position,
             Rotation = Quaternion.LookRotation(_ctx.PlayerDirection, _ctx.GroundNormal)
         };
+
+
+        if(TryGetComponent(out Automation_Sound sound))
+        {
+            sound.PlaySound();
+        }
+
         return _transfrm;
     }
 

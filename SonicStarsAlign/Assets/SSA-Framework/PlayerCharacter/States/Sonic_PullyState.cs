@@ -65,6 +65,7 @@ public class Sonic_PullyState : IState
         _pos = _ctx.SplnHandler.NewPosition();
         _ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_vel, -_ctx.Gravity);
         _ctx.VerticalVelocity = Vector3.Project(_vel, -_ctx.Gravity);
+        _ctx.Physics_ApplyVelocity();
 
         if (Vector3.ProjectOnPlane(_vel, -_ctx.Gravity).magnitude > 0.1f)
         {

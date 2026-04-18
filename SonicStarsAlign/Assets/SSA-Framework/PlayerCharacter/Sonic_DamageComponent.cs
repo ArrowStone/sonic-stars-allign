@@ -29,10 +29,10 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
     {
         if (_ctx.CurrentEstate == PlayerStates.Damage) {Debug.Log("Damage state"); return;}
         if (AttackMachine.Library.Active() && AttackMachine.Library.AttackStrength() > _strength) return;
-        ApplyKnockback(_knockback);
 
         if (_ctx.InvinciblitiyState > 0) return;
         _ctx.InvinciblitiyState = InvincibilityDuration;
+        ApplyKnockback(_knockback);
         RingLoss();
     }
 
@@ -64,15 +64,15 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
 
     private void FixedUpdate()
     {
+        if(_ctx.Input.Respawn.WasPressedThisFrame())
+        {
+            Death();
+        }
+
         if (_ctx.InvinciblitiyState > 0)
         {
             _ctx.InvinciblitiyState -= Time.fixedDeltaTime;
             Debug.Log(_ctx.InvinciblitiyState);
-        }
-
-        if(_ctx.Input.Respawn.WasPressedThisFrame())
-        {
-            Death();
         }
     }
 

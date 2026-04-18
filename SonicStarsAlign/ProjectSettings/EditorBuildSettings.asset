@@ -17,9 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/development/scn_TitleCard.unity
     guid: 544074a648980af4c9ee719c12585566
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/development/scn_Test.unity
     guid: 2ce0c9267534684e28407c3f63e40e9e
+  - enabled: 1
+    path: Assets/Scenes/development/scn_TestStage.unity
+    guid: 280ab363bd5b1e686b8dd17f15b36172
   - enabled: 1
     path: Assets/Scenes/development/scn_Win.unity
     guid: 93a0867b7820ade4aab04d679ed7b532
