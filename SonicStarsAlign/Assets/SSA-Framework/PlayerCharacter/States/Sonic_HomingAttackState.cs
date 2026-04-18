@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 
 public class Sonic_HomingAttackState : IState
@@ -35,9 +36,12 @@ public class Sonic_HomingAttackState : IState
         {
             HomingAttackMovement(_delta);
             HomingAttackRotation();
+            HASwitchConditions();
+            Debug.Log("Homing!");
         }
         else
         {
+            Debug.Log("Homing done!");
             ExitConditions();
         }
     }
@@ -49,12 +53,6 @@ public class Sonic_HomingAttackState : IState
     public void ExitState()
     {
         _ctx.ChangeKinematic(false);
-        _ctx.Velocity = _vel;
-
-        // Have to wait one frame, enemy hasnt deactivated yet
-        IEnumerator UpthrustDelay() {yield return new WaitForFixedUpdate(); _ctx.Rb.linearVelocity = -_ctx.Gravity * _ctx.Chp.HomingAttackBounceForce;}
-
-        _ctx.StartCoroutine(UpthrustDelay());
     }
 
     private void HomingAttackMovement(float _delta)
@@ -71,7 +69,7 @@ public class Sonic_HomingAttackState : IState
 
     private bool ContinueHomingAttacking()
     {
-        _difference = _targetPos - _ctx.Rb.transform.position;
+        _difference = _targetPos - _ctx.transform.position;
         if (_difference.magnitude <= _ctx.Rb.sleepThreshold)
         {
             return false;
@@ -89,6 +87,10 @@ public class Sonic_HomingAttackState : IState
 
     private void ExitConditions()
     {
+        _ctx.ChangeKinematic(false);
+        _ctx.VerticalVelocity = -_ctx.Gravity * _ctx.Chp.HomingAttackBounceForce;
+        _ctx.HorizontalVelocity = Vector3.zero;
+        _ctx.Physics_ApplyVelocity();
         _ctx.MachineTransition(PlayerStates.Air);
     }
 }

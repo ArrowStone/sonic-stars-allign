@@ -125,7 +125,7 @@ public class Sonic_AttackComponent : MonoBehaviour
 
         comboLength += 1;
 
-        if (ctx.CurrentEstate is PlayerStates.HomingAttack)
+        /*if (ctx.CurrentEstate is PlayerStates.HomingAttack)
         {
             ctx.MachineTransition(PlayerStates.Air);
             if (_damageable.Health() > Library.GetAttack("HAttack").Damage)
@@ -133,7 +133,7 @@ public class Sonic_AttackComponent : MonoBehaviour
                 Recoil();
                 return;
             }
-        }
+        }*/
 
         if (ctx.CurrentEstate is PlayerStates.Bounce)
         {

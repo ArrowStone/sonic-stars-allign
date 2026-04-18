@@ -3830,12 +3830,6 @@ MonoBehaviour:
     preview: {fileID: 21300000, guid: 3b6f040763cb85e4b917498567771ab4, type: 3}
     nameSprite: {fileID: 21300000, guid: 77620f086dd78f94eb1f3a5d4483d00d, type: 3}
     loadingName: {fileID: 21300000, guid: 8d56004b0549a00428ac534f2b7bf0b1, type: 3}
-  - data: {fileID: 11400000, guid: 328a85c0e526200cb8d802a5539e2699, type: 2}
-    displayName: Neo
-    sceneIndex: 0
-    preview: {fileID: 21300000, guid: 8c2994e0ecf1cc54a8adfd38e5324ff4, type: 3}
-    nameSprite: {fileID: 21300000, guid: ca2db0eb84e501547a637c43ac656156, type: 3}
-    loadingName: {fileID: 21300000, guid: 9f0ffec337860fd4bb3f4ff909548265, type: 3}
   stagePreview: {fileID: 1688343832}
   stageNameImage: {fileID: 1298483031}
   redRingIcons:

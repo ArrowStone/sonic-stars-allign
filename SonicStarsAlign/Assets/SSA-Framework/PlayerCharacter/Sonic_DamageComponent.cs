@@ -72,7 +72,6 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
         if (_ctx.InvinciblitiyState > 0)
         {
             _ctx.InvinciblitiyState -= Time.fixedDeltaTime;
-            Debug.Log(_ctx.InvinciblitiyState);
         }
     }
 

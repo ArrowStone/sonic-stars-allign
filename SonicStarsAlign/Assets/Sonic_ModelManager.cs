@@ -21,13 +21,9 @@ public class Sonic_ModelManager : MonoBehaviour
                 ExitBall();
         }
 
-        private void FixedUpdate () {
- 
-                if ( inBall && _CTX.CurrentEstate is PlayerStates.Air)
-                {
-                        BallAnimator.SetFloat("Speed", 40);
-                }
-                else if (inBall)
+        private void FixedUpdate () 
+        {
+                if (inBall)
                 {
                         BallAnimator.SetFloat("Speed", ballRollSpeed);
                 }

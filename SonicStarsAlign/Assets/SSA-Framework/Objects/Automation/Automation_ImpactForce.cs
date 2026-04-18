@@ -5,6 +5,7 @@ public class Automation_ImpactForce : MonoBehaviour, IAutomation
 {
     public Vector3 Force;
     public UnityEvent InteractionEvent;
+    public bool ReflectVelocityIfOpposite;
 
     #region Util
 
@@ -26,8 +27,14 @@ public class Automation_ImpactForce : MonoBehaviour, IAutomation
             _ctx.MachineTransition(PlayerStates.Air);
         }
 
+        if(ReflectVelocityIfOpposite && Vector3.Dot(_ctx.Velocity, fr) <= 0)
+        {
+            _ctx.Velocity = Vector3.Reflect(_ctx.Velocity, fr.normalized);
+        }
+
         _ctx.Velocity = Vector3.ProjectOnPlane(_ctx.Velocity, fr.normalized) + fr;
         _ctx.PlayerDirection = Vector3.ProjectOnPlane(_ctx.Velocity, _ctx.GroundNormal).normalized;
+        Debug.Log(Vector3.Dot(_ctx.Velocity, fr));        
 
         PosRot _transfrm = new()
         {

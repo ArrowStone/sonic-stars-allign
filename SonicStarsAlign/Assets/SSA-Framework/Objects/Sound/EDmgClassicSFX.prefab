@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Resource
       value: 
       objectReference: {fileID: 8300000, guid: bfcef26d150a27dd4899adce967c88ca, type: 3}
+    - target: {fileID: 1603225458932333582, guid: 9712ffe11e14e3eae975d20cfdb3f3cf, type: 3}
+      propertyPath: BypassEffects
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4584726129559733156, guid: 9712ffe11e14e3eae975d20cfdb3f3cf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

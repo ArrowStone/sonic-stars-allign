@@ -164,7 +164,7 @@ public class Sonic_GroundState : IState
                 if (Physics.OverlapCapsuleNonAlloc(point0, point1, 0.25f, colliders, _ctx.wallLayer) < 2f) _ctx.Physics_Snap(targetPos);
 
                 // If stopped => unlock movement
-                if (_ctx.Velocity.magnitude == 0)
+                if (_ctx.Velocity.magnitude < 0.1f)
                 {
                         _ctx.MovementLockDistance = 0;
                 }
