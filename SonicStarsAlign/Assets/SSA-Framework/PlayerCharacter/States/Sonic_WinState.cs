@@ -14,13 +14,14 @@ public class Sonic_WinState : IState
     //Left blank for future changes
     public void EnterState()
     {
-        SceneManager.LoadScene(0);
         IEnumerator ExitCoroutine()
         {
             yield return new WaitForSeconds(2f);
             Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;   
+            Cursor.visible = true;
+            SceneManager.LoadScene(0);
         }
+        _ctx.StartCoroutine(ExitCoroutine());
     }
 
     public void UpdateState()

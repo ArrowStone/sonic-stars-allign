@@ -8,10 +8,12 @@ public class Sonic_ModelManager : MonoBehaviour
         [SerializeField] Sonic_PlayerStateMachine _CTX;
         
         [SerializeField] GameObject[] ModelsWhenInBall;
+        [SerializeField] GameObject[] ModelsWhenSpinDashing;
         [SerializeField] GameObject[] ModelsWhenNotInBall;
 
         [SerializeField] Animator NormalAnimator;
         [SerializeField] Animator BallAnimator;
+        private Coroutine ballCoroutine;
 
         public float ballRollSpeed;
 
@@ -29,26 +31,48 @@ public class Sonic_ModelManager : MonoBehaviour
                 }
         }
 
-        public void EnterBall () {
+        public void EnterBall (bool waitForAnim = false) {
                 if (inBall) { return; }
+                _CTX.Anim.SetInteger("State", 1);
 
                 inBall = true;
+                if(ballCoroutine != null)
+                        _CTX.StopCoroutine(ballCoroutine);
 
-                foreach (var model in ModelsWhenInBall)
+                void SwitchModels()
                 {
-                        model.SetActive(true);
+                        foreach (var model in ModelsWhenInBall)
+                        {
+                                model.SetActive(true);
+                        }
+
+                        foreach (var model in ModelsWhenNotInBall)
+                        {
+                                model.SetActive(false);
+                        } 
                 }
 
-                foreach (var model in ModelsWhenNotInBall)
+                if(!waitForAnim)
                 {
-                        model.SetActive(false);
+                        SwitchModels();
+                        return;
                 }
+
+                IEnumerator WaitForAnimEnd()
+                {
+                        yield return new WaitForSeconds(0.1f);
+                        SwitchModels();
+                }
+                ballCoroutine = _CTX.StartCoroutine(WaitForAnimEnd());
         }
 
         public void ExitBall () {
                 if (!inBall) { return; }
 
                 inBall = false;
+
+                if(ballCoroutine != null)
+                        _CTX.StopCoroutine(ballCoroutine);
 
                 foreach (var model in ModelsWhenInBall)
                 {

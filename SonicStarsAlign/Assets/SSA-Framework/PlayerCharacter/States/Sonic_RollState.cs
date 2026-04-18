@@ -16,7 +16,7 @@ public class Sonic_RollState : IState
 
                 _groundDetected = true;
                 _ctx.Anim.SetInteger("State", 1);
-                _ctx.ModelManager.EnterBall();
+                _ctx.ModelManager.EnterBall(true);
 
 
                 #endregion Misc

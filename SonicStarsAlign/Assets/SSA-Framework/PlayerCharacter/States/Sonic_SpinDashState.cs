@@ -21,7 +21,7 @@ public class Sonic_SpinDashState : IState
         _ctx.Skid = false;
         _spincharge = 0;
 
-        _ctx.ModelManager.EnterBall();
+        _ctx.ModelManager.EnterBall(true);
 
         _ctx.Snd.RailSpinSource.clip = _ctx.Snd.spinUpSound;
         _ctx.Snd.RailSpinSource.Play();
