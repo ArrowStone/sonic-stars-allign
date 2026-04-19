@@ -1,11 +1,10 @@
 ﻿using System.Collections;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 
 public class Sonic_HomingAttackState : IState
 {
     public Sonic_PlayerStateMachine _ctx;
-    private Vector3 _targetPos;
+    private Transform _targetTransform;
     private Vector3 _difference;
     private Vector3 _vel;
 
@@ -18,10 +17,11 @@ public class Sonic_HomingAttackState : IState
     {
         _ctx.ChangeKinematic(true);
 
-        _targetPos = _ctx.HomingTargetDetector.TargetOutput.transform.position;
-        _difference = _targetPos - _ctx.Rb.transform.position;
+        _targetTransform = _ctx.HomingTargetDetector.TargetOutput.transform;
+        _difference = _targetTransform.position - _ctx.transform.position;
 
-        _ctx.Anim.SetInteger("State", 4);
+        _ctx.Anim.SetInteger("State", 1);
+        _ctx.ModelManager.EnterBall();
         _ctx.ModelManager.ballRollSpeed = 40f;
     }
 
@@ -70,7 +70,7 @@ public class Sonic_HomingAttackState : IState
 
     private bool ContinueHomingAttacking()
     {
-        _difference = _targetPos - _ctx.transform.position;
+        _difference = _targetTransform.position - _ctx.transform.position;
         if (_difference.magnitude <= _ctx.Rb.sleepThreshold)
         {
             return false;
@@ -96,7 +96,7 @@ public class Sonic_HomingAttackState : IState
         
         _ctx.Physics_ApplyVelocity();
 
-        _ctx.ModelManager.EnterBall();
+        _ctx.InvinciblitiyState = 0.5f;
 
         _ctx.MachineTransition(PlayerStates.Air);
     }

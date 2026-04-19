@@ -205,6 +205,7 @@ public class Sonic_GroundState : IState
                 }
 
                 //Also smoothen rotation
+                Debug.Log(_ctx.transform.up + " " + _ctx.GroundCast.HitInfo.normal);
                 _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, Vector3.Lerp(_ctx.transform.up, _ctx.GroundCast.HitInfo.normal, _delta * _ctx.Chp.RotationSmoothingSpeed));
         }
 
@@ -249,9 +250,13 @@ public class Sonic_GroundState : IState
         }
 
         private void SlopePhysics ( float _delta ) {
-                if (Vector3.Angle(-_ctx.Gravity, _ctx.GroundNormal) <= FrameworkUtility.FloorAngle) return;
+                //if (Vector3.Angle(-_ctx.Gravity, _ctx.GroundNormal) <= FrameworkUtility.FloorAngle) return;
 
                 float _slopeFactor = _ctx.Chp.SlopeFactor * _delta;
+                if (Vector3.Dot(_ctx.Gravity, _ctx.HorizontalVelocity.normalized) >= 0)
+                {
+                        _slopeFactor = _ctx.Chp.SlopeFactorDown * _delta;
+                }
                 _ctx.HorizontalVelocity += Vector3.ProjectOnPlane(_ctx.Gravity, _ctx.GroundNormal) * _slopeFactor;
         }
 
@@ -284,8 +289,6 @@ public class Sonic_GroundState : IState
                 if (_ctx.Input.BounceInput.WasPressedThisFrame())
                 {
                         _ctx.MachineTransition(PlayerStates.Spindash);
-                        _ctx.Snd.PlaySound("Jump");
-
                         return;
                 }
 

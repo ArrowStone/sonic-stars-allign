@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1006765566581003025}
   - component: {fileID: 5719568075100845545}
   - component: {fileID: 1280102106122035303}
+  - component: {fileID: 1483306904405856988}
   m_Layer: 10
   m_Name: RedRing
   m_TagString: Untagged
@@ -83,9 +84,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1483306904405856988}
+        m_TargetAssemblyTypeName: Spawner, Assembly-CSharp
+        m_MethodName: Spawn
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2227202703807989491, guid: 978baea2556ee30a49f0f0b6c543e1ca, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   CurStageData: {fileID: 11400000, guid: cd1fe3b8682ce3c4c9121affe1ca87bd, type: 2}
   Place: 0
   ScoreValue: 200
+  OnAllRedRingsCollected:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1483306904405856988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4553716114599546123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10238a00bdba0fd1b92bb8ca97dc82be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3285665488900691945
 PrefabInstance:
   m_ObjectHideFlags: 0

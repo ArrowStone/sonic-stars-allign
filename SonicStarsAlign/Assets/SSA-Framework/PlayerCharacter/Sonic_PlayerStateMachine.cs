@@ -459,6 +459,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         }
 
         public void Dash () {
+                PlayerDirection = InputVector;
                 DashAction?.Invoke();
 
                 if (Vector3.Dot(HorizontalVelocity, PlayerDirection) < Chp.DashSpeed)
@@ -473,7 +474,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                 Physics_ApplyVelocity();
                 MachineTransition(PlayerStates.Air);
                 ModelManager.ExitBall();
-                Anim.SetInteger("State", 4);
+                Anim.SetInteger("State", 0);
         }
 
         #endregion Moves

@@ -197,9 +197,14 @@ public class Sonic_BounceState : IState
     {
         DropDashCalculations(_delta);
 
-        if (!_ctx.Input.CrouchInput.IsPressed() && _ctx.Input.JumpInput.WasPressedThisFrame())
+        if (_ctx.Input.JumpInput.WasPressedThisFrame())
         {
             _ctx.Dash();
+        }
+        if (_ctx.HomingTargetDetector.TargetDetected && _ctx.Input.AttackInput.WasPressedThisFrame())
+        {
+            _ctx.Snd.PlaySound("Homing");
+            _ctx.MachineTransition(PlayerStates.HomingAttack);
         }
     }
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEditor.EditorTools;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "CharacterStats/Camera Effects Stats")]

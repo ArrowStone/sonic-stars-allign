@@ -155,6 +155,7 @@ public class Sonic_AirState : IState
             _ctx.PlayerDirection = Vector3.RotateTowards(_ctx.PlayerDirection, _ctx.HorizontalVelocity.normalized, _turnStrength, 0);
         }
 
+        Debug.Log(_ctx.PlayerDirection + " " + -_ctx.Gravity.normalized);
         _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity.normalized);
     }
 

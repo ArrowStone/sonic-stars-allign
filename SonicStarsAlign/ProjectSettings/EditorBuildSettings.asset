@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/development/scn_Win.unity
     guid: 93a0867b7820ade4aab04d679ed7b532
+  - enabled: 1
+    path: Assets/Scenes/development/scn_Storyboard.unity
+    guid: 3b34ec3429a1cb020831f9e7b0a66206
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 130a5e4fb1d275fee9e3c5601efd6161, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: fee0eb38ce4dedfe1a80e98a13ec6dd6, type: 2}

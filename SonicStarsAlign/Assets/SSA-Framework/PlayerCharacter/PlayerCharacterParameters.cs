@@ -69,6 +69,7 @@ public class PlayerCharacterParameters : ScriptableObject
 
     [Space]
     public float SlopeFactor;
+    public float SlopeFactorDown;
 
     public float SlopeFactorRoll;
 
