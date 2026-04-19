@@ -15,8 +15,8 @@ MonoBehaviour:
   saveFile: test_scene
   Complete: 1
   Rank: 0
-  RedRings: 0101000100
+  RedRings: 0101010101
   bestTime: 0
   bestScore: 0
   RankScores: e8030000d0070000b80b0000a00f0000
-  StageRingCount: 30
+  StageRingCount: 1000

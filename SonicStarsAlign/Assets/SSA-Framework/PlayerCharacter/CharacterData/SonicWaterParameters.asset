@@ -155,6 +155,7 @@ MonoBehaviour:
   MinGroundStickSpeed: 6.25
   MaxGroundDeviation: 70
   SlopeFactor: 20
+  SlopeFactorDown: 0
   SlopeFactorRoll: 10
   SlopeFactorRollDown: 100
   RailSlopeInfluence: 15
@@ -262,6 +263,7 @@ MonoBehaviour:
   HomingAttackSpeed: 75
   HomingAttackBounceForce: 20
   LightDashSpeed: 100
+  LightDashExitSpeed: 60
   RailCollisionBounce: 5
   RailSwitchSpeed: 50
   RailSwitchDuration: 0.125

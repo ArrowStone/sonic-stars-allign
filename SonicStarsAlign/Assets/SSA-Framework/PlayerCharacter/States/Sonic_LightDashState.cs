@@ -46,7 +46,7 @@ public class Sonic_LightDashState : IState
     public void ExitState()
     {
         _ctx.ChangeKinematic(false);
-        _ctx.Velocity = Vector3.zero;
+        _ctx.Velocity = _ctx.PlayerDirection * _ctx.Chp.LightDashExitSpeed;
     }
 
     private void LightDashMovement(float _delta)

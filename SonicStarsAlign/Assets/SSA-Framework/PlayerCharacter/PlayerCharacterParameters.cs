@@ -118,6 +118,7 @@ public class PlayerCharacterParameters : ScriptableObject
     [Space]
     [Header("LightDashSpeed")]
     public float LightDashSpeed;
+    public float LightDashExitSpeed;
 
     [Space]
     [Header("Rail")]

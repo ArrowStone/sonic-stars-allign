@@ -16,7 +16,7 @@ MonoBehaviour:
   HardSpeedCap: 400
   RailSpeedCap: 300
   Acceleration: 20
-  Deceleration: 29.75
+  Deceleration: 30
   GroundDrag: 0
   RunSpeedThreshold: 12
   TurnDeceleration:
@@ -67,7 +67,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  BaseSpeedAir: 2
+  BaseSpeedAir: 30
   AirDrag:
     serializedVersion: 2
     m_Curve:
@@ -92,7 +92,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  AccelerationAir: 11.25
+  AccelerationAir: 15
   TurnDecelerationAir:
     serializedVersion: 2
     m_Curve:
@@ -155,12 +155,13 @@ MonoBehaviour:
   MinGroundStickSpeed: 6.25
   MaxGroundDeviation: 70
   SlopeFactor: 20
+  SlopeFactorDown: 70
   SlopeFactorRoll: 10
   SlopeFactorRollDown: 100
   RailSlopeInfluence: 15
   RailCrouchInfluence: 37.5
   RollDeceleration: 0.1
-  SpinDashDeceleration: 2
+  SpinDashDeceleration: 20
   MinRollSpeed: 5
   SpinDashHoldTime: 0.375
   SpinDashInitSpeed: 1
@@ -221,8 +222,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  BounceSpeed: 40
-  MaxBounceSpeed: 75
+  BounceSpeed: 60
+  MaxBounceSpeed: 90
   BounceFactor:
     serializedVersion: 2
     m_Curve:
@@ -256,12 +257,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MaxBounceHieght: 65
+  MaxBounceHieght: 90
   DashSpeed: 25
   DashBoost: 15
   HomingAttackSpeed: 75
   HomingAttackBounceForce: 20
   LightDashSpeed: 100
+  LightDashExitSpeed: 60
   RailCollisionBounce: 5
   RailSwitchSpeed: 50
   RailSwitchDuration: 0.125
