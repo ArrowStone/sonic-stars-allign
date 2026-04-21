@@ -1,5 +1,6 @@
 using System;
 using JetBrains.Annotations;
+using TMPro.EditorUtilities;
 using Unity.Properties;
 using UnityEngine;
 
@@ -459,10 +460,11 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         }
 
         public void Dash () {
-                PlayerDirection = InputVector;
+                MachineTransition(PlayerStates.Air);
+                if(InputVector.magnitude > 0) PlayerDirection = InputVector;
                 DashAction?.Invoke();
 
-                if (Vector3.Dot(HorizontalVelocity, PlayerDirection) < Chp.DashSpeed)
+                if (Vector3.Dot(HorizontalVelocity, PlayerDirection) > Chp.DashSpeed)
                 {
                         HorizontalVelocity = PlayerDirection * Chp.DashSpeed;
                 }
@@ -472,7 +474,6 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                 }
 
                 Physics_ApplyVelocity();
-                MachineTransition(PlayerStates.Air);
                 ModelManager.ExitBall();
                 Anim.SetInteger("State", 0);
         }

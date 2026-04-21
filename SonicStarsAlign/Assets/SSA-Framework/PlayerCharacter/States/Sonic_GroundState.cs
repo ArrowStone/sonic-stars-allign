@@ -205,7 +205,7 @@ public class Sonic_GroundState : IState
                 }
 
                 //Also smoothen rotation
-                Debug.Log(_ctx.transform.up + " " + _ctx.GroundCast.HitInfo.normal);
+                Debug.Log(_ctx.PlayerDirection + " " + _ctx.transform.up + " " + _ctx.GroundCast.HitInfo.normal);
                 _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, Vector3.Lerp(_ctx.transform.up, _ctx.GroundCast.HitInfo.normal, _delta * _ctx.Chp.RotationSmoothingSpeed));
         }
 

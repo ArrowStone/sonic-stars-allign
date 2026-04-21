@@ -201,6 +201,10 @@ public class Sonic_BounceState : IState
         {
             _ctx.Dash();
         }
+        if (_ctx.RingDetector.TargetDetected && _ctx.Input.ReactionInput.WasPressedThisFrame())
+        {
+            _ctx.MachineTransition(PlayerStates.LightSpeedDash);
+        }
         if (_ctx.HomingTargetDetector.TargetDetected && _ctx.Input.AttackInput.WasPressedThisFrame())
         {
             _ctx.Snd.PlaySound("Homing");

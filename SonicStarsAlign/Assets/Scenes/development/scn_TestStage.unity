@@ -33173,7 +33173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 788088621223185212, guid: 6eb842888e4c6924c959d2c00f60df9f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -53.3
+      value: -70
       objectReference: {fileID: 0}
     - target: {fileID: 788088621223185212, guid: 6eb842888e4c6924c959d2c00f60df9f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -45939,7 +45939,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1001886447
 AudioSource:
   m_ObjectHideFlags: 0
@@ -46050,7 +46050,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1503303045}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1002485388
 GameObject:
@@ -64667,7 +64667,6 @@ Transform:
   m_Children:
   - {fileID: 1546595923}
   - {fileID: 955959814}
-  - {fileID: 1001886448}
   - {fileID: 309453191}
   - {fileID: 1703756840}
   - {fileID: 1842512594}
@@ -84209,4 +84208,5 @@ SceneRoots:
   - {fileID: 95659554}
   - {fileID: 1559113357}
   - {fileID: 202301367}
+  - {fileID: 1001886448}
   - {fileID: 1503303045}
