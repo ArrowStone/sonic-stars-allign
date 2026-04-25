@@ -47,6 +47,7 @@ public class PlayerCharacterParameters : ScriptableObject
 
     [Space]
     public float JumpForce;
+    public float JumpGravityScale;
 
     public float JumpCancel;
 

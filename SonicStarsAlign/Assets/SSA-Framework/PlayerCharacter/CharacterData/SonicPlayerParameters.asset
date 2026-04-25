@@ -147,6 +147,7 @@ MonoBehaviour:
   BreakStrengthAir: 70
   RotationSmoothingSpeed: 5
   JumpForce: 20
+  JumpGravityScale: 0.5
   JumpCancel: 4
   SlipTime: 0.3333333
   LookBackTransitionSpeed: 5
@@ -258,7 +259,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   MaxBounceHieght: 90
-  DashSpeed: 25
+  DashSpeed: 30
   DashBoost: 15
   HomingAttackSpeed: 75
   HomingAttackBounceForce: 20

@@ -5861,6 +5861,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -179.93141
       objectReference: {fileID: 0}
+    - target: {fileID: 2410846063761883630, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
+      propertyPath: ChrTurn.m_Curve.Array.data[0].value
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2453102168790407869, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -39.39874

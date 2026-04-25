@@ -187,7 +187,7 @@ public class Sonic_GroundState : IState
         }
 
         private void GroundRotation ( float _delta ) {
-                // Smoothing looks bad in a loop, disabling it there
+                
                 if (Vector3.Distance(_ctx.transform.position, _ctx.MovementLockStartPos) < _ctx.MovementLockDistance)
                 {
                         _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundCast.HitInfo.normal);
@@ -205,7 +205,6 @@ public class Sonic_GroundState : IState
                 }
 
                 //Also smoothen rotation
-                Debug.Log(_ctx.PlayerDirection + " " + _ctx.transform.up + " " + _ctx.GroundCast.HitInfo.normal);
                 _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, Vector3.Lerp(_ctx.transform.up, _ctx.GroundCast.HitInfo.normal, _delta * _ctx.Chp.RotationSmoothingSpeed));
         }
 

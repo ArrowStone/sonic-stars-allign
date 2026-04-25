@@ -464,14 +464,17 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                 if(InputVector.magnitude > 0) PlayerDirection = InputVector;
                 DashAction?.Invoke();
 
-                if (Vector3.Dot(HorizontalVelocity, PlayerDirection) > Chp.DashSpeed)
+                /*if (Vector3.Dot(HorizontalVelocity, PlayerDirection) > Chp.DashSpeed)
                 {
                         HorizontalVelocity = PlayerDirection * Chp.DashSpeed;
                 }
                 else
                 {
                         HorizontalVelocity += PlayerDirection * Chp.DashBoost;
-                }
+                }*/
+                // I dash => I want to go in a particular direction
+                HorizontalVelocity = PlayerDirection * Chp.DashSpeed;
+                Debug.Log(VerticalVelocity);
 
                 Physics_ApplyVelocity();
                 ModelManager.ExitBall();

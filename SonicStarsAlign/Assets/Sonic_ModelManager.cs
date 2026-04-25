@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using NUnit.Framework;
 
 public class Sonic_ModelManager : MonoBehaviour
 {

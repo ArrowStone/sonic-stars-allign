@@ -98,6 +98,7 @@ public class Sonic_AirState : IState
     public void ExitState()
     {
         _ctx.ModelManager.ExitBall();
+        _ctx.Jumping = false;
     }
 
     #region Util
@@ -130,7 +131,11 @@ public class Sonic_AirState : IState
             }
             return;
         }
-        _ctx.VerticalVelocity = Vector3.ClampMagnitude(_ctx.VerticalVelocity + _ctx.Chp.GravityForce * _delta * _ctx.Gravity, _ctx.Chp.FallVelCap);
+
+        float gravity = _ctx.Chp.GravityForce;
+        if(_ctx.Jumping) gravity *= _ctx.Chp.JumpGravityScale;
+        
+        _ctx.VerticalVelocity = Vector3.ClampMagnitude(_ctx.VerticalVelocity + gravity * _delta * _ctx.Gravity, _ctx.Chp.FallVelCap);
     }
 
     private void AirApplication(float _delta)
@@ -154,8 +159,7 @@ public class Sonic_AirState : IState
         {
             _ctx.PlayerDirection = Vector3.RotateTowards(_ctx.PlayerDirection, _ctx.HorizontalVelocity.normalized, _turnStrength, 0);
         }
-
-        Debug.Log(_ctx.PlayerDirection + " " + -_ctx.Gravity.normalized);
+        
         _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity.normalized);
     }
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Sonic_SpinDashState : IState
 {
@@ -136,7 +137,7 @@ public class Sonic_SpinDashState : IState
         _spincharge += delta;
         float spinSpeed = _ctx.Chp.SpinDashOutput.Evaluate(_spincharge);
         _ctx.ModelManager.ballRollSpeed = spinSpeed;
-         _ctx.Snd.RailSpinSource.pitch = spinSpeed * 0.0167f; // I swear if I hear a joke about this
+         _ctx.Snd.RailSpinSource.pitch = spinSpeed * 0.012f;
         if (_ctx.Input.BounceInput.WasReleasedThisFrame())
         {
             _ctx.Velocity = _ctx.PlayerDirection * spinSpeed;

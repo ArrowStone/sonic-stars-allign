@@ -147,6 +147,7 @@ MonoBehaviour:
   BreakStrengthAir: 70
   RotationSmoothingSpeed: 5
   JumpForce: 20
+  JumpGravityScale: 0.5
   JumpCancel: 4
   SlipTime: 0.3333333
   LookBackTransitionSpeed: 5
