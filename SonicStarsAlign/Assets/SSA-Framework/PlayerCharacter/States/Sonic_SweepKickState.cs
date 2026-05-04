@@ -19,14 +19,13 @@ public class Sonic_SweepKickState : IState
 
     public void EnterState()
     {
-        Debug.Log("Sweep Kick");
         _kickTimer = 0f;
         _hasHit = false;
 
 		_ctx.Anim.SetTrigger("Kick");
 		_ctx.Snd.PlaySound("Slide");
 
-        // lock input for the move
+        // Lock input for the move
         _ctx.HorizontalVelocity = _ctx.PlayerDirection * Mathf.Max(_ctx.HorizontalVelocity.magnitude, _ctx.Chp.BaseSpeed);
         _ctx.VerticalVelocity = Vector3.zero;
         _ctx.Physics_ApplyVelocity();
@@ -39,7 +38,7 @@ public class Sonic_SweepKickState : IState
         float _delta = Time.deltaTime;
         _kickTimer += _delta;
 
-        // check hit window
+        // Check hit window
         if (_kickTimer >= _kickDamageWindow && !_hasHit)
         {
             TryDoKickDamage();
@@ -60,15 +59,12 @@ public class Sonic_SweepKickState : IState
             return;
         }
 
-        // end the move
+        // End the move
         if (_kickTimer >= _kickDuration)
         {
             _ctx.MachineTransition(PlayerStates.Ground);
             return;
         }
-
-        // keep momentum going while kicking
-        //_ctx.Physics_ApplyVelocity();
 
         GroundApplication(_delta);
     }
@@ -77,7 +73,6 @@ public class Sonic_SweepKickState : IState
 
     public void ExitState()
     {
-        // reset or cleanup if needed
     }
 
     private void TryDoKickDamage()
@@ -93,7 +88,7 @@ public class Sonic_SweepKickState : IState
             // TODO: replace with your enemy damage pipeline
             Debug.Log("Sweep Kick hit: " + hit.name);
 
-            // give a little forward boost
+            // Give a little forward boost
             _ctx.Velocity += _ctx.PlayerDirection * _kickSpeedBoost;
             break;
         }

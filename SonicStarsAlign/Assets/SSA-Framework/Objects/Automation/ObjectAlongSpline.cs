@@ -18,6 +18,7 @@ public class ObjectAlongSpline : MonoBehaviour
 
         GameObject currentObject = null; // For rotation
         GameObject prevObject;
+        bool rotatedFirst = false;
 
         for (float i = 0; i < 1; i += 1 / Count)
         {
@@ -31,6 +32,13 @@ public class ObjectAlongSpline : MonoBehaviour
                 Vector3 lookPos = prevObject.transform.position;
                 lookPos.y = currentObject.transform.position.y;
                 currentObject.transform.LookAt(lookPos);
+            }
+            if(rotateObjects && i > 0 && !rotatedFirst)
+            {
+                rotatedFirst = true;
+                Vector3 lookPos = currentObject.transform.position;
+                lookPos.y = prevObject.transform.position.y;
+                prevObject.transform.LookAt(lookPos);
             }
         }
     }

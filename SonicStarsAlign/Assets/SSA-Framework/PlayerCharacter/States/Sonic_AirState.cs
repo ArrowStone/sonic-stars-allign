@@ -47,7 +47,6 @@ public class Sonic_AirState : IState
         _ctx.VerticalVelocity = _v;
         _ctx.HorizontalVelocity = _h;
         _ctx.Physics_ApplyVelocity();
-        Debug.Log(_ctx.Velocity);
 
         InputRotations();
 
