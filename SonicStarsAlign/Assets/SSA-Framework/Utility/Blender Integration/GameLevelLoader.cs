@@ -11,7 +11,36 @@ public class LinkedLevelObject
 {
     public string ObjectID;
     public GameObject LevelObject;
-    public ObjectPropertiesProcessor Processor;
+    public string ComponentType;
+    public void ProcessProperties(GameObject gameObject, JObject jObject)
+    {
+        // Feel free to make this mess clearer if you know how
+        if(ComponentType.Equals("")) return;
+
+        System.Type compType = typeof(LinkedLevelObject).Assembly.GetType(ComponentType);
+
+        if(compType == null)
+        {
+            Debug.LogWarning(string.Format("Could not find component type for {0}", gameObject.name));
+            return;
+        }
+
+        dynamic comp = gameObject.GetComponent(compType);
+        if(comp == null)
+        {
+            Debug.LogWarning(string.Format("Could not find {0} for {1}", ComponentType, gameObject.name));
+            return;
+        }
+
+        Dictionary<string, JToken> paramDictionary = jObject["parameters"].ToObject<Dictionary<string, JToken>>();
+
+        foreach(string key in paramDictionary.Keys)
+        {
+            System.Reflection.FieldInfo compField = compType.GetField(key);
+            if(compField == null)   continue;
+            compField.SetValue(comp, paramDictionary[key].ToObject(compField.FieldType));
+        }
+    }
 }
 
 // Places level geometry & parses the level object JSON on scene load
@@ -48,8 +77,8 @@ public class GameLevelLoader : MonoBehaviour
 
         foreach(JObject obj in objects)
         {
-            GameObject spawnObject = null;
-            ObjectPropertiesProcessor processor = null;
+            // Please don't sue us Nintendo
+            LinkedLevelObject link = null;
             string objType = obj["type"].ToString();
 
             // Get the prefab to place
@@ -57,13 +86,12 @@ public class GameLevelLoader : MonoBehaviour
             {
                 if(linkedObject.ObjectID == objType)
                 {
-                    spawnObject = linkedObject.LevelObject;
-                    processor = linkedObject.Processor;
+                    link = linkedObject;
                     break;
                 }
             }
             // No type / No matching prefabs => ignore
-            if (spawnObject == null) 
+            if (link == null) 
             {
                 if(objType != null) 
                     Debug.LogWarning(
@@ -73,7 +101,7 @@ public class GameLevelLoader : MonoBehaviour
             }
 
             // Place the object and assign common parameters
-            GameObject gobj = (GameObject) Instantiate(spawnObject, levelScene);
+            GameObject gobj = (GameObject) Instantiate(link.LevelObject, levelScene);
 
             float[] pos = obj["position"].ToObject<float[]>();
             float[] rot = obj["rotation"].ToObject<float[]>();
@@ -89,7 +117,7 @@ public class GameLevelLoader : MonoBehaviour
                 cont = cont ? cont : gobj.GetComponentInChildren<SplineContainer>();
                 if(!cont)
                 {
-                    Debug.LogWarning(string.Format("A curve object ({0}) has been assigned to a non-Spline prefab ({1}).", gobj.name, spawnObject.name));
+                    Debug.LogWarning(string.Format("A curve object ({0}) has been assigned to a non-Spline prefab ({1}).", gobj.name, link.LevelObject.name));
                     continue;
                 }
 
@@ -107,7 +135,8 @@ public class GameLevelLoader : MonoBehaviour
                 }
             }
 
-            processor.Process(gobj, obj);
+            // Set properties from Blender
+            link.ProcessProperties(gobj, obj);
         }
     }
 }

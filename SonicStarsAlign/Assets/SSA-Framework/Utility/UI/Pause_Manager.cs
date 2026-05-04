@@ -18,7 +18,6 @@ public class Pause_Manager : MonoBehaviour
 
     public void SetPauseState(bool state)
     {
-        Debug.Log("Pause state: " + state.ToString());
         paused = state;
         pauseMenu.SetActive(state);
         Cursor.lockState = state ? CursorLockMode.None : CursorLockMode.Locked;

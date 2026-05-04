@@ -8791,60 +8791,46 @@ MonoBehaviour:
   levelObjects:
   - ObjectID: ring
     LevelObject: {fileID: 8105107609564456181, guid: d27f74f5278f6924b8217b851fdcfe9f, type: 3}
-    Processor:
-      ComponentType: RedRing_Collection
+    ComponentType: Ring_Collection
   - ObjectID: redring
     LevelObject: {fileID: 4553716114599546123, guid: 4d92249c170ffe746b07a5147cf95955, type: 3}
-    Processor:
-      ComponentType: RedRing_Collection
+    ComponentType: RedRing_Collection
   - ObjectID: checkpoint
     LevelObject: {fileID: 4496295399373898627, guid: aaa1378c5973fe04e879e629affd67dc, type: 3}
-    Processor:
-      ComponentType: RedRing_Collection
+    ComponentType: 
   - ObjectID: goalring
     LevelObject: {fileID: 7655911919764013518, guid: ac618e7758f400149912444418544d6c, type: 3}
-    Processor:
-      ComponentType: RedRing_Collection
+    ComponentType: GoalRing
   - ObjectID: rail
     LevelObject: {fileID: 6846473142447403083, guid: d4c7be0281136e5c0ac38981c0a08bbc, type: 3}
-    Processor:
-      ComponentType: RedRing_Collection
+    ComponentType: Automation_GrindRail
   - ObjectID: pully
     LevelObject: {fileID: 2211225299907886997, guid: b515e3221c84d9345a20d67d0cdfa2c2, type: 3}
-    Processor:
-      ComponentType: RedRing_Collection
+    ComponentType: 
   - ObjectID: velspring
     LevelObject: {fileID: 2597180980917680692, guid: cd69c910cd1d3b14391a1f1ce0a2ac78, type: 3}
-    Processor:
-      ComponentType: RedRing_Collection
+    ComponentType: 
   - ObjectID: splspring
     LevelObject: {fileID: 4193389523358241546, guid: fb78e1b74e31c2647b5afb9173de422e, type: 3}
-    Processor:
-      ComponentType: RedRing_Collection
+    ComponentType: 
   - ObjectID: fan
     LevelObject: {fileID: 2841688091137055627, guid: c8ecb034fd5b6584b9c882ce7140f0b7, type: 3}
-    Processor:
-      ComponentType: RedRing_Collection
+    ComponentType: 
   - ObjectID: pole
     LevelObject: {fileID: 6358570837317104435, guid: 6bea069826be68c4ea63c79da2a61fb3, type: 3}
-    Processor:
-      ComponentType: RedRing_Collection
+    ComponentType: 
   - ObjectID: e_generic
     LevelObject: {fileID: 6886115211697191214, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
-    Processor:
-      ComponentType: RedRing_Collection
+    ComponentType: 
   - ObjectID: e_gunner
     LevelObject: {fileID: 8751931353666102223, guid: 01e205996e4bf35a38fe0c44206e2b45, type: 3}
-    Processor:
-      ComponentType: RedRing_Collection
+    ComponentType: 
   - ObjectID: e_large
     LevelObject: {fileID: 7227980303123717656, guid: 5476038c66909debf92191b591ebe362, type: 3}
-    Processor:
-      ComponentType: RedRing_Collection
+    ComponentType: 
   - ObjectID: e_aerial
     LevelObject: {fileID: 919132149155446097, guid: daee855f58a9c64fd9dcd56bea8d1dcc, type: 3}
-    Processor:
-      ComponentType: RedRing_Collection
+    ComponentType: 
   groundLayer: 14
 --- !u!4 &1154610299
 Transform:
