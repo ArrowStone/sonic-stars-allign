@@ -283,7 +283,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     #region AdditionalFunctions
 
-    public void Physics_ApplyVelocity () {
+        public void Physics_ApplyVelocity () {
                 Velocity = HorizontalVelocity + VerticalVelocity;
         }
 

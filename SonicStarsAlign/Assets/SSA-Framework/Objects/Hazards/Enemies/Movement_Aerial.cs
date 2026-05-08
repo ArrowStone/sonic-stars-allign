@@ -3,9 +3,8 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 
-public class Movement_Aerial : MonoBehaviour, Enemy_MovementBase
+public class Movement_Aerial : Enemy_MovementBase
 {
-        private Rigidbody Rb;
         public Transform target;
         public LayerMask targetLayer;
         public LayerMask detectionBlockingMask;
@@ -25,7 +24,6 @@ public class Movement_Aerial : MonoBehaviour, Enemy_MovementBase
 
         void Awake () {
                 detector = new Overlap_Sphere(gameObject, 1, targetLayer, 0, detectionDistance, detectionBlockingMask, DetectionBias.Proximity);
-                Rb = GetComponent<Rigidbody>();
                 
                 if(PathContainer == null)
                 {
@@ -99,7 +97,8 @@ public class Movement_Aerial : MonoBehaviour, Enemy_MovementBase
                 Vector3 direction = (targetLookPos - transform.position).normalized;
                 if(direction.magnitude == 0) 
                 {
-                        Rb.linearVelocity = Vector3.zero;
+                        HorizontalVelocity = Vector3.zero;
+                        Physics_ApplyVelocity();
                         return;
                 }
                 targetRotation = Quaternion.LookRotation(direction);
@@ -107,6 +106,7 @@ public class Movement_Aerial : MonoBehaviour, Enemy_MovementBase
                 Quaternion newRotation = Quaternion.Lerp(transform.rotation, targetRotation, _delta * rotationSpeed);
                 Player_StaticFunctions.SetTransformRotation(transform, newRotation, "Aerial Movement");
 
-                Rb.linearVelocity = movementSpeed * Mathf.Max(0f, 1f - Quaternion.Angle(targetRotation, transform.rotation) * 0.02f) * transform.forward;
+                HorizontalVelocity = movementSpeed * Mathf.Max(0f, 1f - Quaternion.Angle(targetRotation, transform.rotation) * 0.02f) * transform.forward;
+                Physics_ApplyVelocity();
         }
 }

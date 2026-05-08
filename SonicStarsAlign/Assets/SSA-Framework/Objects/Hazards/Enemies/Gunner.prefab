@@ -567,13 +567,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1077b767218dfd1dfbdb04a93bf962ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 16384
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 32769
+  Hover: 1
+  groundRayLength: 2
+  HorizontalVelocity: {x: 0, y: 0, z: 0}
+  VerticalVelocity: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
   targetLayer:
     serializedVersion: 2
     m_Bits: 2048
   detectionBlockingMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16385
   detectionDistance: 30
   dashDistance: 20
   movementSpeed: 20

@@ -1,9 +1,8 @@
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class Movement_Gunner : MonoBehaviour, Enemy_MovementBase
+public class Movement_Gunner : Enemy_MovementBase
 {
-    private Rigidbody Rb;
     public Transform target;
     public LayerMask targetLayer;
     public LayerMask detectionBlockingMask;
@@ -26,19 +25,21 @@ public class Movement_Gunner : MonoBehaviour, Enemy_MovementBase
     void Awake()
     {
         detector = new Overlap_Sphere(gameObject, 1, targetLayer, 0, detectionDistance, detectionBlockingMask, DetectionBias.Proximity);
-        Rb = GetComponent<Rigidbody>();
         shootTimer = shootInterval;
         shootCounter = 0;
     }
 
     void Dash()
     {
-        Rb.linearVelocity = movementSpeed * transform.forward;
+        HorizontalVelocity = movementSpeed * transform.forward;
+        Physics_ApplyVelocity();
     }
 
     void FixedUpdate()
     {
         float _delta = Time.fixedDeltaTime;
+
+        GroundApplication(_delta);
 
         detector.Execute(transform.position, Vector3.forward);
         if(detector.TargetDetected) target = detector.TargetOutput.transform;
