@@ -586,7 +586,7 @@ MonoBehaviour:
     m_Bits: 16385
   detectionDistance: 30
   dashDistance: 20
-  movementSpeed: 20
+  movementSpeed: 10
   rotationSpeed: 2
   shootInterval: 0.1
   shootCount: 10

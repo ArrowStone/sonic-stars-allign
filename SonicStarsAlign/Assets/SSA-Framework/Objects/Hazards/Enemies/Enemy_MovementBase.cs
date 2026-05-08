@@ -37,18 +37,17 @@ public abstract class Enemy_MovementBase : MonoBehaviour
         HorizontalVelocity = Vector3.ProjectOnPlane(Velocity, GroundNormal).normalized * Velocity.magnitude;
 
         Vector3 targetPos = GroundCast.HitInfo.point + GroundNormal * Hover;
-        //Vector3 point0 = targetPos;
-        //Vector3 point1 = targetPos;
-        //point0 -= GroundNormal * 0.45f;
-        //point1 += GroundNormal * 0.45f;
-        //Collider[] colliders = new Collider[5];
+        Vector3 point0 = targetPos;
+        Vector3 point1 = targetPos;
+        point0 -= GroundNormal * 0.2f;
+        point1 += GroundNormal * 0.2f;
+        Collider[] colliders = new Collider[5];
 
         //Debug.DrawLine(point0, point1, Color.magenta);
 
         // Simple point check isn't enough, player can sometimes clip
-        //if (Physics.OverlapCapsuleNonAlloc(point0, point1, 0.25f, colliders, wallLayer) < 2f) Physics_Snap(targetPos);
-        Debug.Log(targetPos);
-        Physics_Snap(targetPos);
+        if (Physics.OverlapCapsuleNonAlloc(point0, point1, 0.25f, colliders, wallLayer) < 2f) Physics_Snap(targetPos);
+        //Physics_Snap(targetPos);
     }
 
     public void Physics_ApplyVelocity () {

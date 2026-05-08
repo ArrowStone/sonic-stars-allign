@@ -18,7 +18,12 @@ public class Sonic_DamageState : IState
 
     public void UpdateState()
     {
-        float _delta = Time.deltaTime;
+        //float _delta = Time.deltaTime;
+    }
+
+    public void FixedUpdateState()
+    {
+        float _delta = Time.fixedDeltaTime;
 
         if(!GroundCheck()) Gravity(_delta);
         HurtMovement(_delta);
@@ -26,10 +31,6 @@ public class Sonic_DamageState : IState
 
         _ctx.Physics_ApplyVelocity();
         HurtSwitchConditions();
-    }
-
-    public void FixedUpdateState()
-    {
     }
 
     public void LateUpdateState()
@@ -58,7 +59,9 @@ public class Sonic_DamageState : IState
 
     private bool GroundCheck()
     {
-        var _check = _ctx.GroundCast.Execute(_ctx.Rb.worldCenterOfMass, _ctx.Gravity.normalized) || _ctx.GroundCast.Execute(_ctx.Rb.worldCenterOfMass, -_ctx.Gravity.normalized);
+        Debug.DrawRay(_ctx.transform.position, _ctx.Gravity.normalized);
+        var _check = _ctx.GroundCast.Execute(_ctx.transform.position, _ctx.Gravity.normalized) 
+            || _ctx.GroundCast.Execute(_ctx.transform.position, -_ctx.Gravity.normalized);
         _groundDetected = _check && Vector3.Dot(_ctx.Velocity, _ctx.GroundCast.HitInfo.normal) <= 0;
         return _groundDetected;
     }
@@ -77,7 +80,7 @@ public class Sonic_DamageState : IState
 
     private void HurtSwitchConditions()
     {
-        if (_groundDetected && Vector3.Dot(_ctx.Velocity, _ctx.GroundCast.HitInfo.normal) < 0)
+        if (_groundDetected && Vector3.Dot(_ctx.Velocity, _ctx.GroundCast.HitInfo.normal) <= 0)
         {
             if (_ctx.Death)
             {
