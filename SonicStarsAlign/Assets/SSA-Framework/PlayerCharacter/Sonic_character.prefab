@@ -2088,7 +2088,7 @@ MonoBehaviour:
     m_Bits: 16384
   wallLayer:
     serializedVersion: 2
-    m_Bits: 8193
+    m_Bits: 57345
   homingTargetLayer:
     serializedVersion: 2
     m_Bits: 128
