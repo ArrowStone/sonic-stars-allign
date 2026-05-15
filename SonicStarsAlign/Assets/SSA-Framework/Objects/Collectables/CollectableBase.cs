@@ -14,7 +14,7 @@ public abstract class CollectableBase : MonoBehaviour
     public virtual void OnTriggerEnter(Collider _trigger)
     {
         if (NoCollectionTime > 0 ) return;
-        if (_trigger.gameObject.layer != 11 && _trigger.transform.parent.gameObject.layer != 11) return;
+        if ((!_trigger.transform.parent && _trigger.gameObject.layer != 11) || (_trigger.transform.parent && _trigger.transform.parent.gameObject.layer != 11)) return;
 
         Collection(_trigger);
         CollectionEvent.Invoke();

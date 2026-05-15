@@ -19,6 +19,7 @@ public class Sonic_LightDashState : IState
         _ctx.GroundNormal = -_ctx.Gravity.normalized;
         _ctx.Anim.SetInteger("State", 4);
         _ctx.Snd.PlaySound("LightDash");
+        _ctx.VerticalVelocity = Vector3.zero;
     }
 
     public void UpdateState()
@@ -28,7 +29,7 @@ public class Sonic_LightDashState : IState
     public void FixedUpdateState()
     {
         float _delta = Time.fixedDeltaTime;
-        if (!ContinueLightDashing())
+        if (!ContinueLightDashing(_delta))
         {
             AirSwitchConditions();
             return;
@@ -51,7 +52,9 @@ public class Sonic_LightDashState : IState
     private void LightDashMovement(float _delta)
     {
         _vel = _difference.normalized * _ctx.Chp.LightDashSpeed;
-        _ctx.Physics_Snap(_ctx.Rb.transform.position + Vector3.ClampMagnitude(_vel * _delta, _difference.magnitude));
+        _ctx.Physics_Snap(_ctx.transform.position + Vector3.ClampMagnitude(_vel * _delta, _difference.magnitude));
+        _ctx.HorizontalVelocity = _vel;
+        _ctx.Physics_ApplyVelocity();
     }
 
     private void LightDashRotation()
@@ -60,7 +63,7 @@ public class Sonic_LightDashState : IState
         _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity);
     }
 
-    private bool ContinueLightDashing()
+    private bool ContinueLightDashing(float _delta)
     {
         _difference = _targetPos - _ctx.Rb.transform.position;
 

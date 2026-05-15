@@ -155,7 +155,7 @@ MonoBehaviour:
   FallVelCap: 50
   MinGroundStickSpeed: 6.25
   MaxGroundDeviation: 70
-  SlopeFactor: 20
+  SlopeFactor: 30
   SlopeFactorDown: 70
   SlopeFactorRoll: 10
   SlopeFactorRollDown: 100

@@ -33,8 +33,14 @@ public class Automation_ImpactForce : MonoBehaviour, IAutomation
         }
 
         _ctx.Velocity = Vector3.ProjectOnPlane(_ctx.Velocity, fr.normalized) + fr;
+        Vector3 prevDirection = _ctx.PlayerDirection;
         _ctx.PlayerDirection = Vector3.ProjectOnPlane(_ctx.Velocity, _ctx.GroundNormal).normalized;
-        Debug.Log(Vector3.Dot(_ctx.Velocity, fr));        
+
+        // Shouldn't really happen ut it does so
+        if(_ctx.PlayerDirection.Equals(Vector3.zero))
+        {
+            _ctx.PlayerDirection = prevDirection;
+        }   
 
         PosRot _transfrm = new()
         {

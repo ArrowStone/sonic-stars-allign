@@ -22,6 +22,7 @@ public abstract class Enemy_MovementBase : MonoBehaviour
         HorizontalVelocity = Vector3.zero;
         VerticalVelocity = Vector3.zero;
         Velocity = Vector3.zero;
+        prevPos = transform.position;
     }
 
     public void GroundApplication ( float _delta ) {
@@ -43,8 +44,6 @@ public abstract class Enemy_MovementBase : MonoBehaviour
         point1 += GroundNormal * 0.2f;
         Collider[] colliders = new Collider[5];
 
-        //Debug.DrawLine(point0, point1, Color.magenta);
-
         // Simple point check isn't enough, player can sometimes clip
         if (Physics.OverlapCapsuleNonAlloc(point0, point1, 0.25f, colliders, wallLayer) < 2f) Physics_Snap(targetPos);
         //Physics_Snap(targetPos);
@@ -54,16 +53,6 @@ public abstract class Enemy_MovementBase : MonoBehaviour
         Velocity = HorizontalVelocity + VerticalVelocity;
         Rb.linearVelocity = Velocity;
     }
-
-    /*public Quaternion Physics_Rotate ( Vector3 _forward, Vector3 _up ) {
-        Quaternion _diff = Quaternion.LookRotation(_forward, cashedRotation * Vector3.up);
-        _diff = Quaternion.FromToRotation(_diff * Vector3.up, _up.normalized) * _diff;
-        _diff *= Quaternion.Inverse(cashedRotation);
-
-        Rb.MoveRotation(_diff * cashedRotation);
-        cashedRotation = Rb.rotation;
-        return _diff;
-    }*/
 
     public bool Physics_Sweep ( Vector3 _point, out RaycastHit Info ) {
         Vector3 _dif = _point - transform.position;

@@ -56,6 +56,22 @@ PrefabInstance:
       propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5629930558225588673, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5629930558225588673, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5629930558225588673, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
+      propertyPath: m_Size.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5629930558225588673, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6886115211697191214, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
       propertyPath: m_Name
       value: Aerial
@@ -97,6 +113,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277fd47b89dda76ce9e0d9e49cadbaec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  Hover: 0
+  groundRayLength: 0
+  HorizontalVelocity: {x: 0, y: 0, z: 0}
+  VerticalVelocity: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
   targetLayer:
     serializedVersion: 2
