@@ -46,7 +46,7 @@ public class Sonic_SoundComponent : MonoBehaviour
     {
         _ctx = GetComponent<Sonic_PlayerStateMachine>();
 
-		//You can separate sounds from a specific prefab (like character voicelines) and common sounds (dash, jump, etc), then combine them.
+		// You can separate sounds from a specific prefab (like character voicelines) and common sounds (dash, jump, etc), then combine them.
 		SoundsCombined = new SoundType[Sounds.Length + CommonSounds.Sounds.Length];
 		Sounds.CopyTo(SoundsCombined, 0);
         CommonSounds.Sounds.CopyTo(SoundsCombined, Sounds.Length);

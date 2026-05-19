@@ -259,11 +259,11 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   MaxBounceHieght: 90
-  DashSpeed: 30
+  DashSpeed: 45
   DashBoost: 15
-  HomingAttackSpeed: 75
+  HomingAttackSpeed: 60
   HomingAttackBounceForce: 20
-  LightDashSpeed: 100
+  LightDashSpeed: 80
   LightDashExitSpeed: 60
   RailCollisionBounce: 5
   RailSwitchSpeed: 50

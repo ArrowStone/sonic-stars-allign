@@ -231,6 +231,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                 States.Add(PlayerStates.WallRun, new Sonic_WallRunState(this));
                 States.Add(PlayerStates.WallJump, new Sonic_WallJumpState(this));
                 States.Add(PlayerStates.LedgeGrab, new Sonic_LedgeGrabState(this));
+                States.Add(PlayerStates.AirDash, new Sonic_AirDashState(this));
 
                 CurrentEstate = PlayerStates.Air;
                 CurrentState = States[CurrentEstate];
@@ -459,25 +460,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         }
 
         public void Dash () {
-                MachineTransition(PlayerStates.Air);
-                if(InputVector.magnitude > 0) PlayerDirection = InputVector;
                 DashAction?.Invoke();
-
-                /*if (Vector3.Dot(HorizontalVelocity, PlayerDirection) > Chp.DashSpeed)
-                {
-                        HorizontalVelocity = PlayerDirection * Chp.DashSpeed;
-                }
-                else
-                {
-                        HorizontalVelocity += PlayerDirection * Chp.DashBoost;
-                }*/
-                // I dash => I want to go in a particular direction
-                HorizontalVelocity = PlayerDirection * Chp.DashSpeed;
-                Debug.Log(VerticalVelocity);
-
-                Physics_ApplyVelocity();
-                ModelManager.ExitBall();
-                Anim.SetInteger("State", 0);
+                MachineTransition(PlayerStates.AirDash);
         }
 
         #endregion Moves
@@ -540,4 +524,5 @@ public enum PlayerStates
         WallRun,
         WallJump,
         LedgeGrab,
+        AirDash,
 }

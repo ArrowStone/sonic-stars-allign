@@ -275,7 +275,7 @@ public class Sonic_AirState : IState
         }
         if (_ctx.Input.JumpInput.WasPressedThisFrame() && _ctx.AirDashes > 0)
         {
-            _ctx.Snd.PlaySound("Homing");
+            _ctx.Snd.PlaySound("AirDash");
             _ctx.AirDashes--;
             _ctx.Dash();
         }

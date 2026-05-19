@@ -21,6 +21,10 @@ MonoBehaviour:
     Clip:
     - {fileID: 8300000, guid: 7e804f4be6a23ae6b8c8b3bf28a1edc6, type: 3}
     Channel: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+  - Name: AirDash
+    Clip:
+    - {fileID: 8300000, guid: 50fbf5d92cfc657b499f3acd36133c72, type: 3}
+    Channel: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
   - Name: Bounce
     Clip:
     - {fileID: 8300000, guid: 3fd3412e4a4d9114aac5ec7f8ff9d5d6, type: 3}

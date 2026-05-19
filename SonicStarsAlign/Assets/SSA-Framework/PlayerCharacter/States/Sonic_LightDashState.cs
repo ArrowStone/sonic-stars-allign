@@ -15,11 +15,12 @@ public class Sonic_LightDashState : IState
 
     public void EnterState()
     {
-        _ctx.ChangeKinematic(true);
+        //_ctx.ChangeKinematic(true);
         _ctx.GroundNormal = -_ctx.Gravity.normalized;
         _ctx.Anim.SetInteger("State", 4);
         _ctx.Snd.PlaySound("LightDash");
         _ctx.VerticalVelocity = Vector3.zero;
+        _ctx.HorizontalVelocity = Vector3.zero;
     }
 
     public void UpdateState()
@@ -52,7 +53,6 @@ public class Sonic_LightDashState : IState
     private void LightDashMovement(float _delta)
     {
         _vel = _difference.normalized * _ctx.Chp.LightDashSpeed;
-        _ctx.Physics_Snap(_ctx.transform.position + Vector3.ClampMagnitude(_vel * _delta, _difference.magnitude));
         _ctx.HorizontalVelocity = _vel;
         _ctx.Physics_ApplyVelocity();
     }
@@ -67,7 +67,8 @@ public class Sonic_LightDashState : IState
     {
         _difference = _targetPos - _ctx.Rb.transform.position;
 
-        if (_ctx.RingDetector.TargetOutput == null || _difference.magnitude <= _ctx.Rb.sleepThreshold)
+        Debug.Log(_ctx.RingDetector.TargetOutput);
+        if (_ctx.RingDetector.TargetOutput == null || !_ctx.RingDetector.TargetOutput.activeInHierarchy || _difference.magnitude <= 1f)
         {
             _ctx.RingCheck();
             if (_ctx.RingDetector.TargetOutput == null || Vector3.Dot(_ctx.RingDetector.TargetOutput.transform.position - _ctx.Rb.transform.position, _vel.normalized) <= 0)
