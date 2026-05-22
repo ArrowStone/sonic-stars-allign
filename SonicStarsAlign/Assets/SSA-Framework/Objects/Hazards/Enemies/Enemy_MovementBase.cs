@@ -30,8 +30,6 @@ public abstract class Enemy_MovementBase : MonoBehaviour
         if(!GroundCast.Execute(transform.position, Gravity))
         {
             // Airborne
-            Debug.Log(transform.name + " Airborne! " + VerticalVelocity.y);
-            //Debug.Log(Gravity);
             HorizontalVelocity = HorizontalVelocity * DragCoefficient;
             VerticalVelocity += Gravity;
             if(VerticalVelocity.magnitude > FallSpeedCap)
@@ -45,12 +43,6 @@ public abstract class Enemy_MovementBase : MonoBehaviour
         Physics_ApplyVelocity();
 
         Vector3 targetPos = GroundCast.HitInfo.point + GroundNormal * Hover;
-        Vector3 point0 = targetPos;
-        Vector3 point1 = targetPos;
-        point0 -= GroundNormal * 0.2f;
-        point1 += GroundNormal * 0.2f;
-        Collider[] colliders = new Collider[5];
-
         Physics_Snap(targetPos);
     }
 

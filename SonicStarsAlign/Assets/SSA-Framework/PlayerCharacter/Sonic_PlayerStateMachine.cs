@@ -1,6 +1,4 @@
 using System;
-using JetBrains.Annotations;
-using Unity.Properties;
 using UnityEngine;
 
 public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
