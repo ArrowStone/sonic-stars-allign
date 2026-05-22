@@ -574,6 +574,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 32769
   Hover: 1
+  Gravity: {x: 0, y: -0.2, z: 0}
+  FallSpeedCap: 20
+  DragCoefficient: 0.99
   groundRayLength: 2
   HorizontalVelocity: {x: 0, y: 0, z: 0}
   VerticalVelocity: {x: 0, y: 0, z: 0}
@@ -586,7 +589,7 @@ MonoBehaviour:
     m_Bits: 16385
   detectionDistance: 30
   dashDistance: 20
-  movementSpeed: 10
+  movementSpeed: 20
   rotationSpeed: 2
   shootInterval: 0.1
   shootCount: 10

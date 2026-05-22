@@ -41,7 +41,7 @@ public class Movement_Gunner : Enemy_MovementBase
 
         GroundApplication(_delta);
 
-        detector.Execute(transform.position, Vector3.forward);
+        detector.Execute(transform.position, transform.forward);
         if(detector.TargetDetected) target = detector.TargetOutput.transform;
         // The sphere doesn't detect player if they're too close for some reason
         else if (target && Vector3.Distance(target.position, transform.position) > detectionDistance) target = null;

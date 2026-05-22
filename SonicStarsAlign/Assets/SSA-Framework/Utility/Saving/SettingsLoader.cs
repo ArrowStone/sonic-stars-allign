@@ -56,7 +56,8 @@ public class SettingsLoader : MonoBehaviour
 
         bool fullScreen = PlayerPrefs.GetInt("fullsc") == 1;
         int res = PlayerPrefs.GetInt("res");
-        float viewDist = PlayerPrefs.GetFloat("viewDist");
+        //float viewDist = PlayerPrefs.GetFloat("viewDist");
+        float viewDist = 0.1f;
         int AAMode = PlayerPrefs.GetInt("aaMode");
         int AAQuality = PlayerPrefs.GetInt("aaQuality");
         float renderScale = PlayerPrefs.GetFloat("resScale");
@@ -70,7 +71,7 @@ public class SettingsLoader : MonoBehaviour
         }
         else
         {
-            Screen.fullScreen = fullScreen;
+            //Screen.fullScreen = fullScreen;
         }
 
         if (renderScale == 0)

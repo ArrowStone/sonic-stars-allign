@@ -48,12 +48,7 @@ public class Sonic_AirDashState : IState
         _airTime -= _delta;
 
         AirDashSwitchConditions();
-
-        if(_ctx.InputVector.magnitude > 0) _ctx.PlayerDirection = _ctx.InputVector;
-        float speed = Math.Max(_ctx.Velocity.magnitude, _ctx.Chp.DashSpeed);
-        _ctx.HorizontalVelocity = _ctx.PlayerDirection * speed;
-        _ctx.VerticalVelocity = Vector3.zero;
-        _ctx.Physics_ApplyVelocity();
+        AirDashMovement(_delta);
     }
 
     public void LateUpdateState()
@@ -84,6 +79,15 @@ public class Sonic_AirDashState : IState
         _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity.normalized);
     }
 
+    private void AirDashMovement(float _delta)
+    {
+        float _turnStrength = _ctx.ChrTurn.Evaluate(_ctx.HorizontalVelocity.magnitude) * Mathf.PI * _delta;
+        if(_ctx.InputVector.magnitude > 0) _ctx.PlayerDirection = Vector3.RotateTowards(_ctx.PlayerDirection, _ctx.InputVector, _turnStrength, 0);
+        float speed = Math.Max(_ctx.Velocity.magnitude, _ctx.Chp.DashSpeed);
+        _ctx.HorizontalVelocity = _ctx.PlayerDirection * speed;
+        _ctx.VerticalVelocity = Vector3.zero;
+        _ctx.Physics_ApplyVelocity();
+    }
 
     private void AirDashSwitchConditions()
     {

@@ -7,13 +7,15 @@ public abstract class Enemy_MovementBase : MonoBehaviour
     public LayerMask groundLayer;
     public LayerMask wallLayer;
     public float Hover;
+    public Vector3 Gravity;
+    public float FallSpeedCap;
+    public float DragCoefficient;
     public float groundRayLength;
     private Cast_Ray GroundCast;
     private Vector3 GroundNormal;
     private Vector3 Velocity;
     public Vector3 HorizontalVelocity;
     public Vector3 VerticalVelocity;
-    private Vector3 prevPos;
 
     void Start()
     {
@@ -22,20 +24,25 @@ public abstract class Enemy_MovementBase : MonoBehaviour
         HorizontalVelocity = Vector3.zero;
         VerticalVelocity = Vector3.zero;
         Velocity = Vector3.zero;
-        prevPos = transform.position;
     }
 
     public void GroundApplication ( float _delta ) {
-        if(!GroundCast.Execute(transform.position, -Vector3.up))
+        if(!GroundCast.Execute(transform.position, Gravity))
         {
-            transform.position = prevPos;
-            HorizontalVelocity = Vector3.zero;
-            VerticalVelocity = Vector3.zero;
+            // Airborne
+            Debug.Log(transform.name + " Airborne! " + VerticalVelocity.y);
+            //Debug.Log(Gravity);
+            HorizontalVelocity = HorizontalVelocity * DragCoefficient;
+            VerticalVelocity += Gravity;
+            if(VerticalVelocity.magnitude > FallSpeedCap)
+                VerticalVelocity = VerticalVelocity.normalized * FallSpeedCap;
             Physics_ApplyVelocity();
             return;
         }
         GroundNormal = GroundCast.HitInfo.normal;
-        HorizontalVelocity = Vector3.ProjectOnPlane(Velocity, GroundNormal).normalized * Velocity.magnitude;
+        HorizontalVelocity = Vector3.ProjectOnPlane(HorizontalVelocity, GroundNormal) * DragCoefficient;
+        VerticalVelocity = Vector3.zero;
+        Physics_ApplyVelocity();
 
         Vector3 targetPos = GroundCast.HitInfo.point + GroundNormal * Hover;
         Vector3 point0 = targetPos;
@@ -44,9 +51,7 @@ public abstract class Enemy_MovementBase : MonoBehaviour
         point1 += GroundNormal * 0.2f;
         Collider[] colliders = new Collider[5];
 
-        // Simple point check isn't enough, player can sometimes clip
-        if (Physics.OverlapCapsuleNonAlloc(point0, point1, 0.25f, colliders, wallLayer) < 2f) Physics_Snap(targetPos);
-        //Physics_Snap(targetPos);
+        Physics_Snap(targetPos);
     }
 
     public void Physics_ApplyVelocity () {
@@ -62,7 +67,6 @@ public abstract class Enemy_MovementBase : MonoBehaviour
     public void Physics_Snap ( Vector3 _point ) {
         if (!Physics_Sweep(_point, out _))
         {
-            prevPos = transform.position;
             Player_StaticFunctions.MoveRBPosition(Rb, _point, "Physics Snap");
         }
     }

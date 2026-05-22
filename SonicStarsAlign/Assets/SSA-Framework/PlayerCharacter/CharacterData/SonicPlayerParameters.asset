@@ -260,7 +260,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   MaxBounceHieght: 90
   DashSpeed: 45
-  DashBoost: 15
+  DashLength: 0.2
   HomingAttackSpeed: 60
   HomingAttackBounceForce: 20
   LightDashSpeed: 80
