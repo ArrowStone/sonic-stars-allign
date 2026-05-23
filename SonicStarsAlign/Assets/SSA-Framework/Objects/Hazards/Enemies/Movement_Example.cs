@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Movement_Example : Enemy_MovementBase
+public class Movement_Example : Enemy_MovementStateMachine
 {
     public Transform target;
     public LayerMask targetLayer;
@@ -11,16 +11,17 @@ public class Movement_Example : Enemy_MovementBase
     public float movementSpeed;
     public float rotationSpeed;
 
+
     void Awake()
     {
         detector = new Overlap_Sphere(gameObject, 1, targetLayer, 0, detectionDistance, detectionBlockingMask, DetectionBias.Proximity);
     }
 
-    void FixedUpdate()
+    new void FixedUpdate()
     {
+        base.FixedUpdate();
+
         float _delta = Time.fixedDeltaTime;
-        
-        GroundApplication(_delta);
 
         detector.Execute(transform.position, Vector3.forward);
         if(detector.TargetDetected) target = detector.TargetOutput.transform; else target = null;

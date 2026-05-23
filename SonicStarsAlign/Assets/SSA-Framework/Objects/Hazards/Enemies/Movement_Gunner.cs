@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class Movement_Gunner : Enemy_MovementBase
+public class Movement_Gunner : Enemy_MovementStateMachine
 {
     public Transform target;
     public LayerMask targetLayer;
@@ -35,11 +35,11 @@ public class Movement_Gunner : Enemy_MovementBase
         Physics_ApplyVelocity();
     }
 
-    void FixedUpdate()
+    new void FixedUpdate()
     {
-        float _delta = Time.fixedDeltaTime;
+        base.FixedUpdate();
 
-        GroundApplication(_delta);
+        float _delta = Time.fixedDeltaTime;
 
         detector.Execute(transform.position, transform.forward);
         if(detector.TargetDetected) target = detector.TargetOutput.transform;

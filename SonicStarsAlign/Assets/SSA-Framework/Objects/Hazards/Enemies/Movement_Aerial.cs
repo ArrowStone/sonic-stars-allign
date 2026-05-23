@@ -3,7 +3,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 
-public class Movement_Aerial : Enemy_MovementBase
+public class Movement_Aerial : Enemy_MovementStateMachine
 {
         public Transform target;
         public LayerMask targetLayer;
@@ -37,7 +37,8 @@ public class Movement_Aerial : Enemy_MovementBase
                 cachedPathPosition = pathPosition;
         }
 
-        void FixedUpdate () {
+        new void FixedUpdate () {
+
                 float _delta = Time.fixedDeltaTime;
 
                 detector.Execute(transform.position, Vector3.forward);

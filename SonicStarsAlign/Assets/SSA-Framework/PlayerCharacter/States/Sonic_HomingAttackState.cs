@@ -37,11 +37,9 @@ public class Sonic_HomingAttackState : IState
             HomingAttackMovement(_delta);
             HomingAttackRotation();
             HASwitchConditions();
-            Debug.Log("Homing!");
         }
         else
         {
-            Debug.Log("Homing done!");
             ExitConditions();
         }
     }

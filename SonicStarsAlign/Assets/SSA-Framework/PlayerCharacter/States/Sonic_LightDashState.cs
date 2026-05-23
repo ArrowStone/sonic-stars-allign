@@ -67,7 +67,6 @@ public class Sonic_LightDashState : IState
     {
         _difference = _targetPos - _ctx.Rb.transform.position;
 
-        Debug.Log(_ctx.RingDetector.TargetOutput);
         if (_ctx.RingDetector.TargetOutput == null || !_ctx.RingDetector.TargetOutput.activeInHierarchy || _difference.magnitude <= 1f)
         {
             _ctx.RingCheck();
