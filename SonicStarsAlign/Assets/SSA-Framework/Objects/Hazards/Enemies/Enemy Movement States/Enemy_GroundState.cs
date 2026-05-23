@@ -38,6 +38,7 @@ public class Enemy_GroundState : IState
     }
 
     public void GroundApplication ( float _delta ) {
+        if(_etx.GroundCast.HitInfo.normal.Equals(Vector3.zero)) return;
         _etx.GroundNormal = _etx.GroundCast.HitInfo.normal;
         _etx.HorizontalVelocity = Vector3.ProjectOnPlane(_etx.HorizontalVelocity, _etx.GroundNormal) * _etx.DragCoefficient;
         _etx.VerticalVelocity = Vector3.zero;
