@@ -23,6 +23,7 @@ public class InputComponent : MonoBehaviour
     public InputAction StartInput { get; private set; }
     public InputAction SweepInput { get; private set; }
     public InputAction Respawn { get; private set; }
+    public InputAction Touch { get; private set; }
 
     private void Awake()
     {
@@ -39,6 +40,7 @@ public class InputComponent : MonoBehaviour
         StartInput = I.Player.Start;
         SweepInput = I.Player.SweepKick;
         Respawn = I.Player.Respawn;
+        Touch = I.Player.Touch;
     }
 
     private void OnEnable()

@@ -1,6 +1,7 @@
 using System.Collections;
 using GLTFast.Schema;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // The title screen functionality
 public class PressStart : MonoBehaviour
@@ -20,7 +21,7 @@ public class PressStart : MonoBehaviour
         IEnumerator PressStart()
         {
             Debug.Log("Coroutine!");
-            yield return new WaitUntil(() => input.StartInput.IsPressed());
+            yield return new WaitUntil(() => input.StartInput.IsPressed() || input.Touch.IsPressed());
             animator.SetTrigger("StartPressed");
             Debug.Log("Pressed!");
         }
