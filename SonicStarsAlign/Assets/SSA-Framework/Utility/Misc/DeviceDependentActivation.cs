@@ -14,7 +14,7 @@ public class DeviceDependentActivation : MonoBehaviour
         IEnumerator ConnectionWait()
         {
             #if UNITY_EDITOR
-            // Takes a moment to connect
+            // Takes a moment for Unity Remote to connect
             yield return new WaitForSeconds(0.2f);
             #endif
             bool setActive = false;
@@ -30,6 +30,8 @@ public class DeviceDependentActivation : MonoBehaviour
             else AbsentEvent.Invoke();
         }
         StartCoroutine(ConnectionWait());
+        #else
+        AbsentEvent.Invoke()
         #endif
     }
 }

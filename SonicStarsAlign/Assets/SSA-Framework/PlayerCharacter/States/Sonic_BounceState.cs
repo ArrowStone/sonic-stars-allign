@@ -197,8 +197,10 @@ public class Sonic_BounceState : IState
     {
         DropDashCalculations(_delta);
 
-        if (_ctx.Input.JumpInput.WasPressedThisFrame())
+        if (_ctx.Input.JumpInput.WasPressedThisFrame() && _ctx.AirDashes > 0)
         {
+            _ctx.Snd.PlaySound("AirDash");
+            _ctx.AirDashes--;
             _ctx.Dash();
         }
         if (_ctx.RingDetector.TargetDetected && _ctx.Input.ReactionInput.WasPressedThisFrame())
