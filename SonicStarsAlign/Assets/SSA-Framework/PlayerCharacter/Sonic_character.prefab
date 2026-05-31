@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2187395145776945619}
   - component: {fileID: 5195702077386190020}
+  - component: {fileID: 7567326545747933759}
   m_Layer: 11
   m_Name: RailGrind
   m_TagString: Untagged
@@ -41,7 +42,7 @@ AudioSource:
   m_GameObject: {fileID: 1147871658074920336}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -120,6 +121,31 @@ AudioSource:
     - serializedVersion: 3
       time: 0
       value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!169 &7567326545747933759
+AudioLowPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147871658074920336}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.0743065
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -466,6 +492,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4512219977145594253}
   - component: {fileID: 8688365594272636004}
+  - component: {fileID: 2805361430770890105}
   m_Layer: 11
   m_Name: AudioSource5
   m_TagString: Untagged
@@ -585,6 +612,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!169 &2805361430770890105
+AudioLowPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4497414902112148468}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.0743065
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4564684858891927394
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,6 +722,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2262614750448936989}
   - component: {fileID: 7331402089759325619}
+  - component: {fileID: 8488570166733603754}
   m_Layer: 11
   m_Name: AudioSource7
   m_TagString: Untagged
@@ -789,6 +842,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!169 &8488570166733603754
+AudioLowPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4639449920823819570}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.0743065
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6236632323983415307
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,6 +877,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6593887524494519660}
   - component: {fileID: 3719403358816354206}
+  - component: {fileID: 9181969433233115258}
   m_Layer: 11
   m_Name: AudioSource6
   m_TagString: Untagged
@@ -918,6 +997,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!169 &9181969433233115258
+AudioLowPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6236632323983415307}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.0743065
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6495038160521046209
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,6 +1032,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3394759030575824466}
   - component: {fileID: 7057727427473017324}
+  - component: {fileID: 8964973263154436502}
   m_Layer: 11
   m_Name: AudioSource3
   m_TagString: Untagged
@@ -1047,6 +1152,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!169 &8964973263154436502
+AudioLowPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6495038160521046209}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.0743065
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6509000225257215466
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,6 +1248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8195229598406386375}
   - component: {fileID: 489879971780731449}
+  - component: {fileID: 545560369431263699}
   m_Layer: 11
   m_Name: VoiceLines
   m_TagString: Untagged
@@ -1149,7 +1280,7 @@ AudioSource:
   m_GameObject: {fileID: 6702016823952970487}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 639292256306105415, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -1237,6 +1368,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!169 &545560369431263699
+AudioLowPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6702016823952970487}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.0743065
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6820755066129380416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1247,6 +1403,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6482739738394462355}
   - component: {fileID: 8177491502540986153}
+  - component: {fileID: 6874505794596330014}
   m_Layer: 11
   m_Name: AudioSource1
   m_TagString: Untagged
@@ -1366,6 +1523,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!169 &6874505794596330014
+AudioLowPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6820755066129380416}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.0743065
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6858310394731951276
 GameObject:
   m_ObjectHideFlags: 0
@@ -1407,6 +1589,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6925225528416999064}
   - component: {fileID: 9130240190969648398}
+  - component: {fileID: 7297926138240454026}
   m_Layer: 11
   m_Name: AudioSource2
   m_TagString: Untagged
@@ -1526,6 +1709,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!169 &7297926138240454026
+AudioLowPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7035945154133206369}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.0743065
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7458543161178952752
 GameObject:
   m_ObjectHideFlags: 0
@@ -1536,6 +1744,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2185191338319016254}
   - component: {fileID: 4124470886468312936}
+  - component: {fileID: 7899631408999137482}
   m_Layer: 11
   m_Name: AudioSource4
   m_TagString: Untagged
@@ -1646,6 +1855,31 @@ AudioSource:
     - serializedVersion: 3
       time: 0
       value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!169 &7899631408999137482
+AudioLowPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7458543161178952752}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.0743065
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1789,7 +2023,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!96 &4280012910347217301
 TrailRenderer:
-  serializedVersion: 3
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1808,6 +2042,8 @@ TrailRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1829,9 +2065,11 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Time: 0.4
   m_PreviewTimeScale: 1
   m_Parameters:
@@ -1917,7 +2155,6 @@ TrailRenderer:
     shadowBias: 0.5
     generateLightingData: 0
   m_MinVertexDistance: 0.1
-  m_MaskInteraction: 0
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
@@ -1998,10 +2235,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8760114905739693595}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 1
-  m_Drag: 0.5
-  m_AngularDrag: 0
+  m_LinearDamping: 0.5
+  m_AngularDamping: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -2057,6 +2294,16 @@ MonoBehaviour:
   Chp: {fileID: 11400000, guid: 5976ffd069f1d92438628fdafda3acd7, type: 2}
   Chs: {fileID: 11400000, guid: 8f028f94bbfd98d48acca61a86e60e62, type: 2}
   Snd: {fileID: 1408359879882202046}
+  filters:
+  - {fileID: 6874505794596330014}
+  - {fileID: 7297926138240454026}
+  - {fileID: 8964973263154436502}
+  - {fileID: 7899631408999137482}
+  - {fileID: 2805361430770890105}
+  - {fileID: 9181969433233115258}
+  - {fileID: 8488570166733603754}
+  - {fileID: 545560369431263699}
+  - {fileID: 7567326545747933759}
   InvinciblitiyState: 0
   TrickState: 0
   ChrTurn:
@@ -2266,18 +2513,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 21667b008d363bb488525d3bf2d6d42e, type: 3}
     Channel: {fileID: 639292256306105415, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
   railGrindSound: {fileID: 8300000, guid: a005260a0a61dfcb7b30d8f3b54bd082, type: 3}
-  railSwitchSound: {fileID: 8300000, guid: 77eaa8b92871522bf9e1bc80d1cb59c1, type: 3}
-  railLandSound: {fileID: 8300000, guid: 0535d5a9dae114ec9aa20899eaafa6cd, type: 3}
   spinUpSound: {fileID: 8300000, guid: c976265d4c9f164e3ba2d13c601be32a, type: 3}
-  ringSound: {fileID: 8300000, guid: 96941af979471d8c19b7005e6bf9a611, type: 3}
-  goalRingSound: {fileID: 8300000, guid: 184ab8152890a6ff5a148263be230466, type: 3}
-  concreteFootsteps:
-  - {fileID: 8300000, guid: 05e49c04a0d0bedffbbdc1b5b116374f, type: 3}
-  - {fileID: 8300000, guid: d7d20f76ce2753a1c88f99d3e37cb13d, type: 3}
-  - {fileID: 8300000, guid: 5e3866537b535748da2e8d67fb9f7fb7, type: 3}
-  - {fileID: 8300000, guid: f842f8a74ee7a775ca53006e2921ef22, type: 3}
-  - {fileID: 8300000, guid: e11e6512e863f55ac98d7124ec83fa09, type: 3}
-  ringScatterSound: {fileID: 8300000, guid: 3f675148a2fd327cca8e91126145bc46, type: 3}
 --- !u!82 &5570304920696539352
 AudioSource:
   m_ObjectHideFlags: 0

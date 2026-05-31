@@ -173,15 +173,15 @@ MonoBehaviour:
       time: 0
       value: 30
       inSlope: 0
-      outSlope: 60
+      outSlope: 30
       tangentMode: 69
       weightedMode: 0
       inWeight: 0
       outWeight: 0.09299191
     - serializedVersion: 3
       time: 1
-      value: 90
-      inSlope: 60
+      value: 60
+      inSlope: 30
       outSlope: 0
       tangentMode: 69
       weightedMode: 3
@@ -269,6 +269,7 @@ MonoBehaviour:
   RailSwitchSpeed: 50
   RailSwitchDuration: 0.125
   RailSwitchDeadZone: 0.5
+  RailTrickSpeed: 40
   DropDashBaseSpeed: 8
   DropDashChargeMultiplier: 4
   DropDashMaxCharge: 1

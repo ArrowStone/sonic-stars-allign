@@ -47,7 +47,7 @@ public class Automation_GrindRail : MonoBehaviour
 
         Vector3 tangent = RefSpline.EvaluateTangent(_time).xyz;
 
-        _ctx.SplnHandler.SplineSetup(RefSpline, SplineType.GrindRail, AnimationCurve.Constant(0, 1, 1), Vector3.Dot(_ctx.Rb.linearVelocity, tangent.normalized), offset, _time, RefSpline.Spline.Closed);
+        _ctx.SplnHandler.SplineSetup(RefSpline, SplineType.GrindRail, AnimationCurve.Constant(0, 1, 1), Vector3.Dot(_ctx.Velocity, tangent.normalized), offset, _time, RefSpline.Spline.Closed);
         _ctx.SplnHandler.SetTangent(tangent);
         _ctx.MachineTransition(PlayerStates.RailGrinding);
     }

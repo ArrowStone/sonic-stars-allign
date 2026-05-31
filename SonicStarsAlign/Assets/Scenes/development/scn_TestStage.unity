@@ -5766,6 +5766,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -179.93141
       objectReference: {fileID: 0}
+    - target: {fileID: 2410846063761883630, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
+      propertyPath: filter
+      value: 
+      objectReference: {fileID: 353002880}
+    - target: {fileID: 2410846063761883630, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
+      propertyPath: SFXMixer
+      value: 
+      objectReference: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+    - target: {fileID: 2410846063761883630, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
+      propertyPath: UnderwaterAudio
+      value: 
+      objectReference: {fileID: 24100000, guid: d13b36f954adf6ab6bb9ff82b881a5c0, type: 2}
+    - target: {fileID: 2410846063761883630, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
+      propertyPath: UnprocessedAudio
+      value: 
+      objectReference: {fileID: 24100000, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
     - target: {fileID: 2453102168790407869, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -39.39874
@@ -7470,6 +7486,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 173.17862
       objectReference: {fileID: 0}
+    - target: {fileID: 4254476811851850540, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
+      propertyPath: profile
+      value: 
+      objectReference: {fileID: 11400000, guid: ab09877e2e707104187f6f83e2f62510, type: 2}
     - target: {fileID: 4272641908433818298, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0.0000020277123
@@ -7933,6 +7953,10 @@ PrefabInstance:
     - target: {fileID: 4685972679366847030, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.35500193
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697961426679608264, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4701030055785977308, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -23375,6 +23399,11 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!169 &353002880 stripped
+AudioLowPassFilter:
+  m_CorrespondingSourceObject: {fileID: 2933781361481132964, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
+  m_PrefabInstance: {fileID: 95659554}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &353747110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46572,7 +46601,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &1001886447
 AudioSource:
   m_ObjectHideFlags: 0

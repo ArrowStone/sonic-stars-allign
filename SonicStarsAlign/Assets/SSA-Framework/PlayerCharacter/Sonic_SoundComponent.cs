@@ -26,21 +26,9 @@ public class Sonic_SoundComponent : MonoBehaviour
 	bool playedSound;
 
 
-    [Header ("Movement")]
     public AudioClip railGrindSound;
-    public AudioClip railSwitchSound;
-    public AudioClip railLandSound;
     public AudioClip spinUpSound;
 
-    [Header ("Collectables")]
-    public AudioClip ringSound;
-    public AudioClip goalRingSound;
-
-    [Header ("Footsteps")]
-    public AudioClip[] concreteFootsteps;
-
-    [Header ("Damage")]
-    public AudioClip ringScatterSound;
 
     public void Start()
     {
@@ -84,10 +72,12 @@ public class Sonic_SoundComponent : MonoBehaviour
                     int rand = Random.Range(0, s.Clip.Length);
                     Mixer = s.Channel;
                     AudioSources[SourceInt].clip = s.Clip[rand];
+                    AudioSources[SourceInt].outputAudioMixerGroup = Mixer;
                     AudioSources[SourceInt].Play();
                 }else{
                     Mixer = s.Channel;
                     AudioSources[SourceInt].clip = s.Clip[0];
+                    AudioSources[SourceInt].outputAudioMixerGroup = Mixer;
                     AudioSources[SourceInt].Play();
                 }
             }

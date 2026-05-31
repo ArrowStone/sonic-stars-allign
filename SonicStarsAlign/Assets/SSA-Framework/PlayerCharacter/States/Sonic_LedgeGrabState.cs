@@ -13,7 +13,6 @@ public class Sonic_LedgeGrabState : IState
 
     public void EnterState() // Setting the correct position and everything else is handled by AirState
     {
-        Debug.Log("Grab!");
     }
 
     public void UpdateState()
@@ -26,8 +25,6 @@ public class Sonic_LedgeGrabState : IState
         //float _delta = Time.fixedDeltaTime;
         if(_ctx.Input.JumpInput.WasPressedThisFrame())
         {
-            Debug.Log("Ungrabbing!");
-
             Vector3 displacement = _ctx.ledgeGrabReleaseDisplacement;
             displacement.x *= _ctx.transform.forward.x;
             displacement.z *= _ctx.transform.forward.z;

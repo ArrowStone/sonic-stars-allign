@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 {
@@ -16,6 +17,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         public PlayerCharacterParameters Chp;
         public PlayerCharacterStats Chs;
         public Sonic_SoundComponent Snd;
+        public AudioLowPassFilter[] filters;
         public float InvinciblitiyState;
         public bool TrickState;
 
@@ -82,14 +84,9 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                 set
                 {
                         _inWater = value;
-                        if(value)
-                        {
-                                Chp = waterChp;
-                        }
-                        else
-                        {
-                                Chp = airChp;
-                        }
+                        foreach(AudioLowPassFilter filter in filters)
+                                filter.enabled = value;
+                        Chp = value ? waterChp : airChp;
                 }
         }
         public bool runningOnWater;
@@ -268,7 +265,6 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                 {
                     Chp = selectedParams;
                     airChp = selectedParams;
-                    //waterChp = selectedParams;
                 }
 
                 var selectedStats = SceneSwitcher.Instance.GetCachedStats();

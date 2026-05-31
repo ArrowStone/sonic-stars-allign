@@ -10,8 +10,6 @@ public class Sonic_RollState : IState
         }
 
         public void EnterState () {
-                Debug.Log("curl");
-
                 #region Misc
 
                 _groundDetected = true;

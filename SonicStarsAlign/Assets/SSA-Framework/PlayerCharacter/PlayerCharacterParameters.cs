@@ -128,6 +128,7 @@ public class PlayerCharacterParameters : ScriptableObject
     public float RailSwitchSpeed;
     public float RailSwitchDuration;
     public float RailSwitchDeadZone;
+    public float RailTrickSpeed;
 
     [Space]
     [Header("Drop Dash")]

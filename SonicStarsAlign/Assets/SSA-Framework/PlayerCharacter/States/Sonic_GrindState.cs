@@ -52,6 +52,7 @@ public class Sonic_GrindState : IState
         _ctx.Snd.RailSpinSource.pitch = 1f;
 
         _ctx.railEndTime = Time.time;
+        _ctx.Snd.RailSpinSource.volume = 0.7f;
     }
 
     public void FixedUpdateState()
@@ -84,11 +85,19 @@ public class Sonic_GrindState : IState
     public void UpdateState()
     {
         //float _delta = Time.deltaTime;
-
-        Debug.DrawRay(_ctx.transform.position + Vector3.up, _ctx.transform.right * (_railTurn - _tilt), Color.yellow);
     }
 
     #region Util
+    // Making it a separate state is overkill IMO
+    void Trick()
+    {
+        _ctx.Snd.PlaySound("RailLand");
+        if(_ctx.SplnHandler.SpeedMultiplier < _ctx.Chp.RailTrickSpeed)
+        {
+            _ctx.SplnHandler.SpeedMultiplier = _ctx.Chp.RailTrickSpeed * (_ctx.SplnHandler.Forward ? 1 : -1);
+            _ctx.SplnHandler.SpeedFactor = _ctx.SplnHandler.SpeedMultiplier;
+        }
+    }
 
     public void RailSwitchConditions()
     {
@@ -115,6 +124,10 @@ public class Sonic_GrindState : IState
                 }
             }
             _ctx.Jump();
+        }
+        if(_ctx.Input.AttackInput.WasPressedThisFrame())
+        {
+            Trick();
         }
         if (!_ctx.SplnHandler.Active)
         {

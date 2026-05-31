@@ -260,7 +260,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   MaxBounceHieght: 65
   DashSpeed: 25
-  DashBoost: 15
+  DashLength: 0
   HomingAttackSpeed: 75
   HomingAttackBounceForce: 20
   LightDashSpeed: 100
@@ -269,6 +269,7 @@ MonoBehaviour:
   RailSwitchSpeed: 50
   RailSwitchDuration: 0.125
   RailSwitchDeadZone: 0.5
+  RailTrickSpeed: 30
   DropDashBaseSpeed: 8
   DropDashChargeMultiplier: 4
   DropDashMaxCharge: 1

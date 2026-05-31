@@ -137,7 +137,7 @@ public class Sonic_SpinDashState : IState
         _spincharge += delta;
         float spinSpeed = _ctx.Chp.SpinDashOutput.Evaluate(_spincharge);
         _ctx.ModelManager.ballRollSpeed = spinSpeed;
-         _ctx.Snd.RailSpinSource.pitch = spinSpeed * 0.012f;
+         _ctx.Snd.RailSpinSource.pitch = spinSpeed * 0.0167f;
         if (_ctx.Input.BounceInput.WasReleasedThisFrame())
         {
             _ctx.Velocity = _ctx.PlayerDirection * spinSpeed;

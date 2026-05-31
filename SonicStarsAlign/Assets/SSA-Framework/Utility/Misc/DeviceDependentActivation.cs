@@ -25,7 +25,6 @@ public class DeviceDependentActivation : MonoBehaviour
                     setActive = true;
                 }
             }
-            Debug.Log(setActive);
             if(setActive) PresentEvent.Invoke();
             else AbsentEvent.Invoke();
         }
