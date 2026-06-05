@@ -49,10 +49,23 @@ public class GameLevelLoader : MonoBehaviour
     [SerializeField] string sceneAssetPath;
     [SerializeField] List<LinkedLevelObject> levelObjects;
     [SerializeField] int groundLayer;
-    void Start()
+    void Awake()
     {
         Scene levelScene = SceneManager.CreateScene("Level");
-        GameObject levelMesh = (GameObject) Instantiate(Resources.Load<GameObject>(sceneAssetPath), levelScene);
+        //GameObject levelMesh = (GameObject) Instantiate(Resources.Load<GameObject>(sceneAssetPath), levelScene);
+        /*var gltfAsset = gameObject.AddComponent<GLTFast.GltfAsset>();
+        gltfAsset.Url = "file:///home/ice/sonic-stars-allign/SonicStarsAlign/Assets/Resources/Stages/Level.glb";
+        gltfAsset.Instantiate();*/
+        /*GameObject levelMesh = gltfAsset.gameObject;
+        Task<bool> loadTask = gltfAsset.Load("file:///home/ice/sonic-stars-allign/SonicStarsAlign/Assets/Resources/Stages/Level.glb");
+        
+        IEnumerator LoadWait()
+        {
+            yield return new WaitUntil(() => loadTask.IsCompleted);
+            gltfAsset.InstantiateScene(10);
+        }
+
+        StartCoroutine(LoadWait());
 
         // Add collider and assign the ground layer to each piece of geometry
         foreach(Transform child in levelMesh.transform)
@@ -69,17 +82,20 @@ public class GameLevelLoader : MonoBehaviour
         {
             levelMesh.gameObject.AddComponent<MeshCollider>();
             levelMesh.gameObject.layer = groundLayer;
-        }
+        }*/
 
         // Load the level object JSON
         TextAsset levelObjectData = Resources.Load<TextAsset>(sceneAssetPath);
+        Debug.Log(levelObjectData);
         JObject[] objects = JsonConvert.DeserializeObject<JObject[]>(levelObjectData.text);
 
         foreach(JObject obj in objects)
         {
+            Debug.Log(obj["name"]);
             // Please don't sue us Nintendo
             LinkedLevelObject link = null;
             string objType = obj["type"].ToString();
+            Debug.Log(objType);
 
             // Get the prefab to place
             foreach (LinkedLevelObject linkedObject in levelObjects)
@@ -100,6 +116,8 @@ public class GameLevelLoader : MonoBehaviour
                 continue;
             }
 
+            Debug.Log(link.LevelObject.name);
+
             // Place the object and assign common parameters
             GameObject gobj = (GameObject) Instantiate(link.LevelObject, levelScene);
 
@@ -108,7 +126,7 @@ public class GameLevelLoader : MonoBehaviour
 
             gobj.name = obj["name"].ToString();
             gobj.transform.position = new Vector3(-pos[0], pos[2], -pos[1]); // Thanks Unity very cool
-            gobj.transform.eulerAngles = new Vector3(rot[0], rot[1], rot[2]) * 360f;
+            gobj.transform.eulerAngles = new Vector3(rot[0], -rot[2], rot[1]) * Mathf.Rad2Deg;
 
             // Rails and crap
             if(obj.ContainsKey("curve"))

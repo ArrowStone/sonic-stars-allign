@@ -40,35 +40,45 @@ class ExportSomeData(Operator, ExportHelper):
         # Processing data for the objects JSON
         for obj in collection.objects:
 
+            # Quick scale access because we apply it here
+            scaleX = obj.scale.x
+            scaleY = obj.scale.y
+            scaleZ = obj.scale.z
+
             # Initialising the data dump variable and common info
             fileData = {"parameters":{}}
             fileData["name"] = obj.name
-            fileData["position"] = [obj.location.x, obj.location.y, obj.location.z]
+            fileData["position"] = [obj.location.x*scaleX, obj.location.y*scaleY, obj.location.z*scaleZ]
             fileData["rotation"] = [obj.rotation_euler.x, obj.rotation_euler.y, obj.rotation_euler.z]
 
             for key in obj.keys():
                 if key == "type":
                     fileData[key] = obj[key]
                     continue
+                if key == "ant_landscape":
+                    # Always some unencodeable stuff
+                    continue
                 fileData["parameters"][key] = obj[key]
 
             # Checking if there's data to export
             if obj.data is None:
                 fileOutput.append(fileData)
-                continue
+                break
 
             # Exporting the curve if there is one
             if obj.data.id_type == "CURVE":
                 print("Curve!")
                 fileData["curve"] = []
+
                 for point in obj.data.splines[0].bezier_points:
-                    fileData["curve"].append([point.co.x,point.co.y,point.co.z,
-                                              point.handle_left.x,point.handle_left.y,point.handle_left.z,
-                                              point.handle_right.x,point.handle_right.y,point.handle_right.z])
+                    fileData["curve"].append([point.co.x*scaleX,point.co.y*scaleY,point.co.z*scaleZ,
+                                              point.handle_left.x*scaleX,point.handle_left.y*scaleY,point.handle_left.z*scaleZ,
+                                              point.handle_right.x*scaleX,point.handle_right.y*scaleY,point.handle_right.z*scaleZ])
 
             fileOutput.append(fileData)
         
         # Write data
+        print(fileOutput)
         return write_data(self.filepath, fileOutput)
 
 

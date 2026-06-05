@@ -9,31 +9,32 @@ public class CameraDependentPostprocessing : MonoBehaviour
     public LayerMask waterLayer;
     public Volume volume;
     public ScriptableRendererFeature rendererFeature;
+    public AudioSource WindAudioSource;
+    public AudioSource WaterAudioSource;
 
     void Awake()
     {
-        filter.enabled = false;
-        volume.enabled = false;
-        rendererFeature.SetActive(false);
+        SetWater(false);
     }
 
     void OnTriggerStay(Collider other)
     {
         if(FrameworkUtility.CompareLayer(other.gameObject.layer, waterLayer))
-        {
-            filter.enabled = true;
-            volume.enabled = true;
-            rendererFeature.SetActive(true);
-        }
+            SetWater(true);
     }
 
     void OnTriggerExit(Collider other)
     {
         if(FrameworkUtility.CompareLayer(other.gameObject.layer, waterLayer))
-        {
-            filter.enabled = false;
-            volume.enabled = false;
-            rendererFeature.SetActive(false);
-        }
+            SetWater(false);
+    }
+
+    void SetWater(bool water)
+    {
+        filter.enabled = water;
+        volume.enabled = water;
+        rendererFeature.SetActive(water);
+        WindAudioSource.mute = water;
+        WaterAudioSource.mute = !water;
     }
 }
