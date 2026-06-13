@@ -4,10 +4,10 @@ import json
 def write_data(filepath, fileData):
 
     # Saving the gltf file with level geometry
-    bpy.ops.export_scene.gltf(filepath=filepath, collection="Level Geometry")
+    bpy.ops.export_scene.fbx(filepath=filepath, collection="Level Geometry")
 
     # Saving the jSON file with level object data
-    f = open(filepath.replace(".glb", ".json"), "w", encoding='utf-8')
+    f = open(filepath.replace(".fbx", ".json"), "w", encoding='utf-8')
     f.write(json.dumps(fileData))
     f.close()
 
@@ -23,7 +23,7 @@ class ExportSomeData(Operator, ExportHelper):
     bl_idname = "sonic_collision.level_data"
     bl_label = "Export Level Data"
 
-    filename_ext = ".glb"
+    filename_ext = ".fbx"
 
     filter_glob: StringProperty = StringProperty(
         default="*.glb",

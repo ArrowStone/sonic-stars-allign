@@ -120,7 +120,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   Hover: 0
+  Gravity: {x: 0, y: 0, z: 0}
+  FallSpeedCap: 0
+  DragCoefficient: 0
   groundRayLength: 0
+  GroundNormal: {x: 0, y: 0, z: 0}
   HorizontalVelocity: {x: 0, y: 0, z: 0}
   VerticalVelocity: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
@@ -182,9 +186,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3642248809546156846, guid: daee855f58a9c64fd9dcd56bea8d1dcc, type: 3}
+      propertyPath: m_MeshLodSelectionBias
+      value: -2.04
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: daee855f58a9c64fd9dcd56bea8d1dcc, type: 3}
       propertyPath: m_Name
       value: Mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684295394808222897, guid: daee855f58a9c64fd9dcd56bea8d1dcc, type: 3}
+      propertyPath: m_MeshLodSelectionBias
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7205140776170859923, guid: daee855f58a9c64fd9dcd56bea8d1dcc, type: 3}
+      propertyPath: m_ForceMeshLod
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7205140776170859923, guid: daee855f58a9c64fd9dcd56bea8d1dcc, type: 3}
+      propertyPath: m_MeshLodSelectionBias
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7926839288223873370, guid: daee855f58a9c64fd9dcd56bea8d1dcc, type: 3}
+      propertyPath: m_MeshLodSelectionBias
+      value: 0.06
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
