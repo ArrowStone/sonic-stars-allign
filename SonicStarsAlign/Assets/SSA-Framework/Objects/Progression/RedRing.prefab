@@ -175,6 +175,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7635826562936255635, guid: 854d1f0420fbba84bbb9737ec408cb64, type: 3}
+      propertyPath: m_MeshLodSelectionBias
+      value: -2.46
+      objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 854d1f0420fbba84bbb9737ec408cb64, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 9d6474c98b09c8d4ea33bac9159978bf, type: 2}
