@@ -4,6 +4,7 @@ public class Sonic_HomingAttackState : IState
 {
     public Sonic_PlayerStateMachine _ctx;
     private Transform _targetTransform;
+    private bool homingOntoSpline;
     private Vector3 _difference;
     private Vector3 _vel;
 
@@ -17,7 +18,7 @@ public class Sonic_HomingAttackState : IState
         _ctx.ChangeKinematic(true);
 
         _targetTransform = _ctx.HomingTargetDetector.TargetOutput.transform;
-        if(!_ctx.homingOntoSpline) _ctx.homingTargetPosition = _targetTransform.position;
+        homingOntoSpline = _ctx.homingOntoSpline;
         _difference = _ctx.homingTargetPosition - _ctx.transform.position;
 
         _ctx.Anim.SetInteger("State", 1);
@@ -68,7 +69,7 @@ public class Sonic_HomingAttackState : IState
 
     private bool ContinueHomingAttacking()
     {
-        if(!_ctx.homingOntoSpline) _ctx.homingTargetPosition = _targetTransform.position;
+        if(!homingOntoSpline) _ctx.homingTargetPosition = _targetTransform.position;
         _difference = _ctx.homingTargetPosition - _ctx.transform.position;
         if (_difference.magnitude <= _ctx.Rb.sleepThreshold)
         {

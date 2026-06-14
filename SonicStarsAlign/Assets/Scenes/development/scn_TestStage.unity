@@ -5596,10 +5596,6 @@ PrefabInstance:
       propertyPath: UnprocessedAudio
       value: 
       objectReference: {fileID: 24100000, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
-    - target: {fileID: 2410846063761883630, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
-      propertyPath: homingTargetLayer.m_Bits
-      value: 4224
-      objectReference: {fileID: 0}
     - target: {fileID: 2453102168790407869, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -39.39874

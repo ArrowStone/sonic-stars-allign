@@ -36,6 +36,9 @@ public class Sonic_SweepKickState : IState
     public void FixedUpdateState()
     {
         float _delta = Time.deltaTime;
+
+        _ctx.HomingCheck();
+
         _kickTimer += _delta;
 
         // Check hit window

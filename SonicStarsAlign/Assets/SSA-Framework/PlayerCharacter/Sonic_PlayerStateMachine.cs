@@ -436,17 +436,24 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         public void HomingCheck () {
                 HomingTargetDetector.Execute(transform.position - Gravity * 5f, PlayerDirection);
 
-                if(     HomingTargetDetector.TargetDetected &&
-                        FrameworkUtility.CompareLayer(HomingTargetDetector.TargetOutput.layer, homingSplineLayer) &&
+                if(!HomingTargetDetector.TargetDetected) return;
+
+                if(     FrameworkUtility.CompareLayer(HomingTargetDetector.TargetOutput.layer, homingSplineLayer) &&
                         HomingTargetDetector.TargetOutput.TryGetComponent(out SplineContainer container))
                 {
+                        // Spline (e. g. rail)
                         homingOntoSpline = true;
                         SplineUtility.GetNearestPoint(container.Spline,
                         HomingTargetDetector.TargetOutput.transform.InverseTransformPoint(transform.position + PlayerDirection * 10f),
                         out float3 nearest, out _);
                         homingTargetPosition = HomingTargetDetector.TargetOutput.transform.TransformPoint(nearest);
                 }
-                else homingOntoSpline = false;
+                else
+                {
+                        // Not a spline
+                        homingOntoSpline = false;
+                        homingTargetPosition = HomingTargetDetector.TargetOutput.transform.position;
+                }
         }
 
         public void RingCheck () {
