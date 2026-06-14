@@ -57,6 +57,8 @@ public class Sonic_GroundState : IState
         public void FixedUpdateState () {
                 float _delta = Time.fixedDeltaTime;
 
+                _ctx.HomingCheck();
+
                 if (_ctx.InWater && !_wereInWater && _ctx.CanRunOnWater())
                 {
                         // Were on ground but entered water with enough speed - 

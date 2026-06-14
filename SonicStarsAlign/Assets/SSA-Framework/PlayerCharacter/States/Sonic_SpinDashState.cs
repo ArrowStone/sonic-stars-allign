@@ -54,6 +54,8 @@ public class Sonic_SpinDashState : IState
     {
         float _delta = Time.fixedDeltaTime;
 
+        _ctx.HomingCheck();
+
         if (!GroundCheck())
         {
             AirSwitchConditions();

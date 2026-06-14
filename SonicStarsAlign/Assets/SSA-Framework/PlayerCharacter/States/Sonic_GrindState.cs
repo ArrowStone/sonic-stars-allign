@@ -22,6 +22,7 @@ public class Sonic_GrindState : IState
     public void EnterState()
     {
         //Debug.DrawRay(_ctx.transform.position, Vector3.up * 5f, Color.white, 10f);
+        _ctx.ModelManager.ExitBall();
         _ctx.Anim.SetInteger("State", 2);
 
         _ctx.ChangeKinematic(true);

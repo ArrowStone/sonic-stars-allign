@@ -71,12 +71,12 @@ public class HUD_Manager : MonoBehaviour
     {
         float _delta = Time.fixedDeltaTime;
 
-        _ctx.HomingCheck();
         if(_ctx.HomingTargetDetector.TargetDetected && 
-        Vector3.Angle((_ctx.HomingTargetDetector.TargetOutput.transform.position - _ctx.transform.position).normalized, Camera.main.transform.forward) < 90f)
+        Vector3.Angle((_ctx.homingTargetPosition - _ctx.transform.position).normalized, Camera.main.transform.forward) < 90f
+        && !(_ctx.CurrentEstate == PlayerStates.RailGrinding && _ctx.homingOntoSpline))
         {
             homingReticleAnimator.SetBool("Active", true);
-            targetHomingPos = _ctx.HomingTargetDetector.TargetOutput.transform.position;
+            targetHomingPos = _ctx.homingTargetPosition;
         }
         else homingReticleAnimator.SetBool("Active", false);
 

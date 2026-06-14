@@ -55,6 +55,7 @@ public class Sonic_DropDashState : IState
     {
         float _delta = Time.fixedDeltaTime;
 
+        _ctx.HomingCheck();
         if (_groundDetected)
         {
             // Ground movement after landing from drop dash

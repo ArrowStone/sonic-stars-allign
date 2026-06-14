@@ -30,6 +30,9 @@ public class Sonic_LightDashState : IState
     public void FixedUpdateState()
     {
         float _delta = Time.fixedDeltaTime;
+
+        _ctx.HomingCheck();
+
         if (!ContinueLightDashing(_delta))
         {
             AirSwitchConditions();

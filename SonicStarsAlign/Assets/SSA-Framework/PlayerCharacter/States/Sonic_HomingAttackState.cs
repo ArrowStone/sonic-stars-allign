@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Sonic_HomingAttackState : IState
 {
@@ -18,7 +17,8 @@ public class Sonic_HomingAttackState : IState
         _ctx.ChangeKinematic(true);
 
         _targetTransform = _ctx.HomingTargetDetector.TargetOutput.transform;
-        _difference = _targetTransform.position - _ctx.transform.position;
+        if(!_ctx.homingOntoSpline) _ctx.homingTargetPosition = _targetTransform.position;
+        _difference = _ctx.homingTargetPosition - _ctx.transform.position;
 
         _ctx.Anim.SetInteger("State", 1);
         _ctx.ModelManager.EnterBall();
@@ -68,7 +68,8 @@ public class Sonic_HomingAttackState : IState
 
     private bool ContinueHomingAttacking()
     {
-        _difference = _targetTransform.position - _ctx.transform.position;
+        if(!_ctx.homingOntoSpline) _ctx.homingTargetPosition = _targetTransform.position;
+        _difference = _ctx.homingTargetPosition - _ctx.transform.position;
         if (_difference.magnitude <= _ctx.Rb.sleepThreshold)
         {
             return false;

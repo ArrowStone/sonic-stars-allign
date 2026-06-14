@@ -44,6 +44,8 @@ public class Sonic_RollState : IState
         public void FixedUpdateState () {
                 float _delta = Time.fixedDeltaTime;
 
+                _ctx.HomingCheck();
+
                 if (!GroundCheck())
                 {
                         AirSwitchConditions();

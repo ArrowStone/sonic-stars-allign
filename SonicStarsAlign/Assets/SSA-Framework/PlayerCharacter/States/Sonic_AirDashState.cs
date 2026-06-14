@@ -42,6 +42,7 @@ public class Sonic_AirDashState : IState
     {
         float _delta = Time.fixedDeltaTime;
 
+        _ctx.HomingCheck();
         GroundCheck();
         InputRotations();
 

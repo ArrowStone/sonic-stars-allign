@@ -2339,6 +2339,9 @@ MonoBehaviour:
   homingTargetLayer:
     serializedVersion: 2
     m_Bits: 128
+  homingSplineLayer:
+    serializedVersion: 2
+    m_Bits: 4096
   ringLayer:
     serializedVersion: 2
     m_Bits: 1024
@@ -2383,6 +2386,8 @@ MonoBehaviour:
   ledgeGrabStartTime: 0
   MovementLockDistance: 0
   MovementLockStartPos: {x: 0, y: 0, z: 0}
+  homingOntoSpline: 0
+  homingTargetPosition: {x: 0, y: 0, z: 0}
   airRotationSpeed: 8
   doneAirRotation: 1
   fakeNormal: {x: 0, y: 0, z: 0}

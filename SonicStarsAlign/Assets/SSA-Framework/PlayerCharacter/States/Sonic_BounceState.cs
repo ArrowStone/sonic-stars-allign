@@ -63,6 +63,7 @@ public class Sonic_BounceState : IState
     public void FixedUpdateState()
     {
         float _delta = Time.fixedDeltaTime;
+        _ctx.HomingCheck();
     }
 
     public void LateUpdateState()

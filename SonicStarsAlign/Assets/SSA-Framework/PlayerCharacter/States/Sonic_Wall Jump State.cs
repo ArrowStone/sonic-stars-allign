@@ -29,12 +29,14 @@ public class Sonic_WallJumpState : IState
 
     public void UpdateState()
     {
-        float dt = Time.deltaTime;
+        float _delta = Time.deltaTime;
+
+        _ctx.HomingCheck();
 
         // If jump is still held, continue charging
         if (_charging && _ctx.Input.JumpInput.IsPressed())
         {
-            _chargeTime += dt;
+            _chargeTime += _delta;
             _chargeTime = Mathf.Clamp(_chargeTime, 0f, _ctx.Chp.WallJumpMaxCharge);
         }
         else if (_charging && !_ctx.Input.JumpInput.IsPressed())

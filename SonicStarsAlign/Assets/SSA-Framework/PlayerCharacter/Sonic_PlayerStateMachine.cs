@@ -1,6 +1,8 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Splines;
 
 public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 {
@@ -30,6 +32,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         public LayerMask wallLayer;
 
         public LayerMask homingTargetLayer;
+        public LayerMask homingSplineLayer;
 
         public LayerMask ringLayer;
 
@@ -143,7 +146,9 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
         #region Moves
 
-        public float airRotationSpeed; // For rotation toward the vertical position after leaving a ramp
+        public bool homingOntoSpline;
+        public Vector3 homingTargetPosition;
+        public float airRotationSpeed; // For rotation towards the vertical position after leaving a ramp
         public bool doneAirRotation = true;
         public Vector3 fakeNormal;
 
@@ -430,6 +435,18 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
         public void HomingCheck () {
                 HomingTargetDetector.Execute(transform.position - Gravity * 5f, PlayerDirection);
+
+                if(     HomingTargetDetector.TargetDetected &&
+                        FrameworkUtility.CompareLayer(HomingTargetDetector.TargetOutput.layer, homingSplineLayer) &&
+                        HomingTargetDetector.TargetOutput.TryGetComponent(out SplineContainer container))
+                {
+                        homingOntoSpline = true;
+                        SplineUtility.GetNearestPoint(container.Spline,
+                        HomingTargetDetector.TargetOutput.transform.InverseTransformPoint(transform.position + PlayerDirection * 10f),
+                        out float3 nearest, out _);
+                        homingTargetPosition = HomingTargetDetector.TargetOutput.transform.TransformPoint(nearest);
+                }
+                else homingOntoSpline = false;
         }
 
         public void RingCheck () {

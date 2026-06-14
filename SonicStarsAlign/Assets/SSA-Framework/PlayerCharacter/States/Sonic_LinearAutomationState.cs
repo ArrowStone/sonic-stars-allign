@@ -26,6 +26,9 @@ public class Sonic_LinearAutomationState : IState
     public void FixedUpdateState()
     {
         float _delta = Time.fixedDeltaTime;
+
+        _ctx.HomingCheck();
+
         _ctx.SplnHandler.SplineMove(_delta);
         if (_ctx.SplnHandler.Active)
         {

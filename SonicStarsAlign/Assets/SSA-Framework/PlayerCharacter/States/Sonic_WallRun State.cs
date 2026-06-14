@@ -27,8 +27,10 @@ public class Sonic_WallRunState : IState
 
     public void UpdateState()
     {
-        float dt = Time.deltaTime;
-        _timer += dt;
+        float _delta = Time.deltaTime;
+        _timer += _delta;
+
+        _ctx.HomingCheck();
 
         // Max time safety
         if (_timer > _ctx.Chp.MaxWallRunTime)
@@ -52,7 +54,7 @@ public class Sonic_WallRunState : IState
         }
 
 
-        ApplyPhysics(dt);
+        ApplyPhysics(_delta);
         _ctx.Physics_ApplyVelocity();
     }
 

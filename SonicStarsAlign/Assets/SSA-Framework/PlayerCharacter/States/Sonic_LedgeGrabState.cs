@@ -22,7 +22,10 @@ public class Sonic_LedgeGrabState : IState
 
     public void FixedUpdateState()
     {
-        //float _delta = Time.fixedDeltaTime;
+        float _delta = Time.fixedDeltaTime;
+
+        _ctx.HomingCheck();
+
         if(_ctx.Input.JumpInput.WasPressedThisFrame())
         {
             Vector3 displacement = _ctx.ledgeGrabReleaseDisplacement;
