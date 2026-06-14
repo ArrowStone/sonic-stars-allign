@@ -298,7 +298,7 @@ MonoBehaviour:
   - {fileID: 1876812793, guid: b72ca5110fc9f6298ba42974b037f20a, type: 3}
   - {fileID: -1445751066, guid: b72ca5110fc9f6298ba42974b037f20a, type: 3}
   - {fileID: -1956330236, guid: b72ca5110fc9f6298ba42974b037f20a, type: 3}
-  maxPopupCount: 0
+  maxPopupCount: 5
   ScorePopupIgnoreBelow: 200
   PopupOffset: 100
   stageTimer: 0

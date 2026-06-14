@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.SmartFormat.Extensions;
@@ -23,11 +25,13 @@ public class HUD_Manager : MonoBehaviour
     public float stageTimer;
     public Sonic_PlayerStateMachine _ctx;
 
-    private List<GameObject> popups = new List<GameObject>();
+    private GameObject[] popups;
 
     // Initialising automatic counters like rings and score
     private void Awake()
     {
+        popups = new GameObject[maxPopupCount];
+
         homingReticleAnimator = HomingReticle.GetComponent<Animator>();
 
         void SetRings(float rings, float _)
@@ -44,11 +48,11 @@ public class HUD_Manager : MonoBehaviour
 
             if(score - prevScore >= 700)
             {
-                ScorePopup(6);
+                ScorePopup(2);
             }
             else if(score - prevScore >= 500)
             {
-                ScorePopup(4);
+                ScorePopup(1);
             }
             else if(score - prevScore >= 200)
             {
@@ -110,24 +114,24 @@ public class HUD_Manager : MonoBehaviour
     // Showing score gain
     public void ScorePopup(string popupText)
     {
-        int emptyIndex = popups.FindIndex(popup => popup == null);
+        Debug.Log(popupText);
+        int emptyIndex = Array.FindIndex(popups, i => i == null);
+        Debug.Log(emptyIndex);
 
-        if(emptyIndex == -1 && popups.Count >= maxPopupCount)
+        foreach (GameObject gb in popups)
         {
+            Debug.Log(gb);
+        }
+
+        if(emptyIndex == -1)
+        {
+            Debug.Log("No space!");
             return;
         }
 
         GameObject newPopup = Instantiate(scoreTextPopup, Canvas);
 
-        if(emptyIndex == -1)
-        {
-            emptyIndex = popups.Count;
-            popups.Add(newPopup);
-        }
-        else
-        {
-            popups[emptyIndex] = newPopup;
-        }
+        popups[emptyIndex] = newPopup;
 
         newPopup.GetComponentInChildren<TextMeshProUGUI>().text = popupText;
         RectTransform popupTransform = (RectTransform) newPopup.transform;
@@ -140,26 +144,19 @@ public class HUD_Manager : MonoBehaviour
     // Showing encouragement
     public void ScorePopup(int encouragementId)
     {
-        int emptyIndex = popups.FindIndex(popup => popup == null);
+        int emptyIndex = Array.FindIndex(popups, i => i == null);
 
         Debug.Log(emptyIndex);
 
-        if(emptyIndex == -1 && popups.Count > maxPopupCount)
+        if(emptyIndex == -1)
         {
+            Debug.Log("No room for a popup!");
             return;
         }
 
         GameObject newPopup = Instantiate(scoreImagePopup, Canvas);
 
-        if(emptyIndex == -1)
-        {
-            emptyIndex = popups.Count;
-            popups.Add(newPopup);
-        }
-        else
-        {
-            popups[emptyIndex] = newPopup;
-        }
+        popups[emptyIndex] = newPopup;
 
         newPopup.GetComponentInChildren<Image>().sprite = scoreEncouragementImages[encouragementId];
         RectTransform popupTransform = (RectTransform) newPopup.transform;
