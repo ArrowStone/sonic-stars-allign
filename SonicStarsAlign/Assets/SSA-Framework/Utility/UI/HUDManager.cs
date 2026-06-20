@@ -1,23 +1,24 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Localization.SmartFormat.Extensions;
 using UnityEngine.UI;
 
 // Simplifies and unifies interaction with the HUD.
-public class HUD_Manager : MonoBehaviour
+public class HUDManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI[] textObjects;
     [SerializeField] private GameObject scoreTextPopup;
     [SerializeField] private GameObject scoreImagePopup;
     [SerializeField] private RectTransform Canvas;
     [SerializeField] private RectTransform HomingReticle;
+    [SerializeField] private RectTransform SecondHomingReticle;
     [SerializeField] private TMP_Text TimeCounter;
-    private Animator homingReticleAnimator;
+    private bool usingFirstReticle;
+    private GameObject previousFrameTarget;
+    private Animator reticleAnimator;
+    private Animator secondReticleAnimator;
     private Vector3 targetHomingPos;
-
+    private Vector3 previousHomingTarget;
     public Sprite[] scoreEncouragementImages;
     public int maxPopupCount;
     public float ScorePopupIgnoreBelow;
@@ -30,9 +31,12 @@ public class HUD_Manager : MonoBehaviour
     // Initialising automatic counters like rings and score
     private void Awake()
     {
+        usingFirstReticle = true;
+
         popups = new GameObject[maxPopupCount];
 
-        homingReticleAnimator = HomingReticle.GetComponent<Animator>();
+        reticleAnimator = HomingReticle.GetComponent<Animator>();
+        secondReticleAnimator = SecondHomingReticle.GetComponent<Animator>();
 
         void SetRings(float rings, float _)
         {
@@ -75,26 +79,73 @@ public class HUD_Manager : MonoBehaviour
     {
         float _delta = Time.fixedDeltaTime;
 
-        Vector3 viewportPos = Camera.main.WorldToViewportPoint(_ctx.homingTargetPosition);
-        if( _ctx.HomingTargetDetector.TargetDetected &&
-            viewportPos.x is > -1 and < 1 && viewportPos.y is > -1 and < 1 && viewportPos.z > 0 &&
-            !(_ctx.CurrentEstate == PlayerStates.RailGrinding && _ctx.homingOntoSpline))
-        {
-            homingReticleAnimator.SetBool("Active", true);
-            targetHomingPos = _ctx.homingTargetPosition;
-        }
-        else homingReticleAnimator.SetBool("Active", false);
-
         stageTimer += _delta;
     }
 
     private void Update()
     {
-        Vector2 screenPos = Camera.main.WorldToScreenPoint(targetHomingPos);
-        if(screenPos.x < 0 || screenPos.x > Screen.width || screenPos.y < 0 || screenPos.y > Screen.height) 
-            screenPos = new Vector2(-1000, -1000);
+        GameObject currentTarget = _ctx.HomingTargetDetector.TargetOutput;
+        Vector3 viewportPos = Camera.main.WorldToViewportPoint(_ctx.homingTargetPosition);
+        if( _ctx.HomingTargetDetector.TargetDetected &&
+            !(_ctx.CurrentEstate == PlayerStates.RailGrinding && _ctx.homingOntoSpline))
+        {
+            // Target detected
+            Animator anim = usingFirstReticle ? reticleAnimator : secondReticleAnimator;
+            if(currentTarget != previousFrameTarget)
+            {
+                // Different target -> switch reticles & disable the old one
+                Debug.Log("New Target! " + currentTarget.name + " " + !usingFirstReticle);
+                usingFirstReticle = !usingFirstReticle;
+                previousFrameTarget = currentTarget;
+                previousHomingTarget = targetHomingPos;
+                anim.SetBool("Active", false);
+                anim = usingFirstReticle ? reticleAnimator : secondReticleAnimator;
+            }
+            
+            anim.SetBool("Active", true);
+            targetHomingPos = _ctx.homingTargetPosition;
+            //previousFrameTarget = currentTarget;
+        }
+        else
+        {
+            //Debug.Log("No Target!");
+            // No target
+            reticleAnimator.SetBool("Active", false);
+            secondReticleAnimator.SetBool("Active", false);
+        }
 
-        HomingReticle.position = screenPos;
+        RectTransform reticle = usingFirstReticle ? HomingReticle : SecondHomingReticle;
+        // Checking if the fading reticle's on-screen
+        if(viewportPos.x is > -1 and < 1 && viewportPos.y is > -1 and < 1 && viewportPos.z > 2f)
+        {
+            // On-screen
+            Vector2 screenPos = Camera.main.WorldToScreenPoint(targetHomingPos);
+            reticle.position = screenPos;
+        }
+        else
+        {
+            // Off-screen -> instantly disable
+            Animator anim = usingFirstReticle ? reticleAnimator : secondReticleAnimator;
+            anim.SetTrigger("InstantDisable");
+            anim.SetBool("Active", false);
+        }
+
+        RectTransform secReticle = usingFirstReticle ? SecondHomingReticle : HomingReticle;
+        Vector3 secViewportPos = Camera.main.WorldToViewportPoint(previousHomingTarget);
+        // Checking if the fading reticle's on-screen
+        Debug.Log(secViewportPos.z);
+        if(secViewportPos.x is > -1 and < 1 && secViewportPos.y is > -1 and < 1 && secViewportPos.z > 2f)
+        {
+            // On-screen
+            Vector2 secScreenPos = Camera.main.WorldToScreenPoint(previousHomingTarget);
+            secReticle.position = secScreenPos;
+        }
+        else
+        {
+            // Off-screen -> instantly disable
+            Animator secAnim = usingFirstReticle ? secondReticleAnimator : reticleAnimator;
+            secAnim.SetTrigger("InstantDisable");
+        }
 
         int minutes = (int) (stageTimer / 60);
         int seconds = (int) (stageTimer - 0.5f) % 60;

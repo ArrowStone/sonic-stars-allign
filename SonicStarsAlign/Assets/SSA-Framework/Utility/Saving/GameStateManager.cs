@@ -6,7 +6,7 @@ public class GameStateManager : MonoBehaviour
 {
     public StageData[] StageDataAssets;
     public Sonic_PlayerStateMachine ctx;
-    public HUD_Manager hudManager;
+    public HUDManager hudManager;
     public void LoadData()
     {
         if(StageDataAssets == null) return;
