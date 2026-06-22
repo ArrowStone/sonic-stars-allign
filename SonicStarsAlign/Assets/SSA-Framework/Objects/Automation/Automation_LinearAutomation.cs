@@ -6,6 +6,7 @@ public class Automation_LinearAutomation : MonoBehaviour
 {
     public SplineContainer spline;
     public SplineType splineType;
+    public bool GroundPath;
 
     [Space]
     [Header("Forces")]
@@ -22,7 +23,7 @@ public class Automation_LinearAutomation : MonoBehaviour
         {
             _ctx.SplnHandler.SplineSetup(spline, splineType, SpeedCurve, speedMultiplier, _offset, 0, false);
             _ctx.SplnHandler.SetTangent(_ctx.transform.up);
-            _ctx.MachineTransition(PlayerStates.LinearAutomation);
+            _ctx.MachineTransition(GroundPath ? PlayerStates.PathFollow : PlayerStates.LinearAutomation);
             InteractionEvent.Invoke();
         }
     }

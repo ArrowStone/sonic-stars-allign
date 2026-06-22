@@ -49,7 +49,6 @@ MonoBehaviour:
   DummyText: 0
   CamTransform: {fileID: 2730942054133459718}
   Input: {fileID: 0}
-  SetPositionAndRotationManually: 0
   WeightCurve:
     serializedVersion: 2
     m_Curve:
@@ -296,7 +295,7 @@ MonoBehaviour:
     DefaultMode: 2
   DefaultBlend:
     Style: 1
-    Time: 2
+    Time: 1
     CustomCurve:
       serializedVersion: 2
       m_Curve: []

@@ -1,5 +1,3 @@
-using System;
-using TMPro;
 using UnityEngine;
 
 public class Sonic_GroundState : IState
@@ -23,7 +21,7 @@ public class Sonic_GroundState : IState
 
                 #region Collision
 
-                if (_ctx.GroundCast.Execute(_ctx.Rb.position, -_ctx.GroundNormal))
+                if (_ctx.GroundCast.Execute(_ctx.transform.position, -_ctx.GroundNormal))
                 {
                         _ctx.GroundNormal = _ctx.GroundCast.HitInfo.normal;
 

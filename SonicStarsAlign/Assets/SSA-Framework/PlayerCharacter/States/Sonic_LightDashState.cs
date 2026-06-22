@@ -15,7 +15,7 @@ public class Sonic_LightDashState : IState
 
     public void EnterState()
     {
-        //_ctx.ChangeKinematic(true);
+        _ctx.ChangeKinematic(false);
         _ctx.GroundNormal = -_ctx.Gravity.normalized;
         _ctx.Anim.SetInteger("State", 4);
         _ctx.Snd.PlaySound("LightDash");

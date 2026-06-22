@@ -4,7 +4,7 @@ using UnityEngine.Splines;
 public class Sonic_RailSwitchState : IState
 {
     public Sonic_PlayerStateMachine _ctx;
-    private Vector3 _vel;
+    //private Vector3 _vel;
     private Vector3 _difference;
 
     private Vector3 _targetPos;
@@ -71,7 +71,7 @@ public class Sonic_RailSwitchState : IState
     private void RailSwitchMovement(float _delta)
     {
         _currPos = Vector3.Lerp(_startPos, _targetPos, _time / _duration);
-        _vel = (_currPos - _ctx.Rb.transform.position) / Time.fixedDeltaTime;
+        //_vel = (_currPos - _ctx.Rb.transform.position) / Time.fixedDeltaTime;
         _ctx.Physics_Snap(_currPos);
     }
 

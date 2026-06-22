@@ -8,8 +8,6 @@ public class CamBrain : StateMachine_MonoBase<CameraStates>
         public Transform CamTransform;
         public InputComponent Input;
 
-        public bool SetPositionAndRotationManually;
-
         public ICamPointStyle Point;
         public AnimationCurve WeightCurve;
 
@@ -56,10 +54,7 @@ public class CamBrain : StateMachine_MonoBase<CameraStates>
         #region Functions
 
         public void ApplyPoint () {
-                CashedTransform = Point.Transform();
-
-                if(SetPositionAndRotationManually)
-                        CamTransform.SetPositionAndRotation(CashedTransform.Position, CashedTransform.Rotation);
+                
         }
 
         public void SetPoint (ICamPointStyle NewPoint) {

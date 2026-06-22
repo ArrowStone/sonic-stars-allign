@@ -1,7 +1,6 @@
 ﻿using Unity.Cinemachine;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using System.Collections;
 
 // Camera movement

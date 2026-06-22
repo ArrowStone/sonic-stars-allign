@@ -222,6 +222,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                 States.Add(PlayerStates.Damage, new Sonic_DamageState(this));
                 States.Add(PlayerStates.RailGrinding, new Sonic_GrindState(this));
                 States.Add(PlayerStates.LinearAutomation, new Sonic_LinearAutomationState(this));
+                States.Add(PlayerStates.PathFollow, new Sonic_PathFollowState(this));
                 States.Add(PlayerStates.Pully, new Sonic_PullyState(this));
                 States.Add(PlayerStates.Pole, new Sonic_PoleState(this));
                 States.Add(PlayerStates.RailSwitch, new Sonic_RailSwitchState(this));
@@ -535,6 +536,7 @@ public enum PlayerStates
         RailGrinding,
         RailSwitch,
         LinearAutomation,
+        PathFollow,
         Pully,
         Pole,
         DropDash,

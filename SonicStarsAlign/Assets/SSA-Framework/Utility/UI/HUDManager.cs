@@ -80,9 +80,19 @@ public class HUDManager : MonoBehaviour
         float _delta = Time.fixedDeltaTime;
 
         stageTimer += _delta;
+
+        int minutes = (int) (stageTimer / 60);
+        int seconds = (int) (stageTimer - 0.5f) % 60;
+        int decimals = (int) (stageTimer * 100 % 100);
+        if(decimals > 99) decimals -= 100;
+
+        TimeCounter.text = string.Format("<mspace=330>{0:00}:{1:00}.{2:00}</mspace>", 
+            minutes,
+            seconds, 
+            decimals);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         GameObject currentTarget = _ctx.HomingTargetDetector.TargetOutput;
         Vector3 viewportPos = Camera.main.WorldToViewportPoint(_ctx.homingTargetPosition);
@@ -94,7 +104,6 @@ public class HUDManager : MonoBehaviour
             if(currentTarget != previousFrameTarget)
             {
                 // Different target -> switch reticles & disable the old one
-                Debug.Log("New Target! " + currentTarget.name + " " + !usingFirstReticle);
                 usingFirstReticle = !usingFirstReticle;
                 previousFrameTarget = currentTarget;
                 previousHomingTarget = targetHomingPos;
@@ -108,7 +117,6 @@ public class HUDManager : MonoBehaviour
         }
         else
         {
-            //Debug.Log("No Target!");
             // No target
             reticleAnimator.SetBool("Active", false);
             secondReticleAnimator.SetBool("Active", false);
@@ -133,7 +141,6 @@ public class HUDManager : MonoBehaviour
         RectTransform secReticle = usingFirstReticle ? SecondHomingReticle : HomingReticle;
         Vector3 secViewportPos = Camera.main.WorldToViewportPoint(previousHomingTarget);
         // Checking if the fading reticle's on-screen
-        Debug.Log(secViewportPos.z);
         if(secViewportPos.x is > -1 and < 1 && secViewportPos.y is > -1 and < 1 && secViewportPos.z > 2f)
         {
             // On-screen
@@ -146,16 +153,6 @@ public class HUDManager : MonoBehaviour
             Animator secAnim = usingFirstReticle ? secondReticleAnimator : reticleAnimator;
             secAnim.SetTrigger("InstantDisable");
         }
-
-        int minutes = (int) (stageTimer / 60);
-        int seconds = (int) (stageTimer - 0.5f) % 60;
-        int decimals = (int) (stageTimer * 100 % 100);
-        if(decimals > 99) decimals -= 100;
-
-        TimeCounter.text = string.Format("<mspace=330>{0:00}:{1:00}.{2:00}</mspace>", 
-            minutes,
-            seconds, 
-            decimals);
     }
 
     private void SetText(int i, string text)
