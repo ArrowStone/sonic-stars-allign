@@ -139,8 +139,6 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         public Overlap_Sphere HomingTargetDetector { get; private set; }
         public Overlap_Sphere RailDetectorL { get; private set; }
         public Overlap_Sphere RailDetectorR { get; private set; }
-        public float MovementLockDistance;
-        public Vector3 MovementLockStartPos;
 
         #endregion Util
 
@@ -233,6 +231,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                 States.Add(PlayerStates.WallJump, new Sonic_WallJumpState(this));
                 States.Add(PlayerStates.LedgeGrab, new Sonic_LedgeGrabState(this));
                 States.Add(PlayerStates.AirDash, new Sonic_AirDashState(this));
+                States.Add(PlayerStates.Debug, new Sonic_DebugState(this));
 
                 CurrentEstate = PlayerStates.Air;
                 CurrentState = States[CurrentEstate];
@@ -251,6 +250,13 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         }
 
         public void FixedUpdate () {
+                if(Input.DebugToggle.WasPressedThisFrame())
+                {
+                        if(CurrentEstate == PlayerStates.Debug)
+                                MachineTransition(PlayerStates.Air);
+                        else    MachineTransition(PlayerStates.Debug);
+                }
+
                 base.MachineFixedUpdate();
 
                 Vector3 relevantVelocity = transform.InverseTransformDirection(Rb.linearVelocity);
@@ -545,4 +551,5 @@ public enum PlayerStates
         WallJump,
         LedgeGrab,
         AirDash,
+        Debug
 }

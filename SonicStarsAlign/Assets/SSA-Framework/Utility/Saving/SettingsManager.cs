@@ -7,7 +7,7 @@ public class SettingsManager : MonoBehaviour
 
     void Awake()
     {
-        settingsElements = FindObjectsByType<SettingsElement>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID);
+        settingsElements = FindObjectsByType<SettingsElement>();
         ResetElements();
     }
 

@@ -164,36 +164,14 @@ public class Sonic_GroundState : IState
                 // Simple point check isn't enough, player can sometimes clip
                 if (Physics.OverlapCapsuleNonAlloc(point0, point1, 0.25f, colliders, _ctx.wallLayer) < 2f) _ctx.Physics_Snap(targetPos);
 
-                // If stopped => unlock movement
-                if (_ctx.Velocity.magnitude < 0.1f)
-                {
-                        _ctx.MovementLockDistance = 0;
-                }
 
                 // Locking movement after a dash panel if needed
-                if (_ctx.MovementLockDistance > 0 && Vector3.Distance(_ctx.transform.position, _ctx.MovementLockStartPos) < _ctx.MovementLockDistance)
-                {
-                        _ctx.PlayerDirection = Vector3.ProjectOnPlane(_ctx.PlayerDirection, _ctx.GroundNormal).normalized;
-                        _ctx.InputVector = _ctx.PlayerDirection;
-                }
-                else
-                {
-                        InputRotations();
-                        _ctx.MovementLockDistance = -1;
-                }
-
+                InputRotations();
 
                 GroundRotation(_delta);
         }
 
         private void GroundRotation ( float _delta ) {
-                
-                if (Vector3.Distance(_ctx.transform.position, _ctx.MovementLockStartPos) < _ctx.MovementLockDistance)
-                {
-                        _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundCast.HitInfo.normal);
-                        return;
-                }
-
                 float _turnStrength = _ctx.ChrTurn.Evaluate(_ctx.HorizontalVelocity.magnitude) * Mathf.PI * _delta;
                 if (_ctx.InputVector.magnitude >= 0.1 && !_ctx.Skid)
                 {

@@ -27,7 +27,7 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
 
     public void DealDamage(float _damage, Vector3 _knockback, int _strength)
     {
-        if (_ctx.CurrentEstate == PlayerStates.Damage) {Debug.Log("Damage state"); return;}
+        if (_ctx.CurrentEstate is PlayerStates.Damage or PlayerStates.Debug) return;
         if (AttackMachine.Library.Active() && AttackMachine.Library.AttackStrength() > _strength) return;
 
         if (_ctx.InvinciblitiyState > 0) return;

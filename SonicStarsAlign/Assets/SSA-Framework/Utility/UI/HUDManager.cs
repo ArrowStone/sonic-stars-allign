@@ -167,11 +167,6 @@ public class HUDManager : MonoBehaviour
         int emptyIndex = Array.FindIndex(popups, i => i == null);
         Debug.Log(emptyIndex);
 
-        foreach (GameObject gb in popups)
-        {
-            Debug.Log(gb);
-        }
-
         if(emptyIndex == -1)
         {
             Debug.Log("No space!");

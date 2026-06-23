@@ -5,7 +5,7 @@ public class ExitMenu : MonoBehaviour
 {
     public void Exit()
     {
-        foreach(Canvas canvas in FindObjectsByType<Canvas>(FindObjectsSortMode.None))
+        foreach(Canvas canvas in FindObjectsByType<Canvas>())
         {
             if(canvas.gameObject.scene.buildIndex != gameObject.scene.buildIndex)
             {

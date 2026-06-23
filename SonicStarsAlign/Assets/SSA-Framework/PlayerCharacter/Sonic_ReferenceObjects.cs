@@ -1,4 +1,3 @@
-using Unity.Collections;
 using UnityEditor;
 using UnityEngine;
 
@@ -16,7 +15,7 @@ public class Sonic_ReferenceObjects : MonoBehaviour
         public void FindAllReferences () {
 #if UNITY_EDITOR
 
-                CameraBrain = Object.FindFirstObjectByType<CamBrain>();
+                CameraBrain = FindAnyObjectByType<CamBrain>();
 
                 EditorUtility.SetDirty(this);
 #endif

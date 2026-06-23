@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Android;
 using UnityEngine.InputSystem;
 
 // Game input
@@ -24,6 +23,7 @@ public class InputComponent : MonoBehaviour
     public InputAction SweepInput { get; private set; }
     public InputAction Respawn { get; private set; }
     public InputAction Touch { get; private set; }
+    public InputAction DebugToggle { get; private set; }
 
     private void Awake()
     {
@@ -41,6 +41,7 @@ public class InputComponent : MonoBehaviour
         SweepInput = I.Player.SweepKick;
         Respawn = I.Player.Respawn;
         Touch = I.Player.Touch;
+        DebugToggle = I.Player.DebugToggle;
     }
 
     private void OnEnable()
