@@ -346,7 +346,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                         return;
                 }
 
-                if (_cl.TryGetComponent(out Automation_Sound _sd))
+                if (_cl.TryGetComponent(out SoundPlayer _sd))
                 {
                         _sd.PlaySound();
                 }

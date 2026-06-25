@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Automation_Sound : MonoBehaviour
+public class SoundPlayer : MonoBehaviour
 {
     [SerializeField] private AudioClip sound;
     [SerializeField] private AudioSource source;

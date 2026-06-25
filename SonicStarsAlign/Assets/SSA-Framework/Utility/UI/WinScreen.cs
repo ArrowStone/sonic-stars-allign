@@ -8,6 +8,7 @@ public class WinScreen : MonoBehaviour
 
     [SerializeField] string CounterFormat;
     [SerializeField] string TimeCounterFormat;
+    [SerializeField] float CounterStep;
     public TextCountdown scoreCounter;
     public TextCountdown ringCounter;
     public TextCountdown timeCounter;
@@ -55,15 +56,15 @@ public class WinScreen : MonoBehaviour
 
         IEnumerator CountdownWait()
         {
-            yield return scoreCounter.CountdownCoroutine(1f, 0, score, Time.fixedDeltaTime, CounterFormat);
-            yield return ringCounter.CountdownCoroutine(1f, 0, rings, Time.fixedDeltaTime, CounterFormat);
-            yield return timeCounter.TimeCountdownCoroutine(1f, 0f, time, Time.fixedDeltaTime, TimeCounterFormat);
+            yield return scoreCounter.CountdownCoroutine(1f, 0, score, CounterStep, CounterFormat);
+            yield return ringCounter.CountdownCoroutine(1f, 0, rings, CounterStep, CounterFormat);
+            yield return timeCounter.TimeCountdownCoroutine(1f, 0f, time, CounterStep, TimeCounterFormat);
         }
         IEnumerator TotalScoreWait()
         {
-            yield return totalScoreCounter.CountdownCoroutine(1f, 0, score, Time.fixedDeltaTime, CounterFormat);
-            yield return totalScoreCounter.CountdownCoroutine(1f, score, ringScore, Time.fixedDeltaTime, CounterFormat);
-            yield return totalScoreCounter.CountdownCoroutine(1f, ringScore, totalScore, Time.fixedDeltaTime, CounterFormat);
+            yield return totalScoreCounter.CountdownCoroutine(1f, 0, score, CounterStep, CounterFormat);
+            yield return totalScoreCounter.CountdownCoroutine(1f, score, ringScore, CounterStep, CounterFormat);
+            yield return totalScoreCounter.CountdownCoroutine(1f, ringScore, totalScore, CounterStep, CounterFormat);
         }
 
         StartCoroutine(CountdownWait());
