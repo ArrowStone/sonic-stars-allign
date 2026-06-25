@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class Sonic_WinState : IState
 {
@@ -11,17 +9,11 @@ public class Sonic_WinState : IState
         _ctx = _machine;
     }
 
-    //Left blank for future changes
     public void EnterState()
     {
-        IEnumerator ExitCoroutine()
-        {
-            yield return new WaitForSeconds(2f);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            SceneManager.LoadScene(0);
-        }
-        _ctx.StartCoroutine(ExitCoroutine());
+        _ctx.HorizontalVelocity = Vector3.zero;
+        _ctx.VerticalVelocity = Vector3.zero;
+        _ctx.Physics_ApplyVelocity();
     }
 
     public void UpdateState()
