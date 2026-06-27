@@ -263,6 +263,7 @@ MonoBehaviour:
   DashLength: 0.2
   HomingAttackSpeed: 60
   HomingAttackBounceForce: 20
+  RailHomingTargetOffset: 10
   LightDashSpeed: 80
   LightDashExitSpeed: 60
   RailCollisionBounce: 5

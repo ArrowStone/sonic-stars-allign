@@ -1,11 +1,12 @@
 using System;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.Splines;
 
 public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 {
+        public static Sonic_PlayerStateMachine Instance {get; private set;}
+
         public InputComponent Input;
         public Sonic_ModelManager ModelManager;
 
@@ -269,23 +270,25 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
         private void Awake()
         {
-            if (SceneSwitcher.Instance != null)
-            {
-                var selectedParams = SceneSwitcher.Instance.GetCachedCharacter();
+                if (Instance == null) Instance = this;
 
-                if (selectedParams != null)
+                if (SceneSwitcher.Instance != null)
                 {
-                    Chp = selectedParams;
-                    airChp = selectedParams;
-                }
+                        var selectedParams = SceneSwitcher.Instance.GetCachedCharacter();
 
-                var selectedStats = SceneSwitcher.Instance.GetCachedStats();
+                        if (selectedParams != null)
+                        {
+                                Chp = selectedParams;
+                                airChp = selectedParams;
+                        }
 
-                if (selectedStats != null)
-                {
-                    Chs = selectedStats;
+                        var selectedStats = SceneSwitcher.Instance.GetCachedStats();
+
+                        if (selectedStats != null)
+                        {
+                                Chs = selectedStats;
+                        }
                 }
-            }
         }
 
     #region AdditionalFunctions
@@ -451,7 +454,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                         // Spline (e. g. rail)
                         homingOntoSpline = true;
                         SplineUtility.GetNearestPoint(container.Spline,
-                        HomingTargetDetector.TargetOutput.transform.InverseTransformPoint(transform.position + PlayerDirection * 10f),
+                        HomingTargetDetector.TargetOutput.transform.InverseTransformPoint(transform.position + PlayerDirection * Chp.RailHomingTargetOffset),
                         out float3 nearest, out _);
                         homingTargetPosition = HomingTargetDetector.TargetOutput.transform.TransformPoint(nearest);
                 }

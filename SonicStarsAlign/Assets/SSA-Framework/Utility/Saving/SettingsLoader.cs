@@ -86,11 +86,5 @@ public class SettingsLoader : MonoBehaviour
         cameraData.antialiasingQuality = SMAAQualities[AAQuality];
         cameraData.taaSettings.quality = TAAQualities[AAQuality];
         pipelineAsset.renderScale = renderScale;
-
-        if (pointPlayer)
-        {
-            pointPlayer.JoystickSensitivity *= 0.5f + joySensitivity;
-            pointPlayer.MouseSensitivity *= 0.5f + mouseSensitivity;
-        }
     }
 }

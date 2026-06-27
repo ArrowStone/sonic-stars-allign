@@ -48,33 +48,6 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPointStyle
         [ColourIfNull(0.6f , 0.2f , 0.2f , 2f)] public CameraStatsPrimary PrimaryStats;
         [ColourIfNull(0.6f , 0.2f , 0.2f , 2f)] public CameraStatsEffects EffectStats;
 
-        [Header("Parameters")]
-
-
-        [Header("Legacy Parameters")]
-        public float TargetDistance;
-
-        public Vector3 Offset;
-
-
-        public float2 YLimits;
-
-        public Vector2 MouseSensitivity;
-        public Vector2 JoystickSensitivity;
-
-        [Space]
-        public float SmoothRotationSpeed = 0.2f;
-
-        public float MovementSmoothing;
-
-        [Space]
-        public float CameraRecenteringWait;
-
-        public float YAxisRecenteringSpeed;
-        public float XAxisRecenteringSpeed;
-
-        public float BackCameraSpeed;
-
         #region Util
 
         private float _currentPlayerRunningSpeed;
@@ -86,11 +59,6 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPointStyle
         private bool _isCameraInFrontOfCharacter;
         private bool _canSetIsCameraInFrontOfCharacter = true;
         private float _CharacterCameraDot;
-
-        private Vector3 _cashedTargetPosition;
-
-        private Vector2 _joystickInputValues;
-        private Vector2 _mouseInputValues;
 
         private Vector2 _rot;
 
@@ -114,10 +82,6 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPointStyle
 
         public void OnEnterPoint ( CamBrain _brain ) {
                 Brain = _brain;
-                _position = _brain.CashedTransform.Position;
-                _rotation = _brain.CashedTransform.Rotation;
-                // _cashedTargetPosition = Target.GetComponentInChildren<Rigidbody>().position;
-                _cashedTargetPosition = MainTarget.position;
 
                 //Cinemachine setup
                 CMCamera.Target.TrackingTarget = MainTarget;
@@ -141,20 +105,6 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPointStyle
                 CalculateFOV();
 
                 AutoRecenterCamera(false);
-
-                if (MainTarget != null)
-                {
-                        _cashedTargetPosition = MainTarget.position;
-                }
-                if (Brain.Input != null)
-                {
-                        InputHandling(_delta);
-                }
-
-
-                //_position = SmoothMove(Brain, UpdatePosition(_delta), _delta);
-                _position = UpdatePosition(_delta);
-                _rotation = UpdateRotation(_delta);
 
                 _previousPlayerRunningSpeed = _currentPlayerRunningSpeed;
 
@@ -350,44 +300,6 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPointStyle
         #endregion
 
         #region camera control
-        private void InputHandling ( float _delta ) {
-                // looking behind where the player is facing
-                if (Brain.Input.BackCameraInput.IsPressed())
-                {
-                        AutoRecenterCamera(true);
-                        _rot.y = Mathf.LerpAngle(_rot.y, MainTarget.eulerAngles.y + 180f, BackCameraSpeed * _delta);
-                }
-                else
-                {
-                        if ((_joystickInputValues + _mouseInputValues).magnitude < 0.1f)
-                        {
-                                _recenteringState -= _delta;
-                                if (_recenteringState <= 0)
-                                {
-                                        _rot.x = Mathf.LerpAngle(_rot.x, MainTarget.eulerAngles.x, YAxisRecenteringSpeed * _delta);
-                                        _rot.y = Mathf.LerpAngle(_rot.y, MainTarget.eulerAngles.y, XAxisRecenteringSpeed * _delta);
-                                }
-
-                        }
-                        else
-                        {
-                                _recenteringState = CameraRecenteringWait;
-                        }
-
-                        // Screw joystick simulation we're going full SRB2
-                        //_inputValues = Vector2.ClampMagnitude(Brain.Input.CameraInput.ReadValue<Vector2>(), 1);
-                        _joystickInputValues = Brain.Input.CameraInputValues;
-                        _mouseInputValues = Vector2.Lerp(_mouseInputValues, Brain.Input.MouseInput.ReadValue<Vector2>(), SmoothRotationSpeed * _delta);
-
-                        // Idk why x and y values are swapped but i dont wanna fix it
-                        _rot.y += _joystickInputValues.x * JoystickSensitivity.x * _delta;
-                        _rot.x -= _joystickInputValues.y * JoystickSensitivity.y * _delta;
-                        _rot.y += _mouseInputValues.x * MouseSensitivity.x * Time.timeScale; // Multiply by timescale so the camera wont rotate while paused
-                        _rot.x -= _mouseInputValues.y * MouseSensitivity.y * Time.timeScale;
-
-                        _rot.x = Mathf.Clamp(_rot.x, YLimits.x, YLimits.y);
-                }
-        }
 
         private void AutoRecenterCamera ( bool ManualOverwrite ) {
 
@@ -474,31 +386,5 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPointStyle
                 _canSetIsCameraInFrontOfCharacter = true;
         }
 
-        public Quaternion UpdateRotation ( float _delta ) {
-                // Dunno why its here but it messes with using the mouse for rotation so it goes in the trash
-                //return Quaternion.RotateTowards(_rotation, Quaternion.LookRotation(Target.position - _position), SmoothRotationSpeed * _delta);
-                return Quaternion.LookRotation(MainTarget.position - _position);
-        }
-
-        public Vector3 UpdatePosition ( float _delta ) {
-                Quaternion _posRot = new()
-                {
-                        eulerAngles = new Vector3(_rot.x, _rot.y)
-                };
-                return _cashedTargetPosition + Offset + (_posRot * (Vector3.forward * TargetDistance));
-        }
-
         #endregion AdditionalFunctions
-
-        private Vector3 _position;
-        private Quaternion _rotation = Quaternion.identity;
-
-        public PosRot Transform () {
-                PosRot _transfrm = new()
-                {
-                        Position = _position,
-                        Rotation = _rotation
-                };
-                return _transfrm;
-        }
 }

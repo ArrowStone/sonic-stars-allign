@@ -6,6 +6,8 @@ using UnityEngine.UI;
 // Simplifies and unifies interaction with the HUD.
 public class HUDManager : MonoBehaviour
 {
+    public static HUDManager Instance {get; private set;}
+
     [SerializeField] private TextMeshProUGUI[] textObjects;
     [SerializeField] private GameObject scoreTextPopup;
     [SerializeField] private GameObject scoreImagePopup;
@@ -27,6 +29,11 @@ public class HUDManager : MonoBehaviour
     public Sonic_PlayerStateMachine _ctx;
 
     private GameObject[] popups;
+
+    void Start()
+    {
+        if(Instance == null) Instance = this;
+    }
 
     // Initialising automatic counters like rings and score
     private void Awake()
@@ -113,7 +120,6 @@ public class HUDManager : MonoBehaviour
             
             anim.SetBool("Active", true);
             targetHomingPos = _ctx.homingTargetPosition;
-            //previousFrameTarget = currentTarget;
         }
         else
         {

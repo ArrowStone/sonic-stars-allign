@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using System;
+
+// Handles the presentation of data on the results screen
 public class WinScreen : MonoBehaviour
 {
     static public WinScreen Instance {get; private set;}
@@ -40,10 +42,10 @@ public class WinScreen : MonoBehaviour
 
     public void Activate()
     {
-        //var data = SceneSwitcher.Instance.GetWinData();
-        int score = 200;
-        int rings = 50;
-        float time = 2;
+        PlayerCharacterStats chs = Sonic_PlayerStateMachine.Instance.Chs;
+        int score = chs.Score;
+        int rings = (int) chs.Rings;
+        float time = HUDManager.Instance.stageTimer;
         int ringScore = score + rings * 10;
         int totalScore = ringScore + Math.Max(0, targetTime - (int) time) * 5;
         int rank = 0;
