@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using GLTFast;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Splines;
@@ -47,25 +49,22 @@ public class LinkedLevelObject
 public class GameLevelLoader : MonoBehaviour
 {
     [SerializeField] string sceneAssetPath;
+    [SerializeField] TextAsset LevelData;
     [SerializeField] List<LinkedLevelObject> levelObjects;
     [SerializeField] int groundLayer;
-    void Awake()
+    async void Awake()
     {
         Scene levelScene = SceneManager.CreateScene("Level");
-        //GameObject levelMesh = (GameObject) Instantiate(Resources.Load<GameObject>(sceneAssetPath), levelScene);
-        /*var gltfAsset = gameObject.AddComponent<GLTFast.GltfAsset>();
-        gltfAsset.Url = "file:///home/ice/sonic-stars-allign/SonicStarsAlign/Assets/Resources/Stages/Level.glb";
-        gltfAsset.Instantiate();*/
-        /*GameObject levelMesh = gltfAsset.gameObject;
-        Task<bool> loadTask = gltfAsset.Load("file:///home/ice/sonic-stars-allign/SonicStarsAlign/Assets/Resources/Stages/Level.glb");
-        
-        IEnumerator LoadWait()
+        GltfImport gltf = new GltfImport();
+        string gltfPath = "file://" + Application.dataPath.Replace("Assets", "") + AssetDatabase.GetAssetPath(LevelData).Replace(".json", ".glb");
+        bool success = await gltf.Load(gltfPath);
+        if(!success)
         {
-            yield return new WaitUntil(() => loadTask.IsCompleted);
-            gltfAsset.InstantiateScene(10);
+            // Can't find the .glb file
+            Debug.LogError(string.Format("glTF file not found at \"{0}\".", gltfPath));
         }
-
-        StartCoroutine(LoadWait());
+        GameObject levelMesh = new GameObject("Pingas");
+        await gltf.InstantiateMainSceneAsync(levelMesh.transform);
 
         // Add collider and assign the ground layer to each piece of geometry
         foreach(Transform child in levelMesh.transform)
@@ -82,12 +81,11 @@ public class GameLevelLoader : MonoBehaviour
         {
             levelMesh.gameObject.AddComponent<MeshCollider>();
             levelMesh.gameObject.layer = groundLayer;
-        }*/
+        }
 
-        // Load the level object JSON
-        TextAsset levelObjectData = Resources.Load<TextAsset>(sceneAssetPath);
-        Debug.Log(levelObjectData);
-        JObject[] objects = JsonConvert.DeserializeObject<JObject[]>(levelObjectData.text);
+        // Handle the level object JSON
+        Debug.Log(LevelData);
+        JObject[] objects = JsonConvert.DeserializeObject<JObject[]>(LevelData.text);
 
         foreach(JObject obj in objects)
         {

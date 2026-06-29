@@ -1,5 +1,4 @@
 ﻿using Unity.Cinemachine;
-using Unity.Mathematics;
 using UnityEngine;
 using System.Collections;
 
@@ -53,7 +52,6 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPointStyle
         private float _currentPlayerRunningSpeed;
         private float _previousPlayerRunningSpeed;
 
-        private float _recenteringState;
         private bool _canCheckSpeedForRecenter = true;
 
         private bool _isCameraInFrontOfCharacter;
@@ -69,7 +67,6 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPointStyle
         private Vector2 _previousCameraAxisValues;
         private Vector2 _currentCameraAxisValues;
         private float _amountMovedHorizThisFrame;
-        private Vector2 _inputThisFrame;
 
         //Offsets
         private float _currentLookAheadModifier;

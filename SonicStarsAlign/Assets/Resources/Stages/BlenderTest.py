@@ -18,7 +18,7 @@ from bpy.props import StringProperty
 from bpy.types import Operator
 
 
-class ExportSomeData(Operator, ExportHelper):
+class ExportLevelData(Operator, ExportHelper):
     """Exports the level model and level objects' custom properties"""
     bl_idname = "sonic_collision.level_data"
     bl_label = "Export Level Data"
@@ -39,6 +39,7 @@ class ExportSomeData(Operator, ExportHelper):
 
         # Processing data for the objects JSON
         for obj in collection.objects:
+            print(obj.name)
 
             # Quick scale access because we apply it here
             scaleX = obj.scale.x
@@ -63,7 +64,7 @@ class ExportSomeData(Operator, ExportHelper):
             # Checking if there's data to export
             if obj.data is None:
                 fileOutput.append(fileData)
-                break
+                continue
 
             # Exporting the curve if there is one
             if obj.data.id_type == "CURVE":
@@ -83,17 +84,17 @@ class ExportSomeData(Operator, ExportHelper):
 
 
 def menu_func_export(self, context):
-    self.layout.operator(ExportSomeData.bl_idname, text="Export level data")
+    self.layout.operator(ExportLevelData.bl_idname, text="Export level data")
 
 
 # Register and add to the "file selector" menu (required to use F3 search "Text Export Operator" for quick access).
 def register():
-    bpy.utils.register_class(ExportSomeData)
+    bpy.utils.register_class(ExportLevelData)
     bpy.types.TOPBAR_MT_file_export.append(menu_func_export)
 
 
 def unregister():
-    bpy.utils.unregister_class(ExportSomeData)
+    bpy.utils.unregister_class(ExportLevelData)
     bpy.types.TOPBAR_MT_file_export.remove(menu_func_export)
 
 
@@ -101,4 +102,4 @@ if __name__ == "__main__":
     register()
 
     # Test call.
-    bpy.ops.sonic_collision.level_data('INVOKE_DEFAULT')
+    #bpy.ops.sonic_collision.level_data('INVOKE_DEFAULT')
