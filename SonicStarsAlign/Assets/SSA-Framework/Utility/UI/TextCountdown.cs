@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -23,15 +22,16 @@ public class TextCountdown : MonoBehaviour
     {
         float startTime = Time.time;
         float currentValue = startValue;
+        float step = (targetValue - startValue) / time * stepTime;
         
         while(Time.time - startTime < time)
         {
-            textComponent.text = String.Format(format, (int) currentValue);
-            currentValue += (targetValue - startValue) / time * stepTime;
+            textComponent.text = string.Format(format, (int) currentValue);
+            currentValue += step;
             yield return new WaitForSeconds(stepTime);
-            StepEvent.Invoke();
+            if(step != 0) StepEvent.Invoke();
         }
-        textComponent.text = String.Format(format, (int) targetValue);
+        textComponent.text = string.Format(format, (int) targetValue);
         DoneEvent.Invoke();
     }
 
@@ -53,7 +53,7 @@ public class TextCountdown : MonoBehaviour
 
     public void SetValue(int value, string format = "{0}")
     {
-        textComponent.text = String.Format(format, value);
+        textComponent.text = string.Format(format, value);
     }
     
     public void SetTime(float time, string format = "{0:00}:{1:00}.{2:00}")

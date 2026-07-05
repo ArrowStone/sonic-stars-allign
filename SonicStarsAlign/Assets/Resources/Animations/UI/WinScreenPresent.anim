@@ -511,7 +511,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.9666667
+        time: 2
         value: 1
         inSlope: 0
         outSlope: 0
@@ -1660,7 +1660,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.9666667
+        time: 2
         value: 1
         inSlope: 0
         outSlope: 0
@@ -1815,8 +1815,15 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 1.9833333
+  - time: 1.8333334
     functionName: PlayMusic
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 2
+    functionName: ToggleObjects
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

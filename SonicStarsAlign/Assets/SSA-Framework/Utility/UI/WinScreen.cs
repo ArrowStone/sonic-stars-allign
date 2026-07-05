@@ -16,7 +16,9 @@ public class WinScreen : MonoBehaviour
     public TextCountdown timeCounter;
     public TextCountdown totalScoreCounter;
     public Image RankImage;
-    public AudioSource MusicPlayer;
+    public AudioSource MusicSource;
+    public GameObject[] ObjectsToToggle;
+    public GoalRing goalRing;
 
     [SerializeField] private Sprite[] rankLetters;
     [SerializeField] private int[] rankScores;
@@ -47,14 +49,9 @@ public class WinScreen : MonoBehaviour
         int score = chs.Score;
         int rings = (int) chs.Rings;
         float time = HUDManager.Instance.stageTimer;
-        int ringScore = score + rings * 10;
-        int totalScore = ringScore + Math.Max(0, targetTime - (int) time) * 5;
-        int rank = 0;
-        for(int i=0; i < rankScores.Length; i++)
-        {
-            if(rankScores[i] > totalScore) break;
-            rank = i;
-        }
+        int ringScore = rings * 100;
+        int totalScore = score + Math.Max(0, targetTime - (int) time) * 5;
+        int rank = goalRing.RankCalc(Sonic_PlayerStateMachine.Instance);
         RankImage.sprite = rankLetters[rank];
 
         IEnumerator CountdownWait()
@@ -65,9 +62,9 @@ public class WinScreen : MonoBehaviour
         }
         IEnumerator TotalScoreWait()
         {
-            yield return totalScoreCounter.CountdownCoroutine(1f, 0, score, CounterStep, CounterFormat);
-            yield return totalScoreCounter.CountdownCoroutine(1f, score, ringScore, CounterStep, CounterFormat);
-            yield return totalScoreCounter.CountdownCoroutine(1f, ringScore, totalScore, CounterStep, CounterFormat);
+            yield return totalScoreCounter.CountdownCoroutine(1f, 0, score - ringScore, CounterStep, CounterFormat);
+            yield return totalScoreCounter.CountdownCoroutine(1f, score - ringScore, score, CounterStep, CounterFormat);
+            yield return totalScoreCounter.CountdownCoroutine(1f, score, totalScore, CounterStep, CounterFormat);
         }
 
         StartCoroutine(CountdownWait());
@@ -77,6 +74,14 @@ public class WinScreen : MonoBehaviour
     // Have to do this because animation events do a stupid
     public void PlayMusic()
     {
-        MusicPlayer.Play();
+        MusicSource.Play();
+    }
+
+    public void ToggleObjects()
+    {
+        foreach(GameObject obj in ObjectsToToggle)
+        {
+            obj.SetActive(!obj.activeSelf);
+        }
     }
 }

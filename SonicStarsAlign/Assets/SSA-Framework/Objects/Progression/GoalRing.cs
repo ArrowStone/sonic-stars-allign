@@ -4,6 +4,7 @@ public class GoalRing : CollectableBase
 {
     public StageData Data;
     public GameStateManager GameStateSaver;
+    public WinScreen winScreen;
     [SerializeField] private UnityEvent AdditionalReachEvent;
 
     public override void Collection(Collider _triggerer)
@@ -13,6 +14,8 @@ public class GoalRing : CollectableBase
             _ctx.Snd.PlaySound("GoalRing");
             CollectionEvent.Invoke();
             _ctx.MachineTransition(PlayerStates.Win);
+
+            winScreen.goalRing = this;
 
             // The trigger's name is meant to be the verb btw
             WinScreen.Instance.GetComponent<Animator>().SetTrigger("Present");
