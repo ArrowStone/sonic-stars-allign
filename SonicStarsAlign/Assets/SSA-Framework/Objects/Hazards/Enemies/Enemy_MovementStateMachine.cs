@@ -42,7 +42,6 @@ public abstract class Enemy_MovementStateMachine : StateMachine_MonoBase<EnemySt
 
     public void FixedUpdate()
     {
-        //Debug.Log(CurrentEstate);
         base.MachineFixedUpdate();
     }
 
@@ -75,5 +74,6 @@ public abstract class Enemy_MovementStateMachine : StateMachine_MonoBase<EnemySt
 public enum EnemyStates
 {
     Ground,
-    Air
+    Air,
+    Stunned
 }

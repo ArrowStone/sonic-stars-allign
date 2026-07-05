@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GLTFast;
 using Newtonsoft.Json;
@@ -19,7 +20,7 @@ public class LinkedLevelObject
         // Feel free to make this mess clearer if you know how
         if(ComponentType.Equals("")) return;
 
-        System.Type compType = typeof(LinkedLevelObject).Assembly.GetType(ComponentType);
+        Type compType = typeof(LinkedLevelObject).Assembly.GetType(ComponentType);
 
         if(compType == null)
         {
@@ -63,7 +64,7 @@ public class GameLevelLoader : MonoBehaviour
             // Can't find the .glb file
             Debug.LogError(string.Format("glTF file not found at \"{0}\".", gltfPath));
         }
-        GameObject levelMesh = new GameObject("Pingas");
+        GameObject levelMesh = (GameObject) Instantiate(new GameObject("Level"), levelScene);
         await gltf.InstantiateMainSceneAsync(levelMesh.transform);
 
         // Add collider and assign the ground layer to each piece of geometry
@@ -84,7 +85,6 @@ public class GameLevelLoader : MonoBehaviour
         }
 
         // Handle the level object JSON
-        Debug.Log(LevelData);
         JObject[] objects = JsonConvert.DeserializeObject<JObject[]>(LevelData.text);
 
         foreach(JObject obj in objects)
@@ -120,6 +120,8 @@ public class GameLevelLoader : MonoBehaviour
             GameObject gobj = (GameObject) Instantiate(link.LevelObject, levelScene);
 
             float[] pos = obj["position"].ToObject<float[]>();
+            Debug.Log(obj["position"]);
+            Debug.Log(String.Format("{0} {1} {2}", pos[0], pos[1], pos[2]));
             float[] rot = obj["rotation"].ToObject<float[]>();
 
             gobj.name = obj["name"].ToString();
@@ -129,6 +131,7 @@ public class GameLevelLoader : MonoBehaviour
             // Rails and crap
             if(obj.ContainsKey("curve"))
             {
+                Debug.Log("Spline processing!");
                 SplineContainer cont = gobj.GetComponent<SplineContainer>();
                 cont = cont ? cont : gobj.GetComponentInChildren<SplineContainer>();
                 if(!cont)

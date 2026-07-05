@@ -13,21 +13,31 @@ public class GoalRing : CollectableBase
             _ctx.Snd.PlaySound("GoalRing");
             CollectionEvent.Invoke();
             _ctx.MachineTransition(PlayerStates.Win);
-            /*GameStateSaver.UpdateStageData(Data);
-            Data.Complete = true;
-            DataSaving.RecordStageData(Data);*/
 
-            /*int rank = RankCalc(_ctx);
+            // The trigger's name is meant to be the verb btw
+            WinScreen.Instance.GetComponent<Animator>().SetTrigger("Present");
+            AdditionalReachEvent.Invoke();
+
+            if(!(GameStateSaver && Data)) 
+            {
+                // Probably launched the scene in editor, don't bother
+                Debug.LogWarning(string.Format( "Skipping saving progress due to absence of {0}{1}{2}.",
+                                                GameStateSaver ? ""  : "GameStateSaver",
+                                                !(GameStateSaver || Data) ? " and " : "",
+                                                Data ? ""  : "Data"));
+                return;
+            }
+            GameStateSaver.UpdateStageData(Data);
+            Data.Complete = true;
+            DataSaving.RecordStageData(Data);
+
+            int rank = RankCalc(_ctx);
             SceneSwitcher.Instance.CacheWinData(
                 _ctx.Chs.Score,
                 GameStateSaver.hudManager.stageTimer,
                 _ctx.Chs.Rings,
                 rank
-            );*/
-            //SceneSwitcher.Instance.SwitchScene(WinSceneIndex);
-            // The trigger's name is meant to be the verb btw
-            WinScreen.Instance.GetComponent<Animator>().SetTrigger("Present");
-            AdditionalReachEvent.Invoke();
+            );
         }
     }
 

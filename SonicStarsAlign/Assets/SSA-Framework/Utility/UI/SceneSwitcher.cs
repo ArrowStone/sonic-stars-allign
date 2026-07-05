@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// A script which is just supposed to tackle switching scenes using events and animations.
+// However, it kind of grew out of control.
 public class SceneSwitcher : MonoBehaviour
 {
     private int cachedScene = 0;
@@ -68,7 +70,7 @@ public class SceneSwitcher : MonoBehaviour
         AddScene(cachedScene);
     }
 
-    // Sorry lajeeth had to bring this back so main mneu buttons work
+    // Sorry lajeeth had to bring this back so main menu would buttons work
 
     public void CacheScene(int _scn)
     {

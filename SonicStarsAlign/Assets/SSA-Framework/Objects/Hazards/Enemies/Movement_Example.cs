@@ -32,8 +32,6 @@ public class Movement_Example : Enemy_MovementStateMachine
             targetLookPos.y = transform.position.y;
             targetRotation = Quaternion.LookRotation((targetLookPos - transform.position).normalized);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, _delta * rotationSpeed);
-            //Debug.Log();
-            //Debug.DrawRay(transform.position, transform.forward * 10f, Color.red, _delta);
             HorizontalVelocity = movementSpeed * Mathf.Max(0f, 1f - Quaternion.Angle(targetRotation, transform.rotation) * 0.02f) * transform.forward;
             Physics_ApplyVelocity();
         }

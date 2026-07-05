@@ -1829,22 +1829,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8686193632016039774, guid: 8ed7ea0843703b97a98df69089887798, type: 3}
---- !u!1 &40106164 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6873897379251993779, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
-  m_PrefabInstance: {fileID: 95659554}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &40106168 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5892325253384980216, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
-  m_PrefabInstance: {fileID: 95659554}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 40106164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d00f476b5c36b654ebd3bf585b5b3829, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &42136717
 GameObject:
   m_ObjectHideFlags: 0
@@ -27536,12 +27520,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0240f1e196ce2a4ab167c1ad424c486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Brain: {fileID: 0}
-  Target: {fileID: 95659555}
-  PointTransform: {fileID: 188107175}
-  RotationSmoothTime: 0.2
-  RecenteringWait: 0
-  RecenteringSpeed: 10
 --- !u!114 &445835126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27554,29 +27532,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9247b8fdbee1f96458149e2269f596cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerCameraBrain: {fileID: 40106168}
-  Enter:
-    Point: {fileID: 445835120}
-    WeightCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  EnterEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  Exit:
-    Point: {fileID: 40106164}
-    WeightCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  ExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &445835127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34078,6 +34033,8 @@ GameObject:
   - component: {fileID: 625632991}
   - component: {fileID: 625632992}
   - component: {fileID: 625632993}
+  - component: {fileID: 625632994}
+  - component: {fileID: 625632995}
   m_Layer: 5
   m_Name: WinScreen
   m_TagString: Untagged
@@ -34097,12 +34054,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1456804730}
   - {fileID: 1662930498}
   - {fileID: 954895713}
   - {fileID: 1332201835}
   - {fileID: 763164368}
   - {fileID: 381986519}
+  - {fileID: 1456804730}
   m_Father: {fileID: 720331564}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -34121,7 +34078,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: a66f9e18416024b439cad630c13f0093, type: 3}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -34227,6 +34184,7 @@ MonoBehaviour:
   timeCounter: {fileID: 807998331}
   totalScoreCounter: {fileID: 1474785290}
   RankImage: {fileID: 306444796}
+  MusicPlayer: {fileID: 625632994}
   rankLetters:
   - {fileID: 21300000, guid: abcb76deac9c29844a3da5ee4248a843, type: 3}
   - {fileID: 21300000, guid: d3f8587c5e200f648a6db800c1f2e276, type: 3}
@@ -34368,6 +34326,116 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Automation_Sound
   sound: {fileID: 8300000, guid: 9593510628a8d46b0929b82c6b8099fa, type: 3}
   source: {fileID: 625632988}
+--- !u!82 &625632994
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625632986}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -8372143128106977872, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 887de46812ab3429d9f11c04c9f8db79, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &625632995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625632986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cdc683a2fd56b047bc0f0b0b7c8afec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneSwitcher
+  gameplaySceneIndex: 0
 --- !u!1 &627252962
 GameObject:
   m_ObjectHideFlags: 0

@@ -289,6 +289,10 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                                 Chs = selectedStats;
                         }
                 }
+
+                // Resetting stuff as it doesn't auto-reset
+                Chs.Rings = 0;
+                Chs.Score = 0;
         }
 
     #region AdditionalFunctions

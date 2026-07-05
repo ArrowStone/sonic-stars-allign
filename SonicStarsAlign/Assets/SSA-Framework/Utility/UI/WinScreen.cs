@@ -16,6 +16,7 @@ public class WinScreen : MonoBehaviour
     public TextCountdown timeCounter;
     public TextCountdown totalScoreCounter;
     public Image RankImage;
+    public AudioSource MusicPlayer;
 
     [SerializeField] private Sprite[] rankLetters;
     [SerializeField] private int[] rankScores;
@@ -71,5 +72,11 @@ public class WinScreen : MonoBehaviour
 
         StartCoroutine(CountdownWait());
         StartCoroutine(TotalScoreWait());
+    }
+
+    // Have to do this because animation events do a stupid
+    public void PlayMusic()
+    {
+        MusicPlayer.Play();
     }
 }
