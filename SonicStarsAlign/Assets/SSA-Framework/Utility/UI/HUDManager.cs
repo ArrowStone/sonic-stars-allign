@@ -25,7 +25,6 @@ public class HUDManager : MonoBehaviour
     public int maxPopupCount;
     public float ScorePopupIgnoreBelow;
     public float PopupOffset;
-    public float stageTimer;
     public Sonic_PlayerStateMachine _ctx;
 
     private GameObject[] popups;
@@ -71,14 +70,26 @@ public class HUDManager : MonoBehaviour
             }
             
         }
+        void SetTime(float time, float _)
+        {
+            int minutes = (int) (time / 60);
+            int seconds = (int) (time - 0.5f) % 60;
+            int decimals = (int) (time * 100 % 100);
+            if(decimals > 99) decimals -= 100;
+
+            TimeCounter.text = string.Format("<mspace=330>{0:00}:{1:00}.{2:00}</mspace>", 
+                minutes,
+                seconds, 
+                decimals);
+        }
 
         _ctx.Chs.RingSet += SetRings;
         _ctx.Chs.ScoreSet += SetScore;
+        _ctx.Chs.TimeSet += SetTime;
 
-        _ctx.Chs.Rings = _ctx.Chs.Rings;
-        _ctx.Chs.Score = _ctx.Chs.Score;
-
-        stageTimer = 0;
+        _ctx.Chs.Rings = 0;
+        _ctx.Chs.Score = 0;
+        _ctx.Chs.Time = 0;
     }
 
     // Homing indicator
@@ -86,17 +97,7 @@ public class HUDManager : MonoBehaviour
     {
         float _delta = Time.fixedDeltaTime;
 
-        stageTimer += _delta;
-
-        int minutes = (int) (stageTimer / 60);
-        int seconds = (int) (stageTimer - 0.5f) % 60;
-        int decimals = (int) (stageTimer * 100 % 100);
-        if(decimals > 99) decimals -= 100;
-
-        TimeCounter.text = string.Format("<mspace=330>{0:00}:{1:00}.{2:00}</mspace>", 
-            minutes,
-            seconds, 
-            decimals);
+        _ctx.Chs.Time += _delta;
     }
 
     private void LateUpdate()
@@ -169,9 +170,7 @@ public class HUDManager : MonoBehaviour
     // Showing score gain
     public void ScorePopup(string popupText)
     {
-        Debug.Log(popupText);
         int emptyIndex = Array.FindIndex(popups, i => i == null);
-        Debug.Log(emptyIndex);
 
         if(emptyIndex == -1)
         {

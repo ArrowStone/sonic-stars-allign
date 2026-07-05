@@ -15,14 +15,18 @@ public static class DataSaving
     {
         string saveData = JsonUtility.ToJson(data);
         string filePath = GetSaveFileForStage(data);
+
+        Debug.Log(string.Format("Saving into file at {0}!", filePath));
         if(File.Exists(filePath))
         {
             File.WriteAllText(filePath, saveData, System.Text.Encoding.UTF8);
         }
         else
         {
-            Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "save-0/"));
-            Debug.Log("Creating new save file!");
+            // Intention is to have more save files down the line, so the number 0 will change.
+            string saveFolder = Path.Combine(Application.persistentDataPath, "save-0/");
+            Directory.CreateDirectory(saveFolder);
+            Debug.Log(string.Format("Creating new save file in folder {0}!", saveFolder));
             StreamWriter file = File.CreateText(filePath);
             file.Write(saveData);
             file.Close();
@@ -34,9 +38,21 @@ public static class DataSaving
         string filePath = GetSaveFileForStage(data);
         if(File.Exists(filePath))
         {
+            int[] rankScores = (int[]) data.RankScores.Clone();
+            int stageRingCount = data.StageRingCount;
+            float targetTime = data.TargetTime;
+
+            Debug.Log(rankScores);
+
             string textData = File.ReadAllText(filePath, System.Text.Encoding.UTF8);
             JsonUtility.FromJsonOverwrite(textData, data);
+
+            Debug.Log(rankScores);
+
+            data.RankScores = rankScores;
+            data.StageRingCount = stageRingCount;
+            data.TargetTime = targetTime;
         }
-        else Debug.Log("No file for " + data.saveFile);
+        else Debug.Log("No existing file for " + data.saveFile);
     }
 }

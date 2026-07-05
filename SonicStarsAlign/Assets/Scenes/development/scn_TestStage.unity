@@ -24206,6 +24206,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 625632990}
     - target: {fileID: 132287486102300894, guid: ac618e7758f400149912444418544d6c, type: 3}
+      propertyPath: GameStateSaver
+      value: 
+      objectReference: {fileID: 1559113360}
+    - target: {fileID: 132287486102300894, guid: ac618e7758f400149912444418544d6c, type: 3}
       propertyPath: AdditionalReachEvent.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -65239,9 +65243,9 @@ Transform:
   - {fileID: 2143413670}
   - {fileID: 1042968363}
   - {fileID: 1022758082}
-  - {fileID: 686877418}
   - {fileID: 587366236}
   - {fileID: 761402860}
+  - {fileID: 686877418}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1504277491
@@ -67147,7 +67151,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5647529648611033916, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1060413610}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1499848914895319125, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1559113360}
   m_SourcePrefab: {fileID: 100100000, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
 --- !u!114 &1559113358 stripped
 MonoBehaviour:
@@ -67160,6 +67167,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cdc683a2fd56b047bc0f0b0b7c8afec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1559113359 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1499848914895319125, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
+  m_PrefabInstance: {fileID: 1559113357}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1559113360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559113359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf629c2a41cb2f27e8f7950be5e9cd6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StageDataAssets:
+  - {fileID: 11400000, guid: cd1fe3b8682ce3c4c9121affe1ca87bd, type: 2}
+  - {fileID: 11400000, guid: 328a85c0e526200cb8d802a5539e2699, type: 2}
+  ctx: {fileID: 1488587696}
 --- !u!64 &1562070103
 MeshCollider:
   m_ObjectHideFlags: 0

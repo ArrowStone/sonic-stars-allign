@@ -6,7 +6,6 @@ public class GameStateManager : MonoBehaviour
 {
     public StageData[] StageDataAssets;
     public Sonic_PlayerStateMachine ctx;
-    public HUDManager hudManager;
     public void LoadData()
     {
         if(StageDataAssets == null) return;
@@ -19,7 +18,7 @@ public class GameStateManager : MonoBehaviour
 
     public void UpdateStageData(StageData data)
     {
-        data.bestTime = Math.Max(data.bestTime, hudManager.stageTimer);
+        data.bestTime = Math.Max(data.bestTime, ctx.Chs.Time);
         data.bestScore = Math.Max(data.bestScore, ctx.Chs.Score);
     }
 

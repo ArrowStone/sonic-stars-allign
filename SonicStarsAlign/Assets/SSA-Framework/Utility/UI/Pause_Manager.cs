@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 // da thing that does pause
 public class Pause_Manager : MonoBehaviour
 {
+    public static Pause_Manager Instance;
     public GameObject pauseMenu;
     public MonoBehaviour[] gameComponents;
     public static bool paused = false;
@@ -11,6 +12,8 @@ public class Pause_Manager : MonoBehaviour
     private bool wasPauseButtonReleased = true;
     void OnEnable()
     {
+        Instance = this;
+
         SetPauseState(paused);
 
         input = GameObject.Find("Player_Rigidbody").GetComponent<Sonic_PlayerStateMachine>().Input;

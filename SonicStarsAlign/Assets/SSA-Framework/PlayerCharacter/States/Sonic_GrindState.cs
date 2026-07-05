@@ -42,7 +42,6 @@ public class Sonic_GrindState : IState
         Debug.DrawRay(_ctx.transform.position, Vector3.up * 5f, Color.black, 10f);
 
         _ctx.ChangeKinematic(false);
-        Debug.Log(_vel);
         _ctx.HorizontalVelocity = _vel;
         _ctx.Physics_ApplyVelocity();
         _ctx.SplnHandler.Clear();

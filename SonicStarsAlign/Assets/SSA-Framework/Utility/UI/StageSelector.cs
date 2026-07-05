@@ -92,7 +92,6 @@ public class StageSelector : MonoBehaviour
 
         for(int i=0; i<redRingIcons.Length; i++)
         {
-            Debug.Log(current.data.RedRings[i]);
             redRingIcons[i].color = current.data.RedRings[i] ? Color.red : Color.white;
         }
 

@@ -18,10 +18,8 @@ public class WinScreen : MonoBehaviour
     public Image RankImage;
     public AudioSource MusicSource;
     public GameObject[] ObjectsToToggle;
-    public GoalRing goalRing;
 
     [SerializeField] private Sprite[] rankLetters;
-    [SerializeField] private int[] rankScores;
     [SerializeField] private int targetTime;
 
     private void Awake()
@@ -45,13 +43,28 @@ public class WinScreen : MonoBehaviour
 
     public void Activate()
     {
-        PlayerCharacterStats chs = Sonic_PlayerStateMachine.Instance.Chs;
-        int score = chs.Score;
-        int rings = (int) chs.Rings;
-        float time = HUDManager.Instance.stageTimer;
-        int ringScore = rings * 100;
-        int totalScore = score + Math.Max(0, targetTime - (int) time) * 5;
-        int rank = goalRing.RankCalc(Sonic_PlayerStateMachine.Instance);
+        // Giving the worst stats by default in case there's a bug
+        // so people won't exploit it.
+        // Sorry to anyone who gets their run screwed up by this.
+        int score = 0;
+        int rings = 0;
+        float time = 10000;
+        int ringScore = 0;
+        int totalScore = 0;
+        int rank = 0;
+        SceneSwitcher ScSw = SceneSwitcher.Instance;
+        
+        // ScSw unavailablee when launching the scene on its own through the Editor.
+        if(ScSw)
+        {
+            var data = SceneSwitcher.Instance.GetWinData();
+            score = data.score;
+            rings = (int) data.rings;
+            time = data.time;
+            ringScore = rings * 5;
+            totalScore = score + Math.Max(0, (int) (data.targetTime - time)) * 5;
+            rank = data.rank;
+        }
         RankImage.sprite = rankLetters[rank];
 
         IEnumerator CountdownWait()
@@ -77,11 +90,14 @@ public class WinScreen : MonoBehaviour
         MusicSource.Play();
     }
 
+    // Purely for the HUD and other UI elements
     public void ToggleObjects()
     {
         foreach(GameObject obj in ObjectsToToggle)
         {
-            obj.SetActive(!obj.activeSelf);
+            obj.SetActive(false);
         }
+        // Manually because it's just one
+        Pause_Manager.Instance.enabled = false;
     }
 }

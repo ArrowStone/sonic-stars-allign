@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Pingas
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9a03bef2e82ceefc7b78645afd6e01e3, type: 2}
-  m_sharedMaterial: {fileID: -1855814695332418370, guid: 9a03bef2e82ceefc7b78645afd6e01e3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fd9305e8779000b0c9d89e8d49d6d725, type: 2}
+  m_sharedMaterial: {fileID: 8159139940651166050, guid: fd9305e8779000b0c9d89e8d49d6d725, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -104,6 +104,7 @@ MonoBehaviour:
   m_VerticalAlignment: 8192
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -164,7 +165,7 @@ MonoBehaviour:
           - rid: 69339953725440003
           - rid: 69339955812368385
           - rid: 69339955812368387
-        m_UpdateType: 1
+        m_UpdateType: 0
     - rid: 69339953725440001
       type: {class: LocalizedAssetProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
       data:

@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -25,7 +26,8 @@ public class ObjectAlongSpline : MonoBehaviour
             prevObject = currentObject;
 
             Vector3 pos = Spline.EvaluatePosition(i);
-            currentObject = Instantiate(Object, pos, Quaternion.identity, transform);
+            currentObject = (GameObject) PrefabUtility.InstantiatePrefab(Object, transform);
+            currentObject.transform.position = pos;
 
             if (prevObject & rotateObjects)
             {
