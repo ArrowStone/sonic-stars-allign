@@ -1,15 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using GLTFast;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using TMPro;
 using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Splines;
 
-[System.Serializable]
+[Serializable]
 public class LinkedLevelObject
 {
     public string ObjectID;
@@ -49,29 +51,66 @@ public class LinkedLevelObject
 // Places level geometry & parses the level object JSON on scene load
 public class GameLevelLoader : MonoBehaviour
 {
-    [SerializeField] string sceneAssetPath;
+    private string absolutePath; // Overrides the text asset, used for tesing levels in a standalone player
+    [SerializeField] TMP_InputField PathInput;
     [SerializeField] TextAsset LevelData;
     [SerializeField] List<LinkedLevelObject> levelObjects;
     [SerializeField] int groundLayer;
+
     async void Awake()
     {
+        //LoadLevel();
+    }
+
+    void Update()
+    {
+        if(!PathInput) return;
+        absolutePath = PathInput.text;
+    }
+
+    public void SetLoadPath(string path)
+    {
+        absolutePath = path;
+    }
+
+    public async void LoadLevel()
+    {
+        Scene existingLevel = SceneManager.GetSceneByName("Level");
+        Debug.Log(existingLevel.isLoaded);
+        if(existingLevel.isLoaded) await SceneManager.UnloadSceneAsync(existingLevel);
+
         Scene levelScene = SceneManager.CreateScene("Level");
         GltfImport gltf = new GltfImport();
-        string gltfPath = "file://" + Application.dataPath.Replace("Assets", "") + AssetDatabase.GetAssetPath(LevelData).Replace(".json", ".glb");
+
+        string filePath = absolutePath;
+
+        // Unity complains if I don't include the #if.
+        #if UNITY_EDITOR
+        if(absolutePath == "")
+        filePath = Application.dataPath.Replace("Assets", "") +
+                            AssetDatabase.GetAssetPath(LevelData);
+        #endif
+
+        string gltfPath = "file://" + filePath.Replace(".json", ".glb");
         bool success = await gltf.Load(gltfPath);
         if(!success)
         {
             // Can't find the .glb file
             Debug.LogError(string.Format("glTF file not found at \"{0}\".", gltfPath));
+            return;
         }
         GameObject levelMesh = (GameObject) Instantiate(new GameObject("Level"), levelScene);
         await gltf.InstantiateMainSceneAsync(levelMesh.transform);
 
+        Debug.Log("=== COLLIDERS INCOMING ===");
+
         // Add collider and assign the ground layer to each piece of geometry
-        foreach(Transform child in levelMesh.transform)
+        foreach(Transform child in levelMesh.GetComponentsInChildren<Transform>())
         {
+            Debug.Log(child.name);
             if (child.TryGetComponent(out MeshFilter _))
             {
+                Debug.Log("Mesh!");
                 child.gameObject.AddComponent<MeshCollider>();
                 child.gameObject.layer = groundLayer;
             }
@@ -85,7 +124,9 @@ public class GameLevelLoader : MonoBehaviour
         }
 
         // Handle the level object JSON
-        JObject[] objects = JsonConvert.DeserializeObject<JObject[]>(LevelData.text);
+        string textData = LevelData.text;
+        if(absolutePath != "") textData = File.ReadAllText(absolutePath);
+        JObject[] objects = JsonConvert.DeserializeObject<JObject[]>(textData);
 
         foreach(JObject obj in objects)
         {
@@ -121,7 +162,7 @@ public class GameLevelLoader : MonoBehaviour
 
             float[] pos = obj["position"].ToObject<float[]>();
             Debug.Log(obj["position"]);
-            Debug.Log(String.Format("{0} {1} {2}", pos[0], pos[1], pos[2]));
+            Debug.Log(string.Format("{0} {1} {2}", pos[0], pos[1], pos[2]));
             float[] rot = obj["rotation"].ToObject<float[]>();
 
             gobj.name = obj["name"].ToString();

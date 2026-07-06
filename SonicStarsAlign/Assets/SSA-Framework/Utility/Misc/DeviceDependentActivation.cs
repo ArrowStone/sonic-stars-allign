@@ -30,7 +30,7 @@ public class DeviceDependentActivation : MonoBehaviour
         }
         StartCoroutine(ConnectionWait());
         #else
-        AbsentEvent.Invoke()
+        AbsentEvent.Invoke();
         #endif
     }
 }

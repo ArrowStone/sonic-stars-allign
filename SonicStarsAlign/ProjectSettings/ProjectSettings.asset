@@ -113,7 +113,7 @@ PlayerSettings:
   xboxEnableGuest: 0
   xboxEnablePIXSampling: 0
   metalFramebufferOnly: 0
-  metalUseMetalDisplayLink: 0
+  metalUseMetalDisplayLink: 1
   xboxOneResolution: 0
   xboxOneSResolution: 0
   xboxOneXResolution: 3
@@ -143,7 +143,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: Preview v0.2
+  bundleVersion: Preview v0.4
   preloadedAssets:
   - {fileID: -944628639613478452, guid: e6916219fffbbda4cad5a0223d4c4dd3, type: 3}
   - {fileID: 11400000, guid: fee0eb38ce4dedfe1a80e98a13ec6dd6, type: 2}
@@ -159,7 +159,7 @@ PlayerSettings:
   allowHDRDisplaySupport: 1
   useHDRDisplay: 1
   hdrBitDepth: 0
-  m_ColorGamuts: 00000000
+  m_ColorGamuts: 0300000000000000
   targetPixelDensity: 30
   resolutionScalingMode: 0
   resetResolutionOnWindowResize: 0

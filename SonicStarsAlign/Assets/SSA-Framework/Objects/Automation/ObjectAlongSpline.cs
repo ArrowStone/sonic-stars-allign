@@ -4,6 +4,7 @@ using UnityEngine.Splines;
 
 public class ObjectAlongSpline : MonoBehaviour
 {
+    #if UNITY_EDITOR
     public GameObject Object;
     public float Count;
     public bool rotateObjects = true;
@@ -44,4 +45,5 @@ public class ObjectAlongSpline : MonoBehaviour
             }
         }
     }
+    #endif
 }

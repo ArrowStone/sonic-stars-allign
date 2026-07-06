@@ -258,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5b1c4adcead828778e130c7335c9a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toggleMouse: 1
   pauseMenu: {fileID: 3799188775065146930}
   gameComponents: []
 --- !u!114 &7881546424201047853
@@ -301,7 +302,6 @@ MonoBehaviour:
   maxPopupCount: 5
   ScorePopupIgnoreBelow: 200
   PopupOffset: 100
-  stageTimer: 0
   _ctx: {fileID: 0}
 --- !u!1 &1029226489811158419
 GameObject:
@@ -2951,14 +2951,12 @@ MonoBehaviour:
   - {fileID: 6064398541565238943}
   - {fileID: 4454794658180237767}
   - {fileID: 6935953991670813361}
-  goalRing: {fileID: 0}
   rankLetters:
   - {fileID: 21300000, guid: abcb76deac9c29844a3da5ee4248a843, type: 3}
   - {fileID: 21300000, guid: d3f8587c5e200f648a6db800c1f2e276, type: 3}
   - {fileID: 21300000, guid: 51f38eac8b6c036469135c9ef6576d0d, type: 3}
   - {fileID: 21300000, guid: 28fcfd3d852d1a043b237334db2f8b00, type: 3}
   - {fileID: 21300000, guid: e8a1cc63299d88a4e9b5cbadf4fa4bb5, type: 3}
-  rankScores: 00000000f4010000e8030000dc050000d0070000
   targetTime: 600
 --- !u!95 &6237659217851682427
 Animator:
