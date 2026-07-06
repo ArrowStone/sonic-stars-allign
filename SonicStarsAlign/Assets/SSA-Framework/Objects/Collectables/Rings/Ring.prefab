@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 3392526048585346234}
   - component: {fileID: 2417903233847346982}
   - component: {fileID: 4612260657262127081}
+  - component: {fileID: 2741307619067382782}
   m_Layer: 10
   m_Name: Ring
   m_TagString: Untagged
@@ -161,10 +162,10 @@ MonoBehaviour:
   CollectionEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8105107609564456181}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 2741307619067382782}
+        m_TargetAssemblyTypeName: Destructor, Assembly-CSharp
+        m_MethodName: Destruction
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -175,3 +176,15 @@ MonoBehaviour:
         m_CallState: 2
   Value: 1
   ScoreValue: 5
+--- !u!114 &2741307619067382782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105107609564456181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6eac356cb7a96378e389822af4098c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Destructor

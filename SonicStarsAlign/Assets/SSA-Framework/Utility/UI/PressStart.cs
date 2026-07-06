@@ -9,9 +9,11 @@ public class PressStart : MonoBehaviour
     public InputComponent input;
     public Animator animator;
 
-    private void Start()
+    private void Awake()
     {
-        Debug.Log("Start!");
+        // Needed if exiting from a stage
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     // Activated by the animation
