@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Test Scene Save
   m_EditorClassIdentifier: 
   saveFile: test_scene
-  Complete: 1
+  Complete: 0
   Rank: 0
   RedRings: 0000000000
-  bestTime: 10000
+  bestTime: 10000000
   bestScore: 0
   RankScores: f4010000e8030000dc050000d0070000
   StageRingCount: 1000

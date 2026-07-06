@@ -1126,7 +1126,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1296393081607888089, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_text
-      value: START
+      value: SELECT
       objectReference: {fileID: 0}
     - target: {fileID: 1296393081607888089, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_sharedMaterial
