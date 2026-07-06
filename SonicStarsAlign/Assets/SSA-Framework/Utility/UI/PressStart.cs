@@ -1,7 +1,5 @@
 using System.Collections;
-using GLTFast.Schema;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 // The title screen functionality
 public class PressStart : MonoBehaviour

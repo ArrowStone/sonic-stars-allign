@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.IO;
+using System;
 
 // Handles writing the save data to a pernament storage as well as retrieving data.
 public static class DataSaving
@@ -53,6 +54,16 @@ public static class DataSaving
             data.StageRingCount = stageRingCount;
             data.TargetTime = targetTime;
         }
-        else Debug.Log("No existing file for " + data.saveFile);
+        else 
+        {
+            // No existing file => set bad stats in case of a bug
+            // (to avoid exploits)
+            // Sorry if your save got ruined by this
+            Debug.Log("No existing file for " + data.saveFile);
+            data.Complete = false;
+            data.bestScore = 0;
+            data.bestTime = 10000000;
+            data.Rank = 0;
+        }
     }
 }

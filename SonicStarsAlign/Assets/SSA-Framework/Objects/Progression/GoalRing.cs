@@ -17,6 +17,10 @@ public class GoalRing : CollectableBase
             _ctx.Snd.PlaySound("GoalRing");
             _ctx.MachineTransition(PlayerStates.Win);
 
+
+            int rank = RankCalc((int) _ctx.Chs.Rings,   _ctx.Chs.Score + 
+                                                        System.Math.Max(0, (int) (Data.TargetTime - _ctx.Chs.Time)) * 5);
+
             if(!(GameStateSaver && Data)) 
             {
                 // Probably launched the scene in editor, don't bother
@@ -27,13 +31,11 @@ public class GoalRing : CollectableBase
             }
             else
             {
-                GameStateSaver.UpdateStageData(Data);
+                GameStateSaver.UpdateStageData(Data, (byte) rank);
                 Data.Complete = true;
                 DataSaving.RecordStageData(Data);
             }
 
-            int rank = RankCalc((int) _ctx.Chs.Rings,   _ctx.Chs.Score + 
-                                                        System.Math.Max(0, (int) (Data.TargetTime - _ctx.Chs.Time)) * 5);
             SceneSwitcher.Instance.CacheWinData(
                 _ctx.Chs.Score,
                 _ctx.Chs.Time,

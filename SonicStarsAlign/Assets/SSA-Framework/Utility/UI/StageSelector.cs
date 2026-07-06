@@ -19,8 +19,10 @@ public class StageSelector : MonoBehaviour
     public Stage[] stages;
 
     [Header("UI References")]
-    public Image stagePreview;     // UI Image for stage thumbnail
-    public Image stageNameImage;   // UI Image for stage name graphic
+    public Sprite[] RankImages;     // Rank images in order: D, C, B, A, S
+    public Image rankDisplay;       // UI Image for the rank display
+    public Image stagePreview;      // UI Image for stage thumbnail
+    public Image stageNameDisplay;  // UI Image for stage name graphic
     public Image[] redRingIcons;
     public TMP_Text bestTimeText;
     public TMP_Text bestScoreText;
@@ -87,25 +89,48 @@ public class StageSelector : MonoBehaviour
             stagePreview.sprite = current.preview;
 
         // Update stage name image
-        if (stageNameImage != null && current.nameSprite != null)
-            stageNameImage.sprite = current.nameSprite;
+        if (stageNameDisplay != null && current.nameSprite != null)
+            stageNameDisplay.sprite = current.nameSprite;
 
+        // Update red ring collection display
         for(int i=0; i<redRingIcons.Length; i++)
         {
             redRingIcons[i].color = current.data.RedRings[i] ? Color.red : Color.white;
         }
 
-        float bestTime = current.data.bestTime;
-        int minutes = (int) (bestTime / 60);
-        int seconds = (int) (bestTime - 0.5f) % 60;
-        int decimals = (int) (bestTime * 100 % 100);
-        if(decimals > 99) decimals -= 100;
+        if(current.data.Complete)
+        {
+            // Completed => display saved stats
 
-        bestTimeText.text = string.Format("{0:00}:{1:00}.{2:00}", 
-            minutes,
-            seconds, 
-            decimals);
-        bestScoreText.text = current.data.bestScore.ToString();
+            // Update best time & score
+            float bestTime = current.data.bestTime;
+            int minutes = (int) (bestTime / 60);
+            int seconds = (int) (bestTime - 0.5f) % 60;
+            int decimals = (int) (bestTime * 100 % 100);
+            if(decimals > 99) decimals -= 100;
+
+            bestTimeText.text = string.Format("{0:00}:{1:00}.{2:00}", 
+                minutes,
+                seconds, 
+                decimals);
+            bestScoreText.text = current.data.bestScore.ToString();
+
+            //Update displayed rank
+            if (rankDisplay != null && RankImages.Length == 5)
+                rankDisplay.sprite = RankImages[current.data.Rank];
+        }
+        else
+        {
+            // Not completed => show that stats are unavailable
+
+            // Show that best time and score are not set
+            bestTimeText.text = "--:--:--";
+            bestScoreText.text = "-----";
+
+            // Show that the rank is unavailable
+            if (rankDisplay != null)
+                rankDisplay.color = Color.clear;
+        }
 
         // Optional: debug log
         Debug.Log("Selected Stage: " + current.displayName + " (SceneIndex: " + current.sceneIndex + ")");

@@ -17,7 +17,7 @@ MonoBehaviour:
   Rank: 0
   RedRings: 0000000000
   bestTime: 10000
-  bestScore: 100
-  RankScores: 2c01000058020000e8030000dc050000
+  bestScore: 0
+  RankScores: f4010000e8030000dc050000d0070000
   StageRingCount: 1000
-  TargetTime: 300
+  TargetTime: 120

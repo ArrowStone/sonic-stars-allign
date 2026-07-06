@@ -16,10 +16,17 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    public void UpdateStageData(StageData data)
+    public void UpdateStageData(StageData data, byte rank)
     {
-        data.bestTime = Math.Max(data.bestTime, ctx.Chs.Time);
+        if(!data.Complete)
+        {
+            data.bestTime = ctx.Chs.Time;
+            data.bestScore = ctx.Chs.Score;
+            data.Rank = rank;
+        }
+        data.bestTime = Math.Min(data.bestTime, ctx.Chs.Time);
         data.bestScore = Math.Max(data.bestScore, ctx.Chs.Score);
+        data.Rank = Math.Max(data.Rank, rank);
     }
 
     void Awake()
