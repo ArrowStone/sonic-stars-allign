@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -129,8 +130,9 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
         if (_ctx.Death) { return; }
 
         _ctx.Death = true;
-        _ctx.MachineTransition(PlayerStates.Damage);
         _ctx.Invoke(nameof(_ctx.Respawn), 1);
+        _ctx.MachineTransition(PlayerStates.Damage);
+        //_ctx.Respawn();
         PlayerDeath?.Invoke();
         DeathEvent.Invoke();
     }

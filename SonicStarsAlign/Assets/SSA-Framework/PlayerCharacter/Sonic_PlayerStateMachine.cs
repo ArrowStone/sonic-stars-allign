@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -298,9 +299,13 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         }
 
         public void Respawn () {
-                Player_StaticFunctions.SetTransform(transform, Chs.SpawnData.Position, Chs.SpawnData.Rotation, "Respawn");
+                // I have no idea why the commented code is not working
+                Physics_Snap(Chs.SpawnData.Position);
+                Rb.MoveRotation(Chs.SpawnData.Rotation);
+                //Player_StaticFunctions.SetTransform(transform, Chs.SpawnData.Position, Chs.SpawnData.Rotation, "Respawn");
+
                 Death = false;
-                MachineTransition(PlayerStates.Ground);
+                MachineTransition(PlayerStates.Air);
         }
 
         private Quaternion cashedRotation = Quaternion.identity;

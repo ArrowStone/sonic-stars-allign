@@ -39,9 +39,6 @@ public class Sonic_DamageState : IState
 
     public void ExitState()
     {
-        _ctx.HorizontalVelocity = Vector3.zero;
-        _ctx.VerticalVelocity = Vector3.zero;
-        _ctx.Physics_ApplyVelocity();
     }
 
     private void HurtMovement(float _delta)
