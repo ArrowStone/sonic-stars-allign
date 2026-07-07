@@ -301,7 +301,6 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         public void Respawn () {
                 // I have no idea why the commented code is not working
                 Physics_Snap(Chs.SpawnData.Position);
-                Rb.MoveRotation(Chs.SpawnData.Rotation);
                 //Player_StaticFunctions.SetTransform(transform, Chs.SpawnData.Position, Chs.SpawnData.Rotation, "Respawn");
 
                 Death = false;
