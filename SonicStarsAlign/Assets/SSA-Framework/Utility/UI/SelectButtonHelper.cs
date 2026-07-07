@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class SelectButtonHelper : MonoBehaviour
@@ -13,6 +14,16 @@ public class SelectButtonHelper : MonoBehaviour
         Debug.Log("Caching Stage: " + stageName);
 
         SceneSwitcher.Instance.CacheStage(stageName);
-        SceneSwitcher.Instance.SwitchScene(loadingScreenSceneIndex);
+
+        IEnumerator WaitForAnim()
+        {
+            // Tried to make it wait for the actual animation to finish but couldn't find a decent way.
+            yield return new WaitForSeconds(0.5f);
+
+            SceneSwitcher.Instance.AddScene(loadingScreenSceneIndex);
+        }
+
+
+        StartCoroutine(WaitForAnim());
     }
 }

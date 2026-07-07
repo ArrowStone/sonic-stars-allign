@@ -10,9 +10,11 @@ public class TitleCard : MonoBehaviour
     public Image stageNameImage;
 
     public TMP_Text loadingText;
-    public float minDisplayTime = 1.5f; // ensures loading screen shows briefly
+    public float minDisplayTime = 1.5f; // Ensures loading screen shows briefly.
 
-    void Start()
+    // Starts when the title card animation is done
+    // to ensure it plays out smoothly.
+    public void LoadScene()
     {
         StartCoroutine(LoadStageCoroutine());
     }
