@@ -12,6 +12,16 @@ public class TitleCard : MonoBehaviour
     public TMP_Text loadingText;
     public float minDisplayTime = 1.5f; // Ensures loading screen shows briefly.
 
+    private void Awake()
+    {
+        string cachedStage = SceneSwitcher.Instance?.GetCachedStage();
+        var stage = StageSelector.Instance.GetStageByDisplayName(cachedStage);
+
+        // Update UI
+        //if (stagePreview != null && stage.preview != null) stagePreview.sprite = stage.preview;
+        if (stageNameImage != null && stage.loadingName != null) stageNameImage.sprite = stage.loadingName;
+    }
+
     // Starts when the title card animation is done
     // to ensure it plays out smoothly.
     public void LoadScene()
@@ -42,10 +52,6 @@ public class TitleCard : MonoBehaviour
             Debug.LogError("Stage not found for displayName: " + cachedStage);
             yield break;
         }
-
-        // Update UI
-        //if (stagePreview != null && stage.preview != null) stagePreview.sprite = stage.preview;
-        if (stageNameImage != null && stage.loadingName != null) stageNameImage.sprite = stage.loadingName;
 
         AsyncOperation op = SceneManager.LoadSceneAsync(stage.sceneIndex);
         op.allowSceneActivation = false;
