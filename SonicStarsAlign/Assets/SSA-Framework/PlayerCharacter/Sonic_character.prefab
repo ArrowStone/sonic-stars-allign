@@ -2336,7 +2336,7 @@ MonoBehaviour:
     m_Bits: 57345
   homingTargetLayer:
     serializedVersion: 2
-    m_Bits: 4224
+    m_Bits: 128
   homingSplineLayer:
     serializedVersion: 2
     m_Bits: 4096

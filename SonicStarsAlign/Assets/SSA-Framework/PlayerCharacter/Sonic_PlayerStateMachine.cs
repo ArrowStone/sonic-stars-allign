@@ -452,7 +452,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
                 if(!HomingTargetDetector.TargetDetected) return;
 
-                if(     FrameworkUtility.CompareLayer(HomingTargetDetector.TargetOutput.layer, homingSplineLayer) &&
+                // Homing onto rails disabled because I think manual homing is. a fair challenge when the hitbox is large.
+                /*if(     FrameworkUtility.CompareLayer(HomingTargetDetector.TargetOutput.layer, homingSplineLayer) &&
                         HomingTargetDetector.TargetOutput.TryGetComponent(out SplineContainer container))
                 {
                         // Spline (e. g. rail)
@@ -467,7 +468,10 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
                         // Not a spline
                         homingOntoSpline = false;
                         homingTargetPosition = HomingTargetDetector.TargetOutput.transform.position;
-                }
+                }*/
+
+                homingOntoSpline = false;
+                homingTargetPosition = HomingTargetDetector.TargetOutput.transform.position;
         }
 
         public void RingCheck () {
