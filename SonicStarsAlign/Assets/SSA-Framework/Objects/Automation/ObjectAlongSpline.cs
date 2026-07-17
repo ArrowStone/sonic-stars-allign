@@ -4,7 +4,7 @@ using UnityEngine.Splines;
 
 public class ObjectAlongSpline : MonoBehaviour
 {
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     public GameObject Object;
     public float Count;
     public bool rotateObjects = true;
@@ -27,7 +27,7 @@ public class ObjectAlongSpline : MonoBehaviour
             prevObject = currentObject;
 
             Vector3 pos = Spline.EvaluatePosition(i);
-            currentObject = (GameObject) PrefabUtility.InstantiatePrefab(Object, transform);
+            currentObject = (GameObject)PrefabUtility.InstantiatePrefab(Object, transform);
             currentObject.transform.position = pos;
 
             if (prevObject & rotateObjects)
@@ -36,7 +36,7 @@ public class ObjectAlongSpline : MonoBehaviour
                 lookPos.y = currentObject.transform.position.y;
                 currentObject.transform.LookAt(lookPos);
             }
-            if(rotateObjects && i > 0 && !rotatedFirst)
+            if (rotateObjects && i > 0 && !rotatedFirst)
             {
                 rotatedFirst = true;
                 Vector3 lookPos = currentObject.transform.position;
@@ -45,5 +45,5 @@ public class ObjectAlongSpline : MonoBehaviour
             }
         }
     }
-    #endif
+#endif
 }

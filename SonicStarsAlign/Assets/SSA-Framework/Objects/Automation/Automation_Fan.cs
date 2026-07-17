@@ -18,16 +18,16 @@ public class Automation_Fan : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if(!ctx) return;
+        if (!ctx) return;
         foreach (Rigidbody r in rbs)
         {
-            if(r.isKinematic)
+            if (r.isKinematic)
             {
                 // Probably ledge grabbing
                 continue;
             }
             //float _fr = Force.Evaluate(Vector3.Dot(transform.position - ctx.transform.position, transform.up)) * Time.deltaTime;
-            float _fr =  DisplacementMagnitude - Vector3.Distance(transform.position, ctx.transform.position);
+            float _fr = DisplacementMagnitude - Vector3.Distance(transform.position, ctx.transform.position);
             Vector3 _force = DisplacementDirection * _fr * ForceMultiplier;
 
             if (ctx != null && Vector3.Dot(ctx.GroundNormal, _force) > 0.25)
@@ -62,6 +62,6 @@ public class Automation_Fan : MonoBehaviour
     {
         Gizmos.DrawRay(transform.position, TargetDisplacement);
         Gizmos.DrawRay(transform.position + TargetDisplacement, transform.right * 0.5f - transform.up);
-        Gizmos.DrawRay(transform.position + TargetDisplacement, - transform.right * 0.5f - transform.up);
+        Gizmos.DrawRay(transform.position + TargetDisplacement, -transform.right * 0.5f - transform.up);
     }
 }

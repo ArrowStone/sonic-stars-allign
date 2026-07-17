@@ -19,13 +19,13 @@ public class CameraDependentPostprocessing : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if(FrameworkUtility.CompareLayer(other.gameObject.layer, waterLayer))
+        if (FrameworkUtility.CompareLayer(other.gameObject.layer, waterLayer))
             SetWater(true);
     }
 
     void OnTriggerExit(Collider other)
     {
-        if(FrameworkUtility.CompareLayer(other.gameObject.layer, waterLayer))
+        if (FrameworkUtility.CompareLayer(other.gameObject.layer, waterLayer))
             SetWater(false);
     }
 

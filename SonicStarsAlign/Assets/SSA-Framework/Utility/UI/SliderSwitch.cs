@@ -16,6 +16,6 @@ public class SliderSwitch : MonoBehaviour
 
     public void SetValue()
     {
-        text.text = values[(int) (scrollbar.value * (values.Length-1))];
+        text.text = values[(int)(scrollbar.value * (values.Length - 1))];
     }
 }

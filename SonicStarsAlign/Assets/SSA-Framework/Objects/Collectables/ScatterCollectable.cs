@@ -48,7 +48,7 @@ public class ScatterCollectable : MonoBehaviour
 
         GravityCalculations();
         GroundCheck(_delta);
-        
+
         if (!despawn)
             return;
 
@@ -64,7 +64,7 @@ public class ScatterCollectable : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
 
     private void GravityCalculations()

@@ -73,6 +73,6 @@ public class SettingsElement : MonoBehaviour
                 Toggle toggle = (Toggle)component;
                 toggle.isOn = defaultValue > 0;
                 break;
-        } 
+        }
     }
 }

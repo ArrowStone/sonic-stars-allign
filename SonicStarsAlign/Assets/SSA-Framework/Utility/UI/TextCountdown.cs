@@ -23,15 +23,15 @@ public class TextCountdown : MonoBehaviour
         float startTime = Time.time;
         float currentValue = startValue;
         float step = (targetValue - startValue) / time * stepTime;
-        
-        while(Time.time - startTime < time)
+
+        while (Time.time - startTime < time)
         {
-            textComponent.text = string.Format(format, (int) currentValue);
+            textComponent.text = string.Format(format, (int)currentValue);
             currentValue += step;
             yield return new WaitForSeconds(stepTime);
-            if(step != 0) StepEvent.Invoke();
+            if (step != 0) StepEvent.Invoke();
         }
-        textComponent.text = string.Format(format, (int) targetValue);
+        textComponent.text = string.Format(format, (int)targetValue);
         DoneEvent.Invoke();
     }
 
@@ -39,8 +39,8 @@ public class TextCountdown : MonoBehaviour
     {
         float startTime = Time.time;
         float currentValue = startValue;
-        
-        while(Time.time - startTime < time)
+
+        while (Time.time - startTime < time)
         {
             textComponent.text = FormatTime(currentValue, format);
             currentValue += (targetValue - startValue) / time * stepTime;
@@ -55,7 +55,7 @@ public class TextCountdown : MonoBehaviour
     {
         textComponent.text = string.Format(format, value);
     }
-    
+
     public void SetTime(float time, string format = "{0:00}:{1:00}.{2:00}")
     {
         textComponent.text = FormatTime(time, format);

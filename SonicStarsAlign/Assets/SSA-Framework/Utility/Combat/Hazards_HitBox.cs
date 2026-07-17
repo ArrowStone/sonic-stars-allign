@@ -18,13 +18,13 @@ public class Hazards_HitBox : MonoBehaviour
     {
         if (isActiveAndEnabled && other.TryGetComponent(out Damaged))
         {
-            if(PlayerOnly && !other.gameObject.CompareTag("Player")) return;
-            if(Strength > 998)
+            if (PlayerOnly && !other.gameObject.CompareTag("Player")) return;
+            if (Strength > 998)
             {
                 // Mainly for the death plane
                 Damaged.DealDamage(999, Vector3.zero, 999);
             }
-            
+
             switch (KnockbackApplication)
             {
                 case Hazards_HitStyle.Local:

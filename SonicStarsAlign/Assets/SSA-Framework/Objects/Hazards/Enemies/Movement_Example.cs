@@ -24,11 +24,11 @@ public class Movement_Example : Enemy_MovementStateMachine
         float _delta = Time.fixedDeltaTime;
 
         detector.Execute(transform.position, Vector3.forward);
-        if(detector.TargetDetected) target = detector.TargetOutput.transform; else target = null;
+        if (detector.TargetDetected) target = detector.TargetOutput.transform; else target = null;
 
         if (target)
         {
-            Vector3 targetLookPos = target.position ;
+            Vector3 targetLookPos = target.position;
             targetLookPos.y = transform.position.y;
             targetRotation = Quaternion.LookRotation((targetLookPos - transform.position).normalized);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, _delta * rotationSpeed);

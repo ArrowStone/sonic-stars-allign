@@ -42,24 +42,24 @@ public class Movement_Gunner : Enemy_MovementStateMachine
         float _delta = Time.fixedDeltaTime;
 
         detector.Execute(transform.position, transform.forward);
-        if(detector.TargetDetected) target = detector.TargetOutput.transform;
+        if (detector.TargetDetected) target = detector.TargetOutput.transform;
         // The sphere doesn't detect player if they're too close for some reason
         else if (target && Vector3.Distance(target.position, transform.position) > detectionDistance) target = null;
 
         if (target)
         {
-            Vector3 targetLookPos = target.position ;
+            Vector3 targetLookPos = target.position;
             targetLookPos.y = transform.position.y;
             targetRotation = Quaternion.LookRotation((targetLookPos - transform.position).normalized);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, _delta * rotationSpeed);
             shootTimer -= _delta;
-            if(shootTimer <= 0)
+            if (shootTimer <= 0)
             {
                 shootTimer = shootInterval;
 
                 Vector3 rotationVector = Vector3.ProjectOnPlane(target.position - BulletSpawn.position, Vector3.Cross(transform.forward, transform.up));
 
-                if(Vector3.Angle(transform.forward, rotationVector) > 45) return;
+                if (Vector3.Angle(transform.forward, rotationVector) > 45) return;
 
                 rotationVector += new Vector3(RandomNumberGenerator.GetInt32(-5, 5), RandomNumberGenerator.GetInt32(-5, 5), RandomNumberGenerator.GetInt32(-5, 5)) * 0.1f;
                 Quaternion bulletRotation = Quaternion.LookRotation(rotationVector);
@@ -73,7 +73,7 @@ public class Movement_Gunner : Enemy_MovementStateMachine
                 {
                     shootTimer = shootDelay;
                     shootCounter = 0;
-                    if(Vector3.Distance(target.position, transform.position) < dashDistance) Dash();
+                    if (Vector3.Distance(target.position, transform.position) < dashDistance) Dash();
                 }
 
                 source.Play();

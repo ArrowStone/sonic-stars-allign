@@ -92,7 +92,7 @@ public class Sonic_GrindState : IState
     void Trick()
     {
         _ctx.Snd.PlaySound("RailLand");
-        if(_ctx.SplnHandler.SpeedMultiplier < _ctx.Chp.RailTrickSpeed)
+        if (_ctx.SplnHandler.SpeedMultiplier < _ctx.Chp.RailTrickSpeed)
         {
             _ctx.SplnHandler.SpeedMultiplier = _ctx.Chp.RailTrickSpeed * (_ctx.SplnHandler.Forward ? 1 : -1);
             _ctx.SplnHandler.SpeedFactor = _ctx.SplnHandler.SpeedMultiplier;
@@ -125,7 +125,7 @@ public class Sonic_GrindState : IState
             }
             _ctx.Jump();
         }
-        if(_ctx.Input.AttackInput.WasPressedThisFrame())
+        if (_ctx.Input.AttackInput.WasPressedThisFrame())
         {
             Trick();
         }

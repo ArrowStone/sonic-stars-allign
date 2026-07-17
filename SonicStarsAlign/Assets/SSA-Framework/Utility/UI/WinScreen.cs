@@ -6,7 +6,7 @@ using System;
 // Handles the presentation of data on the results screen
 public class WinScreen : MonoBehaviour
 {
-    static public WinScreen Instance {get; private set;}
+    static public WinScreen Instance { get; private set; }
 
     [SerializeField] string CounterFormat;
     [SerializeField] string TimeCounterFormat;
@@ -24,7 +24,7 @@ public class WinScreen : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -53,16 +53,16 @@ public class WinScreen : MonoBehaviour
         int totalScore = 0;
         int rank = 0;
         SceneSwitcher ScSw = SceneSwitcher.Instance;
-        
+
         // ScSw unavailablee when launching the scene on its own through the Editor.
-        if(ScSw)
+        if (ScSw)
         {
             var data = SceneSwitcher.Instance.GetWinData();
             score = data.score;
-            rings = (int) data.rings;
+            rings = (int)data.rings;
             time = data.time;
             ringScore = rings * 5;
-            totalScore = score + Math.Max(0, (int) (data.targetTime - time)) * 5;
+            totalScore = score + Math.Max(0, (int)(data.targetTime - time)) * 5;
             rank = data.rank;
         }
         RankImage.sprite = rankLetters[rank];
@@ -93,7 +93,7 @@ public class WinScreen : MonoBehaviour
     // Purely for the HUD and other UI elements
     public void ToggleObjects()
     {
-        foreach(GameObject obj in ObjectsToToggle)
+        foreach (GameObject obj in ObjectsToToggle)
         {
             obj.SetActive(false);
         }

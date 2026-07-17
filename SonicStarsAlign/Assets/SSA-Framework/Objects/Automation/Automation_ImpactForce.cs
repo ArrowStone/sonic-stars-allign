@@ -27,7 +27,7 @@ public class Automation_ImpactForce : MonoBehaviour, IAutomation
             _ctx.MachineTransition(PlayerStates.Air);
         }
 
-        if(ReflectVelocityIfOpposite && Vector3.Dot(_ctx.Velocity, fr) <= 0)
+        if (ReflectVelocityIfOpposite && Vector3.Dot(_ctx.Velocity, fr) <= 0)
         {
             _ctx.Velocity = Vector3.Reflect(_ctx.Velocity, fr.normalized);
         }
@@ -37,10 +37,10 @@ public class Automation_ImpactForce : MonoBehaviour, IAutomation
         _ctx.PlayerDirection = Vector3.ProjectOnPlane(_ctx.Velocity, _ctx.GroundNormal).normalized;
 
         // Shouldn't really happen ut it does so
-        if(_ctx.PlayerDirection.Equals(Vector3.zero))
+        if (_ctx.PlayerDirection.Equals(Vector3.zero))
         {
             _ctx.PlayerDirection = prevDirection;
-        }   
+        }
 
         PosRot _transfrm = new()
         {

@@ -80,7 +80,7 @@ public class Sonic_AirState : IState
         _ctx.Physics_ApplyVelocity();
 
         // Rotation also acts as a ledge grab timeout timer
-        if(_ctx.doneAirRotation) 
+        if (_ctx.doneAirRotation)
         {
             CheckForLedgeGrab();
         }
@@ -131,8 +131,8 @@ public class Sonic_AirState : IState
         }
 
         float gravity = _ctx.Chp.GravityForce;
-        if(_ctx.Jumping) gravity *= _ctx.Chp.JumpGravityScale;
-        
+        if (_ctx.Jumping) gravity *= _ctx.Chp.JumpGravityScale;
+
         _ctx.VerticalVelocity = Vector3.ClampMagnitude(_ctx.VerticalVelocity + gravity * _delta * _ctx.Gravity, _ctx.Chp.FallVelCap);
     }
 
@@ -157,7 +157,7 @@ public class Sonic_AirState : IState
         {
             _ctx.PlayerDirection = Vector3.RotateTowards(_ctx.PlayerDirection, _ctx.HorizontalVelocity.normalized, _turnStrength, 0);
         }
-        
+
         _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity.normalized);
     }
 
@@ -317,7 +317,7 @@ public class Sonic_AirState : IState
                 {
                     _ctx.WallRunNormal = hit.normal;
                     _ctx.OnWall = true;
-                    
+
                     _ctx.WallRunDirection = Vector3.Cross(_ctx.HorizontalVelocity.normalized, _ctx.WallRunNormal).y > 0;
 
                     _ctx.MachineTransition(PlayerStates.WallRun);
@@ -331,14 +331,14 @@ public class Sonic_AirState : IState
 
     private void CheckForLedgeGrab() // Also logic for ledge grabbing
     {
-        if(Vector3.Dot(_ctx.VerticalVelocity.normalized, _ctx.Gravity) < 0)
+        if (Vector3.Dot(_ctx.VerticalVelocity.normalized, _ctx.Gravity) < 0)
         {
             // Moving upwards - don't grab
             return;
         }
         // Gotta save em while we have em
-        _ctx.ledgeGrabHorizontalVelocity = _ctx.HorizontalVelocity; 
-        _ctx.ledgeGrabVerticalVelocity = _ctx.VerticalVelocity; 
+        _ctx.ledgeGrabHorizontalVelocity = _ctx.HorizontalVelocity;
+        _ctx.ledgeGrabVerticalVelocity = _ctx.VerticalVelocity;
 
         _ctx.HorizontalVelocity = Vector3.zero;
         _ctx.VerticalVelocity = Vector3.zero;
@@ -373,20 +373,20 @@ public class Sonic_AirState : IState
 
         endPosition.y = hit.point.y;
         // The relative Y value of the horizontal ledge point actually controls the displacement from the y coordinate of the ledge surface
-        horzRayStart.y = hit.point.y + _ctx.ledgeHorizontalRayPoint.localPosition.y; 
+        horzRayStart.y = hit.point.y + _ctx.ledgeHorizontalRayPoint.localPosition.y;
 
         // Horizontal ray a bit down from the y position of the ledge to get the horizontal position values
         ray = new Ray(horzRayStart, _ctx.transform.forward * horzLength);
         success = Physics.Raycast(ray, out hit, horzLength, _ctx.ledgeLayer);
 
-         // Ideally the second ray should hit the ledge but it's impossible to guarantee, so we check
+        // Ideally the second ray should hit the ledge but it's impossible to guarantee, so we check
         if (!success)
         {
             return;
         }
 
         // If the second ray's normal close to the first normal then it's a flat surface and not a ledge
-        if(Vector3.Angle(hit.normal, topNormal) < _ctx.Chp.MaxGroundDeviation)
+        if (Vector3.Angle(hit.normal, topNormal) < _ctx.Chp.MaxGroundDeviation)
         {
             return;
         }
@@ -406,16 +406,16 @@ public class Sonic_AirState : IState
 
         // Set position
         Player_StaticFunctions.SetRBPosition(_ctx.Rb, endPosition, "Ledge Grab");
-        
+
         _ctx.MachineTransition(PlayerStates.LedgeGrab); // Change state
     }
 
     void CheckForStoneSkip(float _delta)
     {
-        if(_ctx.InWater) // Touching water
+        if (_ctx.InWater) // Touching water
         {
             // Checking ig have enough speed and pressed the button soon enough
-            if(_reactionInputTimer > _ctx.Chp.stoneSkipCooldown && 
+            if (_reactionInputTimer > _ctx.Chp.stoneSkipCooldown &&
             _ctx.Velocity.magnitude > _ctx.Chp.stoneSkipMinimumSpeed)
             {
                 // Go up
@@ -436,11 +436,11 @@ public class Sonic_AirState : IState
             }
         }
 
-        if(_reactionInputTimer > 0f)
+        if (_reactionInputTimer > 0f)
         {
             _reactionInputTimer -= _delta;
         }
-        else if(_ctx.Input.ReactionInput.WasPressedThisFrame())
+        else if (_ctx.Input.ReactionInput.WasPressedThisFrame())
         {
             _reactionInputTimer = _ctx.Chp.stoneSkipCooldown + _ctx.Chp.stoneSkipWindow;
         }
@@ -453,7 +453,7 @@ public class Sonic_AirState : IState
             _ctx.doneAirRotation = true;
             _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity.normalized);
         }
-        if(!_ctx.doneAirRotation)
+        if (!_ctx.doneAirRotation)
         {
             _ctx.fakeNormal = Vector3.Slerp(_ctx.fakeNormal, -_ctx.Gravity.normalized, delta * _ctx.airRotationSpeed);
             _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.fakeNormal);

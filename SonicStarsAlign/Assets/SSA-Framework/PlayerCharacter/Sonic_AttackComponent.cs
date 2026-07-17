@@ -52,13 +52,13 @@ public class Sonic_AttackComponent : MonoBehaviour
             jumping = false;
         }
 
-        if(ctx.CurrentEstate == PlayerStates.Ground)
+        if (ctx.CurrentEstate == PlayerStates.Ground)
         {
             int scoreAdd = 0;
 
-            if(comboLength > 2) scoreAdd = 200;
-            if(comboLength > 4) scoreAdd = 700;
-            if(comboLength > 6) scoreAdd = 1000;
+            if (comboLength > 2) scoreAdd = 200;
+            if (comboLength > 4) scoreAdd = 700;
+            if (comboLength > 6) scoreAdd = 1000;
 
             if (comboLength > 0) Debug.Log(string.Format("Combo of length {0}, bonus score {1}", comboLength, scoreAdd));
 

@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class SpawnPrefab : MonoBehaviour
 {
-        public List<GameObject> prefabToSpawn = new List<GameObject>();
+    public List<GameObject> prefabToSpawn = new List<GameObject>();
 
-        public void Spawn () {
-                for (int i = 0; i < prefabToSpawn.Count; i++) {
-                        Instantiate(prefabToSpawn[i], transform.position, Quaternion.identity);
-                }
+    public void Spawn()
+    {
+        for (int i = 0; i < prefabToSpawn.Count; i++)
+        {
+            Instantiate(prefabToSpawn[i], transform.position, Quaternion.identity);
         }
+    }
 }

@@ -39,7 +39,7 @@ public class Automation_DashPanel : MonoBehaviour, IAutomation
         };
 
 
-        if(TryGetComponent(out SoundPlayer sound))
+        if (TryGetComponent(out SoundPlayer sound))
         {
             sound.PlaySound();
         }

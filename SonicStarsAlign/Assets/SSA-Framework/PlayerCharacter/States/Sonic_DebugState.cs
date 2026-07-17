@@ -59,8 +59,8 @@ public class Sonic_DebugState : IState
         _ = _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity.normalized);
 
         _ctx.HorizontalVelocity = _ctx.InputVector * 100f;
-        if(_ctx.Input.JumpInput.IsPressed()) _ctx.VerticalVelocity = Vector3.up * 50f;
-        else if(_ctx.Input.BounceInput.IsPressed()) _ctx.VerticalVelocity = Vector3.down * 50f;
+        if (_ctx.Input.JumpInput.IsPressed()) _ctx.VerticalVelocity = Vector3.up * 50f;
+        else if (_ctx.Input.BounceInput.IsPressed()) _ctx.VerticalVelocity = Vector3.down * 50f;
         else _ctx.VerticalVelocity = Vector3.zero;
         _ctx.Physics_ApplyVelocity();
     }

@@ -69,7 +69,7 @@ public class Sonic_HomingAttackState : IState
 
     private bool ContinueHomingAttacking()
     {
-        if(!homingOntoSpline) _ctx.homingTargetPosition = _targetTransform.position;
+        if (!homingOntoSpline) _ctx.homingTargetPosition = _targetTransform.position;
         _difference = _ctx.homingTargetPosition - _ctx.transform.position;
         if (_difference.magnitude <= _ctx.Rb.sleepThreshold)
         {
@@ -93,7 +93,7 @@ public class Sonic_HomingAttackState : IState
         //_ctx.HorizontalVelocity = Vector3.zero;
         /*if(_ctx.Input.AttackInput.IsPressed())
             _ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_vel, -_ctx.Gravity);*/
-        
+
         _ctx.Physics_ApplyVelocity();
 
         _ctx.InvinciblitiyState = 0.5f;

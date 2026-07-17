@@ -10,27 +10,27 @@ public class DeviceDependentActivation : MonoBehaviour
     public UnityEvent AbsentEvent;
     void Awake()
     {
-        #if UNITY_ANDROID || UNITY_EDITOR
+#if UNITY_ANDROID || UNITY_EDITOR
         IEnumerator ConnectionWait()
         {
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             // Takes a moment for Unity Remote to connect
             yield return new WaitForSeconds(0.2f);
-            #endif
+#endif
             bool setActive = false;
             foreach (InputDevice device in InputSystem.devices)
             {
-                if(device.name == DesiredDevice)
+                if (device.name == DesiredDevice)
                 {
                     setActive = true;
                 }
             }
-            if(setActive) PresentEvent.Invoke();
+            if (setActive) PresentEvent.Invoke();
             else AbsentEvent.Invoke();
         }
         StartCoroutine(ConnectionWait());
-        #else
+#else
         AbsentEvent.Invoke();
-        #endif
+#endif
     }
 }

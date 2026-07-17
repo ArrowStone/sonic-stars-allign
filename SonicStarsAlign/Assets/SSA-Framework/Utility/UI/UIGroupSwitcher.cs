@@ -13,7 +13,7 @@ public class UIGroupSwitcher : MonoBehaviour
 
     public void SwitchGroup(int gr_id)
     {
-        for (int i=0; i<groups.Length; i++) // i know foreach exists
+        for (int i = 0; i < groups.Length; i++) // i know foreach exists
         {
             if (i == gr_id)
             {

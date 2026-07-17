@@ -12,18 +12,20 @@ using UnityEngine.UIElements;
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true)]
 public class BaseColourAttribute : MultiPropertyAttribute
 {
-        public Color            _colour;
+    public Color _colour;
 
-        public BaseColourAttribute ( float r, float g, float b, float a ) {
-                _colour = new Color(r, g, b, a);
-        }
+    public BaseColourAttribute(float r, float g, float b, float a)
+    {
+        _colour = new Color(r, g, b, a);
+    }
 
 #if UNITY_EDITOR
-        public override bool WillDrawOnGUI ( Rect position, SerializedProperty property, GUIContent label, MultiPropertyAttribute BaseAttribute ) {
-                GUI.color = _colour;
+    public override bool WillDrawOnGUI(Rect position, SerializedProperty property, GUIContent label, MultiPropertyAttribute BaseAttribute)
+    {
+        GUI.color = _colour;
 
-                return true;
-        }
+        return true;
+    }
 #endif
 }
 
@@ -33,21 +35,23 @@ public class BaseColourAttribute : MultiPropertyAttribute
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true)]
 public class ColourIfNullAttribute : MultiPropertyAttribute
 {
-        public Color            _colour;
+    public Color _colour;
 
-        public ColourIfNullAttribute ( float r, float g, float b, float a ) {
-                _colour = new Color(r, g, b, a);
-        }
+    public ColourIfNullAttribute(float r, float g, float b, float a)
+    {
+        _colour = new Color(r, g, b, a);
+    }
 #if UNITY_EDITOR
 
-        public override bool WillDrawOnGUI ( Rect position, SerializedProperty property, GUIContent label, MultiPropertyAttribute BaseAttribute ) {
-                if (property.propertyType == SerializedPropertyType.ObjectReference && property.objectReferenceValue == null)
-                {
-                        GUI.color = _colour;
-                }
-
-                return true;
+    public override bool WillDrawOnGUI(Rect position, SerializedProperty property, GUIContent label, MultiPropertyAttribute BaseAttribute)
+    {
+        if (property.propertyType == SerializedPropertyType.ObjectReference && property.objectReferenceValue == null)
+        {
+            GUI.color = _colour;
         }
+
+        return true;
+    }
 #endif
 }
 
@@ -57,23 +61,25 @@ public class ColourIfNullAttribute : MultiPropertyAttribute
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true)]
 public class ColourIfEqualToAttribute : MultiPropertyAttribute
 {
-        public bool             _compare;
-        public Color            _colour;
+    public bool _compare;
+    public Color _colour;
 
-        public ColourIfEqualToAttribute ( bool compare, float r, float g, float b, float a ) {
-                _colour = new Color(r, g, b, a);
-                _compare = compare;
-        }
+    public ColourIfEqualToAttribute(bool compare, float r, float g, float b, float a)
+    {
+        _colour = new Color(r, g, b, a);
+        _compare = compare;
+    }
 
 #if UNITY_EDITOR
-        public override bool WillDrawOnGUI ( Rect position, SerializedProperty property, GUIContent label, MultiPropertyAttribute BaseAttribute ) {
-                if (property.propertyType == SerializedPropertyType.Boolean && property.boolValue == _compare)
-                {
-                        GUI.color = _colour;
-                }
-
-                return true;
+    public override bool WillDrawOnGUI(Rect position, SerializedProperty property, GUIContent label, MultiPropertyAttribute BaseAttribute)
+    {
+        if (property.propertyType == SerializedPropertyType.Boolean && property.boolValue == _compare)
+        {
+            GUI.color = _colour;
         }
+
+        return true;
+    }
 #endif
 }
 
@@ -83,24 +89,27 @@ public class ColourIfEqualToAttribute : MultiPropertyAttribute
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true)]
 public class TextSpace : MultiPropertyAttribute
 {
-        public string            _text;
+    public string _text;
 
-        public TextSpace ( string text ) {
-                _text = text;
-        }
+    public TextSpace(string text)
+    {
+        _text = text;
+    }
 
 #if UNITY_EDITOR
 
-        //Ensured there won't be a gap prepared to draw the field, as this will overwrite it.
-        public override float? GetPropertyHeight ( float baseHeight, SerializedProperty property, GUIContent label, MultiPropertyAttribute BaseAttribute ) {
-                return 0;
-        }
+    //Ensured there won't be a gap prepared to draw the field, as this will overwrite it.
+    public override float? GetPropertyHeight(float baseHeight, SerializedProperty property, GUIContent label, MultiPropertyAttribute BaseAttribute)
+    {
+        return 0;
+    }
 
-        //Instead of drawing the field, draw a help box instead.
-        public override bool WillDrawOnGUI ( Rect position, SerializedProperty property, GUIContent label, MultiPropertyAttribute BaseAttribute ) {
+    //Instead of drawing the field, draw a help box instead.
+    public override bool WillDrawOnGUI(Rect position, SerializedProperty property, GUIContent label, MultiPropertyAttribute BaseAttribute)
+    {
 
-                GUILayout.Label( _text, EditorStyles.helpBox );
-                return false;
-        }
+        GUILayout.Label(_text, EditorStyles.helpBox);
+        return false;
+    }
 #endif
 }

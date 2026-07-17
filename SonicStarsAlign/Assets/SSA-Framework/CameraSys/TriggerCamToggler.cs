@@ -8,13 +8,13 @@ public class TriggerCamToggler : MonoBehaviour
     [SerializeField] bool CamDisable = true;
     void OnTriggerEnter(Collider other)
     {
-        if(CamEnable && other.CompareTag("Player"))
+        if (CamEnable && other.CompareTag("Player"))
             CMCam.enabled = true;
     }
 
     void OnTriggerExit(Collider other)
     {
-        if(CamDisable && other.CompareTag("Player"))
+        if (CamDisable && other.CompareTag("Player"))
             CMCam.enabled = false;
     }
 }

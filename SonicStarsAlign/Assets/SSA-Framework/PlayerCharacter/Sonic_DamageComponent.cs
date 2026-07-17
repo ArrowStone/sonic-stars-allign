@@ -65,7 +65,7 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
 
     private void FixedUpdate()
     {
-        if(_ctx.Input.Respawn.WasPressedThisFrame())
+        if (_ctx.Input.Respawn.WasPressedThisFrame())
         {
             Death();
         }
@@ -89,7 +89,7 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
 
     public void RingLoss()
     {
-        if(_ctx.Death) return;
+        if (_ctx.Death) return;
         Debug.Log("Ring loss");
         if (_ctx.Chs.Shield != null)
         {

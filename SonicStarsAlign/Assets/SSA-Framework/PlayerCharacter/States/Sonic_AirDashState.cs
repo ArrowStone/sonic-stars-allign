@@ -21,12 +21,12 @@ public class Sonic_AirDashState : IState
         #endregion
 
         #region Velocity
-        if(_ctx.InputVector.magnitude > 0) _ctx.PlayerDirection = _ctx.InputVector;
+        if (_ctx.InputVector.magnitude > 0) _ctx.PlayerDirection = _ctx.InputVector;
         _ctx.HorizontalVelocity = _ctx.PlayerDirection * _ctx.Chp.DashSpeed;
         _ctx.VerticalVelocity = Vector3.zero;
         _ctx.Physics_ApplyVelocity();
         #endregion
-        
+
         #region Animations
         _ctx.ModelManager.ExitBall();
         _ctx.Anim.SetInteger("State", 4);
@@ -83,7 +83,7 @@ public class Sonic_AirDashState : IState
     private void AirDashMovement(float _delta)
     {
         float _turnStrength = _ctx.ChrTurn.Evaluate(_ctx.HorizontalVelocity.magnitude) * Mathf.PI * _delta;
-        if(_ctx.InputVector.magnitude > 0) _ctx.PlayerDirection = Vector3.RotateTowards(_ctx.PlayerDirection, _ctx.InputVector, _turnStrength, 0);
+        if (_ctx.InputVector.magnitude > 0) _ctx.PlayerDirection = Vector3.RotateTowards(_ctx.PlayerDirection, _ctx.InputVector, _turnStrength, 0);
         float speed = Math.Max(_ctx.Velocity.magnitude, _ctx.Chp.DashSpeed);
         _ctx.HorizontalVelocity = _ctx.PlayerDirection * speed;
         _ctx.VerticalVelocity = Vector3.zero;
@@ -106,13 +106,13 @@ public class Sonic_AirDashState : IState
             _ctx.Snd.PlaySound("Bounce");
             _ctx.MachineTransition(PlayerStates.Bounce);
         }
-        if(_groundDetected)
+        if (_groundDetected)
         {
             _ctx.MachineTransition(PlayerStates.Ground);
         }
-        if(_airTime <= 0)
+        if (_airTime <= 0)
         {
-            _ctx.MachineTransition(PlayerStates.Air);   
+            _ctx.MachineTransition(PlayerStates.Air);
         }
     }
     #endregion Util

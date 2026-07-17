@@ -11,7 +11,7 @@ public class Enemy_GroundState : IState
 
     public void EnterState()
     {
-        
+
     }
 
     public void UpdateState()
@@ -34,11 +34,12 @@ public class Enemy_GroundState : IState
 
     public void ExitState()
     {
-        
+
     }
 
-    public void GroundApplication ( float _delta ) {
-        if(_etx.GroundCast.HitInfo.normal.Equals(Vector3.zero)) return;
+    public void GroundApplication(float _delta)
+    {
+        if (_etx.GroundCast.HitInfo.normal.Equals(Vector3.zero)) return;
         _etx.GroundNormal = _etx.GroundCast.HitInfo.normal;
         _etx.HorizontalVelocity = Vector3.ProjectOnPlane(_etx.HorizontalVelocity, _etx.GroundNormal) * _etx.DragCoefficient;
         _etx.VerticalVelocity = Vector3.zero;
@@ -50,7 +51,7 @@ public class Enemy_GroundState : IState
 
     public void GroundSwitchConditions()
     {
-        if(!_etx.GroundCast.Execute(_etx.transform.position, _etx.Gravity))
+        if (!_etx.GroundCast.Execute(_etx.transform.position, _etx.Gravity))
         {
             _etx.MachineTransition(EnemyStates.Air);
         }

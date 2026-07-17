@@ -79,7 +79,7 @@ public class Sonic_LightDashState : IState
             }
 
         }
-        
+
         _targetPos = _ctx.RingDetector.TargetOutput.transform.position;
         _difference = _targetPos - _ctx.Rb.transform.position;
 
@@ -97,7 +97,7 @@ public class Sonic_LightDashState : IState
     private void AirSwitchConditions()
     {
         // If the player wants to stop
-        if(_ctx.InputVector.magnitude != 0)
+        if (_ctx.InputVector.magnitude != 0)
         {
             _ctx.Velocity = _ctx.PlayerDirection * _ctx.Chp.LightDashExitSpeed;
         }

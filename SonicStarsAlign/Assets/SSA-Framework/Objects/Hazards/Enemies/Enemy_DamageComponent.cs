@@ -45,7 +45,7 @@ public class Enemy_DamageComponent : MonoBehaviour, IDamageable
         Sonic_PlayerStateMachine _ctx;
 
         // Checking if it's the player and whether they're not attacking
-        if (other.TryGetComponent(out _ctx) && other.TryGetComponent(out _damaged) && 
+        if (other.TryGetComponent(out _ctx) && other.TryGetComponent(out _damaged) &&
             !other.GetComponent<Sonic_AttackComponent>().Library.Active())
         {
             switch (KnockbackApplication)

@@ -20,18 +20,18 @@ public class LinkedLevelObject
     public void ProcessProperties(GameObject gameObject, JObject jObject)
     {
         // Feel free to make this mess clearer if you know how
-        if(ComponentType.Equals("")) return;
+        if (ComponentType.Equals("")) return;
 
         Type compType = typeof(LinkedLevelObject).Assembly.GetType(ComponentType);
 
-        if(compType == null)
+        if (compType == null)
         {
             Debug.LogWarning(string.Format("Could not find component type for {0}", gameObject.name));
             return;
         }
 
         dynamic comp = gameObject.GetComponent(compType);
-        if(comp == null)
+        if (comp == null)
         {
             Debug.LogWarning(string.Format("Could not find {0} for {1}", ComponentType, gameObject.name));
             return;
@@ -39,10 +39,10 @@ public class LinkedLevelObject
 
         Dictionary<string, JToken> paramDictionary = jObject["parameters"].ToObject<Dictionary<string, JToken>>();
 
-        foreach(string key in paramDictionary.Keys)
+        foreach (string key in paramDictionary.Keys)
         {
             System.Reflection.FieldInfo compField = compType.GetField(key);
-            if(compField == null)   continue;
+            if (compField == null) continue;
             compField.SetValue(comp, paramDictionary[key].ToObject(compField.FieldType));
         }
     }
@@ -64,7 +64,7 @@ public class GameLevelLoader : MonoBehaviour
 
     void Update()
     {
-        if(!PathInput) return;
+        if (!PathInput) return;
         absolutePath = PathInput.text;
     }
 
@@ -77,7 +77,7 @@ public class GameLevelLoader : MonoBehaviour
     {
         Scene existingLevel = SceneManager.GetSceneByName("Level");
         Debug.Log(existingLevel.isLoaded);
-        if(existingLevel.isLoaded) await SceneManager.UnloadSceneAsync(existingLevel);
+        if (existingLevel.isLoaded) await SceneManager.UnloadSceneAsync(existingLevel);
 
         Scene levelScene = SceneManager.CreateScene("Level");
         GltfImport gltf = new GltfImport();
@@ -85,27 +85,27 @@ public class GameLevelLoader : MonoBehaviour
         string filePath = absolutePath;
 
         // Unity complains if I don't include the #if.
-        #if UNITY_EDITOR
-        if(absolutePath == "")
-        filePath = Application.dataPath.Replace("Assets", "") +
-                            AssetDatabase.GetAssetPath(LevelData);
-        #endif
+#if UNITY_EDITOR
+        if (absolutePath == "")
+            filePath = Application.dataPath.Replace("Assets", "") +
+                                AssetDatabase.GetAssetPath(LevelData);
+#endif
 
         string gltfPath = "file://" + filePath.Replace(".json", ".glb");
         bool success = await gltf.Load(gltfPath);
-        if(!success)
+        if (!success)
         {
             // Can't find the .glb file
             Debug.LogError(string.Format("glTF file not found at \"{0}\".", gltfPath));
             return;
         }
-        GameObject levelMesh = (GameObject) Instantiate(new GameObject("Level"), levelScene);
+        GameObject levelMesh = (GameObject)Instantiate(new GameObject("Level"), levelScene);
         await gltf.InstantiateMainSceneAsync(levelMesh.transform);
 
         Debug.Log("=== COLLIDERS INCOMING ===");
 
         // Add collider and assign the ground layer to each piece of geometry
-        foreach(Transform child in levelMesh.GetComponentsInChildren<Transform>())
+        foreach (Transform child in levelMesh.GetComponentsInChildren<Transform>())
         {
             Debug.Log(child.name);
             if (child.TryGetComponent(out MeshFilter _))
@@ -125,10 +125,10 @@ public class GameLevelLoader : MonoBehaviour
 
         // Handle the level object JSON
         string textData = LevelData.text;
-        if(absolutePath != "") textData = File.ReadAllText(absolutePath);
+        if (absolutePath != "") textData = File.ReadAllText(absolutePath);
         JObject[] objects = JsonConvert.DeserializeObject<JObject[]>(textData);
 
-        foreach(JObject obj in objects)
+        foreach (JObject obj in objects)
         {
             Debug.Log(obj["name"]);
             // Please don't sue us Nintendo
@@ -139,18 +139,18 @@ public class GameLevelLoader : MonoBehaviour
             // Get the prefab to place
             foreach (LinkedLevelObject linkedObject in levelObjects)
             {
-                if(linkedObject.ObjectID == objType)
+                if (linkedObject.ObjectID == objType)
                 {
                     link = linkedObject;
                     break;
                 }
             }
             // No type / No matching prefabs => ignore
-            if (link == null) 
+            if (link == null)
             {
-                if(objType != null) 
+                if (objType != null)
                     Debug.LogWarning(
-                        string.Format("Unassigned/invalid object type: {0} ({1})", 
+                        string.Format("Unassigned/invalid object type: {0} ({1})",
                         objType, obj["name"].ToString()));
                 continue;
             }
@@ -158,7 +158,7 @@ public class GameLevelLoader : MonoBehaviour
             Debug.Log(link.LevelObject.name);
 
             // Place the object and assign common parameters
-            GameObject gobj = (GameObject) Instantiate(link.LevelObject, levelScene);
+            GameObject gobj = (GameObject)Instantiate(link.LevelObject, levelScene);
 
             float[] pos = obj["position"].ToObject<float[]>();
             Debug.Log(obj["position"]);
@@ -170,12 +170,12 @@ public class GameLevelLoader : MonoBehaviour
             gobj.transform.eulerAngles = new Vector3(rot[0], -rot[2], rot[1]) * Mathf.Rad2Deg;
 
             // Rails and crap
-            if(obj.ContainsKey("curve"))
+            if (obj.ContainsKey("curve"))
             {
                 Debug.Log("Spline processing!");
                 SplineContainer cont = gobj.GetComponent<SplineContainer>();
                 cont = cont ? cont : gobj.GetComponentInChildren<SplineContainer>();
-                if(!cont)
+                if (!cont)
                 {
                     Debug.LogWarning(string.Format("A curve object ({0}) has been assigned to a non-Spline prefab ({1}).", gobj.name, link.LevelObject.name));
                     continue;
@@ -183,15 +183,15 @@ public class GameLevelLoader : MonoBehaviour
 
                 float[][] curvePoints = obj["curve"].ToObject<float[][]>();
 
-                if(cont.Splines.Count == 0) cont.AddSpline();
+                if (cont.Splines.Count == 0) cont.AddSpline();
 
-                foreach(float[] point in curvePoints)
+                foreach (float[] point in curvePoints)
                 {
                     // Have to do the math because Blender deals with handle positions but Unity wants normals
                     float3 pointPos = new float3(-point[0], point[2], -point[1]);
                     float3 inNormal = new float3(-point[3], point[5], -point[4]) - pointPos;
                     float3 outNormal = new float3(-point[6], point[8], -point[7]) - pointPos;
-                    cont.Spline.Add(new BezierKnot( pointPos, inNormal, outNormal ));
+                    cont.Spline.Add(new BezierKnot(pointPos, inNormal, outNormal));
                 }
             }
 

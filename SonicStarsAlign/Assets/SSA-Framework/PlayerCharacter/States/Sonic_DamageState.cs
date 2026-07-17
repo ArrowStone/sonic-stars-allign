@@ -25,7 +25,7 @@ public class Sonic_DamageState : IState
     {
         float _delta = Time.fixedDeltaTime;
 
-        if(!GroundCheck()) Gravity(_delta);
+        if (!GroundCheck()) Gravity(_delta);
         HurtMovement(_delta);
         HurtRotation();
 
@@ -60,7 +60,7 @@ public class Sonic_DamageState : IState
     private bool GroundCheck()
     {
         Debug.DrawRay(_ctx.transform.position, _ctx.Gravity.normalized);
-        var _check = _ctx.GroundCast.Execute(_ctx.transform.position, _ctx.Gravity.normalized) 
+        var _check = _ctx.GroundCast.Execute(_ctx.transform.position, _ctx.Gravity.normalized)
             || _ctx.GroundCast.Execute(_ctx.transform.position, -_ctx.Gravity.normalized);
         _groundDetected = _check && Vector3.Dot(_ctx.Velocity, _ctx.GroundCast.HitInfo.normal) <= 0;
         return _groundDetected;

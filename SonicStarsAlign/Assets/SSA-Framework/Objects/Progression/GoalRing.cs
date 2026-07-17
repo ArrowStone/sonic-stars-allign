@@ -18,20 +18,20 @@ public class GoalRing : CollectableBase
             _ctx.MachineTransition(PlayerStates.Win);
 
 
-            int rank = RankCalc((int) _ctx.Chs.Rings,   _ctx.Chs.Score + 
-                                                        System.Math.Max(0, (int) (Data.TargetTime - _ctx.Chs.Time)) * 5);
+            int rank = RankCalc((int)_ctx.Chs.Rings, _ctx.Chs.Score +
+                                                        System.Math.Max(0, (int)(Data.TargetTime - _ctx.Chs.Time)) * 5);
 
-            if(!(GameStateSaver && Data)) 
+            if (!(GameStateSaver && Data))
             {
                 // Probably launched the scene in editor, don't bother
-                Debug.LogWarning(string.Format( "Skipping saving progress due to absence of {0}{1}{2}.",
-                                                GameStateSaver ? ""  : "GameStateSaver",
+                Debug.LogWarning(string.Format("Skipping saving progress due to absence of {0}{1}{2}.",
+                                                GameStateSaver ? "" : "GameStateSaver",
                                                 !(GameStateSaver || Data) ? " and " : "", // I'm so clever
-                                                Data ? ""  : "Data"));
+                                                Data ? "" : "Data"));
             }
             else
             {
-                GameStateSaver.UpdateStageData(Data, (byte) rank);
+                GameStateSaver.UpdateStageData(Data, (byte)rank);
                 Data.Complete = true;
                 DataSaving.RecordStageData(Data);
             }

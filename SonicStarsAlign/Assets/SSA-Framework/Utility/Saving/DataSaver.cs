@@ -18,7 +18,7 @@ public static class DataSaving
         string filePath = GetSaveFileForStage(data);
 
         Debug.Log(string.Format("Saving into file at {0}!", filePath));
-        if(File.Exists(filePath))
+        if (File.Exists(filePath))
         {
             File.WriteAllText(filePath, saveData, System.Text.Encoding.UTF8);
         }
@@ -37,9 +37,9 @@ public static class DataSaving
     public static void ReadStageData(StageData data)
     {
         string filePath = GetSaveFileForStage(data);
-        if(File.Exists(filePath))
+        if (File.Exists(filePath))
         {
-            int[] rankScores = (int[]) data.RankScores.Clone();
+            int[] rankScores = (int[])data.RankScores.Clone();
             int stageRingCount = data.StageRingCount;
             float targetTime = data.TargetTime;
 
@@ -54,7 +54,7 @@ public static class DataSaving
             data.StageRingCount = stageRingCount;
             data.TargetTime = targetTime;
         }
-        else 
+        else
         {
             // No existing file => set bad stats in case of a bug
             // (to avoid exploits)

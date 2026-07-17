@@ -55,7 +55,7 @@ public class Sonic_RailSwitchState : IState
         {
             ExitConditions();
         }
-        
+
         _ctx.Physics_ApplyVelocity();
     }
 

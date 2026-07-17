@@ -8,9 +8,9 @@ public class GameStateManager : MonoBehaviour
     public Sonic_PlayerStateMachine ctx;
     public void LoadData()
     {
-        if(StageDataAssets == null) return;
+        if (StageDataAssets == null) return;
 
-        for(int i=0; i<StageDataAssets.Length; i++)
+        for (int i = 0; i < StageDataAssets.Length; i++)
         {
             DataSaving.ReadStageData(StageDataAssets[i]);
         }
@@ -18,7 +18,7 @@ public class GameStateManager : MonoBehaviour
 
     public void UpdateStageData(StageData data, byte rank)
     {
-        if(!data.Complete)
+        if (!data.Complete)
         {
             data.bestTime = ctx.Chs.Time;
             data.bestScore = ctx.Chs.Score;

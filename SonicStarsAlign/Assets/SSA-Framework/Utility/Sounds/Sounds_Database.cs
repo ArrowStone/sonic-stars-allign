@@ -6,5 +6,5 @@ using TMPro;
 [CreateAssetMenu(menuName = "Databases/SoundAssetDatabase")]
 public class Sounds_Database : ScriptableObject
 {
-	public SoundType[] Sounds;
+    public SoundType[] Sounds;
 }

@@ -22,8 +22,8 @@ public class Sonic_SweepKickState : IState
         _kickTimer = 0f;
         _hasHit = false;
 
-		_ctx.Anim.SetTrigger("Kick");
-		_ctx.Snd.PlaySound("Slide");
+        _ctx.Anim.SetTrigger("Kick");
+        _ctx.Snd.PlaySound("Slide");
 
         // Lock input for the move
         _ctx.HorizontalVelocity = _ctx.PlayerDirection * Mathf.Max(_ctx.HorizontalVelocity.magnitude, _ctx.Chp.BaseSpeed);
@@ -49,14 +49,14 @@ public class Sonic_SweepKickState : IState
 
 
         // Jumping out of the kick
-        if(_ctx.Input.JumpInput.WasPressedThisFrame())
+        if (_ctx.Input.JumpInput.WasPressedThisFrame())
         {
             _ctx.Jump();
             return;
         }
 
         // Leaving the ground
-        if(!GroundCheck())
+        if (!GroundCheck())
         {
             _ctx.MachineTransition(PlayerStates.Air);
             return;
@@ -97,9 +97,10 @@ public class Sonic_SweepKickState : IState
         }
     }
 
-    private bool GroundCheck () {
-            return _ctx.GroundCast.Execute(_ctx.transform.position, -_ctx.GroundNormal) &&
-                Vector3.Angle(_ctx.GroundCast.HitInfo.normal, _ctx.GroundNormal) <= _ctx.Chp.MaxGroundDeviation;
+    private bool GroundCheck()
+    {
+        return _ctx.GroundCast.Execute(_ctx.transform.position, -_ctx.GroundNormal) &&
+            Vector3.Angle(_ctx.GroundCast.HitInfo.normal, _ctx.GroundNormal) <= _ctx.Chp.MaxGroundDeviation;
     }
 
     private void GroundApplication(float _delta)

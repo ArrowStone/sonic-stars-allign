@@ -43,11 +43,11 @@ public class SceneSwitcher : MonoBehaviour
     }
     public void AddScene(int _scn)
     {
-        if(_scn < 0)
+        if (_scn < 0)
         {
             ExitGame();
         }
-        else 
+        else
         {
             SceneManager.LoadSceneAsync(_scn, LoadSceneMode.Additive);
         }
@@ -59,11 +59,11 @@ public class SceneSwitcher : MonoBehaviour
     private void ExitGame()
     {
         // Credit: Unity Docs
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
             Application.Quit();
-        #endif
+#endif
     }
 
     public void AddCachedScene()

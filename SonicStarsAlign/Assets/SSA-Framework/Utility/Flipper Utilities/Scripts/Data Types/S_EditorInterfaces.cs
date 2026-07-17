@@ -6,9 +6,10 @@ using UnityEngine;
 public interface ICustomEditorLogic
 {
 #if UNITY_EDITOR
-	public void CustomOnSceneGUI ( SceneView sceneView = null) {
+    public void CustomOnSceneGUI(SceneView sceneView = null)
+    {
 
-	}
+    }
 #endif
 
 }

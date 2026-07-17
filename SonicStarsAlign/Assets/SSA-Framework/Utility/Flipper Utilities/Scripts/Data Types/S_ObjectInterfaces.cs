@@ -6,28 +6,32 @@ using UnityEngine;
 
 public interface ITriggerable
 {
-	public void TriggerObjectOn () {
+    public void TriggerObjectOn()
+    {
 
-	}
+    }
 
-	public void TriggerObjectOff () {
+    public void TriggerObjectOff()
+    {
 
-	}
+    }
 
-	public void TriggerObjectEachFrame( ) { 
-	}
+    public void TriggerObjectEachFrame()
+    {
+    }
 
-	public void StartTriggeredOn () {
-	}
+    public void StartTriggeredOn()
+    {
+    }
 }
 
 public enum TriggerTypes
 {
-	On,
-	//Once,
-	Off,
-	Either,
-	Reset,
-	Frame,
-	Start
+    On,
+    //Once,
+    Off,
+    Either,
+    Reset,
+    Frame,
+    Start
 }

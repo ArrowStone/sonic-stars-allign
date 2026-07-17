@@ -5,13 +5,13 @@ public class ExitMenu : MonoBehaviour
 {
     public void Exit()
     {
-        foreach(Canvas canvas in FindObjectsByType<Canvas>())
+        foreach (Canvas canvas in FindObjectsByType<Canvas>())
         {
-            if(canvas.gameObject.scene.buildIndex != gameObject.scene.buildIndex)
+            if (canvas.gameObject.scene.buildIndex != gameObject.scene.buildIndex)
             {
                 canvas.GetComponent<Animator>().SetInteger("Menu", 0);
                 return;
-            }   
+            }
         }
     }
 }

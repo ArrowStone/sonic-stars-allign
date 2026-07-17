@@ -9,65 +9,69 @@ using UnityEngine;
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true)]
 public class SetBoolIfOtherAttribute : MultiPropertyAttribute
 {
-	//Fields to set when constructed
-	public bool             _setThisBoolTo { get; private set; }
-	public string	_propertyToCheck { get; private set; }
-	public object	_valueToCheckFor { get; private set; }
+    //Fields to set when constructed
+    public bool _setThisBoolTo { get; private set; }
+    public string _propertyToCheck { get; private set; }
+    public object _valueToCheckFor { get; private set; }
 
-	//Constructor
-	public SetBoolIfOtherAttribute ( bool setThis, string propertyToCheck, object comparedValue ) {
-		_setThisBoolTo = setThis;
-		_propertyToCheck = propertyToCheck;
-		_valueToCheckFor = comparedValue;
-	}
+    //Constructor
+    public SetBoolIfOtherAttribute(bool setThis, string propertyToCheck, object comparedValue)
+    {
+        _setThisBoolTo = setThis;
+        _propertyToCheck = propertyToCheck;
+        _valueToCheckFor = comparedValue;
+    }
 #if UNITY_EDITOR
 
-	// Tracking Fields for the Drawer
-	SerializedProperty _fieldToCheck;
-	SerializedProperty _propertyToSet;
+    // Tracking Fields for the Drawer
+    SerializedProperty _fieldToCheck;
+    SerializedProperty _propertyToSet;
 
-	private bool ShouldSetBoolean ( SerializedProperty propertyToSet ) {
-		//Find the field that determines if this property should be drawn.
+    private bool ShouldSetBoolean(SerializedProperty propertyToSet)
+    {
+        //Find the field that determines if this property should be drawn.
 
-		_fieldToCheck = OnlyDrawIfAttribute.GetField(propertyToSet, _propertyToCheck);
-		if (_fieldToCheck == null) { return false; }
+        _fieldToCheck = OnlyDrawIfAttribute.GetField(propertyToSet, _propertyToCheck);
+        if (_fieldToCheck == null) { return false; }
 
-		return DrawOthersIfAttribute.IsPropertyEqualToValue(_fieldToCheck, _valueToCheckFor);
+        return DrawOthersIfAttribute.IsPropertyEqualToValue(_fieldToCheck, _valueToCheckFor);
 
-	}
+    }
 
-	public override bool WillDrawOnGUI ( Rect position, SerializedProperty property, GUIContent label, MultiPropertyAttribute BaseAttribute ) {
+    public override bool WillDrawOnGUI(Rect position, SerializedProperty property, GUIContent label, MultiPropertyAttribute BaseAttribute)
+    {
 
-		_propertyToSet = property;
+        _propertyToSet = property;
 
-		//If this property should be set to something else based on another, then change it now, before drawing.
-		if (ShouldSetBoolean(_propertyToSet) && _propertyToSet.propertyType == SerializedPropertyType.Boolean)
-		{
-			_propertyToSet.boolValue = _setThisBoolTo; //Set property
-		}
+        //If this property should be set to something else based on another, then change it now, before drawing.
+        if (ShouldSetBoolean(_propertyToSet) && _propertyToSet.propertyType == SerializedPropertyType.Boolean)
+        {
+            _propertyToSet.boolValue = _setThisBoolTo; //Set property
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	public override void OnChangeCheck ( bool wasChanged, MultiPropertyAttribute BaseAttribute, SerializedProperty property ) {
-		_propertyToSet = property;
-		bool goalBoolean = _setThisBoolTo;
+    public override void OnChangeCheck(bool wasChanged, MultiPropertyAttribute BaseAttribute, SerializedProperty property)
+    {
+        _propertyToSet = property;
+        bool goalBoolean = _setThisBoolTo;
 
-		if (wasChanged)
-		{
-			if (ShouldSetBoolean(_propertyToSet))
-			{
-				//If user tried to change this property, but it would be immediately be set back, give an error message to inform them why they can't change it.
-				if (!_propertyToSet.boolValue.Equals(goalBoolean))
-				{
-					Debug.LogError(_propertyToSet.name + " cannot be changed as it uses the SetIfOtherProperty Attribute, based on " + _propertyToCheck);
-				}
-				_propertyToSet.boolValue = goalBoolean; //Set property
-			}
-		}
+        if (wasChanged)
+        {
+            if (ShouldSetBoolean(_propertyToSet))
+            {
+                //If user tried to change this property, but it would be immediately be set back, give an error message to inform them why they can't change it.
+                if (!_propertyToSet.boolValue.Equals(goalBoolean))
+                {
+                    Debug.LogError(_propertyToSet.name + " cannot be changed as it uses the SetIfOtherProperty Attribute, based on " + _propertyToCheck);
+                }
+                _propertyToSet.boolValue = goalBoolean; //Set property
+            }
+        }
 
-		_propertyToSet.serializedObject.ApplyModifiedProperties();
-	}
+        _propertyToSet.serializedObject.ApplyModifiedProperties();
+    }
 #endif
 }
 
@@ -79,9 +83,10 @@ public class SetBoolIfOtherAttribute : MultiPropertyAttribute
 public class CustomReadOnlyAttribute : MultiPropertyAttribute
 {
 #if UNITY_EDITOR
-	public override bool WillDrawOnGUI ( Rect position, SerializedProperty property, GUIContent label, MultiPropertyAttribute BaseAttribute ) {
-		BaseAttribute._isReadOnly = true;
-		return true;
-	}
+    public override bool WillDrawOnGUI(Rect position, SerializedProperty property, GUIContent label, MultiPropertyAttribute BaseAttribute)
+    {
+        BaseAttribute._isReadOnly = true;
+        return true;
+    }
 #endif
 }

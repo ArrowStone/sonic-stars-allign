@@ -122,8 +122,8 @@ public class Sonic_WallRunState : IState
         // Player horizontal input (forward/back stick ignored)
         float horizontalInput = -_ctx.Input.VectorMoveInput.x;
 
-                // Applying direction
-        if(!_ctx.WallRunDirection)
+        // Applying direction
+        if (!_ctx.WallRunDirection)
         {
             wallForward = -wallForward;
             horizontalInput = -horizontalInput;
@@ -159,5 +159,5 @@ public class Sonic_WallRunState : IState
     {
         _ctx.MachineTransition(PlayerStates.Air);
     }
-    
+
 }

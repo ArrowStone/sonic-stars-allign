@@ -42,8 +42,8 @@ public class StageSelector : MonoBehaviour
         {
             Destroy(gameObject);
         }*/
-        
-        if (Instance != null) {Destroy(Instance);}
+
+        if (Instance != null) { Destroy(Instance); }
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
@@ -93,25 +93,25 @@ public class StageSelector : MonoBehaviour
             stageNameDisplay.sprite = current.nameSprite;
 
         // Update red ring collection display
-        for(int i=0; i<redRingIcons.Length; i++)
+        for (int i = 0; i < redRingIcons.Length; i++)
         {
             redRingIcons[i].color = current.data.RedRings[i] ? Color.red : Color.white;
         }
 
-        if(current.data.Complete)
+        if (current.data.Complete)
         {
             // Completed => display saved stats
 
             // Update best time & score
             float bestTime = current.data.bestTime;
-            int minutes = (int) (bestTime / 60);
-            int seconds = (int) (bestTime - 0.5f) % 60;
-            int decimals = (int) (bestTime * 100 % 100);
-            if(decimals > 99) decimals -= 100;
+            int minutes = (int)(bestTime / 60);
+            int seconds = (int)(bestTime - 0.5f) % 60;
+            int decimals = (int)(bestTime * 100 % 100);
+            if (decimals > 99) decimals -= 100;
 
-            bestTimeText.text = string.Format("{0:00}:{1:00}.{2:00}", 
+            bestTimeText.text = string.Format("{0:00}:{1:00}.{2:00}",
                 minutes,
-                seconds, 
+                seconds,
                 decimals);
             bestScoreText.text = current.data.bestScore.ToString();
 

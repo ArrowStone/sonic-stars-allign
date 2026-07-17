@@ -20,7 +20,7 @@ public class Sonic_PathFollowState : IState
 
         _triggerDetected = false;
         // Temporary
-        initialGroundRayLength =  _ctx.GroundCast.DetectionDistance;
+        initialGroundRayLength = _ctx.GroundCast.DetectionDistance;
         _ctx.GroundCast.DetectionDistance = 10f;
     }
 
@@ -77,7 +77,7 @@ public class Sonic_PathFollowState : IState
         _ctx.VerticalVelocity = Vector3.Project(_vel, -_ctx.GroundNormal);
         _ctx.Physics_ApplyVelocity();
 
-        if(_ctx.GroundCast.Execute( _pos + _ctx.SplnHandler.SplineNormal() * 5f,
+        if (_ctx.GroundCast.Execute(_pos + _ctx.SplnHandler.SplineNormal() * 5f,
                                     -_ctx.SplnHandler.SplineNormal()))
         {
             _ctx.GroundNormal = _ctx.GroundCast.HitInfo.normal;

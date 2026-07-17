@@ -45,24 +45,24 @@ public abstract class Enemy_MovementStateMachine : StateMachine_MonoBase<EnemySt
         base.MachineFixedUpdate();
     }
 
-    public void LateUpdate ()
+    public void LateUpdate()
     {
         base.MachineLateUpdate();
     }
 
-    public void Physics_ApplyVelocity () 
+    public void Physics_ApplyVelocity()
     {
         Velocity = HorizontalVelocity + VerticalVelocity;
         Rb.linearVelocity = Velocity;
     }
 
-    public bool Physics_Sweep ( Vector3 _point, out RaycastHit Info ) 
+    public bool Physics_Sweep(Vector3 _point, out RaycastHit Info)
     {
         Vector3 _dif = _point - transform.position;
         return Rb.SweepTest(_dif, out Info, _dif.magnitude, QueryTriggerInteraction.Ignore) && Info.transform.gameObject.layer == wallLayer;
     }
 
-    public void Physics_Snap ( Vector3 _point ) 
+    public void Physics_Snap(Vector3 _point)
     {
         if (!Physics_Sweep(_point, out _))
         {

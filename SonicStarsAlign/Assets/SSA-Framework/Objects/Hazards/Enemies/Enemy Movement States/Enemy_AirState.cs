@@ -15,7 +15,7 @@ public class Enemy_AirState : IState
 
     public void UpdateState()
     {
-        float _delta = Time.deltaTime;;
+        float _delta = Time.deltaTime; ;
     }
 
     public void FixedUpdateState()
@@ -34,21 +34,21 @@ public class Enemy_AirState : IState
 
     public void ExitState()
     {
-        
+
     }
 
-    public void AirMovement ( float _delta ) 
+    public void AirMovement(float _delta)
     {
         _etx.HorizontalVelocity *= _etx.DragCoefficient;
         _etx.VerticalVelocity += _etx.Gravity;
-        if(_etx.VerticalVelocity.magnitude > _etx.FallSpeedCap)
+        if (_etx.VerticalVelocity.magnitude > _etx.FallSpeedCap)
             _etx.VerticalVelocity = _etx.VerticalVelocity.normalized * _etx.FallSpeedCap;
         _etx.Physics_ApplyVelocity();
     }
 
     public void AirSwitchConditions()
     {
-        if(_etx.GroundCast.Execute(_etx.transform.position, _etx.Gravity))
+        if (_etx.GroundCast.Execute(_etx.transform.position, _etx.Gravity))
         {
             _etx.MachineTransition(EnemyStates.Ground);
         }

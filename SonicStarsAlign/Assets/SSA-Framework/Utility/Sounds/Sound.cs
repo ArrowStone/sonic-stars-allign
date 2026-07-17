@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class SoundType
 {
-	public string Name;
-	public AudioClip[] Clip;
-	public AudioMixerGroup Channel;
+    public string Name;
+    public AudioClip[] Clip;
+    public AudioMixerGroup Channel;
 }
