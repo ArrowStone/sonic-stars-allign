@@ -85,17 +85,5 @@ public class SettingsLoader : MonoBehaviour
         cameraData.antialiasingQuality = SMAAQualities[AAQuality];
         cameraData.taaSettings.quality = TAAQualities[AAQuality];
         pipelineAsset.renderScale = renderScale;
-
-        DisplayInfo info = Screen.mainWindowDisplayInfo;
-        if (info.refreshRate.value == 60)
-        {
-
-            QualitySettings.vSyncCount = 2;
-        }
-        else
-        {
-            QualitySettings.vSyncCount = 0;
-            Application.targetFrameRate = 45;
-        }
     }
 }

@@ -258,7 +258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5b1c4adcead828778e130c7335c9a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toggleMouse: 1
   pauseMenu: {fileID: 3799188775065146930}
   gameComponents: []
 --- !u!114 &7881546424201047853
@@ -406,6 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeviceDependentActivation
   DesiredDevice: Touchscreen
+  UndesiredDevice: Gamepad
   PresentEvent:
     m_PersistentCalls:
       m_Calls:
@@ -711,12 +711,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1646845680102545559}
+  - {fileID: 5647529648611033916}
   - {fileID: 8003432216959546695}
   - {fileID: 8076548791704544904}
   - {fileID: 8047363453007196520}
   - {fileID: 8767163580792812277}
-  - {fileID: 5647529648611033916}
   - {fileID: 2998227692402715178}
+  - {fileID: 3669262195236118708}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -878,6 +879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeviceDependentActivation
   DesiredDevice: Touchscreen
+  UndesiredDevice: Gamepad
   PresentEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1499,6 +1501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeviceDependentActivation
   DesiredDevice: Touchscreen
+  UndesiredDevice: Gamepad
   PresentEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1763,6 +1766,81 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 89335a5c5356b08dfa3b312ebe43f530, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2666688834071012820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3669262195236118708}
+  - component: {fileID: 873834805807483765}
+  - component: {fileID: 2608915716716067639}
+  m_Layer: 5
+  m_Name: DeathFade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &3669262195236118708
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666688834071012820}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8562045173513120289}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &873834805807483765
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666688834071012820}
+  m_CullTransparentMesh: 1
+--- !u!114 &2608915716716067639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666688834071012820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2118,6 +2196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeviceDependentActivation
   DesiredDevice: Touchscreen
+  UndesiredDevice: Gamepad
   PresentEvent:
     m_PersistentCalls:
       m_Calls:
@@ -3918,6 +3997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeviceDependentActivation
   DesiredDevice: Touchscreen
+  UndesiredDevice: Gamepad
   PresentEvent:
     m_PersistentCalls:
       m_Calls:
@@ -4038,6 +4118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformDependentActivation
   DesiredDevice: Touchscreen
+  UndesiredDevice: Gamepad
   PresentEvent:
     m_PersistentCalls:
       m_Calls:
@@ -5806,6 +5887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeviceDependentActivation
   DesiredDevice: Touchscreen
+  UndesiredDevice: Gamepad
   PresentEvent:
     m_PersistentCalls:
       m_Calls:
@@ -6779,6 +6861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeviceDependentActivation
   DesiredDevice: Touchscreen
+  UndesiredDevice: Gamepad
   PresentEvent:
     m_PersistentCalls:
       m_Calls:

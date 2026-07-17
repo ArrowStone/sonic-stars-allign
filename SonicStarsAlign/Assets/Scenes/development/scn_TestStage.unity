@@ -20505,8 +20505,6 @@ GameObject:
   - component: {fileID: 445835129}
   - component: {fileID: 445835131}
   - component: {fileID: 445835130}
-  - component: {fileID: 445835125}
-  - component: {fileID: 445835126}
   - component: {fileID: 445835127}
   m_Layer: 0
   m_Name: Cam Lock
@@ -20609,30 +20607,6 @@ Transform:
   - {fileID: 188107175}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &445835125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 445835120}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0240f1e196ce2a4ab167c1ad424c486, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &445835126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 445835120}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9247b8fdbee1f96458149e2269f596cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &445835127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42175,10 +42149,6 @@ PrefabInstance:
     - target: {fileID: 1499848914895319125, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
       propertyPath: m_Name
       value: Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 1502549235398270851, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1899011540828728195, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
       propertyPath: m_AnchoredPosition.x
