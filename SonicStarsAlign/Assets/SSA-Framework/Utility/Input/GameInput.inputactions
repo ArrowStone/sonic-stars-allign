@@ -16,19 +16,19 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Mouse",
+                    "name": "Look",
                     "type": "Value",
-                    "id": "143d45db-56d7-4853-835e-a9360863ef3a",
+                    "id": "6b444451-8a00-4d00-a97e-f47457f736a8",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Look",
+                    "name": "Zoom",
                     "type": "Value",
-                    "id": "6b444451-8a00-4d00-a97e-f47457f736a8",
-                    "expectedControlType": "Vector2",
+                    "id": "72a6ce3f-bbc0-4264-adc2-d0931b9a97ae",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -268,6 +268,17 @@
                 },
                 {
                     "name": "",
+                    "id": "1bd969b9-8585-401d-bee0-f3486883e049",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "143bb1cd-cc10-4eca-a2f0-a3664166fe91",
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
@@ -494,6 +505,17 @@
                     "processors": "",
                     "groups": ";Touch",
                     "action": "Touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "89c521d1-9a07-471e-9cfa-c4a78b679963",
+                    "path": "<Mouse>/scroll/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

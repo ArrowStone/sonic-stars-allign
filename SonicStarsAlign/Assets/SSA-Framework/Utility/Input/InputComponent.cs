@@ -8,7 +8,6 @@ public class InputComponent : MonoBehaviour
     public GameInput I;
     public InputAction MovementInput { get; private set; }
     public InputAction CameraInput { get; private set; }
-    public InputAction MouseInput { get; private set; }
 
     public Vector2 MoveInputValues => MovementInput.ReadValue<Vector2>();
     public Vector3 VectorMoveInput => new(MoveInputValues.x, 0, MoveInputValues.y);
@@ -30,7 +29,6 @@ public class InputComponent : MonoBehaviour
         I = new GameInput();
         MovementInput = I.Player.Move;
         CameraInput = I.Player.Look;
-        MouseInput = I.Player.Mouse;
         JumpInput = I.Player.Jump;
         CrouchInput = I.Player.Crouch;
         BounceInput = I.Player.Bounce;

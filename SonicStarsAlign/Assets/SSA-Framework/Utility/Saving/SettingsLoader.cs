@@ -1,9 +1,8 @@
-using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using Unity.Cinemachine;
+using System.Collections.Generic;
 
 // Code for loading and applying settings in the levels. Every parameter has to be hardcoded.
 public class SettingsLoader : MonoBehaviour
@@ -86,5 +85,17 @@ public class SettingsLoader : MonoBehaviour
         cameraData.antialiasingQuality = SMAAQualities[AAQuality];
         cameraData.taaSettings.quality = TAAQualities[AAQuality];
         pipelineAsset.renderScale = renderScale;
+
+        DisplayInfo info = Screen.mainWindowDisplayInfo;
+        if (info.refreshRate.value == 60)
+        {
+
+            QualitySettings.vSyncCount = 2;
+        }
+        else
+        {
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = 45;
+        }
     }
 }
