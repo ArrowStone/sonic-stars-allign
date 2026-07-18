@@ -9,10 +9,13 @@ public class ObjectAlongSpline : MonoBehaviour
     public float Count;
     public bool rotateObjects = true;
     public SplineContainer Spline;
+    public Vector3 RotationIncrement;
 
     [ContextMenu("Regenerate")]
     public void Along()
     {
+        bool hasSpinScript = Object.TryGetComponent<SimpleSpin>(out _);
+
         for (int i = transform.childCount - 1; i >= 0; i--)
         {
             DestroyImmediate(transform.GetChild(i).gameObject);
@@ -42,6 +45,11 @@ public class ObjectAlongSpline : MonoBehaviour
                 Vector3 lookPos = currentObject.transform.position;
                 lookPos.y = prevObject.transform.position.y;
                 prevObject.transform.LookAt(lookPos);
+            }
+
+            if (hasSpinScript)
+            {
+                currentObject.transform.Rotate(RotationIncrement * i);
             }
         }
     }

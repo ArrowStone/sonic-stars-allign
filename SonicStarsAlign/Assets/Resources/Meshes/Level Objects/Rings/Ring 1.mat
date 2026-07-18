@@ -154,13 +154,13 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metalic: 0
-    - _Metallic: 0.216
+    - _Metallic: 0.295
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 0
-    - _Smoothness: 1
+    - _Smoothness: 0.543
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -173,7 +173,7 @@ Material:
     - _uvScale: 0.06
     m_Colors:
     - Vector2_8044833E: {r: 1, g: 1, b: 0, a: 0}
-    - _BaseColor: {r: 0.9245283, g: 0.85684407, b: 0.18752226, a: 1}
+    - _BaseColor: {r: 1, g: 0.9205433, b: 0, a: 1}
     - _Base_Color: {r: 1, g: 0.6660811, b: 0.1273585, a: 1}
     - _Color: {r: 1, g: 0.71786475, b: 0.1273585, a: 1}
     - _Dither_MinMax_Distance: {r: 2, g: 9, b: 0, a: 0}

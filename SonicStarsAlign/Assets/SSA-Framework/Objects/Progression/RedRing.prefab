@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5719568075100845545}
   - component: {fileID: 1280102106122035303}
   - component: {fileID: 1483306904405856988}
+  - component: {fileID: 4682656373805412835}
   m_Layer: 10
   m_Name: RedRing
   m_TagString: Untagged
@@ -114,6 +115,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10238a00bdba0fd1b92bb8ca97dc82be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4682656373805412835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4553716114599546123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa031929d4d4f9379051cada28543e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SimpleSpin
+  RotationIncrement: {x: 0, y: 1, z: 0}
 --- !u!1001 &3285665488900691945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -124,15 +138,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 854d1f0420fbba84bbb9737ec408cb64, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.022292027
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 854d1f0420fbba84bbb9737ec408cb64, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.022292027
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 854d1f0420fbba84bbb9737ec408cb64, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.022292027
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 854d1f0420fbba84bbb9737ec408cb64, type: 3}
       propertyPath: m_LocalPosition.x
@@ -173,6 +187,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 854d1f0420fbba84bbb9737ec408cb64, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 854d1f0420fbba84bbb9737ec408cb64, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7635826562936255635, guid: 854d1f0420fbba84bbb9737ec408cb64, type: 3}
       propertyPath: m_MeshLodSelectionBias
