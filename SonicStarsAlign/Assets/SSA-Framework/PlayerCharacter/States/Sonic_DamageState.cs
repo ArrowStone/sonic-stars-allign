@@ -14,6 +14,9 @@ public class Sonic_DamageState : IState
     {
         _groundDetected = false;
         _ctx.GroundNormal = -_ctx.Gravity.normalized;
+
+        _ctx.ModelManager.ExitBall();
+        _ctx.Anim.SetInteger("State", 6);
     }
 
     public void UpdateState()

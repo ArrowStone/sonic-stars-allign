@@ -194,9 +194,6 @@ public class HUDManager : MonoBehaviour
     public void ScorePopup(int encouragementId)
     {
         int emptyIndex = Array.FindIndex(popups, i => i == null);
-
-        Debug.Log(emptyIndex);
-
         if (emptyIndex == -1)
         {
             Debug.Log("No room for a popup!");

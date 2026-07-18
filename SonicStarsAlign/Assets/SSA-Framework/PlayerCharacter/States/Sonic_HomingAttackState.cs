@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Sonic_HomingAttackState : IState
 {
@@ -21,7 +22,7 @@ public class Sonic_HomingAttackState : IState
         homingOntoSpline = _ctx.homingOntoSpline;
         _difference = _ctx.homingTargetPosition - _ctx.transform.position;
 
-        _ctx.Anim.SetInteger("State", 1);
+        _ctx.Anim.SetInteger("State", 3);
         _ctx.ModelManager.EnterBall();
         _ctx.ModelManager.ballRollSpeed = 40f;
     }
@@ -97,6 +98,18 @@ public class Sonic_HomingAttackState : IState
         _ctx.Physics_ApplyVelocity();
 
         _ctx.InvinciblitiyState = 0.5f;
+
+        _ctx.ModelManager.ExitBall();
+        _ctx.Anim.SetInteger("State", 100);
+
+        _ctx.Anim.SetTrigger("Trick");
+
+        /*IEnumerator TrickEnd()
+        {
+            yield return new WaitForSeconds(1f);
+            _ctx.Anim.SetInteger("State", 5);
+        }
+        _ctx.StartCoroutine(TrickEnd());*/
 
         _ctx.MachineTransition(PlayerStates.Air);
     }

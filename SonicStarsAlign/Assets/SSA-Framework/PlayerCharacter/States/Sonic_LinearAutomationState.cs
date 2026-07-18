@@ -17,6 +17,9 @@ public class Sonic_LinearAutomationState : IState
         _ctx.ChangeKinematic(true);
         _ctx.GroundNormal = -_ctx.Gravity;
         _triggerDetected = false;
+
+        _ctx.ModelManager.ExitBall();
+        _ctx.Anim.SetInteger("State", 5);
     }
 
     public void UpdateState()
