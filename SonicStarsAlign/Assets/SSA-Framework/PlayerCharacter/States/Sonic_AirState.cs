@@ -25,7 +25,6 @@ public class Sonic_AirState : IState
         _ctx.fakeNormal = _ctx.GroundNormal;
         _ctx.ModelManager.ballRollSpeed = 40f;
 
-        Debug.Log(_ctx.Anim.GetInteger("State"));
         if (_ctx.Anim.GetInteger("State") == 0)
         {
             _ctx.Anim.SetInteger("State", 5);

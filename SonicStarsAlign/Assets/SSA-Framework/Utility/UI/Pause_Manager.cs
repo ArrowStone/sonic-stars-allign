@@ -6,7 +6,6 @@ public class Pause_Manager : MonoBehaviour
 {
     public static Pause_Manager Instance;
     public GameObject pauseMenu;
-    public MonoBehaviour[] gameComponents;
     public static bool paused = false;
     private InputComponent input;
     private bool wasPauseButtonReleased = true;
@@ -27,10 +26,7 @@ public class Pause_Manager : MonoBehaviour
         Cursor.visible = state;
         Time.timeScale = state ? 0 : 1;
 
-        foreach (MonoBehaviour comp in gameComponents)
-        {
-            comp.enabled = !state;
-        }
+        Camera.main.GetComponent<AudioListener>().enabled = !state;
 
         InputSystem.settings.updateMode = state ? InputSettings.UpdateMode.ProcessEventsInDynamicUpdate : InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
     }

@@ -169,6 +169,9 @@ public class Sonic_GrindState : IState
     {
         _vel = _difference / _delta;
         _ctx.Physics_Snap(_pos);
+
+        Debug.Log(_tilt);
+        _ctx.Anim.SetFloat("TILT", _tilt);
     }
 
     private void RailApplication()
@@ -180,7 +183,9 @@ public class Sonic_GrindState : IState
         _pos = _ctx.SplnHandler.NewPosition();
         _difference = _pos - _ctx.transform.position;
 
-        _tilt = Math.Clamp(Vector3.SignedAngle(_ctx.PlayerDirection, _ctx.InputVector, _ctx.GroundNormal) * 0.01111111111f, -1f, 1f);
+        _tilt = Vector3.SignedAngle(_ctx.PlayerDirection, _ctx.InputVector, _ctx.GroundNormal) * 0.01111111111f;
+        _tilt += Vector3.SignedAngle(_ctx.PlayerDirection, _difference.normalized, _ctx.GroundNormal);
+        _tilt = Math.Clamp(_tilt, -1f, 1f);
         _railTurn = _ctx.SplnHandler.SplineCurvature();
     }
 

@@ -358,12 +358,12 @@ BlendTree:
     m_DirectBlendParameter: SPD
     m_Mirror: 0
   m_BlendParameter: SPD
-  m_BlendParameterY: LEAN
+  m_BlendParameterY: H_SPD
   m_MinThreshold: 0
   m_MaxThreshold: 30
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
-  m_BlendType: 2
+  m_BlendType: 0
 --- !u!1101 &-6126119949743394766
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -689,16 +689,16 @@ AnimatorStateMachine:
     m_Position: {x: 180, y: -200, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: 9079499527470189779}
-    m_Position: {x: 540, y: -260, z: 0}
+    m_Position: {x: 580, y: -260, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: 6918764081233178624}
-    m_Position: {x: 710, y: -200, z: 0}
+    m_Position: {x: 610, y: -180, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: -8408921978048326170}
-    m_Position: {x: 680, y: -140, z: 0}
+    m_Position: {x: 700, y: -110, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: 8935421267051483222}
-    m_Position: {x: 640, y: -90, z: 0}
+    m_Position: {x: 490, y: -70, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: -2309793786574703839}
     m_Position: {x: 450, y: -320, z: 0}
@@ -749,7 +749,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: LEAN
+  - m_Name: TILT
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
