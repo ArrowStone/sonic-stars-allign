@@ -102,6 +102,7 @@ public class Sonic_HomingAttackState : IState
         _ctx.ModelManager.ExitBall();
         _ctx.Anim.SetInteger("State", 100);
 
+        _ctx.Anim.SetInteger("TrickType", (int)(5f * Random.value)); // Random. Range always gives 0 for some reason
         _ctx.Anim.SetTrigger("Trick");
 
         /*IEnumerator TrickEnd()
