@@ -15,6 +15,7 @@ public class InputComponent : MonoBehaviour
     public InputAction JumpInput { get; private set; }
     public InputAction CrouchInput { get; private set; }
     public InputAction BounceInput { get; private set; }
+    public InputAction LightDashInput { get; private set; }
     public InputAction ReactionInput { get; private set; }
     public InputAction AttackInput { get; private set; }
     public InputAction BackCameraInput { get; private set; }
@@ -32,6 +33,7 @@ public class InputComponent : MonoBehaviour
         JumpInput = I.Player.Jump;
         CrouchInput = I.Player.Crouch;
         BounceInput = I.Player.Bounce;
+        LightDashInput = I.Player.LightDash;
         ReactionInput = I.Player.ReactionCommand;
         AttackInput = I.Player.Attack;
         BackCameraInput = I.Player.BackCamera;

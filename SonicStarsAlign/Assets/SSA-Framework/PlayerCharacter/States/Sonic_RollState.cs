@@ -166,7 +166,7 @@ public class Sonic_RollState : IState
 
     private void GroundSwitchConditions()
     {
-        if (_ctx.RingDetector.TargetDetected && _ctx.Input.ReactionInput.WasPressedThisFrame())
+        if (_ctx.RingDetector.TargetDetected && _ctx.Input.LightDashInput.WasPressedThisFrame())
         {
             _ctx.MachineTransition(PlayerStates.LightSpeedDash);
         }

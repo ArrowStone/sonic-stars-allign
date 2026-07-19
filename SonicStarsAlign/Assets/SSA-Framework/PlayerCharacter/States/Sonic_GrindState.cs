@@ -106,7 +106,7 @@ public class Sonic_GrindState : IState
     {
         if (_ctx.Input.JumpInput.WasPressedThisFrame())
         {
-            _ctx.Anim.SetInteger("State", 1);
+            //_ctx.Anim.SetInteger("State", 1);
             Automation_GrindRail _grail;
             if (_tilt < -_ctx.Chp.RailSwitchDeadZone && _ctx.RailDetectorL.TargetDetected)
             {
@@ -170,7 +170,6 @@ public class Sonic_GrindState : IState
         _vel = _difference / _delta;
         _ctx.Physics_Snap(_pos);
 
-        Debug.Log(_tilt);
         _ctx.Anim.SetFloat("TILT", _tilt);
     }
 

@@ -46,7 +46,7 @@ public class Sonic_AttackComponent : MonoBehaviour
     {
         Library.AttackUpdate(Time.fixedDeltaTime);
 
-        if (!ctx.Jumping && jumping && ctx.CurrentEstate != PlayerStates.Air)
+        if (!ctx.InBall && jumping && ctx.CurrentEstate != PlayerStates.Air)
         {
             Library.StopAttack("Spin");
             jumping = false;

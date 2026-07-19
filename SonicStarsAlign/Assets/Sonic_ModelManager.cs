@@ -12,11 +12,10 @@ public class Sonic_ModelManager : MonoBehaviour
 
     [SerializeField] Animator NormalAnimator;
     [SerializeField] Animator BallAnimator;
-    private Coroutine ballCoroutine;
 
     public float ballRollSpeed;
 
-    private bool inBall = true;
+    public bool InBall { get; private set; } = true;
 
     private void Start()
     {
@@ -25,7 +24,7 @@ public class Sonic_ModelManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (inBall)
+        if (InBall)
         {
             BallAnimator.SetFloat("Speed", ballRollSpeed);
         }
@@ -33,48 +32,27 @@ public class Sonic_ModelManager : MonoBehaviour
 
     public void EnterBall(bool waitForAnim = false)
     {
-        if (inBall) { return; }
-        _CTX.Anim.SetInteger("State", 1);
+        if (InBall) { return; }
+        //_CTX.Anim.SetInteger("State", 1);
 
-        inBall = true;
-        if (ballCoroutine != null)
-            _CTX.StopCoroutine(ballCoroutine);
+        InBall = true;
 
-        void SwitchModels()
+        foreach (var model in ModelsWhenInBall)
         {
-            foreach (var model in ModelsWhenInBall)
-            {
-                model.SetActive(true);
-            }
-
-            foreach (var model in ModelsWhenNotInBall)
-            {
-                model.SetActive(false);
-            }
+            model.SetActive(true);
         }
 
-        if (!waitForAnim)
+        foreach (var model in ModelsWhenNotInBall)
         {
-            SwitchModels();
-            return;
+            model.SetActive(false);
         }
-
-        IEnumerator WaitForAnimEnd()
-        {
-            yield return new WaitForSeconds(0.1f);
-            SwitchModels();
-        }
-        ballCoroutine = _CTX.StartCoroutine(WaitForAnimEnd());
     }
 
     public void ExitBall()
     {
-        if (!inBall) { return; }
+        if (!InBall) { return; }
 
-        inBall = false;
-
-        if (ballCoroutine != null)
-            _CTX.StopCoroutine(ballCoroutine);
+        InBall = false;
 
         foreach (var model in ModelsWhenInBall)
         {

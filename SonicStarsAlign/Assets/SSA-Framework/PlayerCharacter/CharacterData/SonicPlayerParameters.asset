@@ -313,5 +313,5 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   stoneSkipMinimumSpeed: 14
-  stoneSkipWindow: 0.5
+  stoneSkipWindow: 1
   stoneSkipCooldown: 1

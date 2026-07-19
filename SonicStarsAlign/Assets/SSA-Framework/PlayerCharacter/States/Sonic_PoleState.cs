@@ -36,7 +36,7 @@ public class Sonic_PoleState : IState
 
     public void ExitState()
     {
-        _ctx.Jumping = false;
+        _ctx.InBall = false;
     }
 
     private void PoleSwitchConditions()

@@ -153,20 +153,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public bool doneAirRotation = true;
     public Vector3 fakeNormal;
 
-    private bool _jumping;
-
-    public bool Jumping
-    {
-        get => _jumping;
-        set
-        {
-            _jumping = value;
-            if (value)
-            {
-                JumpAction?.Invoke();
-            }
-        }
-    }
+    public bool InBall;
+    public bool LowGravity;
 
     private bool _dropDashing;
 
@@ -315,6 +303,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         //Player_StaticFunctions.SetTransform(transform, Chs.SpawnData.Position, Chs.SpawnData.Rotation, "Respawn");
 
         Death = false;
+        Anim.SetInteger("State", 5);
         MachineTransition(PlayerStates.Air);
     }
 
@@ -513,7 +502,10 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         VerticalVelocity += GroundNormal * Chp.JumpForce;
         Physics_ApplyVelocity();
 
-        Jumping = true;
+        InBall = true;
+        LowGravity = true;
+
+        JumpAction?.Invoke();
         ModelManager.EnterBall();
         MachineTransition(PlayerStates.Air);
     }

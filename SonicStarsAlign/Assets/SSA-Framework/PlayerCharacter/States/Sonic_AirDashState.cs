@@ -97,7 +97,7 @@ public class Sonic_AirDashState : IState
             _ctx.Snd.PlaySound("Homing");
             _ctx.MachineTransition(PlayerStates.HomingAttack);
         }
-        if (_ctx.RingDetector.TargetDetected && _ctx.Input.ReactionInput.WasPressedThisFrame())
+        if (_ctx.RingDetector.TargetDetected && _ctx.Input.LightDashInput.WasPressedThisFrame())
         {
             _ctx.MachineTransition(PlayerStates.LightSpeedDash);
         }

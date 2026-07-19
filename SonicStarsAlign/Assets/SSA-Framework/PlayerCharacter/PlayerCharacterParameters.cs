@@ -167,7 +167,7 @@ public class PlayerCharacterParameters : ScriptableObject
     [Space]
     [Header("Stone Skipping")]
     public float stoneSkipMinimumSpeed = 14f;   // minimum speed for stone skipping
-    public float stoneSkipWindow = 0.5f;    // the number of seconds you need to press the button before hitting the water
-    public float stoneSkipCooldown = 1f;    // cooldown to prevent spamming
-
+    public float stoneSkipWindow = 0.5f;        // the number of seconds you need to press the button before hitting the water
+    public float stoneSkipCooldown = 1f;        // cooldown to prevent spamming
+    public float stoneSkipHorizontalSpeedMultiplier = 1.2f;    // how much your horizontal speed increases by
 }

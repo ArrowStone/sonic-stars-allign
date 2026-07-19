@@ -273,7 +273,7 @@ public class Sonic_GroundState : IState
 
     private void GroundSwitchConditions()
     {
-        if (_ctx.RingDetector.TargetDetected && _ctx.Input.ReactionInput.WasPressedThisFrame())
+        if (_ctx.RingDetector.TargetDetected && _ctx.Input.LightDashInput.WasPressedThisFrame())
         {
             _ctx.MachineTransition(PlayerStates.LightSpeedDash);
         }
@@ -292,7 +292,6 @@ public class Sonic_GroundState : IState
 
         if (_ctx.Input.JumpInput.WasPressedThisFrame())
         {
-            _ctx.Anim.SetInteger("State", 1);
             _ctx.Jump();
         }
         if (_ctx.Input.SweepInput.WasPressedThisFrame() && _ctx.HorizontalVelocity.magnitude > _ctx.Chp.RunSpeedThreshold)

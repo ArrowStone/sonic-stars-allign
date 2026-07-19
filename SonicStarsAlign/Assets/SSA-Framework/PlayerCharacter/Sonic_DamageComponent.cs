@@ -21,6 +21,7 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
     public Vector3 RingScatterVelocity;
 
     public UnityEvent DeathEvent;
+    public UnityEvent RespawnEvent;
 
     public event Action DealtDamage;
 
@@ -130,9 +131,16 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
         if (_ctx.Death) { return; }
 
         _ctx.Death = true;
-        _ctx.Invoke(nameof(_ctx.Respawn), 1);
+
+        IEnumerator RespawnWait()
+        {
+            yield return new WaitForSeconds(1.5f);
+            _ctx.Respawn();
+            RespawnEvent.Invoke();
+        }
+        //_ctx.Invoke(nameof(_ctx.Respawn), 1);
+        _ctx.StartCoroutine(RespawnWait());
         _ctx.MachineTransition(PlayerStates.Damage);
-        //_ctx.Respawn();
         PlayerDeath?.Invoke();
         DeathEvent.Invoke();
     }

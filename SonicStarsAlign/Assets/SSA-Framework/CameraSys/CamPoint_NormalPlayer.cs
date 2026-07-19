@@ -93,7 +93,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPointStyle
     public void ExecutePoint(float _delta)
     {
 
-        if (Pause_Manager.paused) { return; }
+        if (PauseManager.paused) { return; }
 
         GetCurrentCameraState();
 

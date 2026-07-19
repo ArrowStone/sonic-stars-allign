@@ -18,8 +18,6 @@ public class Sonic_BounceState : IState
         _groundDetected = false;
         _ddchargeTime = 0;
 
-        _ctx.Anim.SetInteger("State", 1);
-
         _ctx.ModelManager.EnterBall();
         _ctx.ModelManager.ballRollSpeed = 40f;
 
@@ -72,6 +70,7 @@ public class Sonic_BounceState : IState
 
     public void ExitState()
     {
+        _ctx.InBall = true;
     }
 
     #region Util
@@ -204,7 +203,7 @@ public class Sonic_BounceState : IState
             _ctx.AirDashes--;
             _ctx.Dash();
         }
-        if (_ctx.RingDetector.TargetDetected && _ctx.Input.ReactionInput.WasPressedThisFrame())
+        if (_ctx.RingDetector.TargetDetected && _ctx.Input.LightDashInput.WasPressedThisFrame())
         {
             _ctx.MachineTransition(PlayerStates.LightSpeedDash);
         }

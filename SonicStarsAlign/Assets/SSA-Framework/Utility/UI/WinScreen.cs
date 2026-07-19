@@ -98,6 +98,6 @@ public class WinScreen : MonoBehaviour
             obj.SetActive(false);
         }
         // Manually because it's just one
-        Pause_Manager.Instance.enabled = false;
+        PauseManager.Instance.enabled = false;
     }
 }

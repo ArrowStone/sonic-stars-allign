@@ -25,10 +25,7 @@ public class Sonic_AirState : IState
         _ctx.fakeNormal = _ctx.GroundNormal;
         _ctx.ModelManager.ballRollSpeed = 40f;
 
-        if (_ctx.Anim.GetInteger("State") == 0)
-        {
-            _ctx.Anim.SetInteger("State", 5);
-        }
+        if (_ctx.Anim.GetInteger("State") != 100) _ctx.Anim.SetInteger("State", 5);
 
         #endregion Misc
 
@@ -76,7 +73,6 @@ public class Sonic_AirState : IState
         RotateTowardVertical(_delta);
         DropDashCalculations(_delta);
 
-        AirSwitchConditions();
         _ctx.Physics_ApplyVelocity();
 
         // Rotation also acts as a ledge grab timeout timer
@@ -87,6 +83,8 @@ public class Sonic_AirState : IState
 
         CheckForStoneSkip(_delta);
         CheckForWallRun();
+
+        AirSwitchConditions();
     }
 
     public void LateUpdateState()
@@ -96,7 +94,8 @@ public class Sonic_AirState : IState
     public void ExitState()
     {
         _ctx.ModelManager.ExitBall();
-        _ctx.Jumping = false;
+        _ctx.InBall = false;
+        _ctx.LowGravity = false;
     }
 
     #region Util
@@ -120,9 +119,10 @@ public class Sonic_AirState : IState
             return;
         }
 
-        if (_ctx.Jumping && _ctx.Input.JumpInput.WasReleasedThisFrame())
+        if (_ctx.LowGravity && _ctx.Input.JumpInput.WasReleasedThisFrame())
         {
-            _ctx.Jumping = false;
+            _ctx.LowGravity = false;
+            _ctx.InBall = false;
             if (Vector3.Dot(_ctx.Velocity, -_ctx.Gravity) > _ctx.Chp.JumpCancel)
             {
                 _ctx.VerticalVelocity = _ctx.Chp.JumpCancel * -_ctx.Gravity;
@@ -131,7 +131,7 @@ public class Sonic_AirState : IState
         }
 
         float gravity = _ctx.Chp.GravityForce;
-        if (_ctx.Jumping) gravity *= _ctx.Chp.JumpGravityScale;
+        if (_ctx.LowGravity) gravity *= _ctx.Chp.JumpGravityScale;
 
         _ctx.VerticalVelocity = Vector3.ClampMagnitude(_ctx.VerticalVelocity + gravity * _delta * _ctx.Gravity, _ctx.Chp.FallVelCap);
     }
@@ -263,7 +263,7 @@ public class Sonic_AirState : IState
             _ctx.Snd.PlaySound("Homing");
             _ctx.MachineTransition(PlayerStates.HomingAttack);
         }
-        if (_ctx.RingDetector.TargetDetected && _ctx.Input.ReactionInput.WasPressedThisFrame())
+        if (_ctx.RingDetector.TargetDetected && _ctx.Input.LightDashInput.WasPressedThisFrame())
         {
             _ctx.MachineTransition(PlayerStates.LightSpeedDash);
         }
@@ -340,11 +340,6 @@ public class Sonic_AirState : IState
         _ctx.ledgeGrabHorizontalVelocity = _ctx.HorizontalVelocity;
         _ctx.ledgeGrabVerticalVelocity = _ctx.VerticalVelocity;
 
-        _ctx.HorizontalVelocity = Vector3.zero;
-        _ctx.VerticalVelocity = Vector3.zero;
-
-        _ctx.ledgeGrabStartTime = Time.time;
-
         Vector3 vertRayStart = _ctx.ledgeVericalRayPoint.position;
         Vector3 horzRayStart = _ctx.ledgeHorizontalRayPoint.position;
         float vertLength = _ctx.ledgeVerticalRayLength;
@@ -368,6 +363,11 @@ public class Sonic_AirState : IState
         {
             return;
         }
+
+        _ctx.HorizontalVelocity = Vector3.zero;
+        _ctx.VerticalVelocity = Vector3.zero;
+
+        _ctx.ledgeGrabStartTime = Time.time;
 
         Vector3 topNormal = hit.normal;
 
@@ -420,6 +420,7 @@ public class Sonic_AirState : IState
             {
                 // Go up
                 _ctx.VerticalVelocity = -_ctx.VerticalVelocity;
+                _ctx.HorizontalVelocity *= _ctx.Chp.stoneSkipHorizontalSpeedMultiplier;
                 _ctx.Physics_ApplyVelocity();
 
                 // Allow to stoneskip again soon
@@ -432,17 +433,23 @@ public class Sonic_AirState : IState
             {
                 // In water and didn't stoneskip => failed
                 _reactionInputTimer = 0f;
-                return;
             }
         }
-
         if (_reactionInputTimer > 0f)
         {
             _reactionInputTimer -= _delta;
+            Debug.Log(_reactionInputTimer - _ctx.Chp.stoneSkipCooldown);
         }
-        else if (_ctx.Input.ReactionInput.WasPressedThisFrame())
+        else if (_ctx.Input.ReactionInput.WasPressedThisFrame() && _reactionInputTimer < _ctx.Chp.stoneSkipCooldown)
         {
+            _ctx.ModelManager.EnterBall();
             _reactionInputTimer = _ctx.Chp.stoneSkipCooldown + _ctx.Chp.stoneSkipWindow;
+        }
+        else if (!_ctx.InBall && _reactionInputTimer < _ctx.Chp.stoneSkipCooldown && _ctx.ModelManager.InBall)
+        {
+            _ctx.LowGravity = false;
+            _ctx.ModelManager.ExitBall();
+            _ctx.Anim.SetInteger("State", 5);
         }
     }
 

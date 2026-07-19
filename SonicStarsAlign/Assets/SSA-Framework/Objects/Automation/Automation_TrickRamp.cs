@@ -45,7 +45,7 @@ public class Automation_TrickRamp : MonoBehaviour, IAutomation
             Debug.Log(_t, this);
             Debug.Log(_vel, this);
 
-            cashedPlayer.Jumping = false;
+            cashedPlayer.InBall = false;
 
             cashedPlayer.Velocity = _vel;
             FrameworkUtility.SplitPlanarVector(cashedPlayer.Velocity, -cashedPlayer.Gravity.normalized, out var _v, out var _h);

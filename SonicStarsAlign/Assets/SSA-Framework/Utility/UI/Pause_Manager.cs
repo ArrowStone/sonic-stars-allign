@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 // da thing that does pause
-public class Pause_Manager : MonoBehaviour
+public class PauseManager : MonoBehaviour
 {
-    public static Pause_Manager Instance;
+    public static PauseManager Instance;
     public GameObject pauseMenu;
     public static bool paused = false;
     private InputComponent input;
@@ -26,8 +26,7 @@ public class Pause_Manager : MonoBehaviour
         Cursor.visible = state;
         Time.timeScale = state ? 0 : 1;
 
-        Camera.main.GetComponent<AudioListener>().enabled = !state;
-
+        AudioListener.pause = state;
         InputSystem.settings.updateMode = state ? InputSettings.UpdateMode.ProcessEventsInDynamicUpdate : InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
     }
 

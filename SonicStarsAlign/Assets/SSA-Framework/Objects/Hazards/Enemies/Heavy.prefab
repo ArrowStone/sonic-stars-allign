@@ -440,6 +440,10 @@ PrefabInstance:
       propertyPath: DamageEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 5053980497681375973, guid: 70024ed7ce0145d169928c1c938c57d3, type: 3}
+    - target: {fileID: 2304758924285989169, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
+      propertyPath: m_Radius
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 3215784629196662793, guid: 06fa524fed55d1b3d99a8783b7d678ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 363.66415

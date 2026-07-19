@@ -13,6 +13,8 @@ public class Sonic_LedgeGrabState : IState
 
     public void EnterState() // Setting the correct position and everything else is handled by AirState
     {
+        _ctx.ModelManager.ExitBall();
+        _ctx.Anim.SetInteger("State", 8);
     }
 
     public void UpdateState()
