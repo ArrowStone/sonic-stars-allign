@@ -30,7 +30,7 @@ public class Sonic_ModelManager : MonoBehaviour
         }
     }
 
-    public void EnterBall(bool waitForAnim = false)
+    public void EnterBall()
     {
         if (InBall) { return; }
         //_CTX.Anim.SetInteger("State", 1);
@@ -43,6 +43,11 @@ public class Sonic_ModelManager : MonoBehaviour
         }
 
         foreach (var model in ModelsWhenNotInBall)
+        {
+            model.SetActive(false);
+        }
+
+        foreach (var model in ModelsWhenSpinDashing)
         {
             model.SetActive(false);
         }
@@ -60,6 +65,31 @@ public class Sonic_ModelManager : MonoBehaviour
         }
 
         foreach (var model in ModelsWhenNotInBall)
+        {
+            model.SetActive(true);
+        }
+
+        foreach (var model in ModelsWhenSpinDashing)
+        {
+            model.SetActive(false);
+        }
+    }
+
+    public void EnterSpindash()
+    {
+        InBall = false;
+
+        foreach (var model in ModelsWhenInBall)
+        {
+            model.SetActive(false);
+        }
+
+        foreach (var model in ModelsWhenNotInBall)
+        {
+            model.SetActive(false);
+        }
+
+        foreach (var model in ModelsWhenSpinDashing)
         {
             model.SetActive(true);
         }

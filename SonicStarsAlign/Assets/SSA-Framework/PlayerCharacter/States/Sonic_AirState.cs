@@ -122,7 +122,7 @@ public class Sonic_AirState : IState
         if (_ctx.LowGravity && _ctx.Input.JumpInput.WasReleasedThisFrame())
         {
             _ctx.LowGravity = false;
-            _ctx.InBall = false;
+            //_ctx.InBall = false;
             if (Vector3.Dot(_ctx.Velocity, -_ctx.Gravity) > _ctx.Chp.JumpCancel)
             {
                 _ctx.VerticalVelocity = _ctx.Chp.JumpCancel * -_ctx.Gravity;

@@ -125,15 +125,14 @@ public class Sonic_AttackComponent : MonoBehaviour
 
         comboLength += 1;
 
-        /*if (ctx.CurrentEstate is PlayerStates.HomingAttack)
+        if (ctx.CurrentEstate is PlayerStates.HomingAttack)
         {
-            ctx.MachineTransition(PlayerStates.Air);
-            if (_damageable.Health() > Library.GetAttack("HAttack").Damage)
-            {
-                Recoil();
-                return;
-            }
-        }*/
+            ctx.ModelManager.ExitBall();
+            ctx.Anim.SetInteger("State", 100);
+
+            ctx.Anim.SetInteger("TrickType", (int)(5f * Random.value)); // Random.Range always gives 0 for some reason
+            ctx.Anim.SetTrigger("Trick");
+        }
 
         if (ctx.CurrentEstate is PlayerStates.Bounce)
         {

@@ -115,6 +115,7 @@ public class PlayerCharacterParameters : ScriptableObject
 
     public float HomingAttackSpeed;
     public float HomingAttackBounceForce;
+    public float HomingAttackSpeedMultiplier;
     public float RailHomingTargetOffset;
 
     [Space]

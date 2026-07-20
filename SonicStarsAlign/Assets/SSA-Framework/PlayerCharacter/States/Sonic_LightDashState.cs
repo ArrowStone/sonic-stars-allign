@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Sonic_LightDashState : IState
 {
@@ -96,15 +97,9 @@ public class Sonic_LightDashState : IState
 
     private void AirSwitchConditions()
     {
-        // If the player wants to stop
-        if (_ctx.InputVector.magnitude != 0)
-        {
-            _ctx.Velocity = _ctx.PlayerDirection * _ctx.Chp.LightDashExitSpeed;
-        }
-        else
-        {
-            _ctx.Velocity = Vector3.zero;
-        }
+        _ctx.Velocity = _ctx.PlayerDirection * _ctx.Chp.LightDashExitSpeed
+                        * Vector3.Dot(_ctx.PlayerDirection, _ctx.InputVector);
+        Debug.Log(Vector3.Dot(_ctx.PlayerDirection, _ctx.InputVector));
 
         _ctx.Anim.SetInteger("State", 0);
         _ctx.MachineTransition(PlayerStates.Air);

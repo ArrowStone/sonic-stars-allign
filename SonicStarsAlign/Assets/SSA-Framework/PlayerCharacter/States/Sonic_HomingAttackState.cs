@@ -22,7 +22,7 @@ public class Sonic_HomingAttackState : IState
         homingOntoSpline = _ctx.homingOntoSpline;
         _difference = _ctx.homingTargetPosition - _ctx.transform.position;
 
-        _ctx.Anim.SetInteger("State", 3);
+        _ctx.Anim.SetInteger("State", 5);
         _ctx.ModelManager.EnterBall();
         _ctx.ModelManager.ballRollSpeed = 40f;
     }
@@ -91,7 +91,7 @@ public class Sonic_HomingAttackState : IState
     {
         _ctx.ChangeKinematic(false);
         _ctx.VerticalVelocity = -_ctx.Gravity * _ctx.Chp.HomingAttackBounceForce;
-        //_ctx.HorizontalVelocity = Vector3.zero;
+        _ctx.HorizontalVelocity *= _ctx.Chp.HomingAttackSpeedMultiplier;
         /*if(_ctx.Input.AttackInput.IsPressed())
             _ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_vel, -_ctx.Gravity);*/
 
@@ -100,10 +100,7 @@ public class Sonic_HomingAttackState : IState
         _ctx.InvinciblitiyState = 0.5f;
 
         _ctx.ModelManager.ExitBall();
-        _ctx.Anim.SetInteger("State", 100);
-
-        _ctx.Anim.SetInteger("TrickType", (int)(5f * Random.value)); // Random.Range always gives 0 for some reason
-        _ctx.Anim.SetTrigger("Trick");
+        //_ctx.Anim.SetInteger("State", 5);
 
         /*IEnumerator TrickEnd()
         {

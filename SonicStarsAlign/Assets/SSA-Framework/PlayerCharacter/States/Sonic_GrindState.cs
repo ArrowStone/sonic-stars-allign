@@ -171,6 +171,7 @@ public class Sonic_GrindState : IState
         _ctx.Physics_Snap(_pos);
 
         _ctx.Anim.SetFloat("TILT", _tilt);
+        Debug.Log(_tilt);
     }
 
     private void RailApplication()
