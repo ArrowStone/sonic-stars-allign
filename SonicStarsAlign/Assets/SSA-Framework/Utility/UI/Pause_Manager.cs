@@ -9,6 +9,9 @@ public class PauseManager : MonoBehaviour
     public static bool paused = false;
     private InputComponent input;
     private bool wasPauseButtonReleased = true;
+    [SerializeField] Animator PauseAnimator;
+    [SerializeField] Animator[] ButtonAnimators;
+
     void OnEnable()
     {
         Instance = this;
@@ -20,8 +23,17 @@ public class PauseManager : MonoBehaviour
 
     public void SetPauseState(bool state)
     {
+
         paused = state;
-        pauseMenu.SetActive(state);
+
+        PauseAnimator.SetBool("Paused", state);
+
+        foreach (Animator anim in ButtonAnimators)
+        {
+            anim.SetTrigger("Off");
+        }
+
+        //pauseMenu.SetActive(state);
         Cursor.lockState = state ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = state;
         Time.timeScale = state ? 0 : 1;
