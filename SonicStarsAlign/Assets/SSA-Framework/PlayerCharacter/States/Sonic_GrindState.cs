@@ -34,7 +34,7 @@ public class Sonic_GrindState : IState
         _ctx.Snd.RailSpinSource.clip = _ctx.Snd.railGrindSound;
         _ctx.Snd.RailSpinSource.Play();
 
-        RailApplication();
+        RailApplication(1f);
     }
 
     public void ExitState()
@@ -62,7 +62,7 @@ public class Sonic_GrindState : IState
         _ctx.SplnHandler.SplineMove(_delta);
         if (_ctx.SplnHandler.Active)
         {
-            RailApplication();
+            RailApplication(_delta);
             InputRotations();
             if (!CollisionD(_delta))
             {
@@ -170,11 +170,10 @@ public class Sonic_GrindState : IState
         _vel = _difference / _delta;
         _ctx.Physics_Snap(_pos);
 
-        _ctx.Anim.SetFloat("TILT", _tilt);
-        Debug.Log(_tilt);
+        _ctx.Anim.SetFloat("TILT", Math.Clamp(_tilt + _railTurn, -1f, 1f));
     }
 
-    private void RailApplication()
+    private void RailApplication(float _delta)
     {
         _norm = _ctx.SplnHandler.SplineNormal();
         _ctx.GroundNormal = _norm;
@@ -184,9 +183,12 @@ public class Sonic_GrindState : IState
         _difference = _pos - _ctx.transform.position;
 
         _tilt = Vector3.SignedAngle(_ctx.PlayerDirection, _ctx.InputVector, _ctx.GroundNormal) * 0.01111111111f;
-        _tilt += Vector3.SignedAngle(_ctx.PlayerDirection, _difference.normalized, _ctx.GroundNormal);
         _tilt = Math.Clamp(_tilt, -1f, 1f);
-        _railTurn = _ctx.SplnHandler.SplineCurvature();
+
+        float newRailTurn = _ctx.SplnHandler.SplineCurvature() * 50f;
+        newRailTurn = Math.Clamp(newRailTurn, -1f, 1f);
+
+        _railTurn = Mathf.Lerp(_railTurn, newRailTurn, _delta);
     }
 
     private void Rotation()
