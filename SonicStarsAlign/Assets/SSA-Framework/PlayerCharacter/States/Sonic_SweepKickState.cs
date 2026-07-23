@@ -107,7 +107,7 @@ public class Sonic_SweepKickState : IState
     {
         _ctx.GroundNormal = _ctx.GroundCast.HitInfo.normal;
         _ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_ctx.Velocity, _ctx.GroundNormal).normalized * _ctx.Velocity.magnitude;
-        _ctx.PlayerDirection = _ctx.HorizontalVelocity.normalized;
+        //_ctx.PlayerDirection = _ctx.HorizontalVelocity.normalized;
         _ctx.Physics_Snap(_ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover);
         _ctx.Physics_ApplyVelocity();
 

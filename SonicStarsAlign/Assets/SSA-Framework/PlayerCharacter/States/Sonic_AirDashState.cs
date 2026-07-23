@@ -48,8 +48,8 @@ public class Sonic_AirDashState : IState
 
         _airTime -= _delta;
 
-        AirDashSwitchConditions();
         AirDashMovement(_delta);
+        AirDashSwitchConditions();
     }
 
     public void LateUpdateState()
@@ -58,8 +58,7 @@ public class Sonic_AirDashState : IState
 
     public void ExitState()
     {
-        _ctx.Physics_ApplyVelocity();
-        _ctx.Anim.SetInteger("State", 0);
+        //_ctx.Physics_ApplyVelocity();
     }
 
     #region Util

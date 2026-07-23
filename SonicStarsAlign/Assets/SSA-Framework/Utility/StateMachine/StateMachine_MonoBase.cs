@@ -56,6 +56,7 @@ public class StateMachine_MonoBase<EState> : MonoBehaviour where EState : Enum
 
     public void MachineTransition(EState _nextState)
     {
+        Debug.Log(_nextState);
         StateChanged?.Invoke(_nextState);
 
         CurrentState.ExitState();

@@ -34,6 +34,7 @@ public class Sonic_BounceState : IState
 
         _ctx.VerticalVelocity = _ctx.Gravity * _ctx.Chp.BounceSpeed;
         _ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_ctx.Velocity, _ctx.Gravity.normalized);
+        _ctx.HorizontalVelocity = Vector3.ClampMagnitude(_ctx.HorizontalVelocity, _ctx.Chp.BaseSpeedAir);
         _ctx.Physics_ApplyVelocity();
 
         InputRotations();
@@ -117,7 +118,7 @@ public class Sonic_BounceState : IState
                     //_ctx.HorizontalVelocity = Vector3.MoveTowards(_ctx.HorizontalVelocity, Vector3.zero, _ctx.Chs.BreakStrengthAir * _delta);
 
                     float _acceleration = _ctx.Chp.AccelerationAir * _delta;
-                    _ctx.HorizontalVelocity += (_acceleration * _ctx.InputVector);
+                    _ctx.HorizontalVelocity += _acceleration * _ctx.InputVector;
                     _ctx.Skid = true;
                     return;
                 }
