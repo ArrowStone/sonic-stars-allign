@@ -173,15 +173,15 @@ MonoBehaviour:
       time: 0
       value: 30
       inSlope: 0
-      outSlope: 30
+      outSlope: 50
       tangentMode: 69
       weightedMode: 0
       inWeight: 0
       outWeight: 0.09299191
     - serializedVersion: 3
       time: 1
-      value: 60
-      inSlope: 30
+      value: 80
+      inSlope: 50
       outSlope: 0
       tangentMode: 69
       weightedMode: 3
@@ -314,6 +314,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   stoneSkipMinimumSpeed: 14
-  stoneSkipWindow: 1
+  stoneSkipWindow: 0.3
   stoneSkipCooldown: 1
   stoneSkipHorizontalSpeedMultiplier: 1.2

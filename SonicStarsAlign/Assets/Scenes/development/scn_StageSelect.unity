@@ -214,6 +214,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -350,6 +351,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1313,6 +1315,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1913,6 +1916,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -2002,7 +2006,7 @@ MonoBehaviour:
   - data: {fileID: 11400000, guid: cd1fe3b8682ce3c4c9121affe1ca87bd, type: 2}
     displayName: Test
     sceneIndex: 4
-    preview: {fileID: 21300000, guid: 3b6f040763cb85e4b917498567771ab4, type: 3}
+    preview: {fileID: 21300000, guid: 91f0084ebd15b41419002b4d8b842aad, type: 3}
     nameSprite: {fileID: 21300000, guid: 77620f086dd78f94eb1f3a5d4483d00d, type: 3}
     loadingName: {fileID: 21300000, guid: 8d56004b0549a00428ac534f2b7bf0b1, type: 3}
   - data: {fileID: 11400000, guid: 328a85c0e526200cb8d802a5539e2699, type: 2}
@@ -2011,8 +2015,10 @@ MonoBehaviour:
     preview: {fileID: 21300000, guid: 8c2994e0ecf1cc54a8adfd38e5324ff4, type: 3}
     nameSprite: {fileID: 21300000, guid: ca2db0eb84e501547a637c43ac656156, type: 3}
     loadingName: {fileID: 21300000, guid: 9f0ffec337860fd4bb3f4ff909548265, type: 3}
+  RankImages: []
+  rankDisplay: {fileID: 0}
   stagePreview: {fileID: 46039372}
-  stageNameImage: {fileID: 1495192438}
+  stageNameDisplay: {fileID: 0}
   redRingIcons:
   - {fileID: 724747246}
   - {fileID: 1319086602}
@@ -3017,6 +3023,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -3489,7 +3496,6 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
-  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -3497,6 +3503,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!81 &1518892025
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3867,6 +3874,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -4169,6 +4177,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
+  m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -4230,7 +4239,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cd1fe3b8682ce3c4c9121affe1ca87bd, type: 2}
   - {fileID: 11400000, guid: 328a85c0e526200cb8d802a5539e2699, type: 2}
   ctx: {fileID: 0}
-  hudManager: {fileID: 0}
 --- !u!1 &1950442293
 GameObject:
   m_ObjectHideFlags: 0

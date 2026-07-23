@@ -263,6 +263,7 @@ MonoBehaviour:
   DashLength: 0
   HomingAttackSpeed: 75
   HomingAttackBounceForce: 20
+  HomingAttackSpeedMultiplier: 0
   RailHomingTargetOffset: 10
   LightDashSpeed: 100
   LightDashExitSpeed: 60
@@ -313,6 +314,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   stoneSkipMinimumSpeed: 14
-  stoneSkipWindow: 0.1
+  stoneSkipWindow: 0.3
   stoneSkipCooldown: 1
   stoneSkipHorizontalSpeedMultiplier: 1.2

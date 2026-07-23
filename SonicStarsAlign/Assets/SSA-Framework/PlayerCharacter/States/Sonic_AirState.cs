@@ -207,7 +207,7 @@ public class Sonic_AirState : IState
             _ctx.HorizontalVelocity = Vector3.RotateTowards(_ctx.HorizontalVelocity, _ctx.PlayerDirection * _ctx.HorizontalVelocity.magnitude, _turnStrength, 0);
         }
 
-        AirDrag(_delta);
+        //AirDrag(_delta);
         _ctx.HorizontalVelocity = Vector3.ClampMagnitude(_ctx.HorizontalVelocity, _ctx.Chp.HardSpeedCap);
     }
 
@@ -414,7 +414,8 @@ public class Sonic_AirState : IState
     {
         if (_ctx.InWater) // Touching water
         {
-            // Checking ig have enough speed and pressed the button soon enough
+            // Checking if have enough speed and pressed the button soon enough
+            // Using the water Chp values because InWater
             if (_reactionInputTimer > _ctx.Chp.stoneSkipCooldown &&
             _ctx.Velocity.magnitude > _ctx.Chp.stoneSkipMinimumSpeed)
             {
@@ -428,6 +429,10 @@ public class Sonic_AirState : IState
 
                 // Don't slow down
                 _ctx.InWater = false;
+
+                // Animations
+                _ctx.ModelManager.ExitBall();
+                _ctx.Anim.SetInteger("State", 5);
             }
             else
             {
@@ -440,14 +445,18 @@ public class Sonic_AirState : IState
             _reactionInputTimer -= _delta;
             Debug.Log(_reactionInputTimer - _ctx.Chp.stoneSkipCooldown);
         }
-        else if (_ctx.Input.ReactionInput.WasPressedThisFrame() && _reactionInputTimer < _ctx.Chp.stoneSkipCooldown)
+        if (_ctx.Input.ReactionInput.WasPressedThisFrame() && _reactionInputTimer < _ctx.Chp.stoneSkipCooldown)
         {
+            // Spinning up for stoneskip
             _ctx.ModelManager.EnterBall();
             _reactionInputTimer = _ctx.Chp.stoneSkipCooldown + _ctx.Chp.stoneSkipWindow;
+
+            // Not jumping so could unroll
+            _ctx.InBall = false;
         }
         else if (!_ctx.InBall && _reactionInputTimer < _ctx.Chp.stoneSkipCooldown && _ctx.ModelManager.InBall)
         {
-            _ctx.LowGravity = false;
+            // Not jumping and ended stoneskip window => exit
             _ctx.ModelManager.ExitBall();
             _ctx.Anim.SetInteger("State", 5);
         }

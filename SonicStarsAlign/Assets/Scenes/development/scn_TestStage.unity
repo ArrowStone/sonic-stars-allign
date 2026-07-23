@@ -4596,22 +4596,6 @@ PrefabInstance:
       propertyPath: UnprocessedAudio
       value: 
       objectReference: {fileID: 24100000, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
-    - target: {fileID: 2410846063761883630, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
-      propertyPath: ledgeGrabDisplacement.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2410846063761883630, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
-      propertyPath: ledgeGrabDisplacement.y
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2410846063761883630, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
-      propertyPath: ledgeGrabDisplacement.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2410846063761883630, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
-      propertyPath: ledgeGrabReleaseDisplacement.y
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 2453102168790407869, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -39.39874
@@ -30876,7 +30860,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1001886447
 AudioSource:
   m_ObjectHideFlags: 0

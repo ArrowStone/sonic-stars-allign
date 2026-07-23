@@ -72,6 +72,8 @@ public class Sonic_SpinDashState : IState
 
     public void ExitState()
     {
+        _ctx.ModelManager.ExitBall();
+        _ctx.Anim.SetInteger("State", 0);
         _ctx.Snd.RailSpinSource.Stop();
         _ctx.Snd.RailSpinSource.pitch = 1f;
     }
@@ -139,7 +141,7 @@ public class Sonic_SpinDashState : IState
         _spincharge += delta;
         float spinSpeed = _ctx.Chp.SpinDashOutput.Evaluate(_spincharge);
         _ctx.ModelManager.ballRollSpeed = spinSpeed;
-        _ctx.Snd.RailSpinSource.pitch = spinSpeed * 0.0167f;
+        _ctx.Snd.RailSpinSource.pitch = spinSpeed * 0.0125f;
         if (_ctx.Input.BounceInput.WasReleasedThisFrame())
         {
             _ctx.Velocity = _ctx.PlayerDirection * spinSpeed;

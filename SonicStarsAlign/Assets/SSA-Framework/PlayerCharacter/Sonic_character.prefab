@@ -2317,16 +2317,6 @@ MonoBehaviour:
   Chp: {fileID: 11400000, guid: 5976ffd069f1d92438628fdafda3acd7, type: 2}
   Chs: {fileID: 11400000, guid: 8f028f94bbfd98d48acca61a86e60e62, type: 2}
   Snd: {fileID: 1408359879882202046}
-  filters:
-  - {fileID: 6874505794596330014}
-  - {fileID: 7297926138240454026}
-  - {fileID: 8964973263154436502}
-  - {fileID: 7899631408999137482}
-  - {fileID: 2805361430770890105}
-  - {fileID: 9181969433233115258}
-  - {fileID: 8488570166733603754}
-  - {fileID: 545560369431263699}
-  - {fileID: 7567326545747933759}
   InvinciblitiyState: 0
   TrickState: 0
   ChrTurn:
@@ -2388,8 +2378,8 @@ MonoBehaviour:
   railDetectionRadius: 2
   railTimeout: 0.1
   railEndTime: 0
-  ledgeGrabDisplacement: {x: -0.5, y: 0, z: -0.5}
-  ledgeGrabReleaseDisplacement: {x: 0.5, y: 1, z: 0.5}
+  ledgeGrabDisplacement: {x: 0, y: 0.7, z: 0}
+  ledgeGrabReleaseDisplacement: {x: 0.5, y: 0.2, z: 0.5}
   groundRayDig: 0.75
   groundRayLength: 1.5
   ledgeVerticalRayLength: 1.5

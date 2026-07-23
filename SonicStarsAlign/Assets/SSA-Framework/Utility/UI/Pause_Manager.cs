@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PauseManager : MonoBehaviour
 {
     public static PauseManager Instance;
-    public GameObject pauseMenu;
+    //public GameObject pauseMenu;
     public static bool paused = false;
     private InputComponent input;
     private bool wasPauseButtonReleased = true;
@@ -28,10 +28,10 @@ public class PauseManager : MonoBehaviour
 
         PauseAnimator.SetBool("Paused", state);
 
-        foreach (Animator anim in ButtonAnimators)
+        /*if (!state)
         {
-            anim.SetTrigger("Off");
-        }
+            foreach (Animator anim in ButtonAnimators) { anim.SetTrigger("Off"); }
+        }*/
 
         //pauseMenu.SetActive(state);
         Cursor.lockState = state ? CursorLockMode.None : CursorLockMode.Locked;
