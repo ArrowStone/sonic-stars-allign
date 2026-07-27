@@ -18,9 +18,12 @@ public class WinScreen : MonoBehaviour
     public Image RankImage;
     public AudioSource MusicSource;
     public GameObject[] ObjectsToToggle;
+    public Image[] RedRingIcons;
 
-    [SerializeField] private Sprite[] rankLetters;
-    [SerializeField] private int targetTime;
+    [SerializeField] private Sprite[] RankLetters;
+    [SerializeField] private int TargetTime;
+    [SerializeField] private Sprite RedRingOn;
+    [SerializeField] private Sprite RedRingOff;
 
     private void Awake()
     {
@@ -52,6 +55,7 @@ public class WinScreen : MonoBehaviour
         int ringScore = 0;
         int totalScore = 0;
         int rank = 0;
+        bool[] redRings = new bool[0];
         SceneSwitcher ScSw = SceneSwitcher.Instance;
 
         // ScSw unavailablee when launching the scene on its own through the Editor.
@@ -64,8 +68,19 @@ public class WinScreen : MonoBehaviour
             ringScore = rings * 5;
             totalScore = score + Math.Max(0, (int)(data.targetTime - time)) * 5;
             rank = data.rank;
+            redRings = data.redRings;
         }
-        RankImage.sprite = rankLetters[rank];
+        RankImage.sprite = RankLetters[rank];
+
+        if (redRings.Length != 0)
+        {
+            int i = 0;
+            foreach (Image icon in RedRingIcons)
+            {
+                icon.sprite = redRings[i] ? RedRingOn : RedRingOff;
+                i += 1;
+            }
+        }
 
         IEnumerator CountdownWait()
         {

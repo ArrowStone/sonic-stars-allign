@@ -20,6 +20,7 @@ public class SceneSwitcher : MonoBehaviour
     private float cachedTargetTime;
     private float cachedRings;
     private int cachedRank;
+    private bool[] cachedRedRings;
     private bool redRingsUnlocked = false;
 
     private void Awake()
@@ -108,7 +109,7 @@ public class SceneSwitcher : MonoBehaviour
     {
         return cachedStageDisplayName;
     }
-    public void CacheWinData(int score, float time, float targetTime, float rings, int rank)
+    public void CacheWinData(int score, float time, float targetTime, float rings, int rank, bool[] redRings)
     {
         Debug.Log(string.Format("Score: {0}, Time: {1}; Rings: {2}, Rank: {3}", score, time, rings, rank));
         cachedScore = score;
@@ -116,10 +117,11 @@ public class SceneSwitcher : MonoBehaviour
         cachedTargetTime = targetTime;
         cachedRings = rings;
         cachedRank = rank;
+        cachedRedRings = redRings;
     }
-    public (int score, float time, float targetTime, float rings, int rank) GetWinData()
+    public (int score, float time, float targetTime, float rings, int rank, bool[] redRings) GetWinData()
     {
-        return (cachedScore, cachedTime, cachedTargetTime, cachedRings, cachedRank);
+        return (cachedScore, cachedTime, cachedTargetTime, cachedRings, cachedRank, cachedRedRings);
     }
     public void SetRedRingUnlock()
     {

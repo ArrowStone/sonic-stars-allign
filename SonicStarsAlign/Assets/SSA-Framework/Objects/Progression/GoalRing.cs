@@ -41,7 +41,8 @@ public class GoalRing : CollectableBase
                 _ctx.Chs.Time,
                 Data.TargetTime,
                 _ctx.Chs.Rings,
-                rank
+                rank,
+                Data.RedRings
             );
 
             // The trigger's name is meant to be the verb btw

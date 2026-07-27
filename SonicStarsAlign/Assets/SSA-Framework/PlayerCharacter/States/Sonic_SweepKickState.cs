@@ -42,10 +42,10 @@ public class Sonic_SweepKickState : IState
         _kickTimer += _delta;
 
         // Check hit window
-        if (_kickTimer >= _kickDamageWindow && !_hasHit)
+        /*if (_kickTimer >= _kickDamageWindow && !_hasHit)
         {
             TryDoKickDamage();
-        }
+        }*/
 
 
         // Jumping out of the kick
@@ -92,7 +92,7 @@ public class Sonic_SweepKickState : IState
             Debug.Log("Sweep Kick hit: " + hit.name);
 
             // Give a little forward boost
-            _ctx.Velocity += _ctx.PlayerDirection * _kickSpeedBoost;
+            _ctx.HorizontalVelocity += _ctx.PlayerDirection * _kickSpeedBoost;
             break;
         }
     }

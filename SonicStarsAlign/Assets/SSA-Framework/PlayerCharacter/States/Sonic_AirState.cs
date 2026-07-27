@@ -263,20 +263,30 @@ public class Sonic_AirState : IState
             _ctx.Snd.PlaySound("Homing");
             _ctx.MachineTransition(PlayerStates.HomingAttack);
         }
-        if (_ctx.RingDetector.TargetDetected && _ctx.Input.LightDashInput.WasPressedThisFrame())
-        {
-            _ctx.MachineTransition(PlayerStates.LightSpeedDash);
-        }
-        if (_ctx.Input.BounceInput.WasPressedThisFrame())
-        {
-            _ctx.Snd.PlaySound("Bounce");
-            _ctx.MachineTransition(PlayerStates.Bounce);
-        }
-        if (_ctx.Input.JumpInput.WasPressedThisFrame() && _ctx.AirDashes > 0)
+        else if (_ctx.Input.JumpInput.WasPressedThisFrame() && _ctx.AirDashes > 0)
         {
             _ctx.Snd.PlaySound("AirDash");
             _ctx.AirDashes--;
             _ctx.Dash();
+        }
+        else if (_ctx.Input.AttackInput.WasPressedThisFrame() && _ctx.AirDashes > 0)
+        {
+            // Tornado Jump
+            _ctx.AirDashes--;
+            _ctx.VerticalVelocity = _ctx.GroundNormal * _ctx.HorizontalVelocity.magnitude;
+            _ctx.Physics_ApplyVelocity();
+            _ctx.ModelManager.ExitBall();
+            _ctx.Anim.SetInteger("State", 100);
+            _ctx.Anim.SetTrigger("Twirl");
+        }
+        else if (_ctx.RingDetector.TargetDetected && _ctx.Input.LightDashInput.WasPressedThisFrame())
+        {
+            _ctx.MachineTransition(PlayerStates.LightSpeedDash);
+        }
+        else if (_ctx.Input.BounceInput.WasPressedThisFrame())
+        {
+            _ctx.Snd.PlaySound("Bounce");
+            _ctx.MachineTransition(PlayerStates.Bounce);
         }
     }
 
@@ -433,6 +443,11 @@ public class Sonic_AirState : IState
                 // Animations
                 _ctx.ModelManager.ExitBall();
                 _ctx.Anim.SetInteger("State", 5);
+
+                // Sound
+
+                //_ctx.Snd.PlaySound("StoneSkipSplat");
+                _ctx.Snd.PlaySound("StoneSkip");
             }
             else
             {

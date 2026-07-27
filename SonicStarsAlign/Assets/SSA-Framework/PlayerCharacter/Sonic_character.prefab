@@ -2533,6 +2533,10 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 4a025893928a18040980756fa9f48f99, type: 3}
     - {fileID: 8300000, guid: 21667b008d363bb488525d3bf2d6d42e, type: 3}
     Channel: {fileID: 639292256306105415, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+  - Name: StoneSkipSplat
+    Clip:
+    - {fileID: 8300000, guid: 10fa0157f3fea9daf9c3d49a65e1c313, type: 3}
+    Channel: {fileID: 639292256306105415, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
   railGrindSound: {fileID: 8300000, guid: a005260a0a61dfcb7b30d8f3b54bd082, type: 3}
   spinUpSound: {fileID: 8300000, guid: c976265d4c9f164e3ba2d13c601be32a, type: 3}
 --- !u!82 &5570304920696539352
