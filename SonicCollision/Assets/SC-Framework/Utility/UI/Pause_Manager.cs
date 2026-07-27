@@ -5,10 +5,11 @@ using UnityEngine.InputSystem;
 public class PauseManager : MonoBehaviour
 {
     public static PauseManager Instance;
-    //public GameObject pauseMenu;
+    public GameObject PauseMenu;
     public static bool paused = false;
     private InputComponent input;
     private bool wasPauseButtonReleased = true;
+    [SerializeField] bool TogglePauseMenuActive;
     [SerializeField] Animator PauseAnimator;
     [SerializeField] Animator[] ButtonAnimators;
 
@@ -26,14 +27,20 @@ public class PauseManager : MonoBehaviour
 
         paused = state;
 
-        PauseAnimator.SetBool("Paused", state);
+        if (TogglePauseMenuActive)
+        {
+            PauseMenu.SetActive(state);
+        }
+        else
+        {
+            PauseAnimator.SetBool("Paused", state);
+        }
 
         /*if (!state)
         {
             foreach (Animator anim in ButtonAnimators) { anim.SetTrigger("Off"); }
         }*/
 
-        //pauseMenu.SetActive(state);
         Cursor.lockState = state ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = state;
         Time.timeScale = state ? 0 : 1;

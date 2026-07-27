@@ -9499,12 +9499,36 @@ PrefabInstance:
       value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 2234342915584395770, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
+      propertyPath: PauseMenu
+      value: 
+      objectReference: {fileID: 1251496307}
+    - target: {fileID: 2234342915584395770, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 1251496307}
     - target: {fileID: 2234342915584395770, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
+      propertyPath: PauseAnimator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234342915584395770, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
+      propertyPath: TogglePauseMenuActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234342915584395770, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
       propertyPath: gameComponents.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234342915584395770, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
+      propertyPath: ButtonAnimators.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234342915584395770, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
+      propertyPath: 'ButtonAnimators.Array.data[0]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234342915584395770, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
+      propertyPath: 'ButtonAnimators.Array.data[1]'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8562045173513120289, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
       propertyPath: m_Pivot.x

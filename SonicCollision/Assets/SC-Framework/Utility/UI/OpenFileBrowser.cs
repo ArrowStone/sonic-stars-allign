@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using TMPro;
 using SimpleFileBrowser;
 using System.Collections;
-using System.IO;
 
 public class OpenFileBrowser : MonoBehaviour
 {
@@ -13,6 +12,8 @@ public class OpenFileBrowser : MonoBehaviour
     {
         var button = GetComponent<Button>();
         button.onClick.AddListener(OnClick);
+
+        input.text = PlayerPrefs.GetString("filePath");
     }
 
     private void OnClick()
@@ -44,5 +45,6 @@ public class OpenFileBrowser : MonoBehaviour
     void OnFilesSelected(string[] filePaths)
     {
         input.text = filePaths[0];
+        PlayerPrefs.SetString("filePath", filePaths[0]);
     }
 }

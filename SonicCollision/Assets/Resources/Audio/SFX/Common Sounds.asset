@@ -65,3 +65,7 @@ MonoBehaviour:
     Clip:
     - {fileID: 8300000, guid: 184ab8152890a6ff5a148263be230466, type: 3}
     Channel: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+  - Name: StoneSkip
+    Clip:
+    - {fileID: 8300000, guid: 41415e074e1dc4d1a92ebf976fbdac93, type: 3}
+    Channel: {fileID: -8636326121779113326, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
