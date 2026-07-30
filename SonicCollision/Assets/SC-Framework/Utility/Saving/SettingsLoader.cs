@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using Unity.Cinemachine;
-using System.Collections.Generic;
 
 // Code for loading and applying settings in the levels. Every parameter has to be hardcoded.
 public class SettingsLoader : MonoBehaviour

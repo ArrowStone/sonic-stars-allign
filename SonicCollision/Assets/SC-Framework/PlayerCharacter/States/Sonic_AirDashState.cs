@@ -22,7 +22,7 @@ public class Sonic_AirDashState : IState
 
         #region Velocity
         if (_ctx.InputVector.magnitude > 0) _ctx.PlayerDirection = _ctx.InputVector;
-        _ctx.HorizontalVelocity = _ctx.PlayerDirection * _ctx.Chp.DashSpeed;
+        _ctx.HorizontalVelocity = _ctx.PlayerDirection * Math.Max(_ctx.Velocity.magnitude, _ctx.Chp.DashSpeed);
         _ctx.VerticalVelocity = Vector3.zero;
         _ctx.Physics_ApplyVelocity();
         #endregion

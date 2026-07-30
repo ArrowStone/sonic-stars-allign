@@ -5,7 +5,7 @@ public class SettingsManager : MonoBehaviour
 {
     SettingsElement[] settingsElements;
 
-    void Awake()
+    void Start()
     {
         settingsElements = FindObjectsByType<SettingsElement>();
         ResetElements();

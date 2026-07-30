@@ -4,30 +4,41 @@ using UnityEngine.UI;
 
 // Basically all settings saving is done here actually. SaveManager basically just provides functions for the buttons to quickly make all the elements
 // save or load their values.
+// Add to a UI component that adjusts the setting value.
 public class SettingsElement : MonoBehaviour
 {
-    public Component component;
+    Component component;
     public string saveParamName;
     public float defaultValue = 0;
+
+    void Awake()
+    {
+        Scrollbar bar = GetComponent<Scrollbar>();
+        component = bar ? bar : component;
+        TMP_Dropdown drop = GetComponent<TMP_Dropdown>();
+        component = drop ? drop : component;
+        Toggle toggle = GetComponent<Toggle>();
+        component = toggle ? toggle : component;
+    }
 
     public void SaveValue()
     {
         switch (component.GetType().Name)
         {
             case "Scrollbar":
-                Debug.Log("Scrollbar");
                 Scrollbar scrollbar = (Scrollbar)component;
                 PlayerPrefs.SetFloat(saveParamName, scrollbar.value);
+                Debug.Log(string.Format("Scrollbar: {0} {1}", saveParamName, scrollbar.value));
                 break;
             case "TMP_Dropdown":
-                Debug.Log("Dropdown");
                 TMP_Dropdown dropdown = (TMP_Dropdown)component;
                 PlayerPrefs.SetInt(saveParamName, dropdown.value);
+                Debug.Log(string.Format("Scrollbar: {0} {1}", saveParamName, dropdown.value));
                 break;
             case "Toggle":
-                Debug.Log("Toggle");
                 Toggle toggle = (Toggle)component;
                 PlayerPrefs.SetInt(saveParamName, toggle.isOn ? 1 : 0);
+                Debug.Log(string.Format("Scrollbar: {0} {1}", saveParamName, toggle.isOn));
                 break;
         }
     }
