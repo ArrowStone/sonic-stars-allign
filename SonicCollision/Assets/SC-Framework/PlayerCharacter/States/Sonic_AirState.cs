@@ -312,7 +312,7 @@ public class Sonic_AirState : IState
         Vector3 origin = _ctx.transform.position;
         Vector3 dir = _ctx.PlayerDirection.normalized;
 
-        if (Physics.Raycast(origin, dir, out hit, _ctx.Chp.WallAttachCheckDistance))
+        if (Physics.Raycast(origin, dir, out hit, _ctx.Chp.WallAttachCheckDistance, _ctx.wallRunLayer))
         {
             // Check that it's actually wall-like (not ground)
             // Using the surface normal angle
