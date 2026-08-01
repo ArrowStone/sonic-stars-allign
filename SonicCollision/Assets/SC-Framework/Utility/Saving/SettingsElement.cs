@@ -28,17 +28,17 @@ public class SettingsElement : MonoBehaviour
             case "Scrollbar":
                 Scrollbar scrollbar = (Scrollbar)component;
                 PlayerPrefs.SetFloat(saveParamName, scrollbar.value);
-                Debug.Log(string.Format("Scrollbar: {0} {1}", saveParamName, scrollbar.value));
+                //Debug.Log(string.Format("Scrollbar: {0} {1}", saveParamName, scrollbar.value));
                 break;
             case "TMP_Dropdown":
                 TMP_Dropdown dropdown = (TMP_Dropdown)component;
                 PlayerPrefs.SetInt(saveParamName, dropdown.value);
-                Debug.Log(string.Format("Scrollbar: {0} {1}", saveParamName, dropdown.value));
+                //Debug.Log(string.Format("Scrollbar: {0} {1}", saveParamName, dropdown.value));
                 break;
             case "Toggle":
                 Toggle toggle = (Toggle)component;
                 PlayerPrefs.SetInt(saveParamName, toggle.isOn ? 1 : 0);
-                Debug.Log(string.Format("Scrollbar: {0} {1}", saveParamName, toggle.isOn));
+                //Debug.Log(string.Format("Scrollbar: {0} {1}", saveParamName, toggle.isOn));
                 break;
         }
     }

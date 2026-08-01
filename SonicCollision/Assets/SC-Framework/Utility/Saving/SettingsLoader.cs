@@ -17,10 +17,10 @@ public class SettingsLoader : MonoBehaviour
     {
         {0,0},
         {3840,2160},
-        {1440,1080},
+        {2560,1440},
         {1920,1080},
+        {1280,720},
         {720,480},
-        {480,240}
     };
     public AntialiasingMode[] AAModes = // Need to correspond to the order in the settings menu
     {
@@ -52,8 +52,13 @@ public class SettingsLoader : MonoBehaviour
         Camera cam = Camera.main;
         UniversalAdditionalCameraData cameraData = cam.GetUniversalAdditionalCameraData(); // Provides access to antialiasing
 
-        bool fullScreen = PlayerPrefs.GetInt("fullsc") == 1;
-        int res = PlayerPrefs.GetInt("res");
+        FullScreenMode[] str = { FullScreenMode.Windowed, FullScreenMode.MaximizedWindow, FullScreenMode.FullScreenWindow, FullScreenMode.ExclusiveFullScreen };
+
+        FullScreenMode displayMode = str[PlayerPrefs.GetInt("displayMode")];
+        int res = PlayerPrefs.GetInt("resolution");
+        int bufferFrames = PlayerPrefs.GetInt("vSync");
+        bool vsync = bufferFrames > 0;
+        bool runInBackground = PlayerPrefs.GetInt("runInBackground") > 0;
         //float viewDist = PlayerPrefs.GetFloat("viewDist");
         float viewDist = 0.1f;
         int AAMode = PlayerPrefs.GetInt("aaMode");
@@ -65,12 +70,11 @@ public class SettingsLoader : MonoBehaviour
 
         if (res > 0)
         {
-            Screen.SetResolution(resolutions[res, 0], resolutions[res, 1], fullScreen);
+            Screen.SetResolution(resolutions[res, 0], resolutions[res, 1], displayMode == FullScreenMode.ExclusiveFullScreen);
         }
-        else
-        {
-            //Screen.fullScreen = fullScreen;
-        }
+        Screen.fullScreenMode = displayMode;
+        QualitySettings.vSyncCount = vsync ? 0 : 1;
+        QualitySettings.maxQueuedFrames = bufferFrames;
 
         if (renderScale == 0)
         {

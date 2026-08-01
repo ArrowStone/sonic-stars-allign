@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5b1c4adcead828778e130c7335c9a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PauseMenu: {fileID: 0}
+  PauseMenu: {fileID: 3799188775065146930}
   TogglePauseMenuActive: 0
   PauseAnimator: {fileID: 3969120462303566945}
   ButtonAnimators:
@@ -461,6 +461,7 @@ GameObject:
   - component: {fileID: 2805468582361406242}
   - component: {fileID: 8875815932411395488}
   - component: {fileID: 2424508856957921384}
+  - component: {fileID: 3812034158092547019}
   m_Layer: 5
   m_Name: Select
   m_TagString: Untagged
@@ -570,10 +571,10 @@ MonoBehaviour:
   AbsentEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1029226489811158419}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 3812034158092547019}
+        m_TargetAssemblyTypeName: Destructor, Assembly-CSharp
+        m_MethodName: Destruction
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -582,6 +583,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3812034158092547019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029226489811158419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6eac356cb7a96378e389822af4098c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Destructor
 --- !u!1 &1064468372315093492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,6 +1051,7 @@ GameObject:
   - component: {fileID: 4859848222911297311}
   - component: {fileID: 7865842414459924284}
   - component: {fileID: 8294476736018034646}
+  - component: {fileID: 5800931181505588807}
   m_Layer: 5
   m_Name: CamMove
   m_TagString: Untagged
@@ -1147,10 +1161,10 @@ MonoBehaviour:
   AbsentEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1502549235398270851}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 5800931181505588807}
+        m_TargetAssemblyTypeName: Destructor, Assembly-CSharp
+        m_MethodName: Destruction
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1159,6 +1173,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5800931181505588807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502549235398270851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6eac356cb7a96378e389822af4098c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Destructor
 --- !u!1 &1523408137196281884
 GameObject:
   m_ObjectHideFlags: 0
@@ -1508,6 +1534,7 @@ GameObject:
   - component: {fileID: 7121190064691733295}
   - component: {fileID: 8768847705161186007}
   - component: {fileID: 3884805053402706068}
+  - component: {fileID: 7340924925363877077}
   m_Layer: 5
   m_Name: Crouch
   m_TagString: Untagged
@@ -1617,10 +1644,10 @@ MonoBehaviour:
   AbsentEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2198671978802625156}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 7340924925363877077}
+        m_TargetAssemblyTypeName: Destructor, Assembly-CSharp
+        m_MethodName: Destruction
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1629,6 +1656,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7340924925363877077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2198671978802625156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6eac356cb7a96378e389822af4098c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Destructor
 --- !u!1 &2604440220578982236
 GameObject:
   m_ObjectHideFlags: 0
@@ -2058,6 +2097,7 @@ GameObject:
   - component: {fileID: 8704803408387568187}
   - component: {fileID: 8166095573457933463}
   - component: {fileID: 1505646157780161721}
+  - component: {fileID: 2908126079958110082}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -2167,18 +2207,30 @@ MonoBehaviour:
   AbsentEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2855481155107504786}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 2908126079958110082}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2908126079958110082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2855481155107504786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6eac356cb7a96378e389822af4098c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Destructor
 --- !u!1 &2916532045035855387
 GameObject:
   m_ObjectHideFlags: 0
@@ -4367,6 +4419,7 @@ GameObject:
   - component: {fileID: 6196597053660022640}
   - component: {fileID: 8858395722569606292}
   - component: {fileID: 8333592164539014184}
+  - component: {fileID: 6100636820426858137}
   m_Layer: 5
   m_Name: Attack
   m_TagString: Untagged
@@ -4476,10 +4529,10 @@ MonoBehaviour:
   AbsentEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5203954117499593167}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 6100636820426858137}
+        m_TargetAssemblyTypeName: Destructor, Assembly-CSharp
+        m_MethodName: Destruction
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4488,6 +4541,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6100636820426858137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5203954117499593167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6eac356cb7a96378e389822af4098c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Destructor
 --- !u!1 &5220613285867316218
 GameObject:
   m_ObjectHideFlags: 0
@@ -4500,6 +4565,7 @@ GameObject:
   - component: {fileID: 3940571975181716937}
   - component: {fileID: 1937166044662526544}
   - component: {fileID: 4656870951793779757}
+  - component: {fileID: 7268777014046482185}
   m_Layer: 5
   m_Name: Move
   m_TagString: Untagged
@@ -4609,10 +4675,10 @@ MonoBehaviour:
   AbsentEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5220613285867316218}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 7268777014046482185}
+        m_TargetAssemblyTypeName: Destructor, Assembly-CSharp
+        m_MethodName: Destruction
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4621,6 +4687,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7268777014046482185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5220613285867316218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6eac356cb7a96378e389822af4098c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Destructor
 --- !u!1 &5580007616036053339
 GameObject:
   m_ObjectHideFlags: 0
@@ -6585,6 +6663,7 @@ GameObject:
   - component: {fileID: 2601113668279927110}
   - component: {fileID: 3810777911527528140}
   - component: {fileID: 1940210102156400612}
+  - component: {fileID: 6013972360230685967}
   m_Layer: 5
   m_Name: Jump
   m_TagString: Untagged
@@ -6694,10 +6773,10 @@ MonoBehaviour:
   AbsentEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8198978088895362376}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 6013972360230685967}
+        m_TargetAssemblyTypeName: Destructor, Assembly-CSharp
+        m_MethodName: Destruction
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6706,6 +6785,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6013972360230685967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8198978088895362376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6eac356cb7a96378e389822af4098c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Destructor
 --- !u!1 &8451467596143197265
 GameObject:
   m_ObjectHideFlags: 0
@@ -7201,6 +7292,7 @@ GameObject:
   - component: {fileID: 115568507896687748}
   - component: {fileID: 484814845932682565}
   - component: {fileID: 8416964404274479574}
+  - component: {fileID: 8731053968727340089}
   m_Layer: 5
   m_Name: LightDash
   m_TagString: Untagged
@@ -7310,10 +7402,10 @@ MonoBehaviour:
   AbsentEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9029973068568691414}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 8731053968727340089}
+        m_TargetAssemblyTypeName: Destructor, Assembly-CSharp
+        m_MethodName: Destruction
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7322,6 +7414,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8731053968727340089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9029973068568691414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6eac356cb7a96378e389822af4098c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Destructor
 --- !u!1 &9058134079206117535
 GameObject:
   m_ObjectHideFlags: 0
@@ -7821,6 +7925,10 @@ PrefabInstance:
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument

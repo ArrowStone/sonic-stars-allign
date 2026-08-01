@@ -269,7 +269,7 @@ public class Sonic_AirState : IState
             _ctx.AirDashes--;
             _ctx.Dash();
         }
-        else if (_ctx.Input.AttackInput.WasPressedThisFrame() && _ctx.AirDashes > 0)
+        else if (_ctx.Input.AttackInput.WasPressedThisFrame() && _ctx.AirDashes > 0 && Vector3.Dot(_ctx.VerticalVelocity, _ctx.Gravity) > 0)
         {
             // Tornado Jump
             _ctx.AirDashes--;
