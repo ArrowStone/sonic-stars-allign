@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // The functionality of switching between several values using a slider
+// Used in the placeholder settings menu only
 public class SliderSwitch : MonoBehaviour
 {
     public Scrollbar scrollbar;

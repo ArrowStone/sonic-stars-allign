@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,17 +8,22 @@ public class MenuSwitcher : MonoBehaviour
     [SerializeField] int MenuToReturnTo = 0;
     [SerializeField] bool UnloadScene = false;
     [SerializeField] bool ActivateOnStart = false;
-    public void Exit()
+    public void Exit(float delay = 0f)
     {
-        foreach (Canvas canvas in FindObjectsByType<Canvas>())
+        IEnumerator ExitDelay()
         {
-            if (canvas.gameObject.scene.buildIndex != gameObject.scene.buildIndex)
+            yield return new WaitForSeconds(delay);
+            foreach (Canvas canvas in FindObjectsByType<Canvas>())
             {
-                canvas.GetComponent<Animator>().SetInteger("Menu", MenuToReturnTo);
-                if (UnloadScene) SceneManager.UnloadSceneAsync(gameObject.scene.buildIndex);
-                return;
+                if (canvas.gameObject.scene.buildIndex != gameObject.scene.buildIndex)
+                {
+                    canvas.GetComponent<Animator>().SetInteger("Menu", MenuToReturnTo);
+                    if (UnloadScene) SceneManager.UnloadSceneAsync(gameObject.scene.buildIndex);
+                    break;
+                }
             }
         }
+        StartCoroutine(ExitDelay());
     }
 
     public void Awake()

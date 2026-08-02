@@ -19,6 +19,8 @@ public class SettingsElement : MonoBehaviour
         component = drop ? drop : component;
         Toggle toggle = GetComponent<Toggle>();
         component = toggle ? toggle : component;
+        Slider slider = GetComponent<Slider>();
+        component = slider ? slider : component;
     }
 
     public void SaveValue()
@@ -29,6 +31,11 @@ public class SettingsElement : MonoBehaviour
                 Scrollbar scrollbar = (Scrollbar)component;
                 PlayerPrefs.SetFloat(saveParamName, scrollbar.value);
                 //Debug.Log(string.Format("Scrollbar: {0} {1}", saveParamName, scrollbar.value));
+                break;
+            case "Slider":
+                Slider slider = (Slider)component;
+                PlayerPrefs.SetFloat(saveParamName, slider.value);
+                //Debug.Log(string.Format("Slider: {0} {1}", saveParamName, scrollbar.value));
                 break;
             case "TMP_Dropdown":
                 TMP_Dropdown dropdown = (TMP_Dropdown)component;
@@ -52,6 +59,11 @@ public class SettingsElement : MonoBehaviour
                 Scrollbar scrollbar = (Scrollbar)component;
                 scrollbar.value = PlayerPrefs.HasKey(saveParamName) ? PlayerPrefs.GetFloat(saveParamName) : defaultValue;
                 break;
+            case "Slider":
+                Debug.Log("Slider");
+                Slider slider = (Slider)component;
+                slider.value = PlayerPrefs.HasKey(saveParamName) ? PlayerPrefs.GetFloat(saveParamName) : defaultValue;
+                break;
             case "TMP_Dropdown":
                 Debug.Log("Dropdown");
                 TMP_Dropdown dropdown = (TMP_Dropdown)component;
@@ -73,6 +85,11 @@ public class SettingsElement : MonoBehaviour
                 Debug.Log("Scrollbar");
                 Scrollbar scrollbar = (Scrollbar)component;
                 scrollbar.value = defaultValue;
+                break;
+            case "Slider":
+                Debug.Log("Slider");
+                Slider slider = (Slider)component;
+                slider.value = defaultValue;
                 break;
             case "TMP_Dropdown":
                 Debug.Log("Dropdown");

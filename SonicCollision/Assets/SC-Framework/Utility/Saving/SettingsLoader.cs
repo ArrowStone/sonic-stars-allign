@@ -63,7 +63,7 @@ public class SettingsLoader : MonoBehaviour
         float viewDist = 0.1f;
         int AAMode = PlayerPrefs.GetInt("aaMode");
         int AAQuality = PlayerPrefs.GetInt("aaQuality");
-        float renderScale = PlayerPrefs.GetFloat("resScale");
+        float renderScale = PlayerPrefs.GetFloat("renderScale");
 
         float mouseSensitivity = PlayerPrefs.GetFloat("mouseSensitivity");
         float joySensitivity = PlayerPrefs.GetFloat("joySensitivity");
