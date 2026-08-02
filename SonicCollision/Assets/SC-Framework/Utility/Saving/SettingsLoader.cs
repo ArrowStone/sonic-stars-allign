@@ -54,7 +54,7 @@ public class SettingsLoader : MonoBehaviour
 
         FullScreenMode[] str = { FullScreenMode.Windowed, FullScreenMode.MaximizedWindow, FullScreenMode.FullScreenWindow, FullScreenMode.ExclusiveFullScreen };
 
-        FullScreenMode displayMode = str[PlayerPrefs.GetInt("displayMode")];
+        int displayMode = PlayerPrefs.GetInt("displayMode");
         int res = PlayerPrefs.GetInt("resolution");
         int bufferFrames = PlayerPrefs.GetInt("vSync");
         bool vsync = bufferFrames > 0;
@@ -68,13 +68,19 @@ public class SettingsLoader : MonoBehaviour
         float mouseSensitivity = PlayerPrefs.GetFloat("mouseSensitivity");
         float joySensitivity = PlayerPrefs.GetFloat("joySensitivity");
 
+        bool homingOnJump = PlayerPrefs.GetInt("homingMapping") > 0; // True = jump button, False = attack button
+
         if (res > 0)
         {
-            Screen.SetResolution(resolutions[res, 0], resolutions[res, 1], displayMode == FullScreenMode.ExclusiveFullScreen);
+            Screen.SetResolution(resolutions[res, 0], resolutions[res, 1], displayMode == 3);
         }
-        Screen.fullScreenMode = displayMode;
+        Screen.fullScreenMode = str[displayMode];
         QualitySettings.vSyncCount = vsync ? 0 : 1;
         QualitySettings.maxQueuedFrames = bufferFrames;
+
+#if PLATFORM_ANDROID
+        Application.targetFrameRate = 60;
+#endif
 
         if (renderScale == 0)
         {
@@ -88,5 +94,8 @@ public class SettingsLoader : MonoBehaviour
         cameraData.antialiasingQuality = SMAAQualities[AAQuality];
         cameraData.taaSettings.quality = TAAQualities[AAQuality];
         pipelineAsset.renderScale = renderScale;
+
+        Sonic_PlayerStateMachine _ctx = FindAnyObjectByType<Sonic_PlayerStateMachine>();
+        _ctx.HomingOnJump = homingOnJump;
     }
 }

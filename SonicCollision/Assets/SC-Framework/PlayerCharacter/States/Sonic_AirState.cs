@@ -258,7 +258,7 @@ public class Sonic_AirState : IState
 
     private void AirSwitchConditions()
     {
-        if (_ctx.HomingTargetDetector.TargetDetected && _ctx.Input.AttackInput.WasPressedThisFrame())
+        if (_ctx.HomingTargetDetector.TargetDetected && (_ctx.HomingOnJump && _ctx.Input.JumpInput.WasPressedThisFrame() || !_ctx.HomingOnJump && _ctx.Input.AttackInput.WasPressedThisFrame()))
         {
             _ctx.Snd.PlaySound("Homing");
             _ctx.MachineTransition(PlayerStates.HomingAttack);

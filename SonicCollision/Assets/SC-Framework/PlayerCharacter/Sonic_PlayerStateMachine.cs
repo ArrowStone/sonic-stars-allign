@@ -22,6 +22,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     [Header("Handling")]
     public AnimationCurve ChrTurn;
+    public bool HomingOnJump;
 
     [Header("Collision")]
     public LayerMask groundLayer;

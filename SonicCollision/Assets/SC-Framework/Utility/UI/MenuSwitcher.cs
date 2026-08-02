@@ -12,12 +12,13 @@ public class MenuSwitcher : MonoBehaviour
     {
         IEnumerator ExitDelay()
         {
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSecondsRealtime(delay);
             foreach (Canvas canvas in FindObjectsByType<Canvas>())
             {
                 if (canvas.gameObject.scene.buildIndex != gameObject.scene.buildIndex)
                 {
-                    canvas.GetComponent<Animator>().SetInteger("Menu", MenuToReturnTo);
+                    canvas.TryGetComponent(out Animator anim);
+                    if (anim) anim.SetInteger("Menu", MenuToReturnTo);
                     if (UnloadScene) SceneManager.UnloadSceneAsync(gameObject.scene.buildIndex);
                     break;
                 }
