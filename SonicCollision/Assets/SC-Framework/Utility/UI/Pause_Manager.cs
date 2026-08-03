@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 // da thing that does pause
 public class PauseManager : MonoBehaviour
@@ -9,9 +11,11 @@ public class PauseManager : MonoBehaviour
     public static bool paused = false;
     private InputComponent input;
     private bool wasPauseButtonReleased = true;
+    [SerializeField] EventSystem eventSystem;
     [SerializeField] bool TogglePauseMenuActive;
     [SerializeField] Animator PauseAnimator;
     [SerializeField] Animator[] ButtonAnimators;
+    [SerializeField] GameObject ObjectToSelectOnPause;
 
     void OnEnable()
     {
@@ -24,6 +28,7 @@ public class PauseManager : MonoBehaviour
 
     public void SetPauseState(bool state)
     {
+        Debug.Log("Set pause: " + state);
 
         paused = state;
 
@@ -47,6 +52,13 @@ public class PauseManager : MonoBehaviour
 
         AudioListener.pause = state;
         InputSystem.settings.updateMode = state ? InputSettings.UpdateMode.ProcessEventsInDynamicUpdate : InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
+        if (state) SetSelectedObject();
+    }
+
+    public void SetSelectedObject()
+    {
+        Debug.Log("Setting!");
+        eventSystem.SetSelectedGameObject(ObjectToSelectOnPause);
     }
 
     public void SwitchPauseState()
@@ -56,12 +68,13 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
-        if (input.StartInput.WasPressedThisFrame() && wasPauseButtonReleased)
+        if (input.PauseInput.WasPressedThisFrame() && wasPauseButtonReleased
+            && SceneManager.sceneCount == 1) // Checking for settings UI
         {
             wasPauseButtonReleased = false;
             SwitchPauseState();
         }
-        else if (input.StartInput.WasReleasedThisFrame())
+        else if (input.PauseInput.WasReleasedThisFrame())
         {
             wasPauseButtonReleased = true;
         }

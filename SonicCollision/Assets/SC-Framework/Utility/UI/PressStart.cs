@@ -21,7 +21,7 @@ public class PressStart : MonoBehaviour
         IEnumerator PressStart()
         {
             Debug.Log("Coroutine!");
-            yield return new WaitUntil(() => input.StartInput.IsPressed() || input.Touch.IsPressed());
+            yield return new WaitUntil(() => input.StartInput.IsPressed() || input.TouchInput.IsPressed());
             animator.SetTrigger("StartPressed");
             Debug.Log("Pressed!");
         }

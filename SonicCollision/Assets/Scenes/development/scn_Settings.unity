@@ -5170,7 +5170,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1782400366}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7382,6 +7382,17 @@ MonoBehaviour:
   MenuToReturnTo: 2
   UnloadScene: 1
   ActivateOnStart: 0
+--- !u!114 &992300731 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6529655679346291719, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
+  m_PrefabInstance: {fileID: 992300727}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992300729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1021149963
 GameObject:
   m_ObjectHideFlags: 0
@@ -10482,6 +10493,7 @@ GameObject:
   - component: {fileID: 1646029098}
   - component: {fileID: 1646029097}
   - component: {fileID: 1646029101}
+  - component: {fileID: 1646029102}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -10598,6 +10610,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1646029102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646029096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 572ee751113f804369c6ab7cb0c9bdf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  BackButton: {fileID: 992300731}
+  MenuFirstSelectedObject: {fileID: 1974928119}
 --- !u!1 &1672090504
 GameObject:
   m_ObjectHideFlags: 0
@@ -11484,7 +11510,7 @@ GameObject:
   - component: {fileID: 1885612088}
   - component: {fileID: 1885612091}
   m_Layer: 5
-  m_Name: UIManager
+  m_Name: SettingsManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

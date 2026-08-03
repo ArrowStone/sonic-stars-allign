@@ -21,9 +21,10 @@ public class InputComponent : MonoBehaviour
     public InputAction BackCameraInput { get; private set; }
     public InputAction StartInput { get; private set; }
     public InputAction SweepInput { get; private set; }
-    public InputAction Respawn { get; private set; }
-    public InputAction Touch { get; private set; }
+    public InputAction RespawnInput { get; private set; }
+    public InputAction TouchInput { get; private set; }
     public InputAction DebugToggle { get; private set; }
+    public InputAction PauseInput { get; private set; }
 
     private void Awake()
     {
@@ -39,9 +40,10 @@ public class InputComponent : MonoBehaviour
         BackCameraInput = I.Player.BackCamera;
         StartInput = I.Player.Start;
         SweepInput = I.Player.SweepKick;
-        Respawn = I.Player.Respawn;
-        Touch = I.Player.Touch;
+        RespawnInput = I.Player.Respawn;
+        TouchInput = I.Player.Touch;
         DebugToggle = I.Player.DebugToggle;
+        PauseInput = I.Player.Pause;
     }
 
     private void OnEnable()

@@ -66,7 +66,7 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
 
     private void FixedUpdate()
     {
-        if (_ctx.Input.Respawn.WasPressedThisFrame())
+        if (_ctx.Input.RespawnInput.WasPressedThisFrame())
         {
             Death();
         }

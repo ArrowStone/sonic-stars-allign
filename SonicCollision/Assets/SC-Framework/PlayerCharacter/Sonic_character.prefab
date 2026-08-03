@@ -2028,7 +2028,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1034952744400504563
 Transform:
   m_ObjectHideFlags: 0
@@ -2142,11 +2142,11 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0.45349613, b: 0.85660374, a: 0.24313726}
-      key1: {r: 0, g: 0.98646975, b: 1, a: 0.49411765}
-      key2: {r: 1, g: 1, b: 1, a: 0.36078432}
+      key0: {r: 0, g: 0.45349613, b: 0.85660374, a: 0.7058824}
+      key1: {r: 0, g: 0.98646975, b: 1, a: 0.7058824}
+      key2: {r: 1, g: 1, b: 1, a: 0.50980395}
       key3: {r: 0, g: 0, b: 0, a: 0.050980393}
-      key4: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0.050980393}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
@@ -2162,7 +2162,7 @@ TrailRenderer:
       atime1: 7170
       atime2: 49730
       atime3: 65535
-      atime4: 0
+      atime4: 65535
       atime5: 0
       atime6: 0
       atime7: 0
@@ -2343,6 +2343,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  HomingOnJump: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 16384

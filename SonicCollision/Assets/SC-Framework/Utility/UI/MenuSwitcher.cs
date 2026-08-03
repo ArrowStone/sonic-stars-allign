@@ -20,6 +20,14 @@ public class MenuSwitcher : MonoBehaviour
                     canvas.TryGetComponent(out Animator anim);
                     if (anim) anim.SetInteger("Menu", MenuToReturnTo);
                     if (UnloadScene) SceneManager.UnloadSceneAsync(gameObject.scene.buildIndex);
+
+                    // Settings exit to pause
+                    PauseManager pm = canvas.GetComponentInChildren<PauseManager>();
+                    if (pm)
+                    {
+                        pm.SetSelectedObject();
+                    }
+
                     break;
                 }
             }

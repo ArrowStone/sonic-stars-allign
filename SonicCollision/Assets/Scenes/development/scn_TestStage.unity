@@ -7796,26 +7796,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.0000004920476
       objectReference: {fileID: 0}
-    - target: {fileID: 5733353218757317946, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
-      propertyPath: m_Parameters.colorGradient.atime4
-      value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 5733353218757317946, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.a
-      value: 0.7058824
-      objectReference: {fileID: 0}
-    - target: {fileID: 5733353218757317946, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.a
-      value: 0.7058824
-      objectReference: {fileID: 0}
-    - target: {fileID: 5733353218757317946, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
-      propertyPath: m_Parameters.colorGradient.key2.a
-      value: 0.50980395
-      objectReference: {fileID: 0}
-    - target: {fileID: 5733353218757317946, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
-      propertyPath: m_Parameters.colorGradient.key4.a
-      value: 0.050980393
-      objectReference: {fileID: 0}
     - target: {fileID: 5743801752865113068, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0.0000008537737
@@ -42864,6 +42844,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3886199953071838502, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
+      propertyPath: ctx
+      value: 
+      objectReference: {fileID: 1488587696}
     - target: {fileID: 4736670260494254289, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 200
@@ -43057,10 +43041,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5647529648611033916, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1060413610}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1499848914895319125, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1559113360}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
 --- !u!114 &1559113358 stripped
 MonoBehaviour:
@@ -43073,27 +43054,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cdc683a2fd56b047bc0f0b0b7c8afec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1559113359 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1499848914895319125, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
+--- !u!114 &1559113360 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3886199953071838502, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
   m_PrefabInstance: {fileID: 1559113357}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1559113360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1559113359}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf629c2a41cb2f27e8f7950be5e9cd6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StageDataAssets:
-  - {fileID: 11400000, guid: cd1fe3b8682ce3c4c9121affe1ca87bd, type: 2}
-  - {fileID: 11400000, guid: 328a85c0e526200cb8d802a5539e2699, type: 2}
-  ctx: {fileID: 1488587696}
 --- !u!95 &1559113361 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3271713855814583699, guid: 6ff8d09c2e7930a14896c7f4ead3c9fa, type: 3}
@@ -52208,7 +52179,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2104905107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54044,7 +54015,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
