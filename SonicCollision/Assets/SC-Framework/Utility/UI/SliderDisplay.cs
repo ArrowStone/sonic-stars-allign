@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class SliderDisplay : MonoBehaviour
 {
     [SerializeField] string DisplayFormat = "{0}%";
+    [SerializeField] float ValueMultiplier = 100f;
     [SerializeField] TMP_Text TextElement;
     [SerializeField] Slider Slider;
 
@@ -19,6 +20,6 @@ public class SliderDisplay : MonoBehaviour
 
     public void SetValue()
     {
-        TextElement.text = string.Format(DisplayFormat, Math.Floor(Slider.value * 100f));
+        TextElement.text = string.Format(DisplayFormat, Math.Floor(Slider.value * ValueMultiplier));
     }
 }

@@ -964,9 +964,13 @@ MonoBehaviour:
   CMCamera: {fileID: 1691193734993029450}
   profile: {fileID: 11400000, guid: ab09877e2e707104187f6f83e2f62510, type: 2}
   pipelineAsset: {fileID: 11400000, guid: 4b83569d67af61e458304325a23e5dfd, type: 2}
+  Mixer: {fileID: 24100000, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+  URPAsset: {fileID: 11400000, guid: 4b83569d67af61e458304325a23e5dfd, type: 2}
   AAModes: 00000000010000000200000003000000
   SMAAQualities: 000000000100000002000000
   TAAQualities: 000000000200000004000000
+  SoundVolumeMultiplier: 100
+  Filters: 00000000010000000200000003000000
 --- !u!1 &9141707336661349766
 GameObject:
   m_ObjectHideFlags: 0
