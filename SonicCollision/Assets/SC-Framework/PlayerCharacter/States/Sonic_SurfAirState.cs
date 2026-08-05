@@ -26,6 +26,7 @@ public class Sonic_SurfAirState : IState
         _ctx.ModelManager.ballRollSpeed = 40f;
 
         _ctx.Anim.SetInteger("State", 2);
+        _ctx.ModelManager.ExitBall();
 
         #endregion Misc
 
@@ -34,6 +35,7 @@ public class Sonic_SurfAirState : IState
         _ctx.GroundNormal = -_ctx.Gravity.normalized;
         _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.fakeNormal);
         _ctx.PlayerDirection = _ctx.transform.forward;
+
 
         #endregion Collision
 
@@ -246,6 +248,12 @@ public class Sonic_SurfAirState : IState
 
     private void AirSwitchConditions()
     {
+        if (_ctx.Input.ReactionInput.WasPressedThisFrame())
+        {
+            // Unmounting
+            _ctx.SurfedProp.Unmount(_ctx);
+            _ctx.MachineTransition(PlayerStates.Air);
+        }
 
     }
 

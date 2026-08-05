@@ -17,6 +17,9 @@ public class Sonic_SurfState : IState
         _groundDetected = true;
         _ctx.AirDashes = 1;
 
+        _ctx.ModelManager.ExitBall();
+        _ctx.Anim.SetInteger("State", 2);
+
         #endregion Misc
 
         #region Collision
@@ -31,7 +34,6 @@ public class Sonic_SurfState : IState
         }
 
         _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.GroundNormal);
-        _ctx.Anim.SetInteger("State", 2);
 
         #endregion Collision
 
@@ -217,6 +219,7 @@ public class Sonic_SurfState : IState
     {
         if (_ctx.Input.JumpInput.WasPressedThisFrame())
         {
+            // Jumping
             //_ctx.Snd.PlaySound("Jump");
             _ctx.Snd.PlaySound("JumpVoiceLine");
 
@@ -226,6 +229,12 @@ public class Sonic_SurfState : IState
             //_ctx.LowGravity = true;
 
             _ctx.MachineTransition(PlayerStates.SurfAir);
+        }
+        if (_ctx.Input.ReactionInput.WasPressedThisFrame())
+        {
+            // Unmounting
+            _ctx.SurfedProp.Unmount(_ctx);
+            _ctx.MachineTransition(PlayerStates.Ground);
         }
     }
 

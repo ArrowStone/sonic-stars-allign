@@ -110,6 +110,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     public Vector3 HorizontalVelocity { get; set; } = Vector3.zero;
     public Vector3 VerticalVelocity { get; set; } = Vector3.zero;
     public Collider TriggerBuffer { get; set; }
+    public PropHandler SurfedProp { get; set; }
     public Vector3 CurrentMoveDirection { get; set; }
     public Vector3 PreviousMoveDirection { get; set; }
     public float PlayerRunningSpeed { get; set; } = 0;
@@ -394,6 +395,14 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
             _gr.Execute(this, transform.position);
             return;
         }
+        if (_cl.TryGetComponent(out PropHandler _ph))
+        {
+            PosRot _t = _ph.Surf(this);
+            Physics_Snap(_t.Position);
+            Physics_Rotate(_t.Rotation * Vector3.forward, _t.Rotation * Vector3.up);
+            return;
+        }
+
     }
 
     private void TriggerDCheck(Collider _)

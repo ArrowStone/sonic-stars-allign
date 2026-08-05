@@ -1013,7 +1013,7 @@ MonoBehaviour:
   pointPlayer: {fileID: 330013986443441624}
   CMCamera: {fileID: 1691193734993029450}
   profile: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c, type: 2}
-  volume: {fileID: 7466261998468450125}
+  mBlurVolume: {fileID: 7466261998468450125}
   pipelineAsset: {fileID: 11400000, guid: 4b83569d67af61e458304325a23e5dfd, type: 2}
   Mixer: {fileID: 24100000, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
   Framerates: 1e0000003c0000005a0000007800000090000000a0000000f000000068010000
