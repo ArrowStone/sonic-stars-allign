@@ -12,9 +12,9 @@ public class SettingsLoader : MonoBehaviour
     public CamPoint_NormalPlayer pointPlayer;
     public CinemachineCamera CMCamera;
     public VolumeProfile profile;
+    public Volume mBlurVolume; // If there was an easier way that works properly I'd use it
     public UniversalRenderPipelineAsset pipelineAsset;
     public AudioMixer Mixer;
-    public UniversalRenderPipelineAsset URPAsset;
 
     [Header("Qualities")]
     public int[,] Resolutions =
@@ -144,6 +144,7 @@ public class SettingsLoader : MonoBehaviour
         QualitySettings.globalTextureMipmapLimit = 2 - textureResolution;
 
         Application.targetFrameRate = Framerates[targetFramerate];
+        Application.runInBackground = runInBackground;
 
         cam.farClipPlane = 100f + (viewDist * 900f);
         if (CMCamera) // Absent in menu scenes
@@ -152,9 +153,9 @@ public class SettingsLoader : MonoBehaviour
         cameraData.antialiasingQuality = SMAAQualities[AAQuality];
         cameraData.taaSettings.quality = TAAQualities[AAQuality];
         pipelineAsset.renderScale = Math.Max(0.1f, renderScale);
-        URPAsset.upscalingFilter = Filters[scalingFilter];
-        URPAsset.mainLightShadowmapResolution = ShadowResolutions[shadowResolution];
-        URPAsset.shadowDistance = shadowDistance;
+        pipelineAsset.upscalingFilter = Filters[scalingFilter];
+        pipelineAsset.mainLightShadowmapResolution = ShadowResolutions[shadowResolution];
+        pipelineAsset.shadowDistance = shadowDistance;
 
         foreach (VolumeComponent c in profile.components)
         {
@@ -169,6 +170,8 @@ public class SettingsLoader : MonoBehaviour
                     }
             }
         }
+
+        mBlurVolume.enabled = mBlurIntensity > 0;
 
         Sonic_PlayerStateMachine _ctx = FindAnyObjectByType<Sonic_PlayerStateMachine>();
         if (_ctx) _ctx.HomingOnJump = homingOnJump;

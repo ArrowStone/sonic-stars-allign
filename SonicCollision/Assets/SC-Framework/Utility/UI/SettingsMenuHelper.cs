@@ -22,4 +22,9 @@ public class SettingsMenuHelper : MonoBehaviour
             BackButton.onClick.Invoke();
         }
     }
+
+    public void ApplySettings()
+    {
+        FindAnyObjectByType<SettingsLoader>().ApplySettings();
+    }
 }

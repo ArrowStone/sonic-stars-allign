@@ -171,4 +171,12 @@ public class PlayerCharacterParameters : ScriptableObject
     public float stoneSkipWindow = 0.5f;        // the number of seconds you need to press the button before hitting the water
     public float stoneSkipCooldown = 1f;        // cooldown to prevent spamming
     public float stoneSkipHorizontalSpeedMultiplier = 1.2f;    // how much your horizontal speed increases by
+
+    [Space]
+    [Header("Prop Surf")]
+    public float MinSurfSpeed;
+    public float SurfAcceleration;
+    public float SurfSkidThreshold;
+    public float SurfSkidAcceleration;
+    public float SurfSkidDeccelerationMultiplier;
 }

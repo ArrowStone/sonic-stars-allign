@@ -317,3 +317,8 @@ MonoBehaviour:
   stoneSkipWindow: 0.3
   stoneSkipCooldown: 1
   stoneSkipHorizontalSpeedMultiplier: 1.2
+  MinSurfSpeed: 20
+  SurfAcceleration: 20
+  SurfSkidThreshold: 70
+  SurfSkidAcceleration: 30
+  SurfSkidDeccelerationMultiplier: 0.2

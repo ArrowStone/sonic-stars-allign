@@ -22,6 +22,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
 
     [Header("Handling")]
     public AnimationCurve ChrTurn;
+    public AnimationCurve ChrTurnSurf;
     public bool HomingOnJump;
 
     [Header("Collision")]
@@ -221,6 +222,8 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
         States.Add(PlayerStates.LedgeGrab, new Sonic_LedgeGrabState(this));
         States.Add(PlayerStates.AirDash, new Sonic_AirDashState(this));
         States.Add(PlayerStates.Debug, new Sonic_DebugState(this));
+        States.Add(PlayerStates.Surf, new Sonic_SurfState(this));
+        States.Add(PlayerStates.SurfAir, new Sonic_SurfAirState(this));
 
         CurrentEstate = PlayerStates.Air;
         CurrentState = States[CurrentEstate];
@@ -576,5 +579,7 @@ public enum PlayerStates
     WallJump,
     LedgeGrab,
     AirDash,
-    Debug
+    Debug,
+    Surf,
+    SurfAir
 }
