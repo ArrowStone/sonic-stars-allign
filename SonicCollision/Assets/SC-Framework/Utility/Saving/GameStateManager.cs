@@ -9,6 +9,7 @@ public class GameStateManager : MonoBehaviour
     public Sonic_PlayerStateMachine ctx;
     private ResetHandler[] ResetHandlerArray;
     private SpawnPoint spawnPoint;
+    private PlayerCharacterStats savedChs;
     public void LoadData()
     {
         if (StageDataAssets == null) return;
@@ -37,6 +38,17 @@ public class GameStateManager : MonoBehaviour
         LoadData();
         ResetHandlerArray = FindObjectsByType<ResetHandler>();
         spawnPoint = FindAnyObjectByType<SpawnPoint>();
+        SaveChs(ctx.Chs);
+    }
+
+    void SaveChs(PlayerCharacterStats chs)
+    {
+        savedChs = new PlayerCharacterStats
+        {
+            Rings = chs.Rings,
+            Score = chs.Score,
+            Time = chs.Time,
+        };
     }
 
     public void ResetStage()
@@ -57,6 +69,8 @@ public class GameStateManager : MonoBehaviour
 
     public void RecordCheckpoint()
     {
+        SaveChs(ctx.Chs);
+        savedChs.Rings = 0f;
         foreach (ResetHandler handler in ResetHandlerArray)
         {
             handler.RecordCheckpoint();
@@ -65,9 +79,19 @@ public class GameStateManager : MonoBehaviour
 
     public void ResetToCheckpoint()
     {
+        ctx.Chs.Rings = savedChs.Rings;
+        ctx.Chs.Score = savedChs.Score;
+        ctx.Chs.Time = savedChs.Time;
+        ctx.Chs.Shield = null;
         foreach (ResetHandler handler in ResetHandlerArray)
         {
             handler.ResetToCheckpoint();
+        }
+
+        ScatterCollectable[] sCols = FindObjectsByType<ScatterCollectable>();
+        foreach (ScatterCollectable col in sCols)
+        {
+            col.End();
         }
     }
 }

@@ -5,6 +5,7 @@ public class ResetHandler : MonoBehaviour
 {
     public bool doResetPosition;
     private Rigidbody rb;
+    private Enemy_MovementStateMachine etx;
     private PosRot startTransform;
     private PosRot checkTransform; // Check is short for checkpoint
     private Vector3 checkLinearVelocity;
@@ -24,6 +25,8 @@ public class ResetHandler : MonoBehaviour
             rb = GetComponent<Rigidbody>();
         }
         isCollectable = TryGetComponent<CollectableBase>(out _);
+        etx = GetComponent<Enemy_MovementStateMachine>();
+        RecordCheckpoint();
     }
 
     public void Reset()
@@ -39,6 +42,7 @@ public class ResetHandler : MonoBehaviour
         {
             gameObject.SetActive(true);
         }
+        etx?.Start();
     }
 
     public void RecordCheckpoint()
@@ -50,8 +54,17 @@ public class ResetHandler : MonoBehaviour
                 Position = transform.position,
                 Rotation = transform.rotation
             };
-            checkLinearVelocity = rb.linearVelocity;
-            checkAngularVelocity = rb.angularVelocity;
+            if (etx)
+            {
+                // Rambus go vroom vroom
+                checkLinearVelocity = etx.VerticalVelocity;
+                checkAngularVelocity = etx.HorizontalVelocity;
+            }
+            else
+            {
+                checkLinearVelocity = rb.linearVelocity;
+                checkAngularVelocity = rb.angularVelocity;
+            }
         }
         if (isCollectable)
         {
@@ -65,8 +78,16 @@ public class ResetHandler : MonoBehaviour
         {
             rb.MovePosition(checkTransform.Position);
             rb.MoveRotation(checkTransform.Rotation);
-            rb.linearVelocity = checkLinearVelocity;
-            rb.angularVelocity = checkAngularVelocity;
+            if (etx)
+            {
+                etx.HorizontalVelocity = checkLinearVelocity;
+                etx.VerticalVelocity = checkAngularVelocity;
+            }
+            else
+            {
+                rb.linearVelocity = checkLinearVelocity;
+                rb.angularVelocity = checkAngularVelocity;
+            }
         }
         if (isCollectable)
         {

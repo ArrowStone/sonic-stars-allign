@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
+// Scattered rings behaviour
 [RequireComponent(typeof(Rigidbody))]
 public class ScatterCollectable : MonoBehaviour
 {
