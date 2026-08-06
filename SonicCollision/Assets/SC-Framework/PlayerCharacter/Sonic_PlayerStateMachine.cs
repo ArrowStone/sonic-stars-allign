@@ -102,6 +102,7 @@ public class Sonic_PlayerStateMachine : StateMachine_MonoBase<PlayerStates>
     #region Util
 
     public float PlayerHover => groundRayLength - groundRayDig;
+    public float SurfHover;
     public Vector3 PlayerDirection { get; set; } = Vector3.forward;
     public Vector3 InputVector { get; set; }
     public Quaternion InputRotation { get; set; }

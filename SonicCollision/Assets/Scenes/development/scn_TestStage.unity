@@ -22793,6 +22793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PropHandler
   UnmountDisplacement: {x: 0, y: 0.5, z: -1}
+  PlayerSurfHover: 0.1
 --- !u!65 &571984684
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30911,7 +30912,7 @@ AudioSource:
   m_GameObject: {fileID: 1001886446}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8372143128106977872, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 955678ba720accacfa22a2a4f7c9bbfe, type: 3}
   m_PlayOnAwake: 1
@@ -53941,6 +53942,7 @@ GameObject:
   - component: {fileID: 571984684}
   - component: {fileID: 571984680}
   - component: {fileID: 571984685}
+  - component: {fileID: 919132148653028981}
   m_Layer: 7
   m_Name: CHAIRMODEL
   m_TagString: Untagged
@@ -53948,6 +53950,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &919132148653028981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148653028980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3837c8865f46aaa91c25b37f1827ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResetHandler
+  ResetEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  doResetPosition: 1
 --- !u!65 &1449267950805968688
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -28,7 +28,7 @@ public class Sonic_SurfState : IState
         {
             _ctx.GroundNormal = _ctx.GroundCast.HitInfo.normal;
 
-            Vector3 targetPos = _ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover;
+            Vector3 targetPos = _ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.SurfHover;
 
             Player_StaticFunctions.MoveRBPosition(_ctx.Rb, Vector3.Lerp(_ctx.Rb.position, targetPos, 0.5f), "Enter Surf State");
         }
@@ -102,7 +102,7 @@ public class Sonic_SurfState : IState
         _ctx.GroundNormal = _ctx.GroundCast.HitInfo.normal;
         _ctx.HorizontalVelocity = Vector3.ProjectOnPlane(_ctx.Velocity, _ctx.GroundNormal).normalized * _ctx.Velocity.magnitude;
 
-        Vector3 targetPos = _ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.PlayerHover;
+        Vector3 targetPos = _ctx.GroundCast.HitInfo.point + _ctx.GroundNormal * _ctx.SurfHover;
         Vector3 point0 = targetPos;
         Vector3 point1 = targetPos;
         point0 -= _ctx.GroundNormal * 0.45f;
