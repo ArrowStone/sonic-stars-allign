@@ -8,6 +8,13 @@ public class CheckPoint : MonoBehaviour
 
     public UnityEvent HitEvent;
 
+    private GameStateManager gsm;
+
+    void Awake()
+    {
+        gsm = FindAnyObjectByType<GameStateManager>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Sonic_PlayerStateMachine _ctx))
@@ -15,5 +22,6 @@ public class CheckPoint : MonoBehaviour
             _ctx.Chs.SpawnData = new PosRot() { Position = transform.position + transform.rotation * offset, Rotation = transform.rotation };
             HitEvent.Invoke();
         }
+        gsm.RecordCheckpoint();
     }
 }

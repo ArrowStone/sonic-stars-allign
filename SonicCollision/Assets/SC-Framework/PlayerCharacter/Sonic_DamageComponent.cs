@@ -8,6 +8,7 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
 {
     public Sonic_PlayerStateMachine _ctx { get; private set; }
     public Sonic_AttackComponent AttackMachine { get; private set; }
+    public GameStateManager gsm { get; private set; }
     [SerializeField] private Vector3 _bounce;
     [SerializeField] private BounceType _bounceType;
 
@@ -62,6 +63,7 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
     {
         _ctx = GetComponent<Sonic_PlayerStateMachine>();
         AttackMachine = GetComponent<Sonic_AttackComponent>();
+        gsm = FindAnyObjectByType<GameStateManager>();
     }
 
     private void FixedUpdate()
@@ -137,6 +139,7 @@ public class Sonic_DamageComponent : MonoBehaviour, IDamageable
             yield return new WaitForSeconds(1.5f);
             _ctx.Respawn();
             RespawnEvent.Invoke();
+            gsm.ResetToCheckpoint();
         }
         //_ctx.Invoke(nameof(_ctx.Respawn), 1);
         _ctx.StartCoroutine(RespawnWait());

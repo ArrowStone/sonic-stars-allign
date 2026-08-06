@@ -54,4 +54,20 @@ public class GameStateManager : MonoBehaviour
         ctx.VerticalVelocity = Vector3.zero;
         ctx.Physics_ApplyVelocity();
     }
+
+    public void RecordCheckpoint()
+    {
+        foreach (ResetHandler handler in ResetHandlerArray)
+        {
+            handler.RecordCheckpoint();
+        }
+    }
+
+    public void ResetToCheckpoint()
+    {
+        foreach (ResetHandler handler in ResetHandlerArray)
+        {
+            handler.ResetToCheckpoint();
+        }
+    }
 }
