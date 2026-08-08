@@ -766,6 +766,7 @@ GameObject:
   - component: {fileID: 1328713327}
   - component: {fileID: 1328713326}
   - component: {fileID: 1328713329}
+  - component: {fileID: 1328713330}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -891,6 +892,33 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &1328713330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328713325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb22008c929122fb5b2360098cfdce71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SettingsLoader
+  pointPlayer: {fileID: 0}
+  CMCamera: {fileID: 0}
+  profile: {fileID: 11400000, guid: ab09877e2e707104187f6f83e2f62510, type: 2}
+  mBlurVolume: {fileID: 0}
+  pipelineAsset: {fileID: 11400000, guid: 4b83569d67af61e458304325a23e5dfd, type: 2}
+  Mixer: {fileID: 24100000, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+  Framerates: 1e0000003c0000005a0000007800000090000000a0000000f000000068010000
+  AAModes: 00000000010000000200000003000000
+  SMAAQualities: 000000000100000002000000
+  TAAQualities: 000000000200000004000000
+  SoundVolumeMultiplier: 100
+  Filters: 00000000010000000200000003000000
+  ShadowResolutions: 000100000002000000040000000800000010000000200000
+  MBlurQualities: 000000000100000002000000
+  AudioModes: 01000000020000000300000004000000050000000600000007000000
 --- !u!1 &1440920716
 GameObject:
   m_ObjectHideFlags: 0

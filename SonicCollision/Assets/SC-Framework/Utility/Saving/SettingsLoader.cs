@@ -15,6 +15,7 @@ public class SettingsLoader : MonoBehaviour
     public Volume mBlurVolume; // If there was an easier way that works properly I'd use it
     public UniversalRenderPipelineAsset pipelineAsset;
     public AudioMixer Mixer;
+    private AudioChangeMusicReset[] musicResetScripts;
 
     [Header("Qualities")]
     public int[,] Resolutions =
@@ -56,7 +57,8 @@ public class SettingsLoader : MonoBehaviour
         TemporalAAQuality.Medium,
         TemporalAAQuality.VeryHigh
     };
-    public float SoundVolumeMultiplier = 10f;
+    public float SoundVolumeMultiplier = 100f;
+    public float SoundVolumeOffset = -50f;
     public UpscalingFilterSelection[] Filters =
     {
         UpscalingFilterSelection.Auto,
@@ -92,6 +94,7 @@ public class SettingsLoader : MonoBehaviour
 
     void Start()
     {
+        musicResetScripts = FindObjectsByType<AudioChangeMusicReset>();
         ApplySettings();
     }
 
@@ -171,18 +174,31 @@ public class SettingsLoader : MonoBehaviour
             }
         }
 
-        mBlurVolume.enabled = mBlurIntensity > 0;
+        if (mBlurVolume) mBlurVolume.enabled = mBlurIntensity > 0;
 
         Sonic_PlayerStateMachine _ctx = FindAnyObjectByType<Sonic_PlayerStateMachine>();
         if (_ctx) _ctx.HomingOnJump = homingOnJump;
 
+        masterVolume = SoundVolumeOffset + masterVolume * SoundVolumeMultiplier;
+        musicVolume = SoundVolumeOffset + musicVolume * SoundVolumeMultiplier;
+        sfxVolume = SoundVolumeOffset + sfxVolume * SoundVolumeMultiplier;
+
+        if (masterVolume < -40f) masterVolume = -100f; // Unity doesn't actually let us mute channel through code, this is the best that can be done
+        if (musicVolume < -40f) musicVolume = -100f;
+        if (sfxVolume < -40f) sfxVolume = -100f;
+
+        Mixer.SetFloat("masterVolume", masterVolume);
+        Mixer.SetFloat("musicVolume", musicVolume);
+        Mixer.SetFloat("sfxVolume", sfxVolume);
+        Mixer.SetFloat("voiceVolume", sfxVolume);
+
         AudioConfiguration audioConfig = AudioSettings.GetConfiguration();
+        if (audioConfig.speakerMode == AudioModes[audioOutputMode]) return;
         audioConfig.speakerMode = AudioModes[audioOutputMode];
         AudioSettings.Reset(audioConfig);
-
-        Mixer.SetFloat("masterVolume", masterVolume * SoundVolumeMultiplier);
-        Mixer.SetFloat("musicVolume", musicVolume * SoundVolumeMultiplier);
-        Mixer.SetFloat("sfxVolume", sfxVolume * SoundVolumeMultiplier);
-        Mixer.SetFloat("voiceVolume", sfxVolume * SoundVolumeMultiplier);
+        foreach (AudioChangeMusicReset script in musicResetScripts)
+        {
+            script.ResetMusic();
+        }
     }
 }

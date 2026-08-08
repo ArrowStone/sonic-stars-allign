@@ -3046,6 +3046,7 @@ GameObject:
   - component: {fileID: 1153097346}
   - component: {fileID: 1153097345}
   - component: {fileID: 1153097344}
+  - component: {fileID: 1153097347}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -3065,7 +3066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19d7606569a7fdb28bbd11b3719b7cc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyAfterBuildIndex: 2
+  destroyAfterBuildIndex: 4
 --- !u!82 &1153097345
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3178,6 +3179,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1153097347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153097343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714f509f73466ede39af146a293b04ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioChangeMusicReset
 --- !u!1 &1236108791
 GameObject:
   m_ObjectHideFlags: 0
@@ -4228,6 +4241,7 @@ GameObject:
   - component: {fileID: 1637560727}
   - component: {fileID: 1637560726}
   - component: {fileID: 1637560729}
+  - component: {fileID: 1637560730}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4353,6 +4367,34 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &1637560730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637560725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb22008c929122fb5b2360098cfdce71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SettingsLoader
+  pointPlayer: {fileID: 0}
+  CMCamera: {fileID: 0}
+  profile: {fileID: 11400000, guid: ab09877e2e707104187f6f83e2f62510, type: 2}
+  mBlurVolume: {fileID: 0}
+  pipelineAsset: {fileID: 11400000, guid: 4b83569d67af61e458304325a23e5dfd, type: 2}
+  Mixer: {fileID: 24100000, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+  Framerates: 1e0000003c0000005a0000007800000090000000a0000000f000000068010000
+  AAModes: 00000000010000000200000003000000
+  SMAAQualities: 000000000100000002000000
+  TAAQualities: 000000000200000004000000
+  SoundVolumeMultiplier: 50
+  SoundVolumeOffset: -20
+  Filters: 00000000010000000200000003000000
+  ShadowResolutions: 000100000002000000040000000800000010000000200000
+  MBlurQualities: 000000000100000002000000
+  AudioModes: 01000000020000000300000004000000050000000600000007000000
 --- !u!1 &1646029096
 GameObject:
   m_ObjectHideFlags: 0

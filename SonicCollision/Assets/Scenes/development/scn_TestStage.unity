@@ -6796,10 +6796,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.35500193
       objectReference: {fileID: 0}
-    - target: {fileID: 4697961426679608264, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4701030055785977308, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -0.0000008537754
@@ -10700,7 +10696,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.00000006665776
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5038103612747748000, guid: 9be615e9310908f3b973576acd44a7c8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -30896,13 +30893,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1001886448}
   - component: {fileID: 1001886447}
+  - component: {fileID: 1001886449}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &1001886447
 AudioSource:
   m_ObjectHideFlags: 0
@@ -31015,6 +31013,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1001886449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001886446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714f509f73466ede39af146a293b04ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioChangeMusicReset
 --- !u!1001 &1003415781
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53962,9 +53972,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a3837c8865f46aaa91c25b37f1827ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResetHandler
-  ResetEvent:
-    m_PersistentCalls:
-      m_Calls: []
   doResetPosition: 1
 --- !u!65 &1449267950805968688
 BoxCollider:

@@ -38,7 +38,7 @@ public class GameStateManager : MonoBehaviour
         LoadData();
         ResetHandlerArray = FindObjectsByType<ResetHandler>();
         spawnPoint = FindAnyObjectByType<SpawnPoint>();
-        SaveChs(ctx.Chs);
+        if (ctx) SaveChs(ctx.Chs);
     }
 
     void SaveChs(PlayerCharacterStats chs)

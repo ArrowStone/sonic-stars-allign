@@ -279,6 +279,7 @@ GameObject:
   m_Component:
   - component: {fileID: 163707186}
   - component: {fileID: 163707185}
+  - component: {fileID: 163707187}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -295,7 +296,7 @@ AudioSource:
   m_GameObject: {fileID: 163707184}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8372143128106977872, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: af30e93a8431a3c2a811d2855986e6a2, type: 3}
   m_PlayOnAwake: 1
@@ -392,12 +393,24 @@ Transform:
   m_GameObject: {fileID: 163707184}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 691.80756, y: 432.6009, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &163707187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163707184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714f509f73466ede39af146a293b04ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioChangeMusicReset
 --- !u!1 &412203932
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,10 +1319,18 @@ MonoBehaviour:
   pointPlayer: {fileID: 0}
   CMCamera: {fileID: 0}
   profile: {fileID: 11400000, guid: ab09877e2e707104187f6f83e2f62510, type: 2}
+  mBlurVolume: {fileID: 0}
   pipelineAsset: {fileID: 11400000, guid: 4b83569d67af61e458304325a23e5dfd, type: 2}
+  Mixer: {fileID: 24100000, guid: 1a38b69d60ad05440b5fe947e77dfece, type: 2}
+  Framerates: 1e0000003c0000005a0000007800000090000000a0000000f000000068010000
   AAModes: 00000000010000000200000003000000
   SMAAQualities: 000000000100000002000000
   TAAQualities: 000000000200000004000000
+  SoundVolumeMultiplier: 100
+  Filters: 00000000010000000200000003000000
+  ShadowResolutions: 000100000002000000040000000800000010000000200000
+  MBlurQualities: 000000000100000002000000
+  AudioModes: 01000000020000000300000004000000050000000600000007000000
 --- !u!114 &1637560730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1640,7 +1661,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Preview v0.4
+  m_text: Preview v0.5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 435f63ae5a9a75719afa5aa6e74e7d41, type: 2}
   m_sharedMaterial: {fileID: -8068059294552169050, guid: 435f63ae5a9a75719afa5aa6e74e7d41, type: 2}
