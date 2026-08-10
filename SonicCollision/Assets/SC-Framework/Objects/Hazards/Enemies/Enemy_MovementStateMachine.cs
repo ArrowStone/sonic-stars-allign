@@ -17,18 +17,23 @@ public abstract class Enemy_MovementStateMachine : StateMachine_MonoBase<EnemySt
     public Vector3 HorizontalVelocity;
     public Vector3 VerticalVelocity;
 
-    public void Start()
+    void Start()
     {
         Rb = GetComponent<Rigidbody>();
         GroundCast = new Cast_Ray(groundRayLength, groundLayer);
-        HorizontalVelocity = Vector3.zero;
-        VerticalVelocity = Vector3.zero;
-        Velocity = Vector3.zero;
 
         Initialize();
 
         States.Add(EnemyStates.Ground, new Enemy_GroundState(this));
         States.Add(EnemyStates.Air, new Enemy_AirState(this));
+        InitInitialState();
+    }
+
+    public void InitInitialState()
+    {
+        HorizontalVelocity = Vector3.zero;
+        VerticalVelocity = Vector3.zero;
+        Velocity = Vector3.zero;
 
         CurrentEstate = EnemyStates.Air;
         CurrentState = States[CurrentEstate];

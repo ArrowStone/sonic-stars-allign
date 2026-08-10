@@ -25,6 +25,8 @@ public class InputComponent : MonoBehaviour
     public InputAction TouchInput { get; private set; }
     public InputAction DebugToggle { get; private set; }
     public InputAction PauseInput { get; private set; }
+    public InputAction TabLeftInput { get; private set; }
+    public InputAction TabRightInput { get; private set; }
 
     private void Awake()
     {
@@ -44,6 +46,8 @@ public class InputComponent : MonoBehaviour
         TouchInput = I.Player.Touch;
         DebugToggle = I.Player.DebugToggle;
         PauseInput = I.Player.Pause;
+        TabLeftInput = I.Player.TabLeft;
+        TabRightInput = I.Player.TabRight;
     }
 
     private void OnEnable()

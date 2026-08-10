@@ -235,6 +235,24 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TabLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""e4812382-38b6-41fe-a469-4053c72828d1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TabRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""9fd9477d-78d3-4de1-936e-fbd909fa1acb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -664,6 +682,50 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""90e13ce9-fb6e-43d1-a037-36992aaa52a9"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""TabLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""419364ce-c38a-4a0b-9513-ef85dc321efb"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TabLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9e16fca-799e-4893-af95-25498ef4bc8b"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""TabRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7abc9cbc-f0b2-4232-bd18-4996f9593ece"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TabRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1267,6 +1329,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Player_Touch = m_Player.FindAction("Touch", throwIfNotFound: true);
         m_Player_DebugToggle = m_Player.FindAction("DebugToggle", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_TabLeft = m_Player.FindAction("TabLeft", throwIfNotFound: true);
+        m_Player_TabRight = m_Player.FindAction("TabRight", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1376,6 +1440,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Touch;
     private readonly InputAction m_Player_DebugToggle;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_TabLeft;
+    private readonly InputAction m_Player_TabRight;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1452,6 +1518,14 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         /// <summary>
+        /// Provides access to the underlying input action "Player/TabLeft".
+        /// </summary>
+        public InputAction @TabLeft => m_Wrapper.m_Player_TabLeft;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/TabRight".
+        /// </summary>
+        public InputAction @TabRight => m_Wrapper.m_Player_TabRight;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1525,6 +1599,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @TabLeft.started += instance.OnTabLeft;
+            @TabLeft.performed += instance.OnTabLeft;
+            @TabLeft.canceled += instance.OnTabLeft;
+            @TabRight.started += instance.OnTabRight;
+            @TabRight.performed += instance.OnTabRight;
+            @TabRight.canceled += instance.OnTabRight;
         }
 
         /// <summary>
@@ -1584,6 +1664,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @TabLeft.started -= instance.OnTabLeft;
+            @TabLeft.performed -= instance.OnTabLeft;
+            @TabLeft.canceled -= instance.OnTabLeft;
+            @TabRight.started -= instance.OnTabRight;
+            @TabRight.performed -= instance.OnTabRight;
+            @TabRight.canceled -= instance.OnTabRight;
         }
 
         /// <summary>
@@ -1996,6 +2082,20 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPause(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "TabLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTabLeft(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "TabRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTabRight(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

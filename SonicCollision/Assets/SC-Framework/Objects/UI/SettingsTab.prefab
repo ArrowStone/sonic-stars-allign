@@ -140,7 +140,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: T
+  m_text: 'Pin
+
+    gas'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fd9305e8779000b0c9d89e8d49d6d725, type: 2}
   m_sharedMaterial: {fileID: 8159139940651166050, guid: fd9305e8779000b0c9d89e8d49d6d725, type: 2}
@@ -300,7 +302,7 @@ GameObject:
   - component: {fileID: 5506791178103262056}
   - component: {fileID: 5082777215988520667}
   - component: {fileID: 1430732284329423030}
-  - component: {fileID: 2564498131351777489}
+  - component: {fileID: 9046541964239850035}
   m_Layer: 5
   m_Name: SettingsTab
   m_TagString: Untagged
@@ -389,7 +391,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2564498131351777489
+--- !u!114 &9046541964239850035
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -402,13 +404,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 3
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -426,7 +428,7 @@ MonoBehaviour:
     m_NormalTrigger: Off
     m_HighlightedTrigger: On
     m_PressedTrigger: On
-    m_SelectedTrigger: On
+    m_SelectedTrigger: on
     m_DisabledTrigger: Off
   m_Interactable: 1
   m_TargetGraphic: {fileID: 5082777215988520667}

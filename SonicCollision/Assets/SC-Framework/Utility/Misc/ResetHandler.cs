@@ -42,7 +42,7 @@ public class ResetHandler : MonoBehaviour
         {
             gameObject.SetActive(true);
         }
-        etx?.Start();
+        etx?.InitInitialState();
     }
 
     public void RecordCheckpoint()

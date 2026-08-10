@@ -1,18 +1,21 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-// HAndles some aspects of exiting and entering the settings UI from the pause menu
+// Handles some aspects of exiting and entering the settings UI from the pause menu
 public class SettingsMenuHelper : MonoBehaviour
 {
+    [SerializeField] AudioSource[] AudioSourcesToKeepPlaying;
     [SerializeField] Button BackButton;
-    [SerializeField] GameObject MenuFirstSelectedObject;
     private InputComponent input;
 
     void Awake()
     {
         input = FindAnyObjectByType<InputComponent>();
-        FindAnyObjectByType<EventSystem>().SetSelectedGameObject(MenuFirstSelectedObject);
+
+        foreach (AudioSource source in AudioSourcesToKeepPlaying)
+        {
+            source.ignoreListenerPause = true; // I do wish this would be a setting in the component
+        }
     }
 
     void Update()
@@ -25,6 +28,6 @@ public class SettingsMenuHelper : MonoBehaviour
 
     public void ApplySettings()
     {
-        FindAnyObjectByType<SettingsLoader>().ApplySettings();
+        FindAnyObjectByType<SettingsLoader>()?.ApplySettings();
     }
 }

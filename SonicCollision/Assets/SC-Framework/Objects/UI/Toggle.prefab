@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 718379461331075618}
   - component: {fileID: 7437639782220789634}
   - component: {fileID: 948875012557879743}
+  - component: {fileID: 6657250083572896166}
   m_Layer: 5
   m_Name: Toggle
   m_TagString: Untagged
@@ -251,7 +252,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 4d6124e7a28798ef39f67aa60c5794af, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -275,6 +276,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SettingsElement
   saveParamName: 
   defaultValue: 0
+--- !u!114 &6657250083572896166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7928188403337940224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f1a4471f84257ec944f78752315004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScrollToThisObjectWhenSelected
 --- !u!1 &8449541728415130289
 GameObject:
   m_ObjectHideFlags: 0

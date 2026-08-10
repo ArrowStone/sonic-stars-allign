@@ -131,9 +131,9 @@ public class SettingsLoader : MonoBehaviour
 
         bool homingOnJump = PlayerPrefs.GetInt("homingMapping") > 0; // True = jump button, False = attack button
 
-        float masterVolume = PlayerPrefs.GetFloat("masterVolume") - 0.5f;
-        float musicVolume = PlayerPrefs.GetFloat("musicVolume") - 0.5f;
-        float sfxVolume = PlayerPrefs.GetFloat("sfxVolume") - 0.5f;
+        float masterVolume = PlayerPrefs.GetFloat("masterVolume");
+        float musicVolume = PlayerPrefs.GetFloat("musicVolume");
+        float sfxVolume = PlayerPrefs.GetFloat("sfxVolume");
         int audioOutputMode = PlayerPrefs.GetInt("soundOutputMode");
 
         if (res > 0)
@@ -179,11 +179,13 @@ public class SettingsLoader : MonoBehaviour
         Sonic_PlayerStateMachine _ctx = FindAnyObjectByType<Sonic_PlayerStateMachine>();
         if (_ctx) _ctx.HomingOnJump = homingOnJump;
 
-        masterVolume = SoundVolumeOffset + masterVolume * SoundVolumeMultiplier;
-        musicVolume = SoundVolumeOffset + musicVolume * SoundVolumeMultiplier;
-        sfxVolume = SoundVolumeOffset + sfxVolume * SoundVolumeMultiplier;
+        // Credit for the usage of the log function and the 20 times multiplier: 
+        // https://discussions.unity.com/t/changing-audio-mixer-group-volume-with-ui-slider-567394/567394/12
+        masterVolume = SoundVolumeOffset + Mathf.Log(masterVolume) * SoundVolumeMultiplier;
+        musicVolume = SoundVolumeOffset + Mathf.Log(musicVolume) * SoundVolumeMultiplier;
+        sfxVolume = SoundVolumeOffset + Mathf.Log(sfxVolume) * SoundVolumeMultiplier;
 
-        if (masterVolume < -40f) masterVolume = -100f; // Unity doesn't actually let us mute channel through code, this is the best that can be done
+        if (masterVolume < -40f) masterVolume = -100f; // Unity doesn't actually let us mute groups through code, this is the best that can be done
         if (musicVolume < -40f) musicVolume = -100f;
         if (sfxVolume < -40f) sfxVolume = -100f;
 
@@ -191,6 +193,7 @@ public class SettingsLoader : MonoBehaviour
         Mixer.SetFloat("musicVolume", musicVolume);
         Mixer.SetFloat("sfxVolume", sfxVolume);
         Mixer.SetFloat("voiceVolume", sfxVolume);
+        Mixer.updateMode = AudioMixerUpdateMode.UnscaledTime;
 
         AudioConfiguration audioConfig = AudioSettings.GetConfiguration();
         if (audioConfig.speakerMode == AudioModes[audioOutputMode]) return;

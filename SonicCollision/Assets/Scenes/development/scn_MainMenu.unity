@@ -4242,6 +4242,7 @@ GameObject:
   - component: {fileID: 1637560726}
   - component: {fileID: 1637560729}
   - component: {fileID: 1637560730}
+  - component: {fileID: 1637560731}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4389,12 +4390,24 @@ MonoBehaviour:
   AAModes: 00000000010000000200000003000000
   SMAAQualities: 000000000100000002000000
   TAAQualities: 000000000200000004000000
-  SoundVolumeMultiplier: 50
-  SoundVolumeOffset: -20
+  SoundVolumeMultiplier: 20
+  SoundVolumeOffset: 0
   Filters: 00000000010000000200000003000000
   ShadowResolutions: 000100000002000000040000000800000010000000200000
   MBlurQualities: 000000000100000002000000
   AudioModes: 01000000020000000300000004000000050000000600000007000000
+--- !u!114 &1637560731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637560725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40a5d088fcb4e4145be09a11f834258a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputComponent
 --- !u!1 &1646029096
 GameObject:
   m_ObjectHideFlags: 0
