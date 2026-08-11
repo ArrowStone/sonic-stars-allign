@@ -75,6 +75,8 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPointStyle
 
     private Vector3 _previousVerticalOffsetPosition;
 
+    private float _wallrunOffset;
+
     #endregion Util
 
     public void OnEnterPoint(CamBrain _brain)
@@ -100,7 +102,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPointStyle
         _currentPlayerRunningSpeed = PlayerCTX.PlayerRunningSpeed;
 
         CompareCameraDirectionToCharacter();
-        CalculateTargetPlacement();
+        CalculateTargetPlacement(_delta);
         CalculateFOV();
 
         AutoRecenterCamera(false);
@@ -194,7 +196,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPointStyle
     }
 
     //Calculates a number of offsets for the main target, then places it in the middle of them.
-    private void CalculateTargetPlacement()
+    private void CalculateTargetPlacement(float _delta)
     {
         Vector3 BaseTargetPosition = BaseTarget.position;
         MainTarget.position = BaseTargetPosition;
@@ -204,7 +206,7 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPointStyle
         OffsetByLookAhead();
         OffsetByVertical();
         OffsetByTurn();
-        OffsetIfWallRun();
+        OffsetIfWallRun(_delta);
 
         //MainTarget.position = BaseTargetPosition + (TargetOffset / Mathf.Max(1, totalOffsets));
         MainTarget.position = BaseTargetPosition + TargetOffset;
@@ -292,12 +294,17 @@ public class CamPoint_NormalPlayer : MonoBehaviour, ICamPointStyle
         }
 
         // Offset the camera from the wall when wall running
-        void OffsetIfWallRun()
+        void OffsetIfWallRun(float _delta)
         {
             if (PlayerCTX.CurrentEstate == PlayerStates.WallRun)
             {
-                TargetOffset += PlayerCTX.WallRunNormal * EffectStats.WallRunOffset;
+                _wallrunOffset = Mathf.MoveTowards(_wallrunOffset, EffectStats.WallRunOffset, _delta * 3f);
             }
+            else
+            {
+                _wallrunOffset = Mathf.MoveTowards(_wallrunOffset, 0f, _delta * 3f);
+            }
+            TargetOffset += PlayerCTX.WallRunNormal * _wallrunOffset;
         }
 
     }

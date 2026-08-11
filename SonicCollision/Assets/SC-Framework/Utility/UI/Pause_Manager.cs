@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 // da thing that does pause
 public class PauseManager : MonoBehaviour
@@ -16,7 +17,7 @@ public class PauseManager : MonoBehaviour
     [SerializeField] Animator PauseAnimator;
     [SerializeField] Animator[] ButtonAnimators;
     [SerializeField] GameObject ObjectToSelectOnPause;
-
+    [SerializeField] Button[] PauseButtons;
     void OnEnable()
     {
         Instance = this;
@@ -52,6 +53,13 @@ public class PauseManager : MonoBehaviour
 
         AudioListener.pause = state;
         InputSystem.settings.updateMode = state ? InputSettings.UpdateMode.ProcessEventsInDynamicUpdate : InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
+
+        foreach (Button b in PauseButtons)
+        {
+            b.interactable = state;
+        }
+        //eventSystem.enabled = state;
+
         if (state) SetSelectedObject();
     }
 

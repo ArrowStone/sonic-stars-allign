@@ -4,6 +4,7 @@ public class Sonic_WallRunState : IState
 {
     private readonly Sonic_PlayerStateMachine _ctx;
     private float _timer;
+    private RaycastHit _wallHit;
 
     public Sonic_WallRunState(Sonic_PlayerStateMachine machine)
     {
@@ -12,6 +13,8 @@ public class Sonic_WallRunState : IState
 
     public void EnterState()
     {
+        _ctx.AirDashes = 1;
+
         _timer = 0f;
 
         // Lock vertical velocity
@@ -23,9 +26,13 @@ public class Sonic_WallRunState : IState
 
         _ctx.ChangeKinematic(false);
         _ctx.OnWall = true;
+
+        _ctx.Anim.SetInteger("State", _ctx.WallRunDirection ? 10 : 9);
     }
 
-    public void UpdateState()
+    public void UpdateState() { }
+
+    public void FixedUpdateState()
     {
         float _delta = Time.deltaTime;
         _timer += _delta;
@@ -35,7 +42,7 @@ public class Sonic_WallRunState : IState
         // Max time safety
         if (_timer > _ctx.Chp.MaxWallRunTime)
         {
-            LeaveWall();
+            DoWallJump();
             return;
         }
 
@@ -49,7 +56,7 @@ public class Sonic_WallRunState : IState
         // Check if we're still touching a valid wall AND moving at a valid angle
         if (!StillOnWall() || !HasValidWallRunAngle())
         {
-            LeaveWall();
+            DoWallJump();
             return;
         }
 
@@ -58,7 +65,6 @@ public class Sonic_WallRunState : IState
         _ctx.Physics_ApplyVelocity();
     }
 
-    public void FixedUpdateState() { }
     public void LateUpdateState() { }
 
     public void ExitState()
@@ -68,20 +74,19 @@ public class Sonic_WallRunState : IState
 
     private bool StillOnWall()
     {
-        RaycastHit hit;
         Vector3 origin = _ctx.transform.position;
 
         // Use the layer defined in the PlayerStateMachine
         if (Physics.Raycast(
             origin,
             -_ctx.WallRunNormal,
-            out hit,
+            out _wallHit,
             _ctx.Chp.WallAttachCheckDistance,
             _ctx.wallRunLayer      // <-- reference the layer from the state machine
         ))
         {
             // Dot against gravity
-            float gravityDot = Mathf.Abs(Vector3.Dot(hit.normal.normalized, -_ctx.Gravity.normalized));
+            float gravityDot = Mathf.Abs(Vector3.Dot(_wallHit.normal.normalized, -_ctx.Gravity.normalized));
 
             // 0 = perfectly vertical wall, 1 = floor/ceiling
             return gravityDot <= _ctx.Chp.MaxWallGravityDot;
@@ -92,7 +97,7 @@ public class Sonic_WallRunState : IState
 
 
 
-    //Helps fix perpendicular bug
+    // Helps fix perpendicular bug
     private bool HasValidWallRunAngle()
     {
         Vector3 velocity = _ctx.Velocity;
@@ -113,6 +118,9 @@ public class Sonic_WallRunState : IState
     }
     private void ApplyPhysics(float dt)
     {
+        // Direction pointing from the wall
+        _ctx.WallRunNormal = _wallHit.normal;
+
         // Base slide direction
         Vector3 wallForward = Vector3.Cross(_ctx.WallRunNormal, -_ctx.Gravity.normalized).normalized;
 
@@ -134,14 +142,17 @@ public class Sonic_WallRunState : IState
             wallForward * _ctx.Chp.WallRunSpeed +
             wallUp * (horizontalInput * _ctx.Chp.WallRunVerticalControl);
 
-        _ctx.HorizontalVelocity = steerVelocity;
+        _ctx.HorizontalVelocity = Vector3.ClampMagnitude(steerVelocity, _ctx.Chp.WallRunSpeed);
 
         // Light gravity so player slowly slides down if idle
         _ctx.VerticalVelocity += _ctx.Gravity * _ctx.Chp.WallRunGravityScale * dt;
 
         // Adjust player rotation
         _ctx.PlayerDirection = wallForward;
-        _ctx.Physics_Rotate(_ctx.PlayerDirection, -_ctx.Gravity.normalized);
+        _ctx.Physics_Rotate(_ctx.PlayerDirection, _ctx.WallRunNormal);
+
+        // Adjust player position
+        _ctx.Physics_Snap(_wallHit.point + _wallHit.normal * 0.34f);
     }
 
     private void DoWallJump()
@@ -152,11 +163,6 @@ public class Sonic_WallRunState : IState
         _ctx.HorizontalVelocity = jumpDir * _ctx.Chp.WallJumpStrength;
         _ctx.Physics_ApplyVelocity();
 
-        _ctx.MachineTransition(PlayerStates.Air);
-    }
-
-    private void LeaveWall()
-    {
         _ctx.MachineTransition(PlayerStates.Air);
     }
 

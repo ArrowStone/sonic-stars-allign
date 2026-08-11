@@ -285,7 +285,7 @@ MonoBehaviour:
   MaxWallGravityDot: 0.2
   WallRunMinSpeed: 8
   MaxWallHeadOnDot: 0.7
-  WallRunVerticalControl: 15
+  WallRunVerticalControl: 10
   WallJumpMaxCharge: 1
   WallJumpMinStrength: 10
   WallJumpMaxStrength: 25

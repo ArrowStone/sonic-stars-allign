@@ -330,6 +330,8 @@ public class Sonic_AirState : IState
 
                     _ctx.WallRunDirection = Vector3.Cross(_ctx.HorizontalVelocity.normalized, _ctx.WallRunNormal).y > 0;
 
+                    Debug.LogWarning(_ctx.WallRunDirection);
+
                     _ctx.MachineTransition(PlayerStates.WallRun);
                     return;
                 }
