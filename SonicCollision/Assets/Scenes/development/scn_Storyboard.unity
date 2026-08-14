@@ -248,7 +248,6 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
-  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -256,6 +255,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &1645350964
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 1645350966}
   - component: {fileID: 1645350965}
   - component: {fileID: 1645350967}
+  - component: {fileID: 1645350968}
   m_Layer: 0
   m_Name: Video Player
   m_TagString: Untagged
@@ -338,6 +339,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   video: {fileID: 1645350965}
+--- !u!114 &1645350968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645350964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40a5d088fcb4e4145be09a11f834258a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputComponent
 --- !u!1 &1936567460
 GameObject:
   m_ObjectHideFlags: 0

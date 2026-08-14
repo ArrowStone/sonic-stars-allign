@@ -103,6 +103,7 @@ MonoBehaviour:
   OnAllRedRingsCollected:
     m_PersistentCalls:
       m_Calls: []
+  CollectedMaterial: {fileID: 2100000, guid: 7daa44a0b55e210cab1b33ee7eb6f882, type: 2}
 --- !u!114 &1483306904405856988
 MonoBehaviour:
   m_ObjectHideFlags: 0

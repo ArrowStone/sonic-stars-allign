@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,6 +8,20 @@ public class RedRing_Collection : CollectableBase
     public int Place;
     public int ScoreValue;
     public UnityEvent OnAllRedRingsCollected;
+    public Material CollectedMaterial;
+
+    void Awake()
+    {
+        IEnumerator WaitForDataUpdate()
+        {
+            yield return new WaitForFixedUpdate();
+            if (CurStageData.RedRings[Place])
+            {
+                transform.GetChild(0).GetComponentInChildren<MeshRenderer>().material = CollectedMaterial;
+            }
+        }
+        StartCoroutine(WaitForDataUpdate());
+    }
 
     public override void Collection(Collider _triggerer)
     {
@@ -19,9 +34,10 @@ public class RedRing_Collection : CollectableBase
             if (AllRedRingsCollected())
             {
                 Debug.Log("All red rings collected!");
-                DataSaving.RecordStageData(CurStageData); // saves to disk
                 OnAllRedRingsCollected.Invoke();
             }
+
+            //DataSaving.RecordStageData(CurStageData); // saves to disk
         }
     }
 

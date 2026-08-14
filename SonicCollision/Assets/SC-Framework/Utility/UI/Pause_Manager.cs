@@ -18,6 +18,8 @@ public class PauseManager : MonoBehaviour
     [SerializeField] Animator[] ButtonAnimators;
     [SerializeField] GameObject ObjectToSelectOnPause;
     [SerializeField] Button[] PauseButtons;
+    [SerializeField] AudioSource[] SourcesToUnpause;
+
     void OnEnable()
     {
         Instance = this;
@@ -25,6 +27,13 @@ public class PauseManager : MonoBehaviour
         SetPauseState(paused);
 
         input = GameObject.Find("Player_Rigidbody").GetComponent<Sonic_PlayerStateMachine>().Input;
+
+        /*SourcesToUnpause = new AudioSource[PauseButtons.Length];
+
+        for (int i = 0; i < PauseButtons.Length; i += 1)
+        {
+            SourcesToUnpause[i] = PauseButtons[i].GetComponent<AudioSource>();
+        }*/
     }
 
     public void SetPauseState(bool state)
@@ -61,6 +70,8 @@ public class PauseManager : MonoBehaviour
         //eventSystem.enabled = state;
 
         if (state) SetSelectedObject();
+
+        foreach (AudioSource source in SourcesToUnpause) source.ignoreListenerPause = true;
     }
 
     public void SetSelectedObject()

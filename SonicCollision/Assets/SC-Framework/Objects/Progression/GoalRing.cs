@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-// Responsible for triggering stat saving and the results screen.
+// Responsible for triggering the results screen.
 public class GoalRing : CollectableBase
 {
     public StageData Data;
-    public GameStateManager GameStateSaver;
     public WinScreen winScreen;
     [SerializeField] private UnityEvent AdditionalReachEvent;
 
@@ -20,21 +19,6 @@ public class GoalRing : CollectableBase
 
             int rank = RankCalc((int)_ctx.Chs.Rings, _ctx.Chs.Score +
                                                         System.Math.Max(0, (int)(Data.TargetTime - _ctx.Chs.Time)) * 5);
-
-            if (!(GameStateSaver && Data))
-            {
-                // Probably launched the scene in editor, don't bother
-                Debug.LogWarning(string.Format("Skipping saving progress due to absence of {0}{1}{2}.",
-                                                GameStateSaver ? "" : "GameStateSaver",
-                                                !(GameStateSaver || Data) ? " and " : "", // I'm so clever
-                                                Data ? "" : "Data"));
-            }
-            else
-            {
-                GameStateSaver.UpdateStageData(Data, (byte)rank);
-                Data.Complete = true;
-                DataSaving.RecordStageData(Data);
-            }
 
             SceneSwitcher.Instance.CacheWinData(
                 _ctx.Chs.Score,

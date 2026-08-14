@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System;
 
-// Handles the presentation of data on the results screen
+// Handles the presentation of data on the results screen and saving stats
 public class WinScreen : MonoBehaviour
 {
     static public WinScreen Instance { get; private set; }
@@ -19,6 +19,9 @@ public class WinScreen : MonoBehaviour
     public AudioSource MusicSource;
     public GameObject[] ObjectsToToggle;
     public Image[] RedRingIcons;
+    public GameObject CutsceneUnlockPopup;
+    private GameStateManager GameStateSaver;
+    [SerializeField] private StageData Data;
 
     [SerializeField] private Sprite[] RankLetters;
     [SerializeField] private int TargetTime;
@@ -31,6 +34,8 @@ public class WinScreen : MonoBehaviour
         {
             Instance = this;
         }
+
+        GameStateSaver = FindAnyObjectByType<GameStateManager>();
     }
 
     public void SetInitialValues()
@@ -72,14 +77,34 @@ public class WinScreen : MonoBehaviour
         }
         RankImage.sprite = RankLetters[rank];
 
-        if (redRings.Length != 0)
+        bool collectedAllRings = true;
+        if (redRings.Length > 0)
         {
-            int i = 0;
-            foreach (Image icon in RedRingIcons)
+            for (int i = 0; i < RedRingIcons.Length; i += 1)
             {
-                icon.sprite = redRings[i] ? RedRingOn : RedRingOff;
-                i += 1;
+                RedRingIcons[i].sprite = redRings[i] ? RedRingOn : RedRingOff;
+                collectedAllRings = collectedAllRings && redRings[i];
             }
+        }
+        else collectedAllRings = false;
+
+        CutsceneUnlockPopup.SetActive(collectedAllRings && !Data.CollectedAllRedrings);
+
+        Data.CollectedAllRedrings = collectedAllRings;
+
+        if (!(GameStateSaver && Data))
+        {
+            // Probably launched the scene in editor, don't bother
+            Debug.LogWarning(string.Format("Skipping saving progress due to absence of {0}{1}{2}.",
+                                            GameStateSaver ? "" : "GameStateSaver",
+                                            !(GameStateSaver || Data) ? " and " : "", // I'm so clever
+                                            Data ? "" : "Data"));
+        }
+        else
+        {
+            GameStateSaver.UpdateStageData(Data, (byte)rank);
+            Data.Complete = true;
+            DataSaving.RecordStageData(Data);
         }
 
         IEnumerator CountdownWait()

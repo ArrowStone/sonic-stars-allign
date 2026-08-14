@@ -33,7 +33,7 @@ public class GameStateManager : MonoBehaviour
         data.Rank = Math.Max(data.Rank, rank);
     }
 
-    void Awake()
+    void Start()
     {
         LoadData();
         ResetHandlerArray = FindObjectsByType<ResetHandler>();

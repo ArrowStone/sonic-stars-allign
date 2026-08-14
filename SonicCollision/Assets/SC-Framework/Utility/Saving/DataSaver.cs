@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.IO;
-using System;
 
 // Handles writing the save data to a pernament storage as well as retrieving data.
 public static class DataSaving
@@ -43,16 +42,13 @@ public static class DataSaving
             int stageRingCount = data.StageRingCount;
             float targetTime = data.TargetTime;
 
-            Debug.Log(rankScores);
-
             string textData = File.ReadAllText(filePath, System.Text.Encoding.UTF8);
             JsonUtility.FromJsonOverwrite(textData, data);
-
-            Debug.Log(rankScores);
 
             data.RankScores = rankScores;
             data.StageRingCount = stageRingCount;
             data.TargetTime = targetTime;
+            Debug.Log(data.RedRings);
         }
         else
         {
@@ -64,6 +60,11 @@ public static class DataSaving
             data.bestScore = 0;
             data.bestTime = 10000000;
             data.Rank = 0;
+            data.CollectedAllRedrings = false;
+            for (int i = 0; i < data.RedRings.Length; i += 1)
+            {
+                data.RedRings[i] = false;
+            }
         }
     }
 }
