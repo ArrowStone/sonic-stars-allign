@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 // Handles switching between tabs in the settings menu
 public class TabManager : MonoBehaviour
@@ -15,12 +16,13 @@ public class TabManager : MonoBehaviour
 
     void Awake()
     {
-        input = FindAnyObjectByType<InputComponent>();
+        input = GetComponent<InputComponent>();
         eventSystem = FindAnyObjectByType<EventSystem>();
         SwitchTab(_tab);
+        InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInDynamicUpdate;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         // You have the right to have a differing opinion on whether this is a good way to do this
         bool selectedAnObjectInATab = eventSystem.currentSelectedGameObject &&

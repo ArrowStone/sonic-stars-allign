@@ -1636,7 +1636,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1430873916}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.40000004
+  m_Size: 0.39999998
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5705,6 +5705,7 @@ GameObject:
   - component: {fileID: 1885612093}
   - component: {fileID: 1885612092}
   - component: {fileID: 1885612094}
+  - component: {fileID: 1885612095}
   m_Layer: 5
   m_Name: SettingsManager
   m_TagString: Untagged
@@ -5755,7 +5756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 043424e5f80fa146899a8808d4fcb244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuSwitcher
-  MenuToReturnTo: 3
+  MenuToReturnTo: 100
   UnloadScene: 0
   ActivateOnStart: 1
 --- !u!114 &1885612093
@@ -5797,6 +5798,18 @@ MonoBehaviour:
   - {fileID: 1640500855}
   - {fileID: 992300732}
   BackButton: {fileID: 992300731}
+--- !u!114 &1885612095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885612086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40a5d088fcb4e4145be09a11f834258a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputComponent
 --- !u!82 &1902680053 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 5795209516076463780, guid: 78c77d12a7e0e92e19d510cd29a897a8, type: 3}
